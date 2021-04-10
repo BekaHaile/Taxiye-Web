@@ -74,27 +74,33 @@ const Button = styled("button")`
   width: 112px;
 `;
 
+const TextWrapper = styled("div")`
+  width: 300px;
+`;
+
 const ArticleCard = ({ article }) => {
   return (
     <Card>
       <CardImage src={article.image} />
       <CardBody>
-        <ArticleInfoWrapper>
-          <Image
-            width="10px"
-            height="11px"
-            src={require("../../../assets/icons/user/Vector.png")}
-          />
-          <AuthorText>{article.author}</AuthorText>
-          <Image
-            width="10px"
-            height="11px"
-            src={require("../../../assets/icons/clock.png")}
-          />
-          <AuthorText>{article.date}</AuthorText>
-        </ArticleInfoWrapper>
-        <ArticleTitle>{article.title}</ArticleTitle>
-        <ArticleText>{article.description}</ArticleText>
+        <TextWrapper>
+          <ArticleInfoWrapper>
+            <Image
+              width="10px"
+              height="11px"
+              src={require("../../../assets/icons/user/Vector.png")}
+            />
+            <AuthorText>{article.author}</AuthorText>
+            <Image
+              width="10px"
+              height="11px"
+              src={require("../../../assets/icons/clock.png")}
+            />
+            <AuthorText>{article.date}</AuthorText>
+          </ArticleInfoWrapper>
+          <ArticleTitle>{article.title}</ArticleTitle>
+          <ArticleText>{article.description}</ArticleText>
+        </TextWrapper>
         <Button>Read More</Button>
       </CardBody>
     </Card>
