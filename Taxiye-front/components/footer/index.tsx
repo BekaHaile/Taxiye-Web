@@ -185,12 +185,12 @@ const FooterSection = () => {
               />
               <Image
                 src={require("../../assets/icons/twitter.png")}
-                width="11px"
+                width="26px"
                 height="21px"
               />
               <Image
                 src={require("../../assets/icons/instagram.png")}
-                width="11px"
+                width="21px"
                 height="21px"
               />
             </SocialLinkWrapper>

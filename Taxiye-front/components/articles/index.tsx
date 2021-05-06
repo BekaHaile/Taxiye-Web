@@ -1,10 +1,14 @@
 import React from 'react';
+import FeaturedContent from './featured';
+import AllArticleContent from './all';
+
 
 
 const ArticlesContent = () => {
     return(
         <>
-        Place holder for articles page
+        <FeaturedContent></FeaturedContent>
+        <AllArticleContent></AllArticleContent>
         </>
     );
 }

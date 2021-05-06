@@ -1,10 +1,19 @@
 import React from 'react';
+import VisionContent from "./vision";
+import TeamContent from "./team";
+import Partners from "./partners";
+import Services from "./services";
+import WeAre from "./we-are";
 
 
 const AboutUsContent = () => {
     return(
         <>
-        Place holder for about us page
+        <WeAre/>
+        <VisionContent/>
+        <Services/>
+        <Partners/>
+        <TeamContent/>
         </>
     );
 }

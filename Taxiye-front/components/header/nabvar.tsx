@@ -86,7 +86,7 @@ const NavBar = () => {
           </NavLink>
         </Link>
         <Link href="/contact-us">
-          <NavLink className={router.pathname === "/contact" ? "active" : null}>
+          <NavLink className={router.pathname === "/contact-us" ? "active" : null}>
             Contact us
           </NavLink>
         </Link>

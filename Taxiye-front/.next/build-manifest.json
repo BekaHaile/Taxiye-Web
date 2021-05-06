@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/articles": [
+    "/about-us": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/articles.js"
+      "static/chunks/pages/about-us.js"
     ],
-    "/corporate": [
+    "/contact-us": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/corporate.js"
+      "static/chunks/pages/contact-us.js"
     ]
   },
   "ampFirstPages": []

@@ -11,6 +11,9 @@ const Section = styled("section")`
 const DefaultSection = styled(Section)`
 background: #fff;
 `;
+const SecondarySection = styled(DefaultSection)`
+  margin: 30px 60px;
+`;
 
 const GraySection = styled(Section)`
 background: #E5E5E5;
@@ -36,4 +39,4 @@ const CenteredText = styled("p")`
   max-width: 800px;
 `;
 
-export {GraySection, DefaultSection, SectionTitle, CenteredText};
+export {GraySection, DefaultSection, SecondarySection, SectionTitle, CenteredText};

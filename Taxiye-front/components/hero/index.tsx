@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import TabbedForms from "./tab";
+import { Form, Inputs } from "./inputs";
+
 
 const SlogganWrapper = styled("div")`
 display; flex;
@@ -89,11 +91,11 @@ const Hero = () => {
   let backgroundUrl = `${require("../../assets/images/heros/services.jpg")}`;
   let description =
     "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet.";
-    
-    if (router.pathname === "/") {
-      height = "700px";
-    }
-    if (router.pathname === "/services") {
+
+  if (router.pathname === "/") {
+    height = "700px";
+  }
+  if (router.pathname === "/services") {
     slogan = "Best Service, Right Time, Right People.";
     backgroundUrl = `${require("../../assets/images/heros/services.jpg")}`;
   } else if (router.pathname === "/corporate") {
@@ -108,7 +110,7 @@ const Hero = () => {
   }
   else if (router.pathname === "/contact-us") {
     slogan = "We would love to here from you.";
-    backgroundUrl = `${require("../../assets/images/heros/Contact us.jpg")}`;
+    backgroundUrl = `${require("../../assets/images/heros/Contact-us.jpg")}`;
     description = "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor";
   }
   else if (router.pathname === "/about-us") {
@@ -149,6 +151,15 @@ const Hero = () => {
             <Description>{description}</Description>
             {router.pathname === "/corporate" ? (
               <SloganButton>Sign up for your company</SloganButton>
+            ) : router.pathname === "/articles" ? (
+              <Form>
+                <Inputs
+                  label="From?"
+                  placeholder="Enter pickup location"
+                  id="location"
+                  icon={require("../../assets/icons/location.png")}
+                />
+              </Form>
             ) : null}
           </SlogganWrapper>
         </HeroWrapper>
