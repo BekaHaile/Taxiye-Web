@@ -5,8 +5,8 @@ import colors from '../main/colors';
 export const GlobalStyle = createGlobalStyle`
 html,
 body {
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
   font-family: Open Sans;
 }
 

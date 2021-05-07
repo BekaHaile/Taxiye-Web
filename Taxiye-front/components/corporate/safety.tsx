@@ -20,6 +20,7 @@ const Block = styled("div")`
   display: flex;
   align-items: center;
   padding: 0px 75px;
+  margin-bottom: 30px;;
 `;
 
 const Image = styled("img")`

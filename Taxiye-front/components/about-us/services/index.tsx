@@ -2,7 +2,7 @@ import React from "react";
 import { DefaultSection, SectionTitle, CenteredText } from "../../section";
 import styled from "styled-components";
 import DeviceImage from "./image";
-import { ContentWrapper, Numbering, Text, Block, BlockContent, BlockTitle } from './content';
+import { ContentWrapper, Numbering, Text, Block, RightText, BlockTitle, RightBlockTitle, Container } from './content';
 
 
 const ServiceContent = () => {
@@ -18,45 +18,45 @@ const ServiceContent = () => {
                 <ContentWrapper>
                     <div>
                         <Block>
-                            <Numbering>1 </Numbering>
-                            <div>
-                                <BlockTitle>Track your trip</BlockTitle>
-                                <Text>
-                                    Real time trip details can be shared with family and friends.
-                                </Text>
-                            </div>
+                            <Container>
+                                <RightBlockTitle>Safer Rides</RightBlockTitle>
+                                <RightText>
+                                Verified drivers, live tracking and an in-app emergency button accessible to suit your safety needs.
+                                </RightText>
+                            </Container>
+                            <Numbering>01 </Numbering>
+
                         </Block>
                         <Block>
-                            <Numbering>2 </Numbering>
-                            <div>
-                                <BlockTitle>Phone Number Privacy</BlockTitle>
-                                <Text>
-                                    Customer’s mobile number is masked at the driver’s end to ensure
-                                    privacy.
-                                </Text>
-                            </div>
+                           
+                            <Container>
+                                <RightBlockTitle>Reliable Services</RightBlockTitle>
+                                <RightText>
+                                Taxiye strives to provide reliable taxi services to all its passengers to fulfill all their travel needs
+                                </RightText>
+                            </Container>
+                            <Numbering>02 </Numbering>
                         </Block>
                     </div>
                     <DeviceImage />
                     <div>
                         <Block>
-                            <Numbering>3 </Numbering>
-                            <div>
-                                <BlockTitle>Verified Professional Drivers</BlockTitle>
+                            <Numbering>03 </Numbering>
+                            <Container>
+                                <BlockTitle>Pocket-friendly Fare</BlockTitle>
                                 <Text>
-                                    Thorough background checks are conducted on Taxiye drivers.
+                                Delivering comfy rides at an affordable price is our sole motto as a way to serve our community
                                 </Text>
-                            </div>
+                            </Container>
                         </Block>
                         <Block>
-                            <Numbering>4 </Numbering>
-                            <div>
-                                <BlockTitle>Emergency alert button</BlockTitle>
+                            <Numbering>04 </Numbering>
+                            <Container>
+                                <BlockTitle>Instant Booking</BlockTitle>
                                 <Text>
-                                    Button can be used to alert the emergency contacts or nearest
-                                    PCR.
+                                With the Taxiye app you can immediately book Taxis and get ride easily and in a timely manner.
                                 </Text>
-                            </div>
+                            </Container>
                         </Block>
                     </div>
                 </ContentWrapper>

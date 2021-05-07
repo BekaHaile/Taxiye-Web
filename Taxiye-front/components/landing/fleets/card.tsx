@@ -33,8 +33,9 @@ const Price = styled("p")`
   padding: 0;
 `;
 
-const CardImage = styled(Image)`
-  height: 80px;
+const CardImage = styled('img')`
+  height: auto;
+  width:auto;
 `;
 
 const TextWrapper = styled('div')`
@@ -44,7 +45,7 @@ padding: 20px 10px;
 const FleetCard = ({ fleet }) => {
   return (
     <Card>
-      <CardImage width="220px" height="67px" src={fleet.image} />
+      <CardImage src={fleet.image} />
       <TextWrapper>
         <CardTitle>{fleet.name}</CardTitle>
         <CardText>{fleet.description}</CardText>

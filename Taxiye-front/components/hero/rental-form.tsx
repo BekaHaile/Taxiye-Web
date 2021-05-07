@@ -18,14 +18,14 @@ const RentalForm = () => {
           label="Package?"
           placeholder="Enter drop off for estimate"
           id="package"
-          icon={require("../../assets/icons/Vector.png")}
+          icon={require("../../assets/icons/user/vector.svg")}
         />
         <InlineForm>
           <Inputs
             label="When?"
             placeholder="Today"
             id="date"
-            icon={require("../../assets/icons/clock.png")}
+            icon={require("../../assets/icons/user/clock.svg")}
           />
           <InputSeparator>
             <Inputs label="Time?" placeholder="06:45 AM" id="time" />

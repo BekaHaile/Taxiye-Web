@@ -8,10 +8,6 @@ const TestimonySliderContainer = styled('div')`
 width:100%;
 `;
 
-
-
-
-
 const Testimonies = () => {
     return(
         <GraySection>

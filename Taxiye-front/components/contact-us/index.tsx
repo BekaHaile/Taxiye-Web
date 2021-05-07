@@ -96,6 +96,7 @@ const ContactUSContent = () => {
 
                 <SectionTitleOnStart> Our Offices </SectionTitleOnStart>
                 <CenteredTextOnStart> Our doors are open to all. Come and visit us! </CenteredTextOnStart>
+                </SecondarySection>
                 <MapContainer>
                     <MapViewer />
                     <MapInfoContainer>
@@ -104,7 +105,6 @@ const ContactUSContent = () => {
                     </MapInfoContainer>
 
                 </MapContainer>
-            </SecondarySection>
         </>
     );
 }

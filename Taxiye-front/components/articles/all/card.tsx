@@ -95,13 +95,13 @@ const ArticleCard = ({ article }) => {
             <Image
               width="10px"
               height="11px"
-              src={require("../../../assets/icons/user/Vector.png")}
+              src={require("../../../assets/icons/user/vector.svg")}
             />
             <AuthorText>{article.author}</AuthorText>
             <Image
               width="10px"
               height="11px"
-              src={require("../../../assets/icons/clock.png")}
+              src={require("../../../assets/icons/user/clock.svg")}
             />
             <AuthorText>{article.date}</AuthorText>
           </ArticleInfoWrapper>

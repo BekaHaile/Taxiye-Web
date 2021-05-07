@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultSection } from "../../section";
+import { GraySection } from "../../section";
 import VisionCard from "./card";
 import styled from "styled-components";
 import {VisionImage, MissionImage, ValueImage} from "./images";
@@ -33,7 +33,7 @@ const contents = [{
 const VisionContent = () => {
     return (
         <>
-            <DefaultSection>
+            <GraySection>
                 <CardContainer>
                 {contents.map((content) => (
 
@@ -42,7 +42,7 @@ const VisionContent = () => {
                 ))}
                 </CardContainer>
 
-            </DefaultSection>
+            </GraySection>
         </>
     );
 }

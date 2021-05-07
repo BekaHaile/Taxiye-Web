@@ -9,10 +9,12 @@ import {
 
 const ServiceTitle = styled(SectionTitle)`
   margin: 30px 0px;
+  text-align:left;
 `;
 
 const RightServiceTitle = styled(ServiceTitle)`
 text-align: right;
+width: 100%;
 `;
 
 const FlexRow = styled("div")`
@@ -30,6 +32,7 @@ const Description = styled("p")`
   margin: 30px 0px;
   max-width: 500px;
   flex: 1;
+  text-align:left;
 `;
 
 const RightDescription = styled(Description)`
@@ -51,7 +54,7 @@ const Services = () => {
           mollis viverra conubia ligula inceptos laoreet.
         </CenteredText>
         <FlexRow>
-          <Image src={require("../../assets/images/serv_img_1.png")} />
+          <Image src={require("../../assets/images/services/taxi.svg")} />
           <div>
             <RightServiceTitle>Taxi on Demand</RightServiceTitle>
             <RightDescription>
@@ -88,12 +91,12 @@ const Services = () => {
               aliquet curae quis quisque.
             </Description>
           </div>
-          <Image src={require("../../assets/images/serv_img_2.png")} />
+          <Image src={require("../../assets/images/services/city-travel.svg")} />
         </FlexRow>
       </GraySection>
       <DefaultSection>
         <FlexRow>
-          <Image src={require("../../assets/images/serv_img_3.png")} />
+          <Image src={require("../../assets/images/services/rentals.svg")} />
           <div>
             <RightServiceTitle>Hourly Rentals</RightServiceTitle>
             <RightDescription>
@@ -131,7 +134,7 @@ const Services = () => {
               aliquet curae quis quisque.
             </Description>
           </div>
-          <Image src={require("../../assets/images/serv_img_4.png")} />
+          <Image src={require("../../assets/images/services/delivery.svg")} />
         </FlexRow>
       </GraySection>
     </>

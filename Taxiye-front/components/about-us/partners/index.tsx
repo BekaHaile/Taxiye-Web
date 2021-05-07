@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultSection, SectionTitle, CenteredText } from "../../section";
+import { GraySection, SectionTitle, CenteredText } from "../../section";
 import styled from "styled-components";
 import { Card, CardWrapper, CardContent, CardTitle, Image } from "./card";
 
@@ -34,7 +34,7 @@ const contents = [{
 const PartnersContent = () => {
     return (
         <>
-            <DefaultSection>
+            <GraySection>
                 <SectionTitle>
                     Our Partners
                 </SectionTitle>
@@ -61,7 +61,7 @@ const PartnersContent = () => {
                     </CardContainer>
                 </Container>
 
-            </DefaultSection>
+            </GraySection>
         </>
     );
 }

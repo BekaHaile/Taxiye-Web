@@ -16,7 +16,7 @@ const SecondarySection = styled(DefaultSection)`
 `;
 
 const GraySection = styled(Section)`
-background: #E5E5E5;
+background: #f9f9f9;
 `;
 
 const SectionTitle = styled("h1")`

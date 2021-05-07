@@ -1,9 +1,16 @@
 import React from "react";
+import SafetyComponent from "./safety";
+import GetStarted from "./get-started";
+import WorkFreedom from "./work-freedom";
+import Requirements from "./requirements";
 
 const SignUp = () => {
   return (
     <>
-        <p>This is the signup page</p>
+        <WorkFreedom></WorkFreedom>
+        <Requirements></Requirements>
+        <SafetyComponent></SafetyComponent>
+        <GetStarted></GetStarted>
     </>
   );
 };

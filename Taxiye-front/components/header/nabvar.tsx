@@ -15,8 +15,7 @@ const NavWrapper = styled("div")`
   background: #ffffff;
 `;
 const Avatar = styled("img")`
-  height:20px;
-  width:20px;
+  
   margin-right:5px;
 `;
 
@@ -52,7 +51,7 @@ const NavLink = styled.a`
   color: #444444;
   padding: 5px 20px;
   &&.active {
-    height: 29px;
+    height: 32px;
     border: 1px solid #A02167;
     box-sizing: border-box;
     border-radius: 5px;
@@ -73,7 +72,13 @@ const NavBar = () => {
         />
       </Link>
       <Nav>
-        <Link href="/signup"><Button> {"Become a driver"} </Button></Link>
+        <Link href="/signup">
+        
+          {router.pathname === "/signup" ? 
+          <NavLink className="active">Become a driver </NavLink>:
+          <Button> {"Become a driver"} </Button> }
+         
+          </Link>
         <Link href="/services">
           <NavLink className={router.pathname === "/services" ? "active" : null}>
             Services
@@ -106,7 +111,7 @@ const NavBar = () => {
         </Link>
         <Link href="/login">
           <SecondaryNavLink>
-            <Avatar src={require("../../assets/icons/user/Vector.png")}/>
+            <Avatar src={require("../../assets/icons/user/avatar.svg")}/>
             <div>Login</div>
           </SecondaryNavLink>
         </Link>

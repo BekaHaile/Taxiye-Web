@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import TabbedForms from "./tab";
-import { Form, DefaultInput } from "../form/inputs";
+import { Form, SecondaryInputs } from "../form/inputs";
 
 
 const SlogganWrapper = styled("div")`
@@ -58,7 +58,7 @@ const HomeHero = styled("div")`
   flex-direction: column;
   justify-content: center;
   padding: 0px 60px 0px;
-  padding-top: 60px;
+  padding-top: 35px;
   background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 52.87%),
     url(${require("../../assets/images/heros/Landing.png")});
   background-repeat: no-repeat;
@@ -68,7 +68,7 @@ const HomeHero = styled("div")`
 `;
 
 const SloganButton = styled("button")`
-  width: 219px;
+  min-width: 120px;
   height: 34px;
   background: #A02167;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
@@ -119,9 +119,9 @@ const Hero = () => {
     description = "get to know us better.";
   }
   else if (router.pathname === "/signup") {
-    slogan = "A little bit about us.";
+    slogan = "Make Money. Earn Respect. Secure Your Future.";
     backgroundUrl = `${require("../../assets/images/heros/services.jpg")}`;
-    description = "get to know us better.";
+    description = "Apply now to become a Taxiye driver-partner. ";
   }
   const HeroWrapper = styled("div")`
     display: flex;
@@ -160,13 +160,15 @@ const Hero = () => {
               <SloganButton>Sign up for your company</SloganButton>
             ) : router.pathname === "/articles" ? (
               
-              <Form>
-                <DefaultInput
-                  placeholder="Enter pickup location"
+                <SecondaryInputs
                   id="location"
+                  placeholder="Search..."
+                  icon={require("../../assets/icons/search.svg")}
                 />
-              </Form>
-            ) : null}
+            ) : router.pathname === "/signup" ? (
+              
+              <SloganButton>Get started</SloganButton>
+          ) : null}
           </SlogganWrapper>
         </HeroWrapper>
       )}

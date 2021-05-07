@@ -7,14 +7,14 @@ const Fleets = [
     name: "Mini",
     description:
       "A regular, economical and comfortable AC hatchback that becomes your everyday ride. ",
-    image: require("../../../assets/images/fleets/fleet-1.png"),
+    image: require("../../../assets/images/fleets/fleet-1.svg"),
     price: "10 Birr",
   },
   {
     name: "Sedan",
     description:
       "  Top rated drivers, and a hand-picked fleet of the best cars with extra legroom and boot space.",
-    image: require("../../../assets/images/fleets/fleet-2.png"),
+    image: require("../../../assets/images/fleets/fleet-2.svg"),
     price: "10 Birr",
   },
   {
@@ -22,20 +22,20 @@ const Fleets = [
     description:
       "A perfect choice for your weekend getaways, with plenty of room for everyone including that extra bag.",
     price: "10 Birr",
-    image: require("../../../assets/images/fleets/fleet-3.png"),
+    image: require("../../../assets/images/fleets/fleet-3.svg"),
   },
   {
     name: "Mini",
     description:
       "A regular, economical and comfortable AC hatchback that becomes your everyday ride. ",
-    image: require("../../../assets/images/fleets/fleet-1.png"),
+    image: require("../../../assets/images/fleets/fleet-1.svg"),
     price: "10 Birr",
   },
   {
     name: "Sedan",
     description:
       "  Top rated drivers, and a hand-picked fleet of the best cars with extra legroom and boot space.",
-    image: require("../../../assets/images/fleets/fleet-2.png"),
+    image: require("../../../assets/images/fleets/fleet-2.svg"),
     price: "10 Birr",
   },
   {
@@ -43,7 +43,7 @@ const Fleets = [
     description:
       "A perfect choice for your weekend getaways, with plenty of room for everyone including that extra bag.",
     price: "10 Birr",
-    image: require("../../../assets/images/fleets/fleet-3.png"),
+    image: require("../../../assets/images/fleets/fleet-3.svg"),
   },
 ];
 

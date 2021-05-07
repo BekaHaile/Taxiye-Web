@@ -25,7 +25,7 @@ const StationForm = () => {
             label="When?"
             placeholder="Today"
             id="date"
-            icon={require("../../assets/icons/clock.png")}
+            icon={require("../../assets/icons/user/clock.svg")}
           />
           <InputSeparator>
           <Inputs label="Time?" placeholder="06:45 AM" id="time" />

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
+
 
 const BottomLinkWrapper = styled("div")`
   display: flex;
@@ -21,7 +21,9 @@ line-height: 150%;
 text-transform: uppercase;
 color: #979797;
 `;
+const Image = styled("img")`
 
+`;
 
 
 const Socials = () => {
@@ -30,19 +32,16 @@ const Socials = () => {
             <Title> Follow us </Title>
             <SocialLinkWrapper>
                 <Image
-                    src={require("../../assets/icons/facebook.png")}
-                    width="11px"
-                    height="21px"
+                    src={require("../../assets/icons/brand-facebook.svg")}
+                   
                 />
                 <Image
-                    src={require("../../assets/icons/twitter.png")}
-                    width="26px"
-                    height="21px"
+                    src={require("../../assets/icons/brand-twitter.svg")}
+                  
                 />
                 <Image
-                    src={require("../../assets/icons/instagram.png")}
-                    width="21px"
-                    height="21px"
+                    src={require("../../assets/icons/brand-instagram.svg")}
+                    
                 />
             </SocialLinkWrapper>
         </>

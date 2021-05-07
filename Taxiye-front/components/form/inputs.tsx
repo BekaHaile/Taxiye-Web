@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import { DefaultSection } from "../section";
 
 const Button = styled("button")`
   height: 39px;
@@ -15,12 +16,16 @@ const Button = styled("button")`
   border-color: transparent;
 `;
 
+
+
 const LabelText = styled("label")`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
   color: #444444;
 `;
+
+
 
 const Input = styled("input")`
   border: none;
@@ -60,7 +65,7 @@ box-sizing: border-box;
 
 `;
 
-const DefaultTextArea= styled('textarea')`
+const DefaultTextArea = styled('textarea')`
 width: 100%;
 min-height:200px;
 padding: 12px 20px;
@@ -78,11 +83,33 @@ box-sizing: border-box;
 
 `;
 
+const CheckBoxLabelText = styled(LabelText)`
+  
+  padding: 0px 10px;
+  
+`;
+
+const Checkbox: FunctionComponent<InputProps> = ({
+  id,
+  label,
+  icon,
+  placeholder,
+}) => {
+  return (
+    <FormGroup>
+      <input id={id} type="checkbox"/>
+      <CheckBoxLabelText>{placeholder}</CheckBoxLabelText>
+    </FormGroup>
+  );
+};
+
 const FormGroup = styled("div")`
   display: flex;
   padding: 5px 0px;
   width: 100%;
 `;
+
+
 
 const Icon = styled("img")`
   width: 11px;
@@ -123,7 +150,7 @@ width: 100%;
 
 type InputProps = {
   id: string;
-  label: string;
+  label?: string;
   icon?: string;
   placeholder: string;
 };
@@ -153,4 +180,55 @@ const Inputs: FunctionComponent<InputProps> = ({
   );
 };
 
-export { Form, InlineForm, Button, Inputs, InputSeparator, DefaultInput, DefaultTextArea };
+
+const DefaultInputs: FunctionComponent<InputProps> = ({
+  id,
+  label,
+  icon,
+  placeholder,
+}) => {
+  return (
+    <FormGroup>
+      {icon !== undefined ? (
+        <Icon height="12px" width="11px" src={icon} />
+      ) : null}
+      <InputWrapper>
+        <label htmlFor={id}>
+          <LabelText> {label} </LabelText>
+        </label>
+        <DefaultInput
+          className={icon !== undefined ? "no-margin" : null}
+          id={id}
+          placeholder={placeholder}
+        />
+      </InputWrapper>
+    </FormGroup>
+  );
+};
+
+const SecondaryInputs: FunctionComponent<InputProps> = ({
+  id,
+  icon,
+  placeholder,
+}) => {
+  return (
+    <SecondaryInput id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }}/>
+  );
+};
+
+const SecondaryInput = styled('input')`
+  width: 400px;
+  margin:20px auto;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  background-position: 20px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 50px;
+  border-radius:50px;
+`;
+
+
+
+export { Form, InlineForm, Button, Inputs, InputSeparator, DefaultInput, DefaultTextArea, SecondaryInputs, DefaultInputs, Checkbox };

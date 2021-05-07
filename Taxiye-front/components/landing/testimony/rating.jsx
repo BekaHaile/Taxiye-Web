@@ -5,6 +5,9 @@ import styled from "styled-components";
 const RatingWrapper = styled("div")`
   display: flex;
   justify-content: space-around;
+  width:50%;
+  align-item:center;
+  margin:auto;
 `;
 
 const Ratings = ({rate}) => {
