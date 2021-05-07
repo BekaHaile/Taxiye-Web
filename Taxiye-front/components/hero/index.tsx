@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import TabbedForms from "./tab";
-import { Form, Inputs } from "./inputs";
+import { Form, DefaultInput } from "../form/inputs";
 
 
 const SlogganWrapper = styled("div")`
@@ -118,6 +118,11 @@ const Hero = () => {
     backgroundUrl = `${require("../../assets/images/heros/About-us.jpg")}`;
     description = "get to know us better.";
   }
+  else if (router.pathname === "/signup") {
+    slogan = "A little bit about us.";
+    backgroundUrl = `${require("../../assets/images/heros/services.jpg")}`;
+    description = "get to know us better.";
+  }
   const HeroWrapper = styled("div")`
     display: flex;
     flex-direction: column;
@@ -132,8 +137,10 @@ const Hero = () => {
     padding-top:20px;
   `;
   const navigatedLink = router.pathname.replace(/\\|\//g, "");
+ 
   return (
     <>
+    
       {router.pathname === "/" ? (
         <HomeHero>
           <HomeSlogan>Life is a journey. Enjoy it with Taxiye.</HomeSlogan>
@@ -152,18 +159,18 @@ const Hero = () => {
             {router.pathname === "/corporate" ? (
               <SloganButton>Sign up for your company</SloganButton>
             ) : router.pathname === "/articles" ? (
+              
               <Form>
-                <Inputs
-                  label="From?"
+                <DefaultInput
                   placeholder="Enter pickup location"
                   id="location"
-                  icon={require("../../assets/icons/location.png")}
                 />
               </Form>
             ) : null}
           </SlogganWrapper>
         </HeroWrapper>
       )}
+      
     </>
   );
 };

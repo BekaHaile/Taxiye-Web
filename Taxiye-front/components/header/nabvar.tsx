@@ -14,6 +14,13 @@ const NavWrapper = styled("div")`
   height: 65px;
   background: #ffffff;
 `;
+const Avatar = styled("img")`
+  height:20px;
+  width:20px;
+  margin-right:5px;
+`;
+
+
 
 const Button = styled("button")`
   background: #f7d259;
@@ -51,7 +58,9 @@ const NavLink = styled.a`
     border-radius: 5px;
   }
 `;
-
+const SecondaryNavLink = styled(NavLink)`
+ display:flex;
+`;
 const NavBar = () => {
   const router = useRouter();
   return (
@@ -64,7 +73,7 @@ const NavBar = () => {
         />
       </Link>
       <Nav>
-        <Button> {"Become a driver"} </Button>
+        <Link href="/signup"><Button> {"Become a driver"} </Button></Link>
         <Link href="/services">
           <NavLink className={router.pathname === "/services" ? "active" : null}>
             Services
@@ -94,6 +103,12 @@ const NavBar = () => {
           <NavLink className={router.pathname === "/about-us" ? "active" : null}>
             About us{" "}
           </NavLink>
+        </Link>
+        <Link href="/login">
+          <SecondaryNavLink>
+            <Avatar src={require("../../assets/icons/user/Vector.png")}/>
+            <div>Login</div>
+          </SecondaryNavLink>
         </Link>
       </Nav>
     </NavWrapper>

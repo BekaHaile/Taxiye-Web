@@ -4,8 +4,41 @@ import { createGlobalStyle } from "styled-components";
 import Header from "../components/header";
 import Banner from "../components/hero";
 import Footer from "../components/footer";
+import { useRouter } from "next/router";
+import "slick-carousel/slick/slick.css";
+
+import "slick-carousel/slick/slick-theme.css";
+
 
 const GlobalStyle = createGlobalStyle`
+
+
+.slick-current {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  transform: scale(1.25);    
+}
+
+.slick-list { 
+  padding:30px 0px !important;
+  margin:0px 60px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #A02167;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: .75;
+  color: #A02167;
+}
+.slick-dots li button:before {
+
+  opacity: .25;
+  color: #A02167;
+
+}
   html,body {
     height: 100%;
     width: 100%;
@@ -48,6 +81,10 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  
+  if(router.pathname === "/login")
+  return <Component {...pageProps} />;
   return (
     <>
       <Head>
