@@ -1,5 +1,5 @@
 import React from "react";
-import { GraySection, SectionTitle, CenteredText } from "../../section";
+import { GraySection, SectionTitle, CenteredText,SectionHeaderContainer,SectionContentContainer  } from "../../section";
 import styled from "styled-components";
 import { Card, CardWrapper, CardContent, CardTitle, Image } from "./card";
 
@@ -7,14 +7,13 @@ const Container = styled("div")`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-margin-bottom:60px;
-margin-top:80px;
+
 `;
 const CardContainer = styled("div")`
 display: flex;
 flex-direction: row;
 justify-content: center;
-margin-bottom:60px;
+
 `;
 
 const contents = [{
@@ -35,12 +34,15 @@ const PartnersContent = () => {
     return (
         <>
             <GraySection>
+                <SectionHeaderContainer>
                 <SectionTitle>
                     Our Partners
                 </SectionTitle>
                 <CenteredText>
                     Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor.
                 </CenteredText>
+                </SectionHeaderContainer>
+                <SectionContentContainer>
                 <Container>
                     <CardWrapper>
 
@@ -60,7 +62,7 @@ const PartnersContent = () => {
                         ))}
                     </CardContainer>
                 </Container>
-
+                </SectionContentContainer>
             </GraySection>
         </>
     );

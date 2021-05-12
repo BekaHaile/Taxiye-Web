@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import styled from "styled-components";
 
 const Card = styled("div")`
@@ -28,17 +27,27 @@ const CardBody = styled("div")`
   padding: 20px;
 `;
 
+const Image = styled("img")`
+ 
+`;
+
+
+const Info = styled("div")`
+  padding-right:10px;
+`;
+
 const AuthorText = styled("span")`
   font-weight: normal;
   font-size: 12px;
   line-height: 150%;
   color: #979797;
-  margin: 0px 5px;
+  margin-left: 5px;
 `;
 
 const ArticleInfoWrapper = styled("div")`
   display: flex;
-  margin: 0px 0px 15px;
+  padding-bottom: 10px;
+  
 `;
 
 const ArticleTitle = styled("h1")`
@@ -47,7 +56,7 @@ const ArticleTitle = styled("h1")`
   font-size: 20px;
   line-height: 30px;
   color: #444444;
-  margin: 10px 0px;
+  padding: 0px 0px 10px 0px;
 `;
 
 const ArticleText = styled("p")`
@@ -56,11 +65,10 @@ const ArticleText = styled("p")`
   font-size: 14px;
   line-height: 150%;
   color: #444444;
-  margin: 10px 0px;
+  padding-bottom:20px;
 `;
 
 const Button = styled("button")`
-  height: 34px;
   border: 1px solid #A02167;
   box-sizing: border-box;
   border-radius: 5px;
@@ -69,34 +77,43 @@ const Button = styled("button")`
   line-height: 19px;
   text-align: center;
   color: #A02167;
-  margin: 10px 0px;
   background: #fff;
-  width: 112px;
+  padding:5px 20px;
 `;
 
 const TextWrapper = styled("div")`
   width: 300px;
 `;
 
+const FlexCard = styled(Card)`
+
+`;
+
+const CenteredCard = styled(Card)`
+  margin: 0px 40px;
+`;
+
+
 const ArticleCard = ({ article }) => {
   return (
     <Card>
       <CardImage src={article.image} />
       <CardBody>
-        <TextWrapper>
+      <TextWrapper>
+       
           <ArticleInfoWrapper>
+            <Info>
             <Image
-              width="10px"
-              height="11px"
               src={require("../../../assets/icons/user/vector.svg")}
             />
             <AuthorText>{article.author}</AuthorText>
+            </Info>
+            <Info>
             <Image
-              width="10px"
-              height="11px"
               src={require("../../../assets/icons/user/clock.svg")}
             />
             <AuthorText>{article.date}</AuthorText>
+            </Info>
           </ArticleInfoWrapper>
           <ArticleTitle>{article.title}</ArticleTitle>
           <ArticleText>{article.description}</ArticleText>

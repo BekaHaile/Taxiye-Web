@@ -31,7 +31,7 @@ font-size: 14px;
 line-height: 22px;
 text-align: center;
 color: #444444;
-margin: 30px 0px;
+padding-top: 30px;
 `;
 
 const CardTitle = styled('p')`

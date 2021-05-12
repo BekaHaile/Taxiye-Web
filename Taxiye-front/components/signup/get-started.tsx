@@ -1,5 +1,5 @@
 import React from "react";
-import {GraySection,SectionTitle } from "../section";
+import {GraySection,SectionTitle,SectionHeaderContainer, SectionContentContainer  } from "../section";
 import styled from "styled-components";
 const SloganButton = styled("button")`
   min-width: 120px;
@@ -26,8 +26,12 @@ const SignUp = () => {
   return (
     <>
     <GraySection>
+    <SectionHeaderContainer>
       <CustomSectionTitle>What are you waiting for? Start today.</CustomSectionTitle>
+      </SectionHeaderContainer>
+      <SectionContentContainer>
       <SloganButton>Get Started</SloganButton>
+      </SectionContentContainer>
 
       </GraySection>
     </>

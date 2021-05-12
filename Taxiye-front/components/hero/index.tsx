@@ -12,7 +12,8 @@ justify-content: center;
 align-items: center;
 text-align: center;
 align-self: center;
-width: 890px;
+margin:auto;
+
 `;
 
 const Slogan = styled("h1")`
@@ -23,12 +24,12 @@ const Slogan = styled("h1")`
 `;
 
 const HomeSlogan = styled(Slogan)`
-  margin: 45px 0px;
+  margin-bottom: 45px;
 `;
 
 const CenteredSlogan = styled(Slogan)`
   text-align: center;
-  margin: 10px 0px;
+  padding-bottom: 10px;
 `;
 
 const Description = styled("p")`
@@ -37,7 +38,7 @@ const Description = styled("p")`
   line-height: 25px;
   text-align: center;
   color: #ffffff;
-  margin: 10px 0px;
+  padding-bottom: 30px;
 `;
 
 const Breadcrump = styled("h2")`
@@ -47,41 +48,48 @@ const Breadcrump = styled("h2")`
   line-height: 22px;
   text-align: center;
   color: #A02167;
-  margin: 10px 0px;
+  padding-bottom: 10px;
   &::firstline {
     text-transform: uppercase;
   }
 `;
 
-const HomeHero = styled("div")`
+const HomeHero = styled("section")`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0px 60px 0px;
-  padding-top: 35px;
   background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 52.87%),
     url(${require("../../assets/images/heros/Landing.png")});
   background-repeat: no-repeat;
   background-size: cover;
-  height: 700px;
-  margin: 0px 0px;
+  height:700px;
+  width:auto;
+`;
+const HomeContainer = styled("div")`
+display: inline-block;
+padding-left:60px;
+margin-top:95px;
+
 `;
 
 const SloganButton = styled("button")`
-  min-width: 120px;
-  height: 34px;
-  background: #A02167;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  margin: 30px 0px;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 19px;
-  text-align: center;
-  color: #ffffff;
-  border-color: transparent;
-  vertical-align: middle;
+background: #A02167;
+box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+border-radius: 5px;
+padding: 5px 20px;
+line-height: 19px;
+text-align: center;
+color: #ffffff;
+border-color: transparent;
+font-family: Open Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+
+text-align: center;
+
 `;
 
 const Hero = () => {
@@ -125,29 +133,36 @@ const Hero = () => {
   }
   const HeroWrapper = styled("div")`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0px 60px 0px;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height: ${height};
-    margin: 0px 0px;
-    padding-top:20px;
+    height:550px;
+    width:100%;
   `;
-  const navigatedLink = router.pathname.replace(/\\|\//g, "");
+
+  const Container = styled("div")`
  
+  padding-top:95px;
+  margin:auto;
+`;
+  const navigatedLink = router.pathname.replace(/\\|\//g, "");
+
   return (
     <>
-    
+
       {router.pathname === "/" ? (
         <HomeHero>
-          <HomeSlogan>Life is a journey. Enjoy it with Taxiye.</HomeSlogan>
-          <TabbedForms />
+          <div>
+          <HomeContainer>
+            <HomeSlogan>Life is a journey. Enjoy it with Taxiye.</HomeSlogan>
+            <TabbedForms />
+          </HomeContainer>
+          </div>
         </HomeHero>
       ) : (
         <HeroWrapper >
+         <Container>
           <SlogganWrapper>
             <Breadcrump>
               {`Home / ${navigatedLink
@@ -159,20 +174,21 @@ const Hero = () => {
             {router.pathname === "/corporate" ? (
               <SloganButton>Sign up for your company</SloganButton>
             ) : router.pathname === "/articles" ? (
-              
-                <SecondaryInputs
-                  id="location"
-                  placeholder="Search..."
-                  icon={require("../../assets/icons/search.svg")}
-                />
+
+              <SecondaryInputs
+                id="location"
+                placeholder="Search..."
+                icon={require("../../assets/icons/search.svg")}
+              />
             ) : router.pathname === "/signup" ? (
-              
+
               <SloganButton>Get started</SloganButton>
-          ) : null}
+            ) : null}
           </SlogganWrapper>
+         </Container>
         </HeroWrapper>
       )}
-      
+
     </>
   );
 };

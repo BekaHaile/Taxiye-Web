@@ -2,8 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import Carousel from "react-elastic-carousel";
 import Card from "./card";
-import {Title,TitleBorder, Block} from '../title';
-import {DefaultSection} from "../../section";
+import {Title, Block} from '../title';
+import {DefaultSection, SectionContentContainer} from "../../section";
 
 
 const Articles = [
@@ -60,11 +60,11 @@ const Articles = [
   const FeaturedContent = () => {
     return(
         <>
+        <DefaultSection>
         <Block>
         <Title>Featured</Title>
-        <TitleBorder></TitleBorder>
         </Block>
-         <DefaultSection>
+         
         <Carousel itemsToShow={1} itemPadding={[25, 0]} transitionMs={700}>
         {Articles.map((article) => (
         <Card key={article.date} article={article} />

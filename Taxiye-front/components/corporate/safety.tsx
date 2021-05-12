@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { GraySection, SectionTitle, CenteredText } from "../section";
+import { GraySection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer  } from "../section";
 import { BlockTitle, BlockContent } from "./text";
 
 const ContentWrapper = styled("div")`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 60px 0px;
+  margin: 0px 0px;
   
 `;
 
@@ -20,12 +20,23 @@ const Block = styled("div")`
   display: flex;
   align-items: center;
   padding: 0px 75px;
-  margin-bottom: 30px;;
+`;
+
+const BlockContainer = styled("div")`
+  display: flex;
+  align-items: center;
+`;
+
+const BlockContainerTop = styled(BlockContainer)`
+  padding-bottom:30px;
+`;
+const BlockContainerBottom = styled(BlockContainer)`
+padding-top:30px;
 `;
 
 const Image = styled("img")`
-  width: 72px;
-  height: 66px;
+  width: 71.15px;
+  height: 66.42px;
   margin-right: 20px;
   vertical-align: middle;
 `;
@@ -33,13 +44,16 @@ const Image = styled("img")`
 const SafteyCenter = () => {
   return (
     <GraySection>
+      <SectionHeaderContainer>
       <SectionTitle>Taxiye Safety Center</SectionTitle>
       <CenteredText>
         Our safety standards make sure that your employees are comfortable and
         secure throughout the trip!
       </CenteredText>
-      <ContentWrapper>
-        <div>
+      </SectionHeaderContainer>
+      <SectionContentContainer>
+      
+        <BlockContainerTop>
           <Block>
             <Image src={require("../../assets/icons/safety.png")} />
             <div>
@@ -59,8 +73,8 @@ const SafteyCenter = () => {
               </SafetyText>
             </div>
           </Block>
-        </div>
-        <div>
+        </BlockContainerTop>
+        <BlockContainerBottom>
           <Block>
             <Image src={require("../../assets/icons/address.png")} />
             <div>
@@ -80,8 +94,8 @@ const SafteyCenter = () => {
               </SafetyText>
             </div>
           </Block>
-        </div>
-      </ContentWrapper>
+        </BlockContainerBottom>
+      </SectionContentContainer>
     </GraySection>
   );
 };

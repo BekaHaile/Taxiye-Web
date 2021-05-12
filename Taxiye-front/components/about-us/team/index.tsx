@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultSection, SectionTitle, CenteredText } from "../../section";
+import { DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer,SectionContentContainer  } from "../../section";
 import { TeamCard, SecondaryTeamCard } from "./card";
 import styled from "styled-components";
 
@@ -7,7 +7,6 @@ const CardContainer = styled("div")`
 display: flex;
 flex-direction: row;
 justify-content: center;
-margin:60px 0px;
 `;
 const Container = styled("div")`
 
@@ -74,12 +73,16 @@ const AboutUsContent = () => {
         <>
             <DefaultSection>
                 <Container>
+                <SectionHeaderContainer>
                     <SectionTitleCenter>
                         Our Team
                 </SectionTitleCenter>
                 <CenteredTextContent>
                         Our company is ran by the best and brightest team in the industy.
                 </CenteredTextContent>
+                </SectionHeaderContainer>
+                    
+                <SectionContentContainer>
                     <CardContainer>
                         {singlecontent.map((content) => (
 
@@ -87,6 +90,11 @@ const AboutUsContent = () => {
 
                         ))}
                     </CardContainer>
+                  
+                </SectionContentContainer>
+
+                <SectionContentContainer>
+                  
                     <CardContainer>
                         {groupcontents.map((content) => (
 
@@ -94,9 +102,11 @@ const AboutUsContent = () => {
 
                         ))}
                     </CardContainer>
+                </SectionContentContainer>
+                
                 </Container>
 
-
+                
             </DefaultSection>
         </>
     );

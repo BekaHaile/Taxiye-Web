@@ -4,13 +4,15 @@ import styled from 'styled-components';
 const Block = styled("div")`
 
 width: 87px;
-margin:30px auto;
+margin: auto;
+margin-bottom:60px;
 `;
 const SecondaryBlock = styled("div")`
-
 width: 102px;
-margin:30px auto;
+margin: auto;
+margin-bottom:60px;
 `;
+
 
 const Title = styled("p")`
 font-family: Open Sans;
@@ -19,17 +21,23 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 color: #444444;
-margin: 3px 0px;
+display: inline-block;
+position: relative;
+
+&:after {
+    content: "";
+    height: 2px;
+    width: 60%;
+    background-color: #A02167;
+    position: absolute;
+    bottom: -.2em;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  
 `;
 
 
-const TitleBorder = styled("div")`
-
-border-bottom: 2px solid #A02167;
-width:50px;
-margin:auto;
-
-`;
 
 
-export {Title, TitleBorder, Block, SecondaryBlock}
+export {Title, Block, SecondaryBlock}

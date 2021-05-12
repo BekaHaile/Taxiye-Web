@@ -4,10 +4,8 @@ import styled from "styled-components";
 import {DefaultSection} from "../../section";
 
 const CardSection = styled("div")`
-  display: grid;
-  grid-template-columns: auto auto auto;
-
- 
+  display: flex;
+  padding-bottom:40px;
 `;
 
 
@@ -36,12 +34,16 @@ const Articles = [
       date: "June 25, 2020",
       image: require("../../../assets/Data/images/articles/news_4.jpg"),
     },
+  
+  ];
+
+  const Articles2 = [
     {
       title: "Lorem ipsum dolor sit, amet consectetur adipi ",
       description:
         "Lorem ipsum dolor sit, amet consectetur adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna.",
       author: "Neguse B.",
-      date: "June 26, 2020",
+      date: "June 23, 2020",
       image: require("../../../assets/Data/images/articles/news_2.jpg"),
     },
     {
@@ -49,7 +51,7 @@ const Articles = [
       description:
         "Lorem ipsum dolor sit, amet consectetur adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna.",
       author: "Neguse B.",
-      date: "June 27, 2020",
+      date: "June 24, 2020",
       image: require("../../../assets/Data/images/articles/news_3.jpg"),
     },
     {
@@ -57,9 +59,10 @@ const Articles = [
       description:
         "Lorem ipsum dolor sit, amet consectetur adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna.",
       author: "Neguse B.",
-      date: "June 28, 2020",
+      date: "June 25, 2020",
       image: require("../../../assets/Data/images/articles/news_4.jpg"),
     },
+  
   ];
 
 const ArticleList = () => {
@@ -67,6 +70,14 @@ const ArticleList = () => {
         <>
         <CardSection>
          {Articles.map((article) => (
+           
+        <Card key={article.date} article={article} />
+        
+      ))}
+      </CardSection>
+
+      <CardSection>
+         {Articles2.map((article) => (
            
         <Card key={article.date} article={article} />
         

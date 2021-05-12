@@ -6,18 +6,15 @@ import StationForm from "./station-form";
 import DeliveryForm from "./delivery-form";
 
 const TabWrapper = styled("div")`
-  padding: 10px 20px 15px;
-  width: 500px;
-  height: 392px;
+  display:inline-block;
   background: #ffffff;
   border-radius: 5px;
   overflow: hidden;
 `;
 
 const TabButtonWrappers = styled("div")`
-  display: flex;
-  justify-content: space-between;
-  margin: 0px 30px;
+  display: inline-block;
+  padding:10px 20px;
 `;
 
 const TabButton = styled.a`

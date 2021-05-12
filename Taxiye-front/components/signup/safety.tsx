@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DefaultSection, SectionTitle, CenteredText } from "../section";
+import { DefaultSection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer  } from "../section";
 
 
 const BlockTitle = styled("h3")`
@@ -52,11 +52,14 @@ const Image = styled("img")`
 const SafteyCenter = () => {
   return (
     <DefaultSection>
+      <SectionHeaderContainer>
       <SectionTitle>Taxiye Safety Center</SectionTitle>
       <CenteredText>
         Our safety standards make sure that your employees are comfortable and
         secure throughout the trip!
       </CenteredText>
+      </SectionHeaderContainer>
+      <SectionContentContainer>
       <ContentWrapper>
         <div>
           <Block>
@@ -99,6 +102,7 @@ const SafteyCenter = () => {
           </Block>
         </div>
       </ContentWrapper>
+      </SectionContentContainer>
     </DefaultSection>
   );
 };

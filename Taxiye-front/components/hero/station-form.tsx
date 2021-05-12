@@ -1,13 +1,16 @@
 import React from "react";
-import { Inputs, Form, InlineForm, InputSeparator, Button } from "./inputs";
-import { Title, SubTitle } from "./tab-titles";
+import { Inputs, Form, InlineForm, InputSeparator } from "./inputs";
+import { Title, SubTitle,HomeTitles,FormContainer,CustomButton } from "./tab-titles";
 
 const StationForm = () => {
   return (
     <>
+    <HomeTitles>
       <Title>The ideal gateway choice.</Title>
       <SubTitle>When traveling between cities</SubTitle>
+      </HomeTitles>
       <Form>
+        <FormContainer>
         <Inputs
           label="From?"
           placeholder="Enter pickup location"
@@ -31,7 +34,9 @@ const StationForm = () => {
           <Inputs label="Time?" placeholder="06:45 AM" id="time" />
           </InputSeparator>
         </InlineForm>
-        <Button>Request Now</Button>
+        </FormContainer>
+        <CustomButton>Request Now</CustomButton>
+        
       </Form>
     </>
   );

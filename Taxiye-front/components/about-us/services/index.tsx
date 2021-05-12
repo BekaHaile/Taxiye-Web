@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultSection, SectionTitle, CenteredText } from "../../section";
+import { DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer,SectionContentContainer  } from "../../section";
 import styled from "styled-components";
 import DeviceImage from "./image";
 import { ContentWrapper, Numbering, Text, Block, RightText, BlockTitle, RightBlockTitle, Container } from './content';
@@ -9,12 +9,15 @@ const ServiceContent = () => {
     return (
         <>
             <DefaultSection>
+            <SectionHeaderContainer>
                 <SectionTitle>
                     Why ride with Taxiye
                 </SectionTitle>
                 <CenteredText>
                     Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor.
                 </CenteredText>
+                </SectionHeaderContainer>
+                <SectionContentContainer>
                 <ContentWrapper>
                     <div>
                         <Block>
@@ -60,7 +63,7 @@ const ServiceContent = () => {
                         </Block>
                     </div>
                 </ContentWrapper>
-
+                </SectionContentContainer>
 
 
             </DefaultSection>

@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-elastic-carousel";
 import Card from "./card";
+import styled from "styled-components";
 
 const Articles = [
   {
@@ -52,6 +53,12 @@ const Articles = [
     image: require("../../../assets/Data/images/articles/news_4.jpg"),
   },
 ];
+
+const Container = styled("div")`
+  width:100%;
+  padding-top:60px;
+`;
+
 
 
 const ArticleSlider = () => {

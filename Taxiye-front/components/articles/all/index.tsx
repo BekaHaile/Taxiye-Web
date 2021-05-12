@@ -1,9 +1,13 @@
 import React from 'react';
-import {Title,TitleBorder, SecondaryBlock} from '../title';
+import styled from "styled-components";
+import {Title, SecondaryBlock} from '../title';
 import ArticleSlider from "./slider";
-import {GraySection} from "../../section";
-import {Button} from "../../form/inputs";
+import {GraySection, SectionContentContainer} from "../../section";
+import {Button} from "../../form/buttons/primary-button";
 
+const CustomButton = styled(Button)`
+  padding: 5px 20px;
+`;
 
 const FeaturedContent = () => {
     return(
@@ -11,10 +15,9 @@ const FeaturedContent = () => {
         <GraySection>
         <SecondaryBlock>
         <Title>All Articles</Title>
-        <TitleBorder></TitleBorder>
         </SecondaryBlock>
         <ArticleSlider></ArticleSlider>
-        <Button>Load More</Button>
+        <CustomButton>Load More</CustomButton>
         </GraySection>
         </>
     );

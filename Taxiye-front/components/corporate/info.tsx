@@ -1,17 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { DefaultSection, SectionTitle, CenteredText } from "../section";
+import { DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer  } from "../section";
 import {BlockContent, BlockTitle} from './text';
-import Image from "next/image";
 
 const BlockWrapper = styled("div")`
 display: flex;
 align-items: flex-start;
-margin: 60px 0px;
+margin: 0px 0px;
 `;
 
 const CorporateText = styled(BlockContent)`
-max-width: 230px;
+width: 230px;
 `;
 
 const Block = styled("div")`
@@ -19,21 +18,40 @@ const Block = styled("div")`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0px 20px;
+  padding-right: 40px;
 `;
-const CardImage = styled(Image)`
+const LastBlock = styled(Block)`
+
+  padding: 0px;
+`;
+const CardImage = styled("div")`
+width:635px;
+height:375px;
+background-image:url(${require("../../assets/images/corporate/macbook-2.png")});
+background-repeat: no-repeat;
+background-size: 635px 375px;
+background-position: center; 
+margin:auto;
+margin-top:20px;
+
+
 
 `;
 
 const CorporateInfoSection = () => {
   return (
     <DefaultSection>
+      <SectionHeaderContainer>
       <SectionTitle>Use Taxiye Corporate for</SectionTitle>
       <CenteredText>
         Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis,
         mollis viverra conubia.
       </CenteredText>
-      <CardImage width="635" height="375" src={require("../../assets/images/corporate/macbook-2.png")} />
+      
+      
+      <CardImage   />
+      </SectionHeaderContainer>
+      <SectionContentContainer>
       <BlockWrapper>
         <Block>
           <BlockTitle>Executive Travel</BlockTitle>
@@ -54,14 +72,15 @@ const CorporateInfoSection = () => {
             Hassle-free daily commute for employees with Taxiye.
           </CorporateText>
         </Block>
-        <Block>
+        <LastBlock>
           <BlockTitle>Employee perks</BlockTitle>
           <CorporateText>
-            Night drops, weekend work travels, easy travel allowance options and
-            more. We cover it all.
+          Night drops, weekend work travels, easy travel allowance options and more.
+          We cover it all.
           </CorporateText>
-        </Block>
+        </LastBlock>
       </BlockWrapper>
+      </SectionContentContainer>
     </DefaultSection>
   );
 };

@@ -1,29 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import {VisionImage, MissionImage, ValueImage} from "./images";
 
 const Card = styled('div')`
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-padding: 0px 20px;
+padding: 35px 20px;
 background: #FFFFFF;
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 border-radius: 10px;
-flex: none;
-order: 0;
-flex-grow: 0;
-margin: 0px 30px;
-width: 270px;
-max-width: 270px;
-height: 310px;
+
 `;
+
 
 const CardWrapper = styled('div')`
 display: flex;
 justify-content: space-around;
-margin: 0px 0px 50px 0px;
+`;
+const CenteredCard = styled(Card)`
+margin:0px 50px;
+box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);
 `;
 
 const CardTitle = styled('h3')`
@@ -34,7 +32,7 @@ font-size: 20px;
 line-height: 27px;
 text-align: center;
 color: #444444;
-margin: 20px 0px;
+padding-bottom: 20px;
 text-align: center;
 `;
 
@@ -45,22 +43,41 @@ font-size: 16px;
 line-height: 22px;
 text-align: center;
 color: #444444;
-margin: 20px 0px;
+width: 250px;
+`;
+
+const TitleContainer = styled('div')`
+    padding-top:30px;
 `;
 
 const Image = styled('img')`
-width: 60px;
+
 `;
 
-const VisionCards = ({content}) => {
+const VisionCards = () => {
     return(
         <CardWrapper>
             <Card>
-                {content.img}
-                <CardTitle>{content.title}</CardTitle>
-                <CardContent>{content.content}</CardContent>
+                <VisionImage />
+                <TitleContainer>
+                <CardTitle>Vision</CardTitle>
+                <CardContent>To be the best ride hailing service provider in Africa which is uniquely owned by taxi drivers, major shareholders and the public.</CardContent>
+                </TitleContainer>
             </Card>
-           
+            <CenteredCard>
+                <MissionImage />
+                <TitleContainer>
+                <CardTitle>Mission</CardTitle>
+                <CardContent>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra adipiscing conubia ligula.</CardContent>
+                </TitleContainer>
+            </CenteredCard>
+            <Card>
+                <ValueImage />
+                <TitleContainer>
+                <CardTitle>Value</CardTitle>
+                <CardContent>To help passengers get better means of transportation at a reasonable price and to modernize the transportation system.</CardContent>
+                </TitleContainer>
+            </Card>
         </CardWrapper>
     );
 }

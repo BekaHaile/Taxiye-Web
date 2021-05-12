@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Button} from "./inputs";
 
 const Title = styled("h5")`
   font-weight: 600;
@@ -7,6 +8,8 @@ const Title = styled("h5")`
   line-height: 19px;
   text-align: center;
   color: #444444;
+  padding-bottom:10px;
+  margin:0px;
 `;
 
 const SubTitle = styled("h6")`
@@ -15,8 +18,17 @@ const SubTitle = styled("h6")`
   line-height: 16px;
   text-align: center;
   color: #444444;
-  margin-top: -10px;
+  margin:0px;
+`;
+const HomeTitles = styled("div")`
+`;
+
+const FormContainer = styled("div")`
+  padding:10px 20px;
+`;
+const CustomButton = styled(Button)`
+  margin:10px 20px;
 `;
 
 
-export {Title, SubTitle};
+export {Title, SubTitle, HomeTitles, FormContainer,CustomButton};

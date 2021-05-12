@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultSection, SectionTitle, CenteredText } from "../section";
+import { DefaultSection, SectionTitle, CenteredText ,SectionHeaderContainer, SectionContentContainer } from "../section";
 import VisionCard from "./card";
 import styled from "styled-components";
 
@@ -33,12 +33,15 @@ const VisionContent = () => {
     return (
         <>
             <DefaultSection>
+            <SectionHeaderContainer>
                 <SectionTitle>
                     Our Team
                 </SectionTitle>
                 <CenteredText>
                     Our company is ran by the best and brightest team in the industy.
                 </CenteredText>
+                </SectionHeaderContainer>
+                <SectionContentContainer>
                 <CardContainer>
                     {contents.map((content) => (
 
@@ -46,7 +49,7 @@ const VisionContent = () => {
 
                     ))}
                 </CardContainer>
-
+                </SectionContentContainer>
             </DefaultSection>
         </>
     );

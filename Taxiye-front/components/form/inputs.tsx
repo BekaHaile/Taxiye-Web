@@ -1,20 +1,10 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { DefaultSection } from "../section";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
-const Button = styled("button")`
-  height: 39px;
-  width:140px;
-  background: #A02167;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  margin: 20px 0px;
-  font-size: 14px;
-  line-height: 19px;
-  text-align: center;
-  color: #ffffff;
-  border-color: transparent;
-`;
+
 
 
 
@@ -61,27 +51,9 @@ box-sizing: border-box;
     outline: none;
     border: 1px solid #A02167;
   }
-
-
 `;
 
-const DefaultTextArea = styled('textarea')`
-width: 100%;
-min-height:200px;
-padding: 12px 20px;
-margin: 8px 0;
-display: inline-block;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
-&& {
-  :focus {
-    outline: none;
-    border: 1px solid #A02167;
-  }
 
-
-`;
 
 const CheckBoxLabelText = styled(LabelText)`
   
@@ -138,6 +110,8 @@ const InlineForm = styled("div")`
     }
   }
 `;
+
+
 
 const InputSeparator = styled("div")`
 display: flex;
@@ -218,7 +192,7 @@ const SecondaryInputs: FunctionComponent<InputProps> = ({
 
 const SecondaryInput = styled('input')`
   width: 400px;
-  margin:20px auto;
+  margin:0px auto;
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
@@ -229,6 +203,52 @@ const SecondaryInput = styled('input')`
   border-radius:50px;
 `;
 
+const Container = styled('div')`
+  display:flex;
+  justify-content:left;
+  margin-top:3px
+ 
+`;
+const SecondContainer = styled('div')`
+  
+  margin:1px 0px;
+ 
+`;
+
+const CustomInput = styled(DefaultInput)`
+  
+border: 1px solid #cacaca;
+height:45px;
+border-left:none;
+margin-left: -3px;
+margin-top:1px;
+ 
+`;
 
 
-export { Form, InlineForm, Button, Inputs, InputSeparator, DefaultInput, DefaultTextArea, SecondaryInputs, DefaultInputs, Checkbox };
+
+function PhoneInputField({label, id, placeholder,country}) {
+  return (
+    <>
+    <label>{label}</label>
+    <Container>
+      <SecondContainer>
+    <PhoneInput
+    
+    country={country}
+    
+    // value={this.state.phone}
+    // onChange={phone => this.setState({ phone })}
+  />
+  </SecondContainer>
+  <CustomInput placeholder={placeholder}/>
+  </Container>
+  </>
+    )
+}
+
+
+
+
+
+export { Form, InlineForm, Inputs, InputSeparator, DefaultInput, SecondaryInputs, DefaultInputs, Checkbox, PhoneInputField };

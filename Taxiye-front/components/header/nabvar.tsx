@@ -10,9 +10,10 @@ const NavWrapper = styled("div")`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 50px 5px 60px;
+  padding: 0px 50px 0px 60px;
   height: 65px;
   background: #ffffff;
+  filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.25));
 `;
 const Avatar = styled("img")`
   

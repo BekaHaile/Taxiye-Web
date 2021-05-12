@@ -1,13 +1,17 @@
 import React from "react";
 import { Inputs, Form, InlineForm, InputSeparator, Button } from "./inputs";
-import { Title, SubTitle } from "./tab-titles";
+import { Title, SubTitle,HomeTitles,FormContainer,CustomButton } from "./tab-titles";
+
 
 const BookForm = () => {
   return (
     <>
+      <HomeTitles>
       <Title>Make every mile count by taxiye.</Title>
       <SubTitle>For in-city point to point travel</SubTitle>
+      </HomeTitles>
       <Form>
+      <FormContainer>
         <Inputs
           label="From?"
           placeholder="Enter pickup location"
@@ -31,7 +35,8 @@ const BookForm = () => {
             <Inputs label="Time?" placeholder="06:45 AM" id="time" />
           </InputSeparator>
         </InlineForm>
-        <Button>Request Now</Button>
+        </FormContainer>
+        <CustomButton>Request Now</CustomButton>
       </Form>
     </>
   );

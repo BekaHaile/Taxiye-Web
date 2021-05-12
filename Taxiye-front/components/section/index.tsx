@@ -5,38 +5,50 @@ const Section = styled("section")`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 60px;
+  padding: 60px 60px;
 `;
 
 const DefaultSection = styled(Section)`
 background: #fff;
 `;
 const SecondarySection = styled(DefaultSection)`
-  margin: 30px 60px;
+  padding: 60px 60px;
 `;
 
 const GraySection = styled(Section)`
 background: #f9f9f9;
 `;
 
+const SectionHeaderContainer = styled("div")`
+
+`;
+
+const SectionContentContainer = styled("div")`
+
+  padding-top:60px;
+
+`;
+
 const SectionTitle = styled("h1")`
   font-family: Open Sans;
-  width:400px;
   font-style: normal;
   font-weight: 600;
   font-size: 32px;
   line-height: 44px;
-  color: #e45397;
+  color: #A02167;
   text-align: center;
   margin: 0;
+  padding-bottom:10px;
 `;
 
 const CenteredText = styled("p")`
   font-size: 18px;
   line-height: 25px;
+  margin:0px;
+  padding:0px;
   text-align: center;
   color: #444444;
   max-width: 800px;
 `;
 
-export {GraySection, DefaultSection, SecondarySection, SectionTitle, CenteredText};
+export {GraySection, DefaultSection, SecondarySection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer};

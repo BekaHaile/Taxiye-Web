@@ -2,16 +2,20 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 const Button = styled("button")`
-  height: 39px;
   background: #A02167;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  margin: 20px 0px;
+  padding: 10px;
   font-size: 14px;
   line-height: 19px;
   text-align: center;
   color: #ffffff;
   border-color: transparent;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
 `;
 
 const LabelText = styled("label")`
@@ -44,7 +48,7 @@ const Input = styled("input")`
 
 const FormGroup = styled("div")`
   display: flex;
-  padding: 5px 0px;
+  padding: 10px 0px;
   width: 100%;
 `;
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
-import {DefaultSection, SectionTitle, CenteredText} from '../../section';
+
+import {DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer } from '../../section';
 
 const ServiceTitle = styled("h3")`
   font-style: normal;
@@ -9,6 +9,7 @@ const ServiceTitle = styled("h3")`
   font-size: 20px;
   line-height: 27px;
   color: #444444;
+  padding-bottom:10px;
 `;
 
 const ServiceText = styled("p")`
@@ -18,12 +19,18 @@ const ServiceText = styled("p")`
   text-align: center;
   color: #444444;
   width: 290px;
+  padding-bottom:10px;
 `;
 
 const ServicesWrapper = styled("div")`
   display: flex;
   justify-content: space-between;
-  padding: 26px 0px;
+`;
+
+const Image = styled("img")`
+height:78px;
+width:65px;
+padding-bottom:30px;
 `;
 
 const ServiceWrapper = styled("div")`
@@ -44,22 +51,24 @@ const Button = styled("button")`
   text-align: center;
   color: #A02167;
   background: #fff;
-  width: 116px;
+  padding: 5px 20px
 `;
 
 const Services = () => {
   return (
     <DefaultSection>
+      <SectionHeaderContainer>
       <SectionTitle>Choose the trip that suits you.</SectionTitle>
       <CenteredText>
         Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis,
         mollis viverra conubia ligula inceptos laoreet.
       </CenteredText>
+      </SectionHeaderContainer>
+      <SectionContentContainer>
       <ServicesWrapper>
         <ServiceWrapper>
           <Image
-            height="78px"
-            width="65px"
+            
             src={require("../../../assets/icons/service.png")}
           />
           <ServiceTitle>Taxi on Demand</ServiceTitle>
@@ -71,8 +80,7 @@ const Services = () => {
         </ServiceWrapper>
         <ServiceWrapper>
           <Image
-            height="78px"
-            width="65px"
+            
             src={require("../../../assets/icons/destination.png")}
           />
           <ServiceTitle>City to City Travel</ServiceTitle>
@@ -84,8 +92,7 @@ const Services = () => {
         </ServiceWrapper>
         <ServiceWrapper>
           <Image
-            height="78px"
-            width="65px"
+           
             src={require("../../../assets/icons/rate.png")}
           />
           <ServiceTitle>Hourly Rental</ServiceTitle>
@@ -109,6 +116,7 @@ const Services = () => {
           <Button>Load More</Button>
         </ServiceWrapper>
       </ServicesWrapper>
+    </SectionContentContainer>
     </DefaultSection>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import styled from "styled-components";
 
 const Card = styled("div")`
@@ -7,12 +6,10 @@ const Card = styled("div")`
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  margin: 0px 33px;
   baackground: #ffffff;
   border-radius: 10px;
   background: #fff;
-  width: 1246px;
-  
+  width: auto;
   
 `;
 
@@ -21,20 +18,25 @@ const CardImage = styled("img")`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 5px;
-  
-  position: static;
-  width: 660px;
-  height: 410px;
-  left: 0px;
-  top: 0px;
+  width:660px;
+  height:410px;
+  margin-right:40px;
+
 `;
 
 const CardBody = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px 20px 20px;
+`;
+
+const Image = styled("img")`
+ 
+`;
+
+
+const Info = styled("div")`
+  padding-right:10px;
 `;
 
 const AuthorText = styled("span")`
@@ -42,12 +44,13 @@ const AuthorText = styled("span")`
   font-size: 12px;
   line-height: 150%;
   color: #979797;
-  margin: 0px 5px;
+  margin-left: 5px;
 `;
 
 const ArticleInfoWrapper = styled("div")`
   display: flex;
-  margin: 0px 0px 15px;
+  padding-bottom: 10px;
+  
 `;
 
 const ArticleTitle = styled("h1")`
@@ -65,11 +68,10 @@ const ArticleText = styled("p")`
   font-size: 14px;
   line-height: 150%;
   color: #444444;
-  margin: 10px 0px;
+  padding-bottom:20px;
 `;
 
 const Button = styled("button")`
-  height: 34px;
   border: 1px solid #A02167;
   box-sizing: border-box;
   border-radius: 5px;
@@ -78,9 +80,8 @@ const Button = styled("button")`
   line-height: 19px;
   text-align: center;
   color: #A02167;
-  margin: 10px 0px;
   background: #fff;
-  width: 112px;
+  padding:5px 20px;
 `;
 
 const TextWrapper = styled("div")`
@@ -95,18 +96,18 @@ const ArticleCard = ({ article }) => {
         <TextWrapper>
         <ArticleTitle>{article.title}</ArticleTitle>
           <ArticleInfoWrapper>
+            <Info>
             <Image
-              width="10px"
-              height="11px"
               src={require("../../../assets/icons/user/vector.svg")}
             />
             <AuthorText>{article.author}</AuthorText>
+            </Info>
+            <Info>
             <Image
-              width="10px"
-              height="11px"
               src={require("../../../assets/icons/user/clock.svg")}
             />
             <AuthorText>{article.date}</AuthorText>
+            </Info>
           </ArticleInfoWrapper>
           
           <ArticleText>{article.description}</ArticleText>

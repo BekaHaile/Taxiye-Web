@@ -1,5 +1,5 @@
 import React from "react";
-import { CenteredText, GraySection, SectionTitle } from "../section";
+import { CenteredText, GraySection, SectionTitle,SectionHeaderContainer, SectionContentContainer  } from "../section";
 import styled from "styled-components";
 
 const CardContainer = styled("div")`
@@ -69,8 +69,11 @@ const Requirements = () => {
     return (
         <>
             <GraySection>
+            <SectionHeaderContainer>
                 <SectionTitle>Application Requirments</SectionTitle>
                 <CenteredText>With simple steps to register and minimum requirements, you can be partners with us today. Below are the documents required from the driver upon registration.</CenteredText>
+                </SectionHeaderContainer>
+                <SectionContentContainer>
                 <CardContainer>
                     <div>
                     {contents.map((content) => (
@@ -90,6 +93,7 @@ const Requirements = () => {
                     </div>
                     <img src={require("../../assets/icons/requirements.svg")} />
                 </CardContainer>
+                </SectionContentContainer>
             </GraySection>
         </>
     );
