@@ -15,13 +15,13 @@ const DeliveryForm = () => {
           label="From?"
           placeholder="Enter pickup location"
           id="location"
-          icon={require("../../assets/icons/location.png")}
+          icon={require("../../assets/icons/location.svg")}
         />
         <Inputs
           label="Where to?"
           placeholder="Enter drop off for estimate"
           id="dropoff"
-          icon={require("../../assets/icons/flag_fill.png")}
+          icon={require("../../assets/icons/flag.svg")}
         />
         <InlineForm>
           <Inputs

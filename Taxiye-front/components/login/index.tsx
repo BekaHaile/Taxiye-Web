@@ -1,14 +1,14 @@
 import React from "react";
 import { Checkbox } from "../form/inputs";
 import Image from "./image";
-import { PhoneInput } from "../form/input-fields/custom-phone-input";
+import { PhoneInput } from "../form/input-fields/phone-input";
 import { ContentWrapper, FlexContainer, CustomButton, CheckBoxContainer, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "./elements";
 import Link from "next/link";
 const Login = () => {
   return (
     <>
       <ContentWrapper>
-        <Image />
+        <Image type=""/>
         <FormContainer>
           <CenteredForm>
             <HeaderContainer>

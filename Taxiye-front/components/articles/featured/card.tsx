@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Card = styled("div")`
   display: flex;
@@ -112,7 +113,7 @@ const ArticleCard = ({ article }) => {
           
           <ArticleText>{article.description}</ArticleText>
         </TextWrapper>
-        <Button>Read More</Button>
+        <Link href="/articles/12345"><Button>Read More</Button></Link>
       </CardBody>
     </Card>
   );

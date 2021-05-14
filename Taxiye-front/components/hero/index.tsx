@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import TabbedForms from "./tab";
 import { Form, SecondaryInputs } from "../form/inputs";
+import Link from "next/link";
 
 
 const SlogganWrapper = styled("div")`
@@ -112,9 +113,17 @@ const Hero = () => {
     description = "Let us take care of your enterprise travel.";
   }
   else if (router.pathname === "/articles") {
-    slogan = "Latest Articles and Updates";
     backgroundUrl = `${require("../../assets/images/heros/Articles.jpg")}`;
+    slogan = "Latest Articles and Updates";
     description = "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor";
+
+  }
+  else if (router.pathname === "/articles/[id]") {
+    const id = router.query.id;
+    backgroundUrl = `${require("../../assets/images/heros/Articles.jpg")}`;
+    slogan = id;
+    description = "";
+
   }
   else if (router.pathname === "/contact-us") {
     slogan = "We would love to here from you.";
@@ -131,6 +140,7 @@ const Hero = () => {
     backgroundUrl = `${require("../../assets/images/heros/services.jpg")}`;
     description = "Apply now to become a Taxiye driver-partner. ";
   }
+
   const HeroWrapper = styled("div")`
     display: flex;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -146,6 +156,16 @@ const Hero = () => {
   padding-top:95px;
   margin:auto;
 `;
+
+const SearchContainer = styled("div")`
+width:400px;
+margin:auto;
+`;
+
+
+  let routes = router.asPath.split("/");
+  routes.shift();
+console.log(routes);
   const navigatedLink = router.pathname.replace(/\\|\//g, "");
 
   return (
@@ -154,38 +174,42 @@ const Hero = () => {
       {router.pathname === "/" ? (
         <HomeHero>
           <div>
-          <HomeContainer>
-            <HomeSlogan>Life is a journey. Enjoy it with Taxiye.</HomeSlogan>
-            <TabbedForms />
-          </HomeContainer>
+            <HomeContainer>
+              <HomeSlogan>Life is a journey. Enjoy it with Taxiye.</HomeSlogan>
+              <TabbedForms />
+            </HomeContainer>
           </div>
         </HomeHero>
       ) : (
         <HeroWrapper >
-         <Container>
-          <SlogganWrapper>
-            <Breadcrump>
-              {`Home / ${navigatedLink
-                .charAt(0)
-                .toUpperCase()}${navigatedLink.slice(1)}`}
-            </Breadcrump>
-            <CenteredSlogan>{slogan}</CenteredSlogan>
-            <Description>{description}</Description>
-            {router.pathname === "/corporate" ? (
-              <SloganButton>Sign up for your company</SloganButton>
-            ) : router.pathname === "/articles" ? (
-
-              <SecondaryInputs
-                id="location"
-                placeholder="Search..."
-                icon={require("../../assets/icons/search.svg")}
-              />
-            ) : router.pathname === "/signup" ? (
-
-              <SloganButton>Get started</SloganButton>
-            ) : null}
-          </SlogganWrapper>
-         </Container>
+          <Container>
+            <SlogganWrapper>
+              <Breadcrump>
+                {`Home / 
+                  ${routes.map(route => route.charAt(0).toUpperCase()+route.slice(1))}
+                  `}
+              </Breadcrump>
+              <CenteredSlogan>{slogan}</CenteredSlogan>
+              <Description>{description}</Description>
+              {router.pathname === "/corporate" ? (
+                <Link href="/signup/corporate">
+                  <SloganButton>Sign up for your company</SloganButton>
+                </Link>
+              ) : router.pathname === "/articles" ? (
+                <SearchContainer>
+                <SecondaryInputs
+                  id="location"
+                  placeholder="Search..."
+                  icon={require("../../assets/icons/search.svg")}
+                />
+                </SearchContainer>
+              ) : router.pathname === "/become-driver" ? (
+                <Link href="/signup/driver">
+                  <SloganButton>Get started</SloganButton>
+                </Link>
+              ) : null}
+            </SlogganWrapper>
+          </Container>
         </HeroWrapper>
       )}
 

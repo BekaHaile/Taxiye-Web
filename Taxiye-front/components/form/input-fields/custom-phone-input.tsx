@@ -81,7 +81,7 @@ const Container = styled("div")`
 display:flex;
 `;
 
-const PhoneInput = ({ label, id, placeholder }) => {
+const PhoneInputField = ({ label, id, placeholder }) => {
     const [phone_code, setPhoneCode] = useState("+251");
     const [phonenumber, setPhoneNumber] = useState("");
     return (
@@ -107,4 +107,4 @@ const PhoneInput = ({ label, id, placeholder }) => {
 
 
 
-export { PhoneInput }
+export { PhoneInputField }

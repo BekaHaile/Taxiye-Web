@@ -127,6 +127,7 @@ type InputProps = {
   label?: string;
   icon?: string;
   placeholder: string;
+  shadow?:boolean
 };
 
 const Inputs: FunctionComponent<InputProps> = ({
@@ -180,18 +181,8 @@ const DefaultInputs: FunctionComponent<InputProps> = ({
   );
 };
 
-const SecondaryInputs: FunctionComponent<InputProps> = ({
-  id,
-  icon,
-  placeholder,
-}) => {
-  return (
-    <SecondaryInput id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }}/>
-  );
-};
-
 const SecondaryInput = styled('input')`
-  width: 400px;
+  width: 100%;
   margin:0px auto;
   box-sizing: border-box;
   border: none;
@@ -201,7 +192,29 @@ const SecondaryInput = styled('input')`
   background-repeat: no-repeat;
   padding: 12px 20px 12px 50px;
   border-radius:50px;
+  outline:none;
 `;
+const SecondaryInputWithShadow = styled(SecondaryInput)`
+box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
+`;
+
+const SecondaryInputs: FunctionComponent<InputProps> = ({
+  id,
+  icon,
+  placeholder,
+  shadow
+}) => {
+  if(shadow)
+  return (
+    <SecondaryInputWithShadow id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }}/>
+  );
+  return (
+    <SecondaryInput id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }}/>
+  );
+};
+
+
+
 
 const Container = styled('div')`
   display:flex;

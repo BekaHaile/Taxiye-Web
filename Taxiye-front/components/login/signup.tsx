@@ -39,7 +39,7 @@ const Signup = () => {
     return (
         <>
             <ContentWrapper>
-                <Image />
+                <Image type=""/>
                 <FormContainer>
                     <CenteredForm>
                         <HeaderContainer>

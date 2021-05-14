@@ -73,9 +73,9 @@ const NavBar = () => {
         />
       </Link>
       <Nav>
-        <Link href="/signup">
+        <Link href="/become-driver">
         
-          {router.pathname === "/signup" ? 
+          {router.pathname === "/become-driver" ? 
           <NavLink className="active">Become a driver </NavLink>:
           <Button> {"Become a driver"} </Button> }
          

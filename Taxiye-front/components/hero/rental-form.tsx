@@ -15,13 +15,13 @@ const RentalForm = () => {
           label="Pickup?"
           placeholder="Enter pickup location"
           id="location"
-          icon={require("../../assets/icons/location.png")}
+          icon={require("../../assets/icons/location.svg")}
         />
         <Inputs
           label="Package?"
           placeholder="Enter drop off for estimate"
           id="package"
-          icon={require("../../assets/icons/user/vector.svg")}
+          icon={require("../../assets/icons/package.svg")}
         />
         <InlineForm>
           <Inputs

@@ -198,7 +198,7 @@ margin-top:18px;
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
-  if (router.pathname.includes("/login"))
+  if (router.pathname.includes("/login") || router.pathname.includes("/signup"))
     return (
       <>
         <Head>

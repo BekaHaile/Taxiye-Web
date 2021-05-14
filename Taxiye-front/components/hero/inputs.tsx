@@ -53,8 +53,7 @@ const FormGroup = styled("div")`
 `;
 
 const Icon = styled("img")`
-  width: 11px;
-  height: 12px;
+  height:fit-content;
   margin-right: 15px;
   margin-top: 6px;
 `;
@@ -83,6 +82,14 @@ const InputSeparator = styled("div")`
 display: flex;
 align-self: flex-end;
 `;
+const DataList = styled("datalist")`
+background-color:#fff;
+position: absolute;
+`;
+
+const Option = styled("option")`
+background-color:#fff;
+`;
 
 const InputWrapper = styled('div')`
 width: 100%;
@@ -104,7 +111,7 @@ const Inputs: FunctionComponent<InputProps> = ({
   return (
     <FormGroup>
       {icon !== undefined ? (
-        <Icon height="12px" width="11px" src={icon} />
+        <Icon src={icon} />
       ) : null}
       <InputWrapper>
         <label htmlFor={id}>
@@ -114,10 +121,18 @@ const Inputs: FunctionComponent<InputProps> = ({
           className={icon !== undefined ? "no-margin" : null}
           id={id}
           placeholder={placeholder}
+          list="data"
         />
+        <DataList id="data">
+            <Option value="Sarbet">
+                
+                
+            </Option>
+            
+          </DataList>
       </InputWrapper>
     </FormGroup>
   );
 };
 
-export { Form, InlineForm, Button, Inputs, InputSeparator };
+export {Form, InlineForm, Button, Inputs, InputSeparator};

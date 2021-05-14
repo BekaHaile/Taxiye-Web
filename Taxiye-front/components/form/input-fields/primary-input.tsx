@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 import styled from "styled-components";
 
 const Input = styled('input')`
@@ -23,15 +23,23 @@ const LabelText = styled("label")`
   color: #444444;
 `;
 
-const DefaultInput = ({
+type InputProps = {
+  id: string;
+  label?: string;
+  placeholder: string;
+  type?: string;
+};
+
+const DefaultInput: FunctionComponent<InputProps> = ({
     label,
     id,
     placeholder,
+    type
   }) => {
     return (
       <>
       <LabelText>{label}</LabelText>
-     <Input placeholder={placeholder} id={id}/>
+     <Input type={type} placeholder={placeholder} id={id}/>
      </>
     );
   };
