@@ -1,21 +1,68 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 import styled from "styled-components";
 
-const Button = styled("select")`
-  background: #A02167;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+const DropDown = styled("select")`
+  background: #fff;
   border-radius: 5px;
-  padding: 5px 20px;
-  font-size: 14px;
-  line-height: 19px;
-  text-align: center;
-  color: #ffffff;
-  border-color: transparent;
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 19px;
+  width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 40px;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 10px;
+  
+`;
+const LabelText = styled("label")`
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  color: #444444;
+  width: 100%;
 `;
 
-export {Button}
+type InputProps = {
+  id: string;
+  label?: string;
+  placeholder: string;
+  type?: string;
+};
+
+const GenderDropDown: FunctionComponent<InputProps> = ({
+    label,
+    id,
+    placeholder
+  }) => {
+    return (
+      <>
+      <LabelText >{label}</LabelText>
+      <div>
+     <DropDown placeholder={placeholder} id={id}>
+      <option> Male</option>
+      <option> Female</option>
+      </DropDown>
+      </div>
+     </>
+    );
+  };
+
+  const CountryDropDown: FunctionComponent<InputProps> = ({
+    label,
+    id,
+    placeholder
+  }) => {
+    return (
+      <>
+      <LabelText >{label}</LabelText>
+      <div>
+     <DropDown placeholder={placeholder} id={id}>
+      <option> Male</option>
+      <option> Female</option>
+      </DropDown>
+      </div>
+     </>
+    );
+  };
+
+export {GenderDropDown, CountryDropDown}

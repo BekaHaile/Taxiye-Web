@@ -37,7 +37,8 @@ const article = {
             type: "media",
             content: {
                 url: require("../../../../assets/Data/images/articles/frame-1233.svg"),
-                caption: "The casket of late U.S. Rep. John Lewis, a pioneer of the civil rights movement who died July 17, is carried outside the Brown Chapel A.M.E. Church, in Selma, Ala., on July 26, 2020.  Christopher Aluka Berry / Reuters",
+                caption: "The casket of late U.S. Rep. John Lewis, a pioneer of the civil rights movement who died July 17, is carried outside the Brown Chapel A.M.E. Church, in Selma, Ala., on July 26, 2020. ",
+                meta:"Christopher Aluka Berry / Reuters"
             }
         },
         {

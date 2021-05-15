@@ -21,9 +21,21 @@ body, html {
   
 }
 
+.MuiStepIcon-root.MuiStepIcon-completed {
+  color: #20AA46 !important;
+}
+
+.MuiStepIcon-root.MuiStepIcon-active {
+  color: #A02167 !important;
+}
+
+.MuiStepper-root {
+  padding: 40px 0px 30px 0px !important;
+}
+
 .intl-tel-input.allow-dropdown input[type=tel] {
   padding-left:95px;
-  height:39px;
+  height:43px;
   width:350px;
   border: 2px solid #ccc;
   border-radius:4px;

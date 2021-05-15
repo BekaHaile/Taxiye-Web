@@ -1,5 +1,5 @@
 import React from 'react';
-import Finish from '../../../../components/signup/corporate/wrapup';
+import Finish from '../../../../components/account/signup/corporate/wrapup';
 
 const finish = () => {
     return <Finish />;

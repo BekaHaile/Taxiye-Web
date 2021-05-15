@@ -43,6 +43,12 @@ const Description = styled("p")`
 `;
 
 const Breadcrump = styled("h2")`
+  margin: auto;
+  display: block;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -100,7 +106,7 @@ const Hero = () => {
   let backgroundUrl = `${require("../../assets/images/heros/services.jpg")}`;
   let description =
     "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet.";
-
+  let queryText = "";
   if (router.pathname === "/") {
     height = "700px";
   }
@@ -122,6 +128,7 @@ const Hero = () => {
     const id = router.query.id;
     backgroundUrl = `${require("../../assets/images/heros/Articles.jpg")}`;
     slogan = id;
+    queryText = id + "";
     description = "";
 
   }
@@ -157,7 +164,7 @@ const Hero = () => {
   margin:auto;
 `;
 
-const SearchContainer = styled("div")`
+  const SearchContainer = styled("div")`
 width:400px;
 margin:auto;
 `;
@@ -165,8 +172,8 @@ margin:auto;
 
   let routes = router.asPath.split("/");
   routes.shift();
-console.log(routes);
-  const navigatedLink = router.pathname.replace(/\\|\//g, "");
+
+  const navigatedLink = routes[0].replace(/\\|\//g, "");
 
   return (
     <>
@@ -186,8 +193,12 @@ console.log(routes);
             <SlogganWrapper>
               <Breadcrump>
                 {`Home / 
-                  ${routes.map(route => route.charAt(0).toUpperCase()+route.slice(1))}
-                  `}
+                  ${navigatedLink.charAt(0).toUpperCase() + navigatedLink.slice(1)}
+                  
+                  
+                  ${queryText != "" ? ` / 
+                  ${queryText.charAt(0).toUpperCase() + queryText.slice(1)}
+                  `: ``}`}
               </Breadcrump>
               <CenteredSlogan>{slogan}</CenteredSlogan>
               <Description>{description}</Description>
@@ -197,11 +208,11 @@ console.log(routes);
                 </Link>
               ) : router.pathname === "/articles" ? (
                 <SearchContainer>
-                <SecondaryInputs
-                  id="location"
-                  placeholder="Search..."
-                  icon={require("../../assets/icons/search.svg")}
-                />
+                  <SecondaryInputs
+                    id="location"
+                    placeholder="Search..."
+                    icon={require("../../assets/icons/search.svg")}
+                  />
                 </SearchContainer>
               ) : router.pathname === "/become-driver" ? (
                 <Link href="/signup/driver">

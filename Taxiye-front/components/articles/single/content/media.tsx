@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
+import Link from "next/link";
 
 const Container = styled("div")`
 text-align: center;
 padding-top:30px;
 `;
+
+const CustomLink = styled("a")`
+color:#A02167;
+`;
+
 const Figure = styled("figure")`
 display: inline-block;
 margin:0px;
@@ -43,7 +49,7 @@ const Quote = ({ media }) => {
             <Container>
                 <Figure>
                     <Image src={media.url} />
-                    <Caption>{media.caption}</Caption>
+                    <Caption>{media.caption}<CustomLink href="/">{media.meta}</CustomLink></Caption>
                 </Figure>
             </Container>
         </>

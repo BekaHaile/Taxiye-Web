@@ -1,5 +1,5 @@
 import React from 'react';
-import Credentail from '../../../../components/signup/corporate/credential';
+import Credentail from '../../../../components/account/signup/corporate/credential';
 
 const credentail = () => {
     return <Credentail />;

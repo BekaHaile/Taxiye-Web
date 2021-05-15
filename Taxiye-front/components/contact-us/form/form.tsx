@@ -14,9 +14,18 @@ height:200px;
 const Container = styled("div")`
 width: min-content;
 `;
+const ButtonContainer = styled("div")`
+margin-top: 20px;
+`;
+const CustomDefaultInput = styled(Input)`
+margin-bottom: 20px;
+`;
+
+
 
 const InlineDefaultInput = styled(Input)`
 margin-right:40px !important;
+margin-bottom:20px;
 `;
 
 const ContactUsForm = () => {
@@ -28,13 +37,13 @@ const ContactUsForm = () => {
                         placeholder="Subject"
                         id="subject"
                     />
-                    <DefaultInput
+                    <CustomDefaultInput
                         placeholder="Subject"
                         id="subject"
                     />
 
                 </InlineForm>
-                <DefaultInput
+                <CustomDefaultInput
                     placeholder="Subject"
                     id="subject"
                 />
@@ -43,9 +52,9 @@ const ContactUsForm = () => {
                     placeholder="Message"
                     id="message"
                 />
-                <div>
+                <ButtonContainer>
                     <Button>Send Message</Button>
-                </div>
+                </ButtonContainer>
             </Container>
         </>
     );

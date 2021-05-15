@@ -95,7 +95,7 @@ const NavBar = () => {
         </Link>
         <Link href="/articles">
           <NavLink
-            className={router.pathname === "/articles" ? "active" : null}
+            className={router.pathname === "/articles" || router.pathname.includes("/articles/") ? "active" : null}
           >
             Articles
           </NavLink>

@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneVerification from '../../../../components/signup/corporate/phone-verification';
+import PhoneVerification from '../../../../components/account/signup/corporate/phone-verification';
 
 const phoneverification = () => {
     return <PhoneVerification />;

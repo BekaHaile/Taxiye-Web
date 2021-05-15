@@ -21,7 +21,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 19px;
-padding-top:9.5px;
+padding-top:12.5px;
 color: #444444;
   
 `;
@@ -58,7 +58,7 @@ const PhoneInput = ({ label, id, placeholder }) => {
                     setPhoneValidation(valid);
                     setPhoneNumber(phone);
                 }}
-                placeholder = "098765"
+                placeholder = {placeholder}
                 containerClassName="intl-tel-input"
                 inputClassName="form-control"
                 defaultCountry="et"
