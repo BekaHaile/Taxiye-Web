@@ -5,10 +5,15 @@ import Router from 'next/router'
 import Link from 'next/link';
 import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../../elements";
 import styled from "styled-components";
+import NeedHelp from "../../need-help";
 
 import Modal from "../../../modal";
 const BolderNavLink = styled(NavLink)`
 font-weight: 600;
+`;
+
+const SmallerNavLink = styled(NavLink)`
+font-size:12px;
 `;
 
 const Container = styled('div')`
@@ -67,7 +72,7 @@ const PhoneVerification = () => {
     return (
         <>
             <ContentWrapper>
-                <Image type="corporate"/>
+                <Image/>
                 <FormContainer>
                     <LeftAlignedForm>
                         <HeaderContainer>
@@ -91,10 +96,8 @@ const PhoneVerification = () => {
                             <CustomButton>Continue</CustomButton>
                             </Link>
                             <FlexContainer>
-                                <SubTitle>Need help?</SubTitle>
-                                <FlexContainer>
-                                    <NavLink href="/">Click here</NavLink>
-                                </FlexContainer>
+                                <NeedHelp/>
+                                <SmallerNavLink onClick={() => Router.back()}>Change Phone Number</SmallerNavLink>
                             </FlexContainer>
                         </ContentContainer>
                     </LeftAlignedForm>

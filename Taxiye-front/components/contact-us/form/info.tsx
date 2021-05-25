@@ -45,27 +45,39 @@ const HeaderContainer = styled('div')`
 `;
 
 
-const Info = ({info}) => {
+const Info = ({info, title, subTitle, socialMedias}) => {
     return (
         <>
         <HeaderContainer>
             <HeaderTitle>
-                {info.header}
+                {title}
             </HeaderTitle>
-            <HeaderSubTitle>{info.headersubTitle}</HeaderSubTitle>
+            <HeaderSubTitle>{subTitle}</HeaderSubTitle>
         </HeaderContainer>
-            {info.content.map((content) => (
+            
                 <ContentContainer>
-                    <ContentTitle>{content.title}</ContentTitle>
-                    {content.details.map((detail) => (
-                        <ContentDetailText>{detail}</ContentDetailText>
+                    <ContentTitle>{info.openHours.header}</ContentTitle>
+                    {info.openHours.content.map((detail) => (
+                        <div>
+                        <ContentDetailText>{detail.title}</ContentDetailText>
+                        <ContentDetailText>{detail.description}</ContentDetailText>
+                        </div>
+                    ))}
+
+                </ContentContainer>
+                <ContentContainer>
+                    <ContentTitle>{info.contactCenter.header}</ContentTitle>
+                    {info.contactCenter.content.map((detail) => (
+                        
+                        <ContentDetailText>{detail.title}</ContentDetailText>
+                        
                     ))}
 
                 </ContentContainer>
 
-            ))}
+            
             <ContentContainer>
-             <Socials />
+             <Socials socialMedias={socialMedias}/>
             </ContentContainer>
 
 

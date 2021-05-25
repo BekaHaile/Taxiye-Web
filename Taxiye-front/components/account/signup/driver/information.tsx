@@ -1,96 +1,85 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "../../../form/buttons/primary-button";
-import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, InputContainer, Title, SubTitle } from "../../elements";
-import colors from "../../../../theme/main/colors";
+import {FlexContainer, ContentContainer, HeaderContainer,  InputContainer, Title, SubTitle } from "../../elements";
 import { PhoneInput } from "../../../form/input-fields/phone-input";
 import { DefaultInput } from "../../../form/input-fields/primary-input";
-import {GenderDropDown, CountryDropDown} from "../../../form/dropdown/drop-down";
+import { GenderDropDown, CountryDropDown } from "../../../form/dropdown/drop-down";
+import TermsConsent from "../../terms";
+import NeedHelp from "../../need-help";
 
-const LinkWithLine = styled("a")`
-color:${colors.primary};
-padding-left:5px;
-
-}
-`;
 
 const CustomHeaderContainer = styled(HeaderContainer)`
 padding-bottom:40px;
 }
 `;
-const InputContainerWithSpace = styled(InputContainer)`
-padding-right:60px;
-}
-`;
+
 const CustomFlexContainer = styled(FlexContainer)`
 padding-bottom:0px;
 justify-content: center;
-}
-`;
-
-const LeftAlignedForm = styled("div")`
-width: fit-content;
+gap:60px;
 }
 `;
 
 
+const SubTitleWithSpace = styled(SubTitle)`
+padding-top:10px;
+}
+`;
 
 const Signup = ({ handleNext, activeStep, steps }) => {
     return (
         <>
 
-            <LeftAlignedForm>
-                <CustomHeaderContainer>
-                    <Title>Driver Information</Title>
-                    <SubTitle>Please provide the following details to get started.</SubTitle>
+            <CustomHeaderContainer>
+                <Title>Driver Information</Title>
+                <SubTitle>Please provide the following details to get started.</SubTitle>
 
-                </CustomHeaderContainer>
-                <ContentContainer>
+            </CustomHeaderContainer>
+            <ContentContainer>
 
-                    <CustomFlexContainer>
-                        <InputContainerWithSpace>
-                            <DefaultInput
-                                label="Full *"
-                                placeholder="your full name"
-                                id="fullname" />
-                        </InputContainerWithSpace>
+                <CustomFlexContainer>
+                    <InputContainer>
+                        <DefaultInput
+                            label="Full name*"
+                            placeholder="your full name"
+                            id="fullname" />
+                    </InputContainer>
 
-                        <InputContainer>
-                            <GenderDropDown
-                                label="Gender *"
-                                placeholder="Select Gender"
-                                id="gender" />
-                        </InputContainer>
-                    </CustomFlexContainer>
+                    <InputContainer>
+                        <GenderDropDown
+                            label="Gender *"
+                            placeholder="Select Gender"
+                            id="gender" />
+                    </InputContainer>
+                </CustomFlexContainer>
 
-                    <CustomFlexContainer>
-                        <InputContainerWithSpace>
-                            <CountryDropDown
-                                label="Country *"
-                                placeholder="Ethiopia"
-                                id="country" />
-                        </InputContainerWithSpace>
+                <CustomFlexContainer>
+                    <InputContainer>
+                        <CountryDropDown
+                            label="Country *"
+                            placeholder="Ethiopia"
+                            id="country" />
+                    </InputContainer>
 
-                        <InputContainer>
-                            <PhoneInput
-                                label="Phone Number *"
-                                placeholder="your phone number"
-                                id="phonenumber" />
+                    <InputContainer>
+                        <PhoneInput
+                            label="Phone Number *"
+                            placeholder="your phone number"
+                            id="phonenumber" />
+                        <SubTitleWithSpace>We’ll send you a text to verify your phone.</SubTitleWithSpace>
 
-                        </InputContainer>
-                    </CustomFlexContainer>
-                    <FlexContainer>
+                    </InputContainer>
+                </CustomFlexContainer>
+                <TermsConsent />
+                <FlexContainer>
                     <Button onClick={handleNext}>
                         Continue
                     </Button>
-                    </FlexContainer>
-                    <FlexContainer>
-                        <SubTitle>Need help?</SubTitle>
-                        <LinkWithLine href="/">Click here</LinkWithLine>
-
-                    </FlexContainer>
-                </ContentContainer>
-            </LeftAlignedForm>
+                </FlexContainer>
+                <NeedHelp/>
+                
+            </ContentContainer>
 
         </>
     );

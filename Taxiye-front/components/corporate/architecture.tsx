@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer } from '../section';
+import { DefaultSection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer } from '../section';
 
 const ContentWrapper = styled('div')`
 display: flex;
@@ -34,8 +34,11 @@ align-items: center;
 padding: 0px 75px;
 `;
 
-const RowTop = styled('div')`
-display: flex;
+const Row = styled('div')`
+display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap:40px;
 padding-bottom:20px;
 `;
 const RowBottom = styled('div')`
@@ -52,48 +55,30 @@ const Image = styled("img")`
 width: 300px;
 `;
 
-const Architecture = () => {
+const Architecture = ({ title, subTitle, contents }) => {
     return (
         <DefaultSection>
             <SectionHeaderContainer>
-            <SectionTitle>How it works</SectionTitle>
-            <CenteredText>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet.</CenteredText>
+                <SectionTitle>{title}</SectionTitle>
+                <CenteredText>{subTitle}</CenteredText>
             </SectionHeaderContainer>
             <SectionContentContainer>
-            <ContentWrapper>
-                <RowTop>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/add-new.png")} />
-                        <HeaderContainer>
-                        <BlockTitle>Manage employees via dashboard</BlockTitle>
-                        <BlockContent>Sign up to access your Taxiye Corporate Dashboard and Invite your employees.</BlockContent>
-                        </HeaderContainer>
-                    </Block>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/mobile.png")} />
-                        <HeaderContainer>
-                        <BlockTitle>Employees book their own rides</BlockTitle>
-                        <BlockContent>Your employees book their rides with the toggle of a button through their Taxiye app.</BlockContent>
-                        </HeaderContainer>
-                    </Block>
-                </RowTop>
-                <RowBottom>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/receipt.png")} />
-                        <HeaderContainer>
-                        <BlockTitle>You pay for the trip as you want</BlockTitle>
-                        <BlockContent>You can pay for the trip after or gets automatically paid through your Taxiye Corporate balance.</BlockContent>
-                        </HeaderContainer>
-                    </Block>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/track-things.png")} />
-                        <HeaderContainer>
-                        <BlockTitle>Track employee expenses and invoices</BlockTitle>
-                        <BlockContent>Track trip expense details and download invoices anytime from the dashboard.</BlockContent>
-                        </HeaderContainer>
-                    </Block>
-                </RowBottom>
-            </ContentWrapper>
+                <ContentWrapper>
+                    <Row>
+                        {contents.map((content) => (
+                            <Block>
+                                <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+                                <HeaderContainer>
+                                    <BlockTitle>{content.title}</BlockTitle>
+                                    <BlockContent>{content.subTitle}</BlockContent>
+                                </HeaderContainer>
+                            </Block>
+
+
+                        ))}
+
+                    </Row>
+                </ContentWrapper>
             </SectionContentContainer>
         </DefaultSection>
     );

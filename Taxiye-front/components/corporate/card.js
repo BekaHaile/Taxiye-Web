@@ -20,10 +20,9 @@ height: 310px;
 
 const CardWrapper = styled('div')`
 display: flex;
-justify-content: space-around;
+gap:50px;
 `;
 const CenteredCard = styled(Card)`
-margin:0px 50px;
 box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);
 `;
 
@@ -55,33 +54,40 @@ const TitleContainer = styled('div')`
 const Image = styled('img')`
 
 `;
+function contentView(content) {
+    return (
+        <>
+            <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+            <TitleContainer>
+                <CardTitle>{content.title}</CardTitle>
+                <CardContent>{content.subTitle}</CardContent>
+            </TitleContainer>
+        </>
+    );
 
-const ExpenseCards = () => {
-    return(
+}
+
+const ExpenseCards = ({ contents }) => {
+
+    return (
         <CardWrapper>
-            <Card>
-                <Image src={require("../../assets/images/corporate/expenses/greater-control.svg")} />
-                <TitleContainer>
-                <CardTitle>Greater Control</CardTitle>
-                <CardContent>Set your own trip terms, create cost centers, and control budget allocation.</CardContent>
-                </TitleContainer>
-            </Card>
-            <CenteredCard>
-                <Image src={require("../../assets/images/corporate/expenses/free-accounts.svg")} />
-                <TitleContainer>
-                <CardTitle>Hassle free accounting</CardTitle>
-                <CardContent>Get rid of the hassle of collecting travel receipts and managing reimbursements.</CardContent>
-                </TitleContainer>
-            </CenteredCard>
-            <Card>
-                <Image src={require("../../assets/images/corporate/expenses/booking.svg")} />
-                <TitleContainer>
-                <CardTitle>Effortless booking</CardTitle>
-                <CardContent>Empower your employees to book their own trips with the tap of a button.</CardContent>
-                </TitleContainer>
-            </Card>
+            {contents.map((content, index) => (
+
+                contents.length % 2 != 0 && (contents.length+1) / 2 == index+1 ?
+                    <CenteredCard>{contentView(content)}</CenteredCard> :
+                    <Card>
+                        {contentView(content)}
+                    </Card>
+
+
+            ))}
+
+
         </CardWrapper>
     );
+
 }
+
+
 
 export default ExpenseCards;

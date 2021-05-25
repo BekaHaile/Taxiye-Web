@@ -8,15 +8,15 @@ const TestimonySliderContainer = styled(SectionContentContainer)`
 width:100%;
 `;
 
-const Testimonies = () => {
+const Testimonies = ({title, subTitle, testimonies}) => {
     return (
         <GraySection>
             <SectionHeaderContainer>
-                <SectionTitle> Loved for all kinds of reasons. </SectionTitle>
-                <CenteredText> Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet. </CenteredText>
+                <SectionTitle> {title} </SectionTitle>
+                <CenteredText> {subTitle} </CenteredText>
             </SectionHeaderContainer>
             <TestimonySliderContainer>
-                <TestimonySlider></TestimonySlider>
+                <TestimonySlider testimonies={testimonies}></TestimonySlider>
             </TestimonySliderContainer>
         </GraySection>
     )

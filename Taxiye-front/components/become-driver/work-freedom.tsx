@@ -9,36 +9,18 @@ flex-direction: row;
 justify-content: center;
 `;
 
-const contents = [{
-    id: "1",
-    img: require("../../assets/icons/schedule.svg"),
-    title: "Greater Contro",
-    content: 'Set your own trip terms, create cost centers, and control budget allocation.'
-},
-{
-    id: "2",
-    img: require("../../assets/icons/rate.svg"),
-    title: "Greater Contro",
-    content: 'Set your own trip terms, create cost centers, and control budget allocation.'
-},
-{
-    id: "3",
-    img: require("../../assets/icons/down-time.svg"),
-    title: "Greater Contro",
-    content: 'Set your own trip terms, create cost centers, and control budget allocation.'
-}
-];
 
-const VisionContent = () => {
+
+const VisionContent = ({title, subTitle, contents}) => {
     return (
         <>
             <DefaultSection>
             <SectionHeaderContainer>
                 <SectionTitle>
-                    Our Team
+                    {title}
                 </SectionTitle>
                 <CenteredText>
-                    Our company is ran by the best and brightest team in the industy.
+                    {subTitle}
                 </CenteredText>
                 </SectionHeaderContainer>
                 <SectionContentContainer>

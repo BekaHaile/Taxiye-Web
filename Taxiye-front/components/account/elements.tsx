@@ -54,6 +54,8 @@ const FormContainer = styled("div")`
   padding: 5px;
   position: relative;
   width:100%;
+  overflow-y:scroll;
+  max-height:100vh;
 `;
 
 const FlexContainer = styled("div")`

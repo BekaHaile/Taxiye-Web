@@ -19,10 +19,11 @@ padding-bottom:40px;
 const CustomTitle = styled(Title)`
 color: #20AA46;
 }`;
-
-const ButtonWithSpace = styled(CustomButton)`
-margin-right:30px;
+const FlexContainerWithGap = styled(FlexContainer)`
+gap:30px;
 }`;
+
+
 
 
 const End = () => {
@@ -35,11 +36,11 @@ const End = () => {
                         <CustomTitle>Congratulations!</CustomTitle>
                         <CustomSubTitle>Your Information and documents are successfully uploaded, Please wait for approval.</CustomSubTitle>
                     </CustomHeaderContainer>
-                    <FlexContainer>
-                        <Link href="/"><ButtonWithSpace>Go Home</ButtonWithSpace></Link>
-                        <Link href="/"><ButtonWithSpace>Support Center</ButtonWithSpace></Link>
+                    <FlexContainerWithGap>
+                        <Link href="/"><CustomButton>Go Home</CustomButton></Link>
+                        <Link href="/"><CustomButton>Support Center</CustomButton></Link>
                         <Link href="/contact-us"><CustomButton>Contact us</CustomButton></Link>
-                    </FlexContainer>
+                    </FlexContainerWithGap>
                 </LeftAlignedForm>
             </ContentWrapper>
 

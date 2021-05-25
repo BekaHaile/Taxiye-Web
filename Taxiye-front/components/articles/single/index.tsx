@@ -7,15 +7,17 @@ import Popular from "./popular";
 const Container = styled("div")`
 display:flex;
 width:100%;
+gap:60px;
 `;
 
-const ArticleContent = () => {
+const ArticleContent = ({article, featured}) => {
+   
     return(
         <>
         <DefaultSection>
             <Container>
-                <Content></Content>
-                <Popular></Popular>
+                <Content article={article}/>
+                <Popular articles={featured}></Popular>
 
             </Container>
 

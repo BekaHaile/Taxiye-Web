@@ -71,7 +71,7 @@ let countriesList = countries.length > 0
     && countries.map((item, i) => {
         return (
             item.numbercode == "+251" ?
-                <option selected="selected" key={i} value={item.numbercode}>{item.emoji}&emsp;{item.numbercode}&emsp;{item.name}</option> :
+                <option selected={true} key={i} value={item.numbercode}>{item.emoji}&emsp;{item.numbercode}&emsp;{item.name}</option> :
                 <option key={i} value={item.numbercode}>{item.emoji}&emsp;{item.numbercode}&emsp;{item.name}</option>
 
         )
@@ -97,7 +97,7 @@ const PhoneInputField = ({ label, id, placeholder }) => {
                 <CodeContainer>
                     <Code>{phone_code}</Code>
                 </CodeContainer>
-                <CustomInput type="number" onInput={(event) => { setPhoneNumber(phone_code + event.target.value); }} placeholder={placeholder} id={id} />
+                <CustomInput type="number" onInput={(event: any) => { setPhoneNumber(phone_code + event.target.value); }} placeholder={placeholder} id={id} />
 
             </Container>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import {VisionImage, MissionImage, ValueImage} from "./images";
 
 const Card = styled('div')`
 display: flex;
@@ -18,9 +17,9 @@ border-radius: 10px;
 const CardWrapper = styled('div')`
 display: flex;
 justify-content: space-around;
+gap:50px;
 `;
 const CenteredCard = styled(Card)`
-margin:0px 50px;
 box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);
 `;
 
@@ -51,35 +50,38 @@ const TitleContainer = styled('div')`
 `;
 
 const Image = styled('img')`
-
+height:50px;
+width:50px;
 `;
+function contentView(content) {
+    return (
+        <>
+            <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+            <TitleContainer>
+                <CardTitle>{content.title}</CardTitle>
+                <CardContent>{content.description}</CardContent>
+            </TitleContainer>
+        </>
+    );
+}
 
-const VisionCards = () => {
-    return(
+const Cards = ({ contents }) => {
+    return (
         <CardWrapper>
-            <Card>
-                <VisionImage />
-                <TitleContainer>
-                <CardTitle>Vision</CardTitle>
-                <CardContent>To be the best ride hailing service provider in Africa which is uniquely owned by taxi drivers, major shareholders and the public.</CardContent>
-                </TitleContainer>
-            </Card>
-            <CenteredCard>
-                <MissionImage />
-                <TitleContainer>
-                <CardTitle>Mission</CardTitle>
-                <CardContent>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra adipiscing conubia ligula.</CardContent>
-                </TitleContainer>
-            </CenteredCard>
-            <Card>
-                <ValueImage />
-                <TitleContainer>
-                <CardTitle>Value</CardTitle>
-                <CardContent>To help passengers get better means of transportation at a reasonable price and to modernize the transportation system.</CardContent>
-                </TitleContainer>
-            </Card>
+            {contents.map((content, index) => (
+                contents.length % 2 != 0 && (contents.length + 1) / 2 == index + 1 ?
+                    <CenteredCard>
+                        {contentView(content)}
+                    </CenteredCard> :
+                    <Card>
+                        {contentView(content)}
+                    </Card>
+
+            ))}
+
+
         </CardWrapper>
     );
 }
 
-export default VisionCards;
+export default Cards;

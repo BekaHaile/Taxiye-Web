@@ -1,14 +1,14 @@
 import React from 'react';
 import FeaturedContent from './featured';
-import AllArticleContent from './all';
+import NormalArticleContent from './normal';
 
 
 
-const ArticlesContent = () => {
+const ArticlesContent = ({featured, unfeatured}) => {
     return(
         <>
-        <FeaturedContent></FeaturedContent>
-        <AllArticleContent></AllArticleContent>
+        <FeaturedContent featured={featured}></FeaturedContent>
+        <NormalArticleContent unfeatured={unfeatured}></NormalArticleContent>
         </>
     );
 }

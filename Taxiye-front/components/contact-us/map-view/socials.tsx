@@ -27,25 +27,23 @@ padding-bottom: 10px;
 const Image = styled("img")`
 padding-right:10px;
 `;
+const Link = styled("a")`
+
+`;
 
 
-const Socials = () => {
+const Socials = ({ socialMedias }) => {
     return (
         <>
             <Title> Follow us </Title>
             <SocialLinkWrapper>
-                <Image
-                    src={require("../../../assets/icons/brand-facebook.svg")}
-                   
-                />
-                <Image
-                    src={require("../../../assets/icons/brand-twitter.svg")}
-                  
-                />
-                <Image
-                    src={require("../../../assets/icons/brand-instagram.svg")}
-                    
-                />
+                {socialMedias.map((socialMedia) => (
+                    <Link href={`${socialMedia.link}`}>
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_HOST}${socialMedia.logo.url}`}
+                        />
+                    </Link>
+                ))}
             </SocialLinkWrapper>
         </>
     );

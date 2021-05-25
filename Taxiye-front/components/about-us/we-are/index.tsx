@@ -47,6 +47,7 @@ const Description = styled("p")`
 
 const LeftDescription = styled(Description)`
   text-align: Left;
+  padding-bottom:20px;
   
 `;
 
@@ -75,33 +76,33 @@ padding:0px;
 
 
 
-const WeAreContent = () => {
+const WeAreContent = ({ title, description, primaryImage, secondaryImage }) => {
     return (
         <>
             <DefaultSection>
-            <CustomSectionContentContainer>
-                <FlexRow>
+                <CustomSectionContentContainer>
+                    <FlexRow>
 
-                    <Container>
-                        <div>
-                            <LeftServiceTitle>Who we are</LeftServiceTitle>
-                            <LeftDescription>
-                            El-Taxi Trading has entered the taxi hailing app business market on May 2019. The company has developed an on-demand ride-hailing mobile application under the brand name of "TAXIYE” provide local taxi drivers with the platform to work in the modem environment and stay competitive in today's market. As such we strive to make our company the leading house in ride hailing business and to be the number one choice for customers as a means of transportation.
-                            </LeftDescription>
-                            <LeftDescription>
-                                
-                            Taxiye is majorly owned by Elnet Technology Pvt. Ltd. and various taxi associations, the public, and the management of the company. The fact that it has included taxi owners' associations and the public in its ownership structure enables it to consider the interest of both the drivers and passengers andultimately provide fair service for the public. We would like both the public andour drivers to feel that Taxiye is their company. Our commitment is to get local Ethiopian drivers to join the 21st century byusing the latest technologies in ride hailing applications.
-                            </LeftDescription>
-                        </div>
-                    </Container>
-                 
-                    <ImageContainer>
-                    <Image src={require("../../../assets/images/about-us/car-image2.svg")} />
-                    <TopImage src={require("../../../assets/images/about-us/car-image1.svg")} />
-                    </ImageContainer>
-               
-                </FlexRow>
-            </CustomSectionContentContainer>
+                        <Container>
+                            <div>
+                                <LeftServiceTitle>{title}</LeftServiceTitle>
+
+                                {description.map((text) => (
+                                    <LeftDescription>
+                                        {text.content}
+                                    </LeftDescription>
+                                ))}
+
+                            </div>
+                        </Container>
+
+                        <ImageContainer>
+                            <Image src={`${process.env.NEXT_PUBLIC_HOST}${primaryImage.url}`} />
+                            <TopImage src={`${process.env.NEXT_PUBLIC_HOST}${secondaryImage.url}`} />
+                        </ImageContainer>
+
+                    </FlexRow>
+                </CustomSectionContentContainer>
             </DefaultSection>
         </>
     );

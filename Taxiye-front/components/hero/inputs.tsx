@@ -38,7 +38,7 @@ const Input = styled("input")`
   flex-direction: column;
   margin: 5px 0px;
   padding: 0px 0px 8px 0px;
-  width: 100%;
+  width: -webkit-fill-available;
   && {
     :focus {
       outline: none;
@@ -48,13 +48,14 @@ const Input = styled("input")`
 
 const FormGroup = styled("div")`
   display: flex;
+  gap:15px;
   padding: 10px 0px;
-  width: 100%;
+  width: -webkit-fill-available;
+  
 `;
 
 const Icon = styled("img")`
   height:fit-content;
-  margin-right: 15px;
   margin-top: 6px;
 `;
 
@@ -70,10 +71,9 @@ const InlineForm = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  gap:50px;
   && {
     input {
-      width: auto;
     }
   }
 `;
@@ -82,17 +82,9 @@ const InputSeparator = styled("div")`
 display: flex;
 align-self: flex-end;
 `;
-const DataList = styled("datalist")`
-background-color:#fff;
-position: absolute;
-`;
-
-const Option = styled("option")`
-background-color:#fff;
-`;
 
 const InputWrapper = styled('div')`
-width: 100%;
+width: -webkit-fill-available;
 `;
 
 type InputProps = {
@@ -123,13 +115,7 @@ const Inputs: FunctionComponent<InputProps> = ({
           placeholder={placeholder}
           list="data"
         />
-        <DataList id="data">
-            <Option value="Sarbet">
-                
-                
-            </Option>
-            
-          </DataList>
+       
       </InputWrapper>
     </FormGroup>
   );

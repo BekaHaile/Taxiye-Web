@@ -8,7 +8,6 @@ border-radius: 10px;
 flex: none;
 order: 0;
 flex-grow: 0;
-margin: 0px 30px;
 width: 300px;
 max-width: 300px;
 height: 310px;
@@ -82,10 +81,10 @@ const TeamCard = ({ content }) => {
     return (
         <CardWrapper>
             <Card>
-                <Image src={content.img} />
+                <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.image.url}`} />
                 <Container>
-                <CardTitle>{content.title}</CardTitle>
-                <CardContent>{content.content}</CardContent>
+                <CardTitle>{content.team}</CardTitle>
+                <CardContent>{content.description}</CardContent>
                 </Container>
             </Card>
 
@@ -97,10 +96,10 @@ const SecondaryTeamCard = ({ content }) => {
     return (
         <CardWrapper>
             <SecondaryCard>
-                <SecondaryImage src={content.img} />
+                <SecondaryImage src={`${process.env.NEXT_PUBLIC_HOST}${content.profile.url}`} />
                 <Container>
-                <CardTitle>{content.title}</CardTitle>
-                <SecondaryCardContent>{content.content}</SecondaryCardContent>
+                <CardTitle>{content.name}</CardTitle>
+                <SecondaryCardContent>{content.title}</SecondaryCardContent>
                 </Container>
             </SecondaryCard>
 

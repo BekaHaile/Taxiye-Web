@@ -6,12 +6,17 @@ import StepLabel from "@material-ui/core/StepLabel";
 import styled from "styled-components";
 import Information from "../driver/information";
 import PhoneVerification from "../driver/phone-verification";
+import VehicleType from "../driver/vehicle-type/";
+import Documents from "../driver/documents/";
 import LastPage from "../driver/finish";
 
 
 const StepperContainer = styled("div")`
 width:760px;
 margin:auto;
+`;
+const BackButton = styled("img")`
+padding-bottom:10px;
 `;
 const steps = [
   "Driver Information",
@@ -20,8 +25,9 @@ const steps = [
   "Documents"
 ];
 
-export default function HorizontalLinearStepper({setShow}) {
+export default function HorizontalLinearStepper({ setShow, setFinishRegistration }) {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [activeSubStep, setActiveSubStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => {
@@ -38,59 +44,63 @@ export default function HorizontalLinearStepper({setShow}) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-
+    if (activeSubStep < 3 && activeStep == 3) {
+      setActiveSubStep((activeSubStep) => activeSubStep + 1);
+      return;
+    }
+    if (activeSubStep == 3 && activeStep == 3) {
+      setFinishRegistration(true);
+      
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
 
+
   const handleBack = () => {
+    if (activeSubStep > 0 && activeStep == 3) {
+      setActiveSubStep((activeSubStep) => activeSubStep - 1);
+      return;
+    }
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
+  const goTo = (step) => {
+    if (activeStep != steps.length && step < activeStep)
+      setActiveStep((prevActiveStep) => step);
   };
 
 
   return (
     <StepperContainer>
-     <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
+      <div>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label, index) => {
+            const stepProps = {};
+            const labelProps = {};
 
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      {
+            return (
+              <Step onClick={() => goTo(index)} key={label} {...stepProps}>
+                <StepLabel {...labelProps}>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+        {activeStep != 0 && activeStep != steps.length ?
+          <BackButton onClick={handleBack} src={require("../../../../assets/icons/back-arrow.svg")} /> :
+          null}
+      </div>
+      <div>{
         activeStep === steps.length ? <LastPage /> :
           activeStep == 0 ?
             <Information activeStep={activeStep} steps={steps} handleNext={handleNext} /> :
-
-            <PhoneVerification  setShow={setShow} handleNext={handleNext} handleBack={handleBack} />
-
+            activeStep == 1 ?
+              <PhoneVerification setShow={setShow} handleNext={handleNext} handleBack={handleBack} /> :
+              activeStep == 2 ?
+                <VehicleType handleNext={handleNext} handleBack={handleBack} /> :
+                <Documents handleNext={handleNext} activeSubStep={activeSubStep} />
       }
-
-      
+      </div>
     </StepperContainer>
 
   );

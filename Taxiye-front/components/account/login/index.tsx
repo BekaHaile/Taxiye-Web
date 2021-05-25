@@ -4,11 +4,11 @@ import Image from "../image";
 import { PhoneInput } from "../../form/input-fields/phone-input";
 import { ContentWrapper, FlexContainer, CustomButton, CheckBoxContainer, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../elements";
 import Link from "next/link";
-const Login = () => {
+const Login = ({hero}) => {
   return (
     <>
       <ContentWrapper>
-        <Image type=""/>
+        <Image hero={hero}/>
         <FormContainer>
           <CenteredForm>
             <HeaderContainer>

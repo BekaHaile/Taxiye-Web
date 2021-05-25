@@ -6,6 +6,7 @@ import colors from "../../../../theme/main/colors";
 import { PhoneInput } from "../../../form/input-fields/phone-input";
 import { DefaultInput } from "../../../form/input-fields/primary-input";
 import Link from "next/link";
+import NeedHelp from "../../need-help";
 
 const LinkWithLine = styled("a")`
 color:${colors.primary};
@@ -18,12 +19,10 @@ const CustomSubTitle = styled(SubTitle)`
 padding-right:0px;
 }
 `;
-const InputContainerWithSpace = styled(InputContainer)`
-padding-right:60px;
-}
-`;
+
 const CustomFlexContainer = styled(FlexContainer)`
 padding-bottom:0px;
+gap:60px;
 }
 `;
 
@@ -36,11 +35,11 @@ transform: translate(0%, -50%);
 
 
 
-const Signup = () => {
+const Signup = ({hero}) => {
   return (
     <>
       <ContentWrapper>
-        <Image type="corporate" />
+        <Image hero={hero} />
         <FormContainer>
           <LeftAlignedForm>
             <HeaderContainer>
@@ -53,12 +52,12 @@ const Signup = () => {
             <ContentContainer>
 
               <CustomFlexContainer>
-                <InputContainerWithSpace>
+                <InputContainer>
                   <DefaultInput
                     label="Company Name *"
                     placeholder="your company name"
                     id="companyname" />
-                </InputContainerWithSpace>
+                </InputContainer>
 
                 <InputContainer>
                   <DefaultInput
@@ -70,12 +69,12 @@ const Signup = () => {
               </CustomFlexContainer>
 
               <CustomFlexContainer>
-                <InputContainerWithSpace>
+                <InputContainer>
                   <PhoneInput
                     label="Phone Number *"
                     placeholder="your phone number"
                     id="phonenumber" />
-                </InputContainerWithSpace>
+                </InputContainer>
 
                 <InputContainer>
                   <DefaultInput
@@ -88,11 +87,7 @@ const Signup = () => {
               <Link href="/signup/corporate/verification">
                 <CustomButton>Continue</CustomButton>
               </Link>
-              <FlexContainer>
-                <CustomSubTitle>Need help?</CustomSubTitle>
-                <LinkWithLine href="/">Click here</LinkWithLine>
-
-              </FlexContainer>
+              <NeedHelp/>
             </ContentContainer>
           </LeftAlignedForm>
         </FormContainer>

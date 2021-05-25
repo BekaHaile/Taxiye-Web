@@ -8,7 +8,7 @@ import { InlineForm } from "../../form/inline-form";
 
 
 const CustomDefaultTextArea = styled(DefaultTextArea)`
-width:700px;
+
 height:200px;
 `;
 const Container = styled("div")`
@@ -19,6 +19,7 @@ margin-top: 20px;
 `;
 const CustomDefaultInput = styled(Input)`
 margin-bottom: 20px;
+width:700px;
 `;
 
 

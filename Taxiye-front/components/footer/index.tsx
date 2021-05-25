@@ -133,22 +133,22 @@ const FooterSection = () => {
               <Link href="/corporate">
                 <FooterLink>Corporate</FooterLink>
               </Link>
-              <Link href="/offices">
+              <Link href="/contact-us">
                 <FooterLink>Offices</FooterLink>
               </Link>
-              <Link href="/contact">
+              <Link href="/contact-us">
                 <FooterLink>Contact us</FooterLink>
               </Link>
-              <Link href="/about">
+              <Link href="/about-us">
                 <FooterLink>About us</FooterLink>
               </Link>
-              <Link href="/jobs">
+              <Link href="/articles">
                 <FooterLink>Jobs</FooterLink>
               </Link>
             </LinkWrapper>
             <LinkWrapper>
               <FooterHeader>Driver</FooterHeader>
-              <Link href="#">
+              <Link href="/signup/driver">
                 <FooterLink>Become a driver</FooterLink>
               </Link>
               <Link href="#">

@@ -12,30 +12,6 @@ const FormContainer = styled("div")`
 `;
 
 
-const info = {
-    id: "1",
-    header: "Let's talk...",
-    headersubTitle: "Ask us anything or just say hi...",
-    content: [{
-        title: "Open Hours",
-        details: [
-            "Monday - Friday",
-            "8 am - 5 pm",
-            "Saturday",
-            "8 am - 12 pm"
-        ],
-    },
-    {
-        title: "Contact Support",
-        details: [
-            "info@elnetech.com",
-            "6055 - Free call 24/7"
-        ],
-    }
-    ]
-
-};
-
 
 
 const InfosContainer = styled("div")`
@@ -43,16 +19,14 @@ padding-right:150px;
     
 `;
 
-const Form = () => {
+const Form = ({mainOffice, title, subTitle, socialMedias}) => {
     return (
         <>
             <DefaultSection>
                 <FormContainer>
                         <InfosContainer>
-                        <Infos key={info.id} info={info} />
+                        <Infos socialMedias={socialMedias} key={mainOffice.id} info={mainOffice} title={title} subTitle={subTitle} />
                         </InfosContainer>
-                       
-                    
                     <ContactUsForm/>
                 </FormContainer>
             </DefaultSection>

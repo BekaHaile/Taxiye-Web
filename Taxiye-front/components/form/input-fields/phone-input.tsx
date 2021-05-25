@@ -53,7 +53,6 @@ const PhoneInput = ({ label, id, placeholder }) => {
                     setPhoneNumber(phone);
                 }}
                 onPhoneNumberFocus = {(valid, phone, data)=>{ 
-                    console.log(data);
                     setPhoneCode(data.dialCode);
                     setPhoneValidation(valid);
                     setPhoneNumber(phone);

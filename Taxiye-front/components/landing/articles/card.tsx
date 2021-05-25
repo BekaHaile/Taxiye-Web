@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Card = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  margin: 0px 33px;
+  margin: 10px 33px;
   baackground: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   background: #fff;
+  width:340px;
 `;
 
 const CardImage = styled("img")`
@@ -18,6 +20,7 @@ const CardImage = styled("img")`
   margin: 0;
   height: 230px;
   width: 100%;
+
 `;
 
 const CardBody = styled("div")`
@@ -97,7 +100,7 @@ const CenteredCard = styled(Card)`
 const ArticleCard = ({ article }) => {
   return (
     <Card>
-      <CardImage src={article.image} />
+      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.header.thumbnail.url}`} />
       <CardBody>
       <TextWrapper>
        
@@ -106,19 +109,21 @@ const ArticleCard = ({ article }) => {
             <Image
               src={require("../../../assets/icons/user/vector.svg")}
             />
-            <AuthorText>{article.author}</AuthorText>
+            <AuthorText>Neguse B.</AuthorText>
             </Info>
             <Info>
             <Image
               src={require("../../../assets/icons/user/clock.svg")}
             />
-            <AuthorText>{article.date}</AuthorText>
+            <AuthorText>June 27, 2020"</AuthorText>
             </Info>
           </ArticleInfoWrapper>
-          <ArticleTitle>{article.title}</ArticleTitle>
-          <ArticleText>{article.description}</ArticleText>
+          <ArticleTitle>{article.header.title}</ArticleTitle>
+          <ArticleText>{article.header.subTitle}</ArticleText>
         </TextWrapper>
+        <Link href={`/articles/`+article.id}>
         <Button>Read More</Button>
+        </Link>
       </CardBody>
     </Card>
   );

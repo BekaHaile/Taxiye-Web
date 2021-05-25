@@ -22,12 +22,12 @@ const CustomSectionTitle = styled(SectionTitle)`
 width:600px;
 `;
 
-const SignUp = () => {
+const SignUp = ({title}) => {
   return (
     <>
     <GraySection>
     <SectionHeaderContainer>
-      <CustomSectionTitle>What are you waiting for? Start today.</CustomSectionTitle>
+      <CustomSectionTitle>{title}</CustomSectionTitle>
       </SectionHeaderContainer>
       <SectionContentContainer>
       <SloganButton>Get Started</SloganButton>

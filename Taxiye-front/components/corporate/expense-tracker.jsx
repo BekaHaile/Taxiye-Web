@@ -9,15 +9,15 @@ text-align:center;
 margin:auto;
 `;
 
-const ExpenseTracker = () => {
+const ExpenseTracker = ({title, subTitle, contents}) => {
     return(
         <GraySection>
             <SectionHeaderContainer>
-            <CustomSectionTitle>Cut down your employee travel expenses</CustomSectionTitle>
-            <CenteredText>Taxiye can help your company save a few bucks in managing employee travel.</CenteredText>
+            <CustomSectionTitle>{title}</CustomSectionTitle>
+            <CenteredText>{subTitle}</CenteredText>
             </SectionHeaderContainer>
             <SectionContentContainer>
-            <Cards />
+            <Cards contents={contents}/>
             </SectionContentContainer>
         </GraySection>
     );

@@ -8,6 +8,7 @@ const Card = styled("div")`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   text-align: center;
+  margin:10px;
 `;
 
 const CardTitle = styled("h3")`
@@ -45,11 +46,11 @@ padding: 20px 10px;
 const FleetCard = ({ fleet }) => {
   return (
     <Card>
-      <CardImage src={fleet.image} />
+      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${fleet.image.url}`} />
       <TextWrapper>
         <CardTitle>{fleet.name}</CardTitle>
         <CardText>{fleet.description}</CardText>
-        <Price>{`${fleet.price} / KM `}</Price>
+        <Price>{fleet.speed}</Price>
       </TextWrapper>
     </Card>
   );

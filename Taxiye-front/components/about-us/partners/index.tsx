@@ -16,37 +16,24 @@ justify-content: center;
 
 `;
 
-const contents = [{
-    id: "1",
-    img: require("../../../assets/images/logo/elnet-logo.png"),
-    title: "Marketing Team",
-    content: 'Our marketing team provides the necessary research to identify our target customers and other audiences. and provides necessary information to the customers.'
-},
-{
-    id: "2",
-    img: require("../../../assets/images/logo/elauto-logo.png"),
-    title: "Marketing Team",
-    content: 'Our marketing team provides the necessary research to identify our target customers and other audiences. and provides necessary information to the customers.'
-}
-];
 
-const PartnersContent = () => {
+const PartnersContent = ({title, subTitle, description, contents}) => {
     return (
         <>
             <GraySection>
                 <SectionHeaderContainer>
                 <SectionTitle>
-                    Our Partners
+                    {title}
                 </SectionTitle>
                 <CenteredText>
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor.
+                    {subTitle}
                 </CenteredText>
                 </SectionHeaderContainer>
                 <SectionContentContainer>
                 <Container>
                     <CardWrapper>
 
-                        <CardTitle>Taxiye has partnered up with 6+ taxi associations including Airport Taxi associations.</CardTitle>
+                        <CardTitle>{description}</CardTitle>
 
 
                     </CardWrapper>
@@ -54,8 +41,8 @@ const PartnersContent = () => {
                         {contents.map((content) => (
                             <CardWrapper>
                                 <Card>
-                                    <Image src={content.img} />
-                                    <CardContent>{content.content}</CardContent>
+                                    <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+                                    <CardContent>{content.description}</CardContent>
                                 </Card>
 
                             </CardWrapper>

@@ -1,66 +1,11 @@
 import React, { useState } from "react";
-import Image from "../../image";
-import { DefaultInput } from "../../../form/input-fields/primary-input";
+import { DefaultOtpInput } from "../../../form/input-fields/otp-field";
 import Router from 'next/router'
-import Link from 'next/link';
-import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../../elements";
+import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../../elements";
 import styled from "styled-components";
 
 const BolderNavLink = styled(NavLink)`
 font-weight: 600;
-`;
-
-const Container = styled('div')`
-padding-bottom:30px;
-`;
-
-const CodeSentContainer = styled('div')`
-display:flex;
-justify-content:center;
-`;
-
-const CodeSentText = styled('p')`
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 22px;
-text-align: center;
-color: #20AA46;
-padding-left:15px;
-`;
-
-const FixedCustomButton = styled(CustomButton)`
-margin-bottom:0px;
-`;
-const ModalTitle = styled("p")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 22px;
-text-align: center;
-`;
-const BackButton = styled("img")`
-padding-bottom:10px;
-`;
-
-const InfoText = styled("p")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 12px;
-line-height: 16px;
-text-align: center;
-color: #444444;
-padding-top:10px;
-padding-bottom:20px;
-`;
-
-const CustomFlexContainer = styled(FlexContainer)`
-padding-bottom:0px;
-justify-content: center;
-}
 `;
 
 const LeftAlignedForm = styled("div")`
@@ -85,15 +30,15 @@ const PhoneVerification = ({ handleNext, setShow, handleBack }) => {
                 <LeftAlignedForm>
 
                     <CustomHeaderContainer>
-                        <BackButton onClick={handleBack} src={require("../../../../assets/icons/back-arrow.svg")} />
+                        
                         <Title>Verify your Phone Number</Title>
                         <CustomSubTitle>Verify your number you submitted on the previous step by typing the 6 digit code we sent via text.</CustomSubTitle>
                     </CustomHeaderContainer>
                     <ContentContainer>
                         <InputContainer>
-                            <DefaultInput
+                            <DefaultOtpInput
                                 label="Verification code *"
-                                placeholder="__ __ __ __ __ __"
+                                placeholder=""
                                 id="phone" />
                         </InputContainer>
 

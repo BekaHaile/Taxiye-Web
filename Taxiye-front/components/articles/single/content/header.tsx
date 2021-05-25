@@ -47,17 +47,17 @@ const ArticleHeader = ({header}) => {
                     <Image
                         src={require("../../../../assets/icons/user/vector.svg")}
                     />
-                    <AuthorText>{header.author}</AuthorText>
+                    <AuthorText>Tolosa T.</AuthorText>
                 </Info>
                 <Info>
                     <Image
                         src={require("../../../../assets/icons/user/clock.svg")}
                     />
-                    <AuthorText>{header.date}</AuthorText>
+                    <AuthorText>July 12</AuthorText>
                 </Info>
             </ArticleInfoWrapper>
             <ArticleTitle>{header.title}</ArticleTitle>
-            <MainImage src={header.image}/>
+            <MainImage src={`${process.env.NEXT_PUBLIC_HOST}${header.mainMedia.url}`}/>
       
         </>
     );

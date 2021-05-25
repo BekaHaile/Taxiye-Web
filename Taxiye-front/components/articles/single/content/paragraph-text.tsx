@@ -16,7 +16,7 @@ padding-top:30px;
 
 const ArticleParagraph = ({ paragraph }) => {
     return (
-        <>
+        <> 
             <ArticleParagraphText>{paragraph}</ArticleParagraphText>
 
 

@@ -44,46 +44,26 @@ height:50px;
 width:50px;
 `;
 
-const contents = [{
-    number: "1",
-    img:require("../../assets/icons/number-1.svg"),
-    title: "Requirement 1",
-    subtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor, nascetur non habitasse iaculis tempor nec egestas fames augue, platea porta integer nostra curae sed arcu.     '
-},
-{
-    number: "2",
-    img:require("../../assets/icons/number-2.svg"),
-    title: "Requirement 2",
-    subtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor, nascetur non habitasse iaculis tempor nec egestas fames augue, platea porta integer nostra curae sed arcu.     '
-},
-{
-    number: "3",
-    img:require("../../assets/icons/number-3.svg"),
-    title: "Requirement 3",
-    subtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor, nascetur non habitasse iaculis tempor nec egestas fames augue, platea porta integer nostra curae sed arcu. '
-}
-];
 
-
-const Requirements = () => {
+const Requirements = ({title, subTitle, contents, mainImage}) => {
     return (
         <>
             <GraySection>
             <SectionHeaderContainer>
-                <SectionTitle>Application Requirments</SectionTitle>
-                <CenteredText>With simple steps to register and minimum requirements, you can be partners with us today. Below are the documents required from the driver upon registration.</CenteredText>
+                <SectionTitle>{title}</SectionTitle>
+                <CenteredText>{subTitle}</CenteredText>
                 </SectionHeaderContainer>
                 <SectionContentContainer>
                 <CardContainer>
                     <div>
                     {contents.map((content) => (
                         <CardContainer>
-                        <Image src={content.img} />
+                        <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
                         <ElementContainer>
                         
                             <StringContainer>
                                 <Title>{content.title}</Title>
-                                <SubTitle>{content.subtitle}</SubTitle>
+                                <SubTitle>{content.description}</SubTitle>
                             </StringContainer>
                         
                          </ElementContainer>
@@ -91,7 +71,7 @@ const Requirements = () => {
                        
                        ))}
                     </div>
-                    <img src={require("../../assets/icons/requirements.svg")} />
+                    <img src={`${process.env.NEXT_PUBLIC_HOST}${mainImage.url}`} />
                 </CardContainer>
                 </SectionContentContainer>
             </GraySection>

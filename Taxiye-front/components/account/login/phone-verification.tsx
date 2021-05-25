@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "../image";
-import { DefaultInput } from "../../form/input-fields/primary-input";
+import { DefaultOtpInput } from "../../form/input-fields/otp-field";
 import Router from 'next/router'
 import Link from 'next/link';
 import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../elements";
@@ -62,7 +62,7 @@ const PhoneVerification = () => {
     return (
         <>
             <ContentWrapper>
-                <Image type=""/>
+                <Image/>
                 <FormContainer>
                     <CenteredForm>
                         <HeaderContainer>
@@ -71,9 +71,9 @@ const PhoneVerification = () => {
                         </HeaderContainer>
                         <ContentContainer>
                             <InputContainer>
-                                <DefaultInput
+                                <DefaultOtpInput
                                     label="Verification code *"
-                                    placeholder="__ __ __ __ __ __"
+                                    placeholder=""
                                     id="phone" />
                             </InputContainer>
 

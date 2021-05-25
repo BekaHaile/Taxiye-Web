@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import styled from "styled-components";
 
 const RatingWrapper = styled("div")`
   display: flex;
-  justify-content: space-around;
-  width:50%;
+  justify-content: space-between;
   align-item:center;
+  gap:10px;
+  width: max-content;
   margin:auto;
+  padding-top:10px;
+`;
+const Image = styled("img")`
+
 `;
 
 const Ratings = ({rate}) => {
@@ -26,7 +30,7 @@ const Ratings = ({rate}) => {
     setRatingNodes(symbols);
   });
 
-  return <RatingWrapper>{ratingNodes}</RatingWrapper>;
+  return <RatingWrapper className="testimony-rating">{ratingNodes}</RatingWrapper>;
 };
 
 export default Ratings;

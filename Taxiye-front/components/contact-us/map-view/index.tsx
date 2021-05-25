@@ -64,19 +64,19 @@ margin-top:20px;
     
 `;
 
-const MapView = () => {
+const MapView = ({offices, title, subTitle, socialMedias}) => {
     return (
         <>
             <SecondarySection>
                 <FullSectionHeaderContainer>
-                    <SectionTitleOnStart> Our Offices </SectionTitleOnStart>
-                    <CenteredTextOnStart> Our doors are open to all. Come and visit us! </CenteredTextOnStart>
+                    <SectionTitleOnStart> {title} </SectionTitleOnStart>
+                    <CenteredTextOnStart> {subTitle} </CenteredTextOnStart>
                 </FullSectionHeaderContainer>
             </SecondarySection>
             <MapContainer>
             <MapViewer />
             <MapInfoContainer>
-                <Infos key={mapinfo.id} info={mapinfo} />
+                <Infos socialMedias={socialMedias} info={offices[0]} />
 
                 <CustomButton>Get directions</CustomButton>
 

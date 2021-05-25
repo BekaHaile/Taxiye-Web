@@ -15,7 +15,6 @@ const Card = styled("div")`
 const CardImage = styled("img")`
   margin: 0;
   width: 350px;
-  height:170px;
 `;
 
 const CardBody = styled("div")`
@@ -80,7 +79,7 @@ const TextWrapper = styled("div")`
 const PopularArticleCard = ({ article }) => {
   return (
     <Card>
-      <CardImage src={article.image} />
+      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.header.thumbnail.url}`} />
       <CardBody>
       <TextWrapper>
        
@@ -89,18 +88,18 @@ const PopularArticleCard = ({ article }) => {
             <Image
               src={require("../../../../assets/icons/user/vector.svg")}
             />
-            <AuthorText>{article.author}</AuthorText>
+            <AuthorText>Niguse B.</AuthorText>
             </Info>
             <Info>
             <Image
               src={require("../../../../assets/icons/user/clock.svg")}
             />
-            <AuthorText>{article.date}</AuthorText>
+            <AuthorText>July 19</AuthorText>
             </Info>
           </ArticleInfoWrapper>
-          <ArticleTitle>{article.title}</ArticleTitle>
+          <ArticleTitle>{article.header.title}</ArticleTitle>
         </TextWrapper>
-        <Link href="/articles/12345">
+        <Link href={`/articles/${article.id}`}>
         <Button>Read More</Button>
         </Link>
         

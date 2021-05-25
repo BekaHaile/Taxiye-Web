@@ -1,6 +1,6 @@
 import React from "react";
 import { GraySection,SectionContentContainer } from "../../section";
-import VisionCard from "./card";
+import Cards from "./card";
 import styled from "styled-components";
 
 
@@ -14,14 +14,14 @@ const CustomSectionContentContainer =  styled(SectionContentContainer)`
 padding:0px;
 `;
 
-const VisionContent = () => {
+const VisionContent = ({contents}) => {
     return (
         <>
             <GraySection>
             <CustomSectionContentContainer>
                 <CardContainer>
 
-                    <VisionCard />
+                    <Cards contents={contents}/>
 
                
                 </CardContainer>

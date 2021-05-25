@@ -48,7 +48,7 @@ const Quote = ({ media }) => {
         <>
             <Container>
                 <Figure>
-                    <Image src={media.url} />
+                    <Image src={`${process.env.NEXT_PUBLIC_HOST}${media.media.url}`} />
                     <Caption>{media.caption}<CustomLink href="/">{media.meta}</CustomLink></Caption>
                 </Figure>
             </Container>

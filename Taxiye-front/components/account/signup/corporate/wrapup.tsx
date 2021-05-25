@@ -39,7 +39,7 @@ const Credential = () => {
     return (
         <>
             <ContentWrapper>
-                <Image type="corporate" />
+                <Image />
                 <FormContainer>
                     <LeftAlignedForm>
                         <HeaderContainer>

@@ -58,100 +58,59 @@ max-width: 550px;
 flex: 1;
 `;
 
-const Services = () => {
+const Services = ({ data }) => {
+  const services = data.services;
   return (
     <>
-      <DefaultSection>
-        <SectionHeaderContainer>
-          <SectionTitle>Our Services</SectionTitle>
-          <CenteredText>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis,
-            mollis viverra conubia ligula inceptos laoreet.
-        </CenteredText>
-        </SectionHeaderContainer>
-        <SectionContentContainer>
-          <FlexRow>
-            <Image src={require("../../assets/images/services/taxi.svg")} />
-            <RightContainer>
-              <RightServiceTitle>Taxi on Demand</RightServiceTitle>
-              <RightDescription>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet libero tortor, nascetur non habitasse iaculis tempor nec egestas fames augue, platea porta integer nostra curae sed arcu. Nec ut diam vulputate ante scelerisque ridiculus lobortis orci mi curae himenaeos quis, senectus curabitur ullamcorper a porttitor nibh fermentum nisi cum morbi aliquam. Vitae pretium vestibulum dui gravida in potenti interdum, class rhoncus neque.
+      {services.map((service, index) => (
 
-            </RightDescription>
-            </RightContainer>
-          </FlexRow>
-        </SectionContentContainer>
-      </DefaultSection>
-      <GraySection>
-        
-          <FlexRow>
-            <LeftContainer>
-              <ServiceTitle>City to City Travel</ServiceTitle>
-              <Description>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-                primis, mollis viverra conubia ligula inceptos laoreet libero
-                tortor, nascetur non habitasse iaculis tempor nec egestas fames
-                augue, platea porta integer nostra curae sed arcu. Nec ut diam
-                vulputate ante scelerisque ridiculus lobortis orci mi curae
-                himenaeos quis, senectus curabitur ullamcorper a porttitor nibh
-                fermentum nisi cum morbi aliquam. Vitae pretium vestibulum dui
-                gravida in potenti interdum, class rhoncus neque. Ullamcorper
-                porttitor non pharetra cursus nisl mollis pellentesque primis
-                penatibus platea, dictum himenaeos eget mi bibendum ad molestie
-                aliquet curae quis quisque.
-            </Description>
-            </LeftContainer>
-            <Image src={require("../../assets/images/services/city-travel.svg")} />
-          </FlexRow>
-        
-      </GraySection>
-      <DefaultSection>
-        
-          <FlexRow>
-            <Image src={require("../../assets/images/services/rentals.svg")} />
-            <RightContainer>
-              <RightServiceTitle>Hourly Rentals</RightServiceTitle>
-              <RightDescription>
-                {" "}
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-              primis, mollis viverra conubia ligula inceptos laoreet libero
-              tortor, nascetur non habitasse iaculis tempor nec egestas fames
-              augue, platea porta integer nostra curae sed arcu. Nec ut diam
-              vulputate ante scelerisque ridiculus lobortis orci mi curae
-              himenaeos quis, senectus curabitur ullamcorper a porttitor nibh
-              fermentum nisi cum morbi aliquam. Vitae pretium vestibulum dui
-              gravida in potenti interdum, class rhoncus neque. Ullamcorper
-              porttitor non pharetra cursus nisl mollis pellentesque primis
-              penatibus platea, dictum himenaeos eget mi bibendum ad molestie
-              aliquet curae quis quisque.
-            </RightDescription>
-            </RightContainer>
-          </FlexRow>
-        
-      </DefaultSection>
-      <GraySection>
-        
-          <FlexRow>
-            <LeftContainer>
-              <ServiceTitle>Messenger Delivery</ServiceTitle>
-              <Description>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-                primis, mollis viverra conubia ligula inceptos laoreet libero
-                tortor, nascetur non habitasse iaculis tempor nec egestas fames
-                augue, platea porta integer nostra curae sed arcu. Nec ut diam
-                vulputate ante scelerisque ridiculus lobortis orci mi curae
-                himenaeos quis, senectus curabitur ullamcorper a porttitor nibh
-                fermentum nisi cum morbi aliquam. Vitae pretium vestibulum dui
-                gravida in potenti interdum, class rhoncus neque. Ullamcorper
-                porttitor non pharetra cursus nisl mollis pellentesque primis
-                penatibus platea, dictum himenaeos eget mi bibendum ad molestie
-                aliquet curae quis quisque.
-            </Description>
-            </LeftContainer>
-            <Image src={require("../../assets/images/services/delivery.svg")} />
-          </FlexRow>
-        
-      </GraySection>
+        <div id={service.id}>
+          {index % 2 == 0 ?
+            <DefaultSection>
+              {index == 0 ?
+                <SectionHeaderContainer>
+                  <SectionTitle>{data.servicePage.serviceSectionTitle}</SectionTitle>
+                  <CenteredText>
+                    {data.servicePage.serviceSectionSubTitle}
+                  </CenteredText>
+                </SectionHeaderContainer> :
+                null}
+              <SectionContentContainer>
+                <FlexRow>
+                  <Image src={require("../../assets/images/services/taxi.svg")} />
+                  <RightContainer>
+                    <RightServiceTitle>{service.name}</RightServiceTitle>
+
+                    
+                      {service.longDescription.map((description) => (
+                        <RightDescription>{description.content}</RightDescription>
+                      ))}
+
+                    
+                  </RightContainer>
+                </FlexRow>
+              </SectionContentContainer>
+            </DefaultSection>
+            :
+            <GraySection>
+
+
+              <FlexRow>
+                <LeftContainer>
+                  <ServiceTitle>{service.name}</ServiceTitle>
+                  
+                    {service.longDescription.map((description) => (
+                     <Description> {description.content} </Description>
+                    ))}
+                  
+                </LeftContainer>
+                <Image src={require("../../assets/images/services/delivery.svg")} />
+              </FlexRow>
+
+            </GraySection>
+          }
+        </div>
+      ))}
     </>
   );
 };

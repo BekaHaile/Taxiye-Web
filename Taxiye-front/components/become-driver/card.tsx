@@ -56,9 +56,9 @@ const VisionCards = ({content}) => {
     return(
         <CardWrapper>
             <Card>
-                <img src={content.img}/>
+                <img src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`}/>
                 <CardTitle>{content.title}</CardTitle>
-                <CardContent>{content.content}</CardContent>
+                <CardContent>{content.description}</CardContent>
             </Card>
            
         </CardWrapper>

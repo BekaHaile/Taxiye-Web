@@ -53,21 +53,21 @@ padding-top:10px;
 padding-bottom:20px;
 `;
 
-const CustomFlexContainer = styled(FlexContainer)`
-padding-bottom:0px;
-justify-content: center;
+const FixedCustomButtonWithSpace = styled(FixedCustomButton)`
+margin-right:30px;
 }
 `;
-const Signup = () => {
+const Signup = ({hero}) => {
 
   const [show, setShow] = React.useState(false);
+  const [finished, setFinishRegistration] = React.useState(false);
   const [sendSms, setSendTextShow] = React.useState(false);
   return (
     <>
       <ContentWrapper>
-        <Image type="driver" />
+        <Image hero={hero} />
         <FormContainer>
-          <Stepper setShow={setShow}/>
+          <Stepper setShow={setShow} setFinishRegistration={setFinishRegistration}/>
         </FormContainer>
 
         <Modal onClose={() => setShow(false)} show={show}>
@@ -87,6 +87,14 @@ const Signup = () => {
             </CodeSentContainer>
           </Container>
           <FixedCustomButton onClick={() => setSendTextShow(false)}>Done</FixedCustomButton>
+        </Modal>
+
+        <Modal onClose={() => setFinishRegistration(false)} show={finished}>
+          <Container>
+            <ModalTitle>I accept that documents uploaded by me are true and correct. I understand that any attempt of providing incorrect, misleading information or fake documents will lead to my immediate black listing from the Taxiye platform. Taxiye platform reserves the right to take the matter to the law enforcement authorities in case of forged documents.</ModalTitle>
+          </Container>
+          <FixedCustomButtonWithSpace onClick={() => { setFinishRegistration(false); }}>Cancel</FixedCustomButtonWithSpace>
+          <FixedCustomButton onClick={() => { setFinishRegistration(false); }}>I agree</FixedCustomButton>
         </Modal>
       </ContentWrapper>
     </>

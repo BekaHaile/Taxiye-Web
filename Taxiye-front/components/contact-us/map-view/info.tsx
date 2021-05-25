@@ -43,25 +43,34 @@ const ContentContainer = styled('div')`
     padding-top:40px;
 `;
 
-const Info = ({info}) => {
+const Info = ({socialMedias,info}) => {
     return (
         <>
             <HeaderTitle>
-                {info.header}
+                {info.name}
             </HeaderTitle>
             <HeaderSubTitle>{info.headersubTitle}</HeaderSubTitle>
-            {info.content.map((content) => (
-                <ContentContainer>
-                    <ContentTitle>{content.title}</ContentTitle>
-                    {content.details.map((detail) => (
-                        <ContentDetailText>{detail}</ContentDetailText>
+            <ContentContainer>
+                    <ContentTitle>{info.openHours.header}</ContentTitle>
+                    {info.openHours.content.map((detail) => (
+                        <div>
+                        <ContentDetailText>{detail.title}</ContentDetailText>
+                        <ContentDetailText>{detail.description}</ContentDetailText>
+                        </div>
                     ))}
 
                 </ContentContainer>
+                <ContentContainer>
+                    <ContentTitle>{info.contactCenter.header}</ContentTitle>
+                    {info.contactCenter.content.map((detail) => (
+                        
+                        <ContentDetailText>{detail.title}</ContentDetailText>
+                        
+                    ))}
 
-            ))}
+                </ContentContainer>
             <ContentContainer>
-             <Socials />
+             <Socials socialMedias={socialMedias}/>
             </ContentContainer>
 
 

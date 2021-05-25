@@ -30,7 +30,7 @@ const GoodToGo = () => {
     return (
         <>
             <ContentWrapper>
-                <MainImage type=""/>
+                <MainImage hero={null}/>
                 <CenteredFormContainer>
                     <CenteredForm>
 

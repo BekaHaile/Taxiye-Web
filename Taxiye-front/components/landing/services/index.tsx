@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import Link from "next/link";
 import {DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer } from '../../section';
 
 const ServiceTitle = styled("h3")`
@@ -54,67 +54,45 @@ const Button = styled("button")`
   padding: 5px 20px
 `;
 
-const Services = () => {
+interface ServiceProps {
+  services: {
+    id: any,
+    name: string,
+    shortDescription: any,
+    thumbnail:any
+  }[],
+  title:string,
+  subTitle: string,
+
+}
+
+const Services = ({services, title, subTitle}: ServiceProps) => {
   return (
     <DefaultSection>
       <SectionHeaderContainer>
-      <SectionTitle>Choose the trip that suits you.</SectionTitle>
+      <SectionTitle>{title}</SectionTitle>
       <CenteredText>
-        Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis,
-        mollis viverra conubia ligula inceptos laoreet.
+        {subTitle}
       </CenteredText>
       </SectionHeaderContainer>
       <SectionContentContainer>
       <ServicesWrapper>
+        {services.map((service => (
         <ServiceWrapper>
           <Image
             
-            src={require("../../../assets/icons/service.png")}
+            src={`${process.env.NEXT_PUBLIC_HOST}${service.thumbnail.url}`}
           />
-          <ServiceTitle>Taxi on Demand</ServiceTitle>
+          <ServiceTitle>{service.name}</ServiceTitle>
           <ServiceText>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-            primis, mollis viverra.
+            {service.shortDescription.content}
           </ServiceText>
+          <Link href={`/services#${service.id}`}>
           <Button>Load More</Button>
+          </Link>
         </ServiceWrapper>
-        <ServiceWrapper>
-          <Image
-            
-            src={require("../../../assets/icons/destination.png")}
-          />
-          <ServiceTitle>City to City Travel</ServiceTitle>
-          <ServiceText>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-            primis, mollis viverra.
-          </ServiceText>
-          <Button>Load More</Button>
-        </ServiceWrapper>
-        <ServiceWrapper>
-          <Image
-           
-            src={require("../../../assets/icons/rate.png")}
-          />
-          <ServiceTitle>Hourly Rental</ServiceTitle>
-          <ServiceText>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-            primis, mollis viverra.
-          </ServiceText>
-          <Button>Load More</Button>
-        </ServiceWrapper>
-        <ServiceWrapper>
-          <Image
-            height="78px"
-            width="65px"
-            src={require("../../../assets/icons/delivery.png")}
-          />
-          <ServiceTitle>Messenger Delivery</ServiceTitle>
-          <ServiceText>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sodales
-            primis, mollis viverra.
-          </ServiceText>
-          <Button>Load More</Button>
-        </ServiceWrapper>
+        )))}
+       
       </ServicesWrapper>
     </SectionContentContainer>
     </DefaultSection>

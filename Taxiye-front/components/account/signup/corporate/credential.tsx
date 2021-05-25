@@ -5,6 +5,7 @@ import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderCo
 import colors from "../../../../theme/main/colors";
 import { DefaultInput } from "../../../form/input-fields/primary-input";
 import Link from "next/link";
+import NeedHelp from "../../terms";
 
 const LinkWithLine = styled("a")`
 color:${colors.primary};
@@ -17,12 +18,10 @@ const CustomSubTitle = styled(SubTitle)`
 padding-right:0px;
 }
 `;
-const InputContainerWithSpace = styled(InputContainer)`
-padding-right:60px;
-}
-`;
+
 const CustomFlexContainer = styled(FlexContainer)`
 padding-bottom:0px;
+gap:60px;
 }
 `;
 
@@ -39,7 +38,7 @@ const Credential = () => {
   return (
     <>
       <ContentWrapper>
-        <Image type="corporate" />
+        <Image />
         <FormContainer>
           <LeftAlignedForm>
             <HeaderContainer>
@@ -50,12 +49,12 @@ const Credential = () => {
             <ContentContainer>
 
               <CustomFlexContainer>
-                <InputContainerWithSpace>
+                <InputContainer>
                   <DefaultInput
                     label="Your Full Name *"
                     placeholder="John doe"
                     id="fullname" />
-                </InputContainerWithSpace>
+                </InputContainer>
 
                 <InputContainer>
                   <DefaultInput
@@ -67,13 +66,13 @@ const Credential = () => {
               </CustomFlexContainer>
 
               <CustomFlexContainer>
-                <InputContainerWithSpace>
+                <InputContainer>
                   <DefaultInput
                     type="password"
                     label="Password *"
                     placeholder="********"
                     id="phonenumber" />
-                </InputContainerWithSpace>
+                </InputContainer>
 
                 <InputContainer>
                   <DefaultInput
@@ -87,11 +86,7 @@ const Credential = () => {
               <Link href="/signup/corporate/finish">
                 <CustomButton>Get Started</CustomButton>
               </Link>
-              <FlexContainer>
-                <CustomSubTitle>Need help?</CustomSubTitle>
-                <LinkWithLine href="/">Click here</LinkWithLine>
-
-              </FlexContainer>
+              <NeedHelp/>
             </ContentContainer>
           </LeftAlignedForm>
         </FormContainer>

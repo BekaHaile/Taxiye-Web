@@ -1,9 +1,9 @@
 import * as React from "react"
 
-function Device() {
+function Device({url}) {
     return (
     <>
-        <img src={require("../../../assets/images/device.svg")}/>
+        <img src={`${process.env.NEXT_PUBLIC_HOST}${url}`}/>
     </>
         )
     }

@@ -6,6 +6,7 @@ const InlineForm = styled("div")`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  gap:60px;
   && {
     input {
       width: inherit;
