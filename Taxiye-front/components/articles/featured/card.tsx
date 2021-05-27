@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import DateView from "../../form/Date";
 
 const Card = styled("div")`
   display: flex;
@@ -17,6 +18,7 @@ const Card = styled("div")`
 const CardImage = styled("img")`
   border-radius: 10px 10px 0px 0px;
   width:inherit;
+  
 `;
 
 const ImageContainer = styled("div")`
@@ -92,27 +94,32 @@ const ArticleCard = ({ article }) => {
   return (
     <Card>
       <ImageContainer>
-        <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.header.mainMedia.url}`} />
+        <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.mainMedia.url}`} />
       </ImageContainer>
       <CardBody>
         <TextWrapper>
-          <ArticleTitle>{article.header.title}</ArticleTitle>
+          <ArticleTitle>{article.headerTitle}</ArticleTitle>
           <ArticleInfoWrapper>
             <Info>
               <Image
                 src={require("../../../assets/icons/user/vector.svg")}
               />
-              <AuthorText>Neguse B.</AuthorText>
-            </Info>
+              {
+                article.user &&
+              <AuthorText>{article.user.firstname} {article.user.lastname.charAt(0)+`.`}</AuthorText>
+              }
+              </Info>
             <Info>
               <Image
                 src={require("../../../assets/icons/user/clock.svg")}
               />
-              <AuthorText>June 28, 2020</AuthorText>
+              <AuthorText>
+                <DateView format="MMMM D, YYYY" date={article.published_at}/>
+                </AuthorText>
             </Info>
           </ArticleInfoWrapper>
 
-          <ArticleText>{article.header.longSubTitle}</ArticleText>
+          <ArticleText>{article.headerLongSubtitle}</ArticleText>
         </TextWrapper>
         <Link href={`/articles/${article.id}`}><Button>Read More</Button></Link>
       </CardBody>

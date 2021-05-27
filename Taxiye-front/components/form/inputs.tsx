@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/style.css';
+import Link from "next/link";
 
 
 
@@ -68,7 +69,7 @@ const Checkbox: FunctionComponent<InputProps> = ({
 }) => {
   return (
     <FormGroup>
-      <input id={id} type="checkbox"/>
+      <input id={id} type="checkbox" />
       <CheckBoxLabelText>{placeholder}</CheckBoxLabelText>
     </FormGroup>
   );
@@ -126,7 +127,12 @@ type InputProps = {
   label?: string;
   icon?: string;
   placeholder: string;
-  shadow?:boolean
+  shadow?: boolean,
+  onInput?,
+  onChange?,
+  lists?: any,
+  value?:string
+
 };
 
 const Inputs: FunctionComponent<InputProps> = ({
@@ -197,18 +203,50 @@ const SecondaryInputWithShadow = styled(SecondaryInput)`
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 `;
 
+const DropDownList = styled("ul")`
+text-align:left;
+background-color:white;
+position:absolute;
+z-index:100;
+padding:5px;
+display:none;
+`;
+const DropDownListItem = styled("li")`
+padding:5px 0px;
+border 1px solid red; 
+list-style-type: none;
+margin:5px;
+`;
+
 const SecondaryInputs: FunctionComponent<InputProps> = ({
   id,
   icon,
+  value,
   placeholder,
-  shadow
+  shadow,
+  onInput,
+  onChange,
+  lists
 }) => {
-  if(shadow)
+  if (shadow)
+    return (
+      <>
+        <SecondaryInputWithShadow  onKeyUp={onInput.bind(this)} id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }} />
+       
+      </>
+    );
   return (
-    <SecondaryInputWithShadow id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }}/>
-  );
-  return (
-    <SecondaryInput id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }}/>
+    <>
+      <SecondaryInput autoComplete="off"  onKeyUp={onInput} id={id} placeholder={placeholder} style={{ backgroundImage: `url(${icon})` }} />
+      <DropDownList id="article-list">
+        {lists.map((list, index) => (
+          <Link key={index} href={`/articles/${list.id}`}>
+          <DropDownListItem > {list.headerTitle}</DropDownListItem>
+          </Link>
+        ))}
+      </DropDownList>
+      
+    </>
   );
 };
 
@@ -239,24 +277,24 @@ margin-top:1px;
 
 
 
-function PhoneInputField({label, id, placeholder,country}) {
+function PhoneInputField({ label, id, placeholder, country }) {
   return (
     <>
-    <label>{label}</label>
-    <Container>
-      <SecondContainer>
-    <PhoneInput
-    
-    country={country}
-    
-    // value={this.state.phone}
-    // onChange={phone => this.setState({ phone })}
-  />
-  </SecondContainer>
-  <CustomInput placeholder={placeholder}/>
-  </Container>
-  </>
-    )
+      <label>{label}</label>
+      <Container>
+        <SecondContainer>
+          <PhoneInput
+
+            country={country}
+
+          // value={this.state.phone}
+          // onChange={phone => this.setState({ phone })}
+          />
+        </SecondContainer>
+        <CustomInput placeholder={placeholder} />
+      </Container>
+    </>
+  )
 }
 
 

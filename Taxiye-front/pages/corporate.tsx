@@ -86,8 +86,7 @@ export async function getServerSideProps() {
   });
   return {
     props: {
-      data: data,
-      error:error
+      data: data
     },
   };
 } catch (e) {

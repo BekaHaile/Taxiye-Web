@@ -8,6 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import GlobalStyle from "../theme/global/index";
 import Loading from "../components/loading/";
+import client from "../backend-client";
+import {QueryClientProvider, QueryClient} from "react-query";
+const queryClient = new QueryClient();
 
 const FloatingButton = styled("div")`
 `;
@@ -32,11 +35,9 @@ export default function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false);
   React.useEffect(() => {
     const start = () => {
-      console.log("start");
       setLoading(true);
     };
     const end = () => {
-      console.log("findished");
       setLoading(false);
     };
     router.events.on("routeChangeStart", start);
@@ -93,7 +94,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
 
     <>
-
+    <QueryClientProvider client={queryClient}>
       <Head>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -120,6 +121,7 @@ export default function MyApp({ Component, pageProps }) {
           <Footer />
         </>
       }
+      </QueryClientProvider>
     </>
   );
 }

@@ -11,10 +11,19 @@ flex: 1;
 `;
 
 
-const Article = ({article}) => {
+const Article = ({ article }) => {
     const articleBody = article.body;
-    const articleHeader = article.header;
-    
+    const articleHeader = {
+
+        "title": article.headerTitle,
+        "mainMedia": {
+            "url": article.mainMedia.url
+        },
+        "published_at": article.published_at,
+        user:article.user
+
+    };
+
     return (
         <>
             <Container>

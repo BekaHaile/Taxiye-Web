@@ -29,7 +29,7 @@ const Loading = () => {
     
    
     return (
-        <>x
+        <>
             <LoadingView>
                 <LoadingContent >
                 <div className="lds-hourglass"><h3>Loading...</h3></div>

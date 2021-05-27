@@ -1,26 +1,22 @@
 import React from 'react';
 import styled from "styled-components";
-import {Title, SecondaryBlock} from '../title';
+import { Title, SecondaryBlock } from '../title';
 import ArticleSlider from "./slider";
-import {GraySection, SectionContentContainer} from "../../section";
-import {Button} from "../../form/buttons/primary-button";
+import { GraySection } from "../../section";
 
-const CustomButton = styled(Button)`
-  padding: 5px 20px;
-`;
 
-const FeaturedContent = ({unfeatured}) => {
-    return(
-        <>
-        <GraySection>
+const FeaturedContent = ({ articles }) => {
+  return (
+    <>
+      <GraySection>
         <SecondaryBlock>
-        <Title>All Articles</Title>
+          <Title>All Articles</Title>
         </SecondaryBlock>
-        <ArticleSlider unfeatured={unfeatured}></ArticleSlider>
-        <CustomButton>Load More</CustomButton>
-        </GraySection>
-        </>
-    );
+        <ArticleSlider unfeatured={articles}></ArticleSlider>
+
+      </GraySection>
+    </>
+  );
 }
 
 export default FeaturedContent;

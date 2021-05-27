@@ -41,18 +41,20 @@ query {
     
   }
   
-    articles(sort: "created_at" ){
+    articles(sort: "created_at", where:{featured:true} ){
     id
     published_at
-    featured
-    header{
-    	title
-    	subTitle
-    	thumbnail{
-      	url
-    	}
-      
+    user{
+      firstname
+      lastname
     }
+    featured
+    headerTitle
+    headerSubTitle
+    thumbnail {
+        url   
+    }
+      
   }
   testimonies(sort: "created_at" ){
   	id
@@ -83,19 +85,18 @@ export async function getServerSideProps() {
     });
     return {
       props: {
-        data: data,
-        error: error
+        data: data
       },
     };
   } catch (e) {
-    return {props:{error:true}};
+    return { props: { error: true } };
   }
 }
 
 
 export default function index({ data, error }) {
   if (error)
-    return  <DefaultErrorPage statusCode={404} />
+    return <DefaultErrorPage statusCode={404} />
 
   return (
     <>

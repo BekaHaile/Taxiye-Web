@@ -8,7 +8,8 @@ const ArticlesContent = ({featured, unfeatured}) => {
     return(
         <>
         <FeaturedContent featured={featured}></FeaturedContent>
-        <NormalArticleContent unfeatured={unfeatured}></NormalArticleContent>
+        <NormalArticleContent articles={unfeatured}></NormalArticleContent>
+
         </>
     );
 }

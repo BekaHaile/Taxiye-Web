@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import DateView from "../../../form/Date";
 
 const Card = styled("div")`
   display: flex;
@@ -79,30 +80,35 @@ const TextWrapper = styled("div")`
 const PopularArticleCard = ({ article }) => {
   return (
     <Card>
-      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.header.thumbnail.url}`} />
+      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`} />
       <CardBody>
-      <TextWrapper>
-       
+        <TextWrapper>
+
           <ArticleInfoWrapper>
             <Info>
-            <Image
-              src={require("../../../../assets/icons/user/vector.svg")}
-            />
-            <AuthorText>Niguse B.</AuthorText>
+              <Image
+                src={require("../../../../assets/icons/user/vector.svg")}
+              />
+              {
+                article.user &&
+                <AuthorText>{article.user.firstname} {article.user.lastname.charAt(0) + `.`}</AuthorText>
+              }
             </Info>
             <Info>
-            <Image
-              src={require("../../../../assets/icons/user/clock.svg")}
-            />
-            <AuthorText>July 19</AuthorText>
+              <Image
+                src={require("../../../../assets/icons/user/clock.svg")}
+              />
+              <AuthorText>
+                <DateView format="MMMM D, YYYY" date={article.published_at} />
+              </AuthorText>
             </Info>
           </ArticleInfoWrapper>
-          <ArticleTitle>{article.header.title}</ArticleTitle>
+          <ArticleTitle>{article.headerTitle}</ArticleTitle>
         </TextWrapper>
         <Link href={`/articles/${article.id}`}>
-        <Button>Read More</Button>
+          <Button>Read More</Button>
         </Link>
-        
+
       </CardBody>
     </Card>
   );

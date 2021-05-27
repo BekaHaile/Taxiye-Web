@@ -70,7 +70,7 @@ const Hero = ({ hero, children }) => {
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height:550px;
+    height:85vh;
     width:100%;
   `;
 

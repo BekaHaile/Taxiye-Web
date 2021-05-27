@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import DateView from "../../../form/Date";
 
 const Image = styled("img")`
  
@@ -39,7 +40,8 @@ padding-bottom:30px;
 `;
 
 
-const ArticleHeader = ({header}) => {
+const ArticleHeader = ({ header }: { header: any }) => {
+
     return (
         <>
             <ArticleInfoWrapper>
@@ -47,18 +49,24 @@ const ArticleHeader = ({header}) => {
                     <Image
                         src={require("../../../../assets/icons/user/vector.svg")}
                     />
-                    <AuthorText>Tolosa T.</AuthorText>
+                    {
+                        header.user &&
+                        <AuthorText>{header.user.firstname} {header.user.lastname.charAt(0) + `.`}</AuthorText>
+                    }
                 </Info>
                 <Info>
                     <Image
                         src={require("../../../../assets/icons/user/clock.svg")}
                     />
-                    <AuthorText>July 12</AuthorText>
+                    <AuthorText>
+                        <DateView format="MMMM D, YYYY" date={header.published_at} />
+                    </AuthorText>
                 </Info>
             </ArticleInfoWrapper>
             <ArticleTitle>{header.title}</ArticleTitle>
-            <MainImage src={`${process.env.NEXT_PUBLIC_HOST}${header.mainMedia.url}`}/>
-      
+            <MainImage src={`${process.env.NEXT_PUBLIC_HOST}${header.mainMedia.url}`} />
+
+
         </>
     );
 }

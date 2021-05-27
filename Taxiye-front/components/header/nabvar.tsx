@@ -65,7 +65,7 @@ const NavBar = () => {
   const router = useRouter();
   return (
     <NavWrapper>
-      <Link href="/">
+      <Link key="1" href="/">
         <Image
           width="97px"
           height="auto"
@@ -73,19 +73,18 @@ const NavBar = () => {
         />
       </Link>
       <Nav>
-        <Link href="/become-driver">
-        
+        <Link key="2" href="/become-driver">
           {router.pathname === "/become-driver" ? 
           <NavLink className="active">Become a driver </NavLink>:
           <Button> {"Become a driver"} </Button> }
          
           </Link>
-        <Link href="/services">
+        <Link key="3" href="/services">
           <NavLink className={router.pathname === "/services" ? "active" : null}>
             Services
           </NavLink>
         </Link>
-        <Link href="/corporate">
+        <Link  key="4" href="/corporate">
           <NavLink
             className={router.pathname === "/corporate" ? "active" : null}
           >
@@ -93,24 +92,24 @@ const NavBar = () => {
             Corporate
           </NavLink>
         </Link>
-        <Link href="/articles">
+        <Link  key="5" href="/articles">
           <NavLink
             className={router.pathname === "/articles" || router.pathname.includes("/articles/") ? "active" : null}
           >
             Articles
           </NavLink>
         </Link>
-        <Link href="/contact-us">
+        <Link  key="6" href="/contact-us">
           <NavLink className={router.pathname === "/contact-us" ? "active" : null}>
             Contact us
           </NavLink>
         </Link>
-        <Link href="/about-us">
+        <Link  key="7" href="/about-us">
           <NavLink className={router.pathname === "/about-us" ? "active" : null}>
             About us{" "}
           </NavLink>
         </Link>
-        <Link href="/login">
+        <Link  key="8" href="/login">
           <SecondaryNavLink>
             <Avatar src={require("../../assets/icons/user/avatar.svg")}/>
             <div>Login</div>

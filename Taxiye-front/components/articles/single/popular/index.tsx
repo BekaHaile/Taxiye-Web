@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import SearchField from "../search";
 import Card from "./card";
 
 
 const Container = styled("div")`
-
+min-width: 350px;
 `;
 const Title = styled("div")`
 font-family: Open Sans;
@@ -16,18 +15,32 @@ line-height: 27px;
 margin-top:60px;
 color: #000000;
 `;
+const NoContent = styled("div")`
+font-family: Open Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 27px;
+margin-top:60px;
+color: #000000;
+text-align:center;
+`;
 
-const Search = ({articles}) => {
+const Search = ({ articles, SearchingComponent }) => {
     return (
         <>
             <Container>
-                <SearchField />
+                {SearchingComponent}
                 <Title>Popular Posts</Title>
-                {articles.map((article) => (
 
-                    <Card key={article.date} article={article} />
+                {
+                    Array.isArray(articles) && !articles.length ?
+                        <NoContent>No content</NoContent> :
+                        articles.map((article) => (
 
-                ))}
+                            <Card key={article.date} article={article} />
+
+                        ))}
 
             </Container>
         </>
