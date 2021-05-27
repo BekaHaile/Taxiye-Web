@@ -110,8 +110,11 @@ export default function articles({ articlePage, featured, unfeatured, articles, 
     />
   </SearchContainer>
 
+
   if (loadedItemsStatus === "error" || searchStatus == "error" || error)
     return <DefaultErrorPage statusCode={404} />
+
+    
   else if (loadedItemsStatus === "loading" || searchStatus === "loading")
     return <Loading />
 

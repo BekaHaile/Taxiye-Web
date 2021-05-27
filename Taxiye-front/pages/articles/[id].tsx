@@ -58,6 +58,8 @@ export async function getServerSideProps(context) {
 export default function articles({ articlePage, article, populars, error }) {
   const [searchText, setSearching] = useState("");
   const { data, status } = useQuery(['articles', { content: searchText }], getSearch, { initialData: populars });
+  
+  
   if ((searchText != "" && status == "error")|| error)
     return <DefaultErrorPage statusCode={404} />
   else if (searchText != "" && status === "loading")
