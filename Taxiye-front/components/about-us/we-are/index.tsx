@@ -87,8 +87,8 @@ const WeAreContent = ({ title, description, primaryImage, secondaryImage }) => {
                             <div>
                                 <LeftServiceTitle>{title}</LeftServiceTitle>
 
-                                {description.map((text) => (
-                                    <LeftDescription>
+                                {description.map((text, index) => (
+                                    <LeftDescription  key={index}>
                                         {text.content}
                                     </LeftDescription>
                                 ))}

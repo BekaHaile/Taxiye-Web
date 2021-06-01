@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Button} from "../hero/inputs";
+import {Button} from "./inputs";
 import Link from "next/link";
 
 const Title = styled("h5")`

@@ -60,8 +60,8 @@ const SafteyCenter = ({ title, subTitle, contents }) => {
       </SectionHeaderContainer>
       <SectionContentContainer>
         <BlockContainer>
-          {contents.map((content) => (
-            <Block>
+          {contents.map((content, index) => (
+            <Block  key={index}>
               <Image src={`http://localhost:1337${content.thumbnail.url}`} />
               <div>
                 <BlockTitle>{content.title}</BlockTitle>

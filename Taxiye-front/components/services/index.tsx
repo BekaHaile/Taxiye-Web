@@ -64,7 +64,7 @@ const Services = ({ data }) => {
     <>
       {services.map((service, index) => (
 
-        <div id={service.id}>
+        <div id={service.id}  key={index}>
           {index % 2 == 0 ?
             <DefaultSection>
               {index == 0 ?
@@ -82,8 +82,8 @@ const Services = ({ data }) => {
                     <RightServiceTitle>{service.name}</RightServiceTitle>
 
                     
-                      {service.longDescription.map((description) => (
-                        <RightDescription>{description.content}</RightDescription>
+                      {service.longDescription.map((description, index) => (
+                        <RightDescription  key={index}>{description.content}</RightDescription>
                       ))}
 
                     
@@ -99,8 +99,8 @@ const Services = ({ data }) => {
                 <LeftContainer>
                   <ServiceTitle>{service.name}</ServiceTitle>
                   
-                    {service.longDescription.map((description) => (
-                     <Description> {description.content} </Description>
+                    {service.longDescription.map((description, index) => (
+                     <Description  key={index}> {description.content} </Description>
                     ))}
                   
                 </LeftContainer>

@@ -38,8 +38,8 @@ const PartnersContent = ({title, subTitle, description, contents}) => {
 
                     </CardWrapper>
                     <CardContainer>
-                        {contents.map((content) => (
-                            <CardWrapper>
+                        {contents.map((content, index) => (
+                            <CardWrapper key={index}>
                                 <Card>
                                     <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
                                     <CardContent>{content.description}</CardContent>

@@ -57,8 +57,8 @@ const Info = ({info, title, subTitle, socialMedias}) => {
             
                 <ContentContainer>
                     <ContentTitle>{info.openHours.header}</ContentTitle>
-                    {info.openHours.content.map((detail) => (
-                        <div>
+                    {info.openHours.content.map((detail, index) => (
+                        <div  key={index}>
                         <ContentDetailText>{detail.title}</ContentDetailText>
                         <ContentDetailText>{detail.description}</ContentDetailText>
                         </div>
@@ -67,9 +67,9 @@ const Info = ({info, title, subTitle, socialMedias}) => {
                 </ContentContainer>
                 <ContentContainer>
                     <ContentTitle>{info.contactCenter.header}</ContentTitle>
-                    {info.contactCenter.content.map((detail) => (
+                    {info.contactCenter.content.map((detail, index) => (
                         
-                        <ContentDetailText>{detail.title}</ContentDetailText>
+                        <ContentDetailText  key={index}>{detail.title}</ContentDetailText>
                         
                     ))}
 

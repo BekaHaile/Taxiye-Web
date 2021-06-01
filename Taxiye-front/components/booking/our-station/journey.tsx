@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Inputs, Form, InlineForm, InputSeparator, Button } from "../../hero/inputs";
+import { Inputs, Form, InlineForm, InputSeparator, Button } from "../../tab-forms/inputs";
 
 
 const ChildrenContainer = styled("div")`

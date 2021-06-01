@@ -65,8 +65,8 @@ const Architecture = ({ title, subTitle, contents }) => {
             <SectionContentContainer>
                 <ContentWrapper>
                     <Row>
-                        {contents.map((content) => (
-                            <Block>
+                        {contents.map((content, index) => (
+                            <Block  key={index}>
                                 <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
                                 <HeaderContainer>
                                     <BlockTitle>{content.title}</BlockTitle>

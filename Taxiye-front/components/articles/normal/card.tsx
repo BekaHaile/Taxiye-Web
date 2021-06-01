@@ -103,7 +103,6 @@ const ArticleCard = ({ article }) => {
       </ImageContainer>
       <CardBody>
         <TextWrapper>
-
           <ArticleInfoWrapper>
             <Info>
               <Image

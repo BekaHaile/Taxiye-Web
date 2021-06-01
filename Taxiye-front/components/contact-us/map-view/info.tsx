@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import colors from '../../../theme/main/colors';
-import  Socials from "./socials";
+import Socials from "./socials";
 
 
 
@@ -43,34 +43,35 @@ const ContentContainer = styled('div')`
     padding-top:40px;
 `;
 
-const Info = ({socialMedias,info}) => {
-    return (
+const selectedLocation = ({ selectedLocation, socialMedias }) => {
+
+    return selectedLocation && (
         <>
             <HeaderTitle>
-                {info.name}
+                {selectedLocation.name}
             </HeaderTitle>
-            <HeaderSubTitle>{info.headersubTitle}</HeaderSubTitle>
+            <HeaderSubTitle>{selectedLocation.headersubTitle}</HeaderSubTitle>
             <ContentContainer>
-                    <ContentTitle>{info.openHours.header}</ContentTitle>
-                    {info.openHours.content.map((detail) => (
-                        <div>
+                <ContentTitle>{selectedLocation.openHours.header}</ContentTitle>
+                {selectedLocation.openHours.content.map((detail, index) => (
+                    <div  key={index}>
                         <ContentDetailText>{detail.title}</ContentDetailText>
                         <ContentDetailText>{detail.description}</ContentDetailText>
-                        </div>
-                    ))}
+                    </div>
+                ))}
 
-                </ContentContainer>
-                <ContentContainer>
-                    <ContentTitle>{info.contactCenter.header}</ContentTitle>
-                    {info.contactCenter.content.map((detail) => (
-                        
-                        <ContentDetailText>{detail.title}</ContentDetailText>
-                        
-                    ))}
-
-                </ContentContainer>
+            </ContentContainer>
             <ContentContainer>
-             <Socials socialMedias={socialMedias}/>
+                <ContentTitle>{selectedLocation.contactCenter.header}</ContentTitle>
+                {selectedLocation.contactCenter.content.map((detail, index) => (
+
+                    <ContentDetailText  key={index}>{detail.title}</ContentDetailText>
+
+                ))}
+
+            </ContentContainer>
+            <ContentContainer>
+                <Socials socialMedias={socialMedias} />
             </ContentContainer>
 
 
@@ -78,4 +79,4 @@ const Info = ({socialMedias,info}) => {
     );
 }
 
-export default Info;
+export default selectedLocation;

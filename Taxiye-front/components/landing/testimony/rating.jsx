@@ -14,23 +14,22 @@ const Image = styled("img")`
 
 `;
 
-const Ratings = ({rate}) => {
-  const [ratingNodes, setRatingNodes] = useState([]);
-  useEffect(() => {
-    let symbols = [];
-    for (let i = 0; i < rate; i++) {
-      symbols.push(
-        <Image
-          width="22.56319236755371px"
-          height="21.45972442626953px"
-          src={require("../../../assets/icons/star.png")}
-        />
-      );
-    }
-    setRatingNodes(symbols);
-  });
+const Ratings = ({ rate }) => {
+  var rates = new Array(rate);
 
-  return <RatingWrapper className="testimony-rating">{ratingNodes}</RatingWrapper>;
+
+  return <RatingWrapper className="testimony-rating"> {
+    rates.map((rate, index) =>
+
+      <Image
+        key={index}
+        width="22.56319236755371px"
+        height="21.45972442626953px"
+        src={require("../../../assets/icons/star.png")}
+      />
+    )
+  }
+  </RatingWrapper>;
 };
 
 export default Ratings;

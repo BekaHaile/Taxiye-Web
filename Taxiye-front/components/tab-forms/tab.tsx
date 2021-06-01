@@ -84,7 +84,7 @@ const Tab = ({setSelectedContent,contentView}) => {
           }}
           href="#station"
         >
-          Our Station
+          Out Station
         </TabButton>
         <TabButton
           className={activeTab === "delivery" ? "active" : null}

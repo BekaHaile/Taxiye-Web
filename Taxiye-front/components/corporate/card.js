@@ -74,8 +74,8 @@ const ExpenseCards = ({ contents }) => {
             {contents.map((content, index) => (
 
                 contents.length % 2 != 0 && (contents.length+1) / 2 == index+1 ?
-                    <CenteredCard>{contentView(content)}</CenteredCard> :
-                    <Card>
+                    <CenteredCard  key={index}>{contentView(content)}</CenteredCard> :
+                    <Card  key={index}>
                         {contentView(content)}
                     </Card>
 

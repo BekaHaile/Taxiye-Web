@@ -51,8 +51,8 @@ const CorporateInfoSection = ({ backgroundImage, title, subTitle, contents }) =>
       </SectionHeaderContainer>
       <SectionContentContainer>
         <BlockWrapper>
-          {contents.map((content) => (
-            <Block>
+          {contents.map((content, index) => (
+            <Block  key={index}>
               <BlockTitle>{content.title}</BlockTitle>
               <CorporateText>
                 {content.subTitle}

@@ -1,5 +1,5 @@
 import React from "react";
-import { CenteredText, GraySection, SectionTitle,SectionHeaderContainer, SectionContentContainer  } from "../section";
+import { CenteredText, GraySection, SectionTitle, SectionHeaderContainer, SectionContentContainer } from "../section";
 import styled from "styled-components";
 
 const CardContainer = styled("div")`
@@ -45,34 +45,34 @@ width:50px;
 `;
 
 
-const Requirements = ({title, subTitle, contents, mainImage}) => {
+const Requirements = ({ title, subTitle, contents, mainImage }) => {
     return (
         <>
             <GraySection>
-            <SectionHeaderContainer>
-                <SectionTitle>{title}</SectionTitle>
-                <CenteredText>{subTitle}</CenteredText>
+                <SectionHeaderContainer>
+                    <SectionTitle>{title}</SectionTitle>
+                    <CenteredText>{subTitle}</CenteredText>
                 </SectionHeaderContainer>
                 <SectionContentContainer>
-                <CardContainer>
-                    <div>
-                    {contents.map((content) => (
-                        <CardContainer>
-                        <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
-                        <ElementContainer>
-                        
-                            <StringContainer>
-                                <Title>{content.title}</Title>
-                                <SubTitle>{content.description}</SubTitle>
-                            </StringContainer>
-                        
-                         </ElementContainer>
-                        </CardContainer>
-                       
-                       ))}
-                    </div>
-                    <img src={`${process.env.NEXT_PUBLIC_HOST}${mainImage.url}`} />
-                </CardContainer>
+                    <CardContainer>
+                        <div>
+                            {contents.map((content, index) => (
+                                <CardContainer key={index}>
+                                    <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+                                    <ElementContainer>
+
+                                        <StringContainer>
+                                            <Title>{content.title}</Title>
+                                            <SubTitle>{content.description}</SubTitle>
+                                        </StringContainer>
+
+                                    </ElementContainer>
+                                </CardContainer>
+
+                            ))}
+                        </div>
+                        <img src={`${process.env.NEXT_PUBLIC_HOST}${mainImage.url}`} />
+                    </CardContainer>
                 </SectionContentContainer>
             </GraySection>
         </>

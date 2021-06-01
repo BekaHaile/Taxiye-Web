@@ -85,7 +85,7 @@ const SliderContainer = () => {
             <Slider
                 settings={settings}
                 content={contents.map((content, index) => (
-                    <Card onClick={() => setSelectedCar(index)} className={index == selectedCar ? 'activecard' : ""}>
+                    <Card key={index} onClick={() => setSelectedCar(index)} className={index == selectedCar ? 'activecard' : ""}>
                         <style jsx global>
                             {styles}
                         </style>

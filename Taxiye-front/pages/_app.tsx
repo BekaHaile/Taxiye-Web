@@ -9,9 +9,13 @@ import "slick-carousel/slick/slick-theme.css";
 import GlobalStyle from "../theme/global/index";
 import Loading from "../components/loading/";
 import client from "../backend-client";
-import {QueryClientProvider, QueryClient} from "react-query";
-const queryClient = new QueryClient();
+import { QueryClientProvider, QueryClient } from "react-query";
+import { Provider } from "react-redux";
+import store from "../redux/store";
 
+
+const queryClient = new QueryClient();
+declare var google;
 const FloatingButton = styled("div")`
 `;
 
@@ -53,14 +57,14 @@ export default function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
     window.addEventListener("scroll", function () {
       if (window.pageYOffset < 10) {
-        if(document.getElementById("floating-button"))
-        document.getElementById("floating-button").className = "hidden";
-        if(document.getElementById("text-on-floating-button"))
-        document.getElementById("text-on-floating-button").className = "hidden";
+        if (document.getElementById("floating-button"))
+          document.getElementById("floating-button").className = "hidden";
+        if (document.getElementById("text-on-floating-button"))
+          document.getElementById("text-on-floating-button").className = "hidden";
       }
       else {
-        if(document.getElementById("floating-button"))
-        document.getElementById("floating-button").className = "";
+        if (document.getElementById("floating-button"))
+          document.getElementById("floating-button").className = "";
       }
 
     }, false);
@@ -73,55 +77,60 @@ export default function MyApp({ Component, pageProps }) {
   )
     return (
       <>
-
-        <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <GlobalStyle />
-        {loading ?
-          <Loading /> :
-          <>
-            <Component {...pageProps} />
-          </>
-        }
+        <Provider store={store}>
+          <Head>
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+              rel="stylesheet"
+            />
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNebshVW6XSdv4X2Nxm3FGIt3qbA7UKU&libraries=places"></script>
+          </Head>
+          <GlobalStyle />
+          {loading ?
+            <Loading /> :
+            <>
+              <Component {...pageProps} />
+            </>
+          }
+        </Provider>
       </>)
       ;
 
   return (
 
     <>
-    <QueryClientProvider client={queryClient}>
-      <Head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
-          rel="stylesheet"
-        />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      </Head>
-      <GlobalStyle />
-      {loading ?
-        <Loading /> :
-        <>
-          <Header />
-          <div>
-            <div onClick={() => toggleFloatingButton(false)} id="text-on-floating-button" className="hidden">
-              Call Us On 6055
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Head>
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+              rel="stylesheet"
+            />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNebshVW6XSdv4X2Nxm3FGIt3qbA7UKU&libraries=places"></script>
+          </Head>
+          <GlobalStyle />
+          {loading ?
+            <Loading /> :
+            <>
+              <Header />
+              <div>
+                <div onClick={() => toggleFloatingButton(false)} id="text-on-floating-button" className="hidden">
+                  Call Us On 6055
         </div>
-            <FloatingButton onClick={() => toggleFloatingButton(true)} id="floating-button" className="hidden">
-              <IconImage src={require("../assets/icons/call-center.svg")} />
-            </FloatingButton>
-          </div>
-          <Component {...pageProps} />
-          <Footer />
-        </>
-      }
-      </QueryClientProvider>
+                <FloatingButton onClick={() => toggleFloatingButton(true)} id="floating-button" className="hidden">
+                  <IconImage src={require("../assets/icons/call-center.svg")} />
+                </FloatingButton>
+              </div>
+              <Component {...pageProps} />
+              <Footer />
+            </>
+          }
+        </QueryClientProvider>
+      </Provider>
     </>
   );
 }

@@ -36,8 +36,8 @@ const Socials = ({ socialMedias }) => {
         <>
             <Title> Follow us </Title>
             <SocialLinkWrapper>
-                {socialMedias.map((socialMedia) => (
-                    <Link href={`${socialMedia.link}`}>
+                {socialMedias.map((socialMedia, index) => (
+                    <Link  key={index} href={`${socialMedia.link}`}>
                         <Image
                             src={`${process.env.NEXT_PUBLIC_HOST}${socialMedia.logo.url}`}
                         />

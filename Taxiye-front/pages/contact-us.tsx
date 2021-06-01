@@ -33,6 +33,8 @@ query{
   addresses{
     id
     name
+    lat
+    lng
     openHours{
       header
       content{

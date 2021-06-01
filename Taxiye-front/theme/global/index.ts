@@ -8,6 +8,63 @@ body, html {
   margin: 0 !important;
   
 }
+.pickers{
+  width: -webkit-fill-available !important;
+}
+.MuiInput-underline {
+  border-bottom: 1px solid #666 !important;
+}
+.MuiInput-underline:before {
+  border-bottom: 1px solid #666 !important;
+}
+.MuiInput-underline:after {
+  border-bottom: 1px solid #A02167 !important;
+}
+.MuiInput-underline:hover {
+  border-bottom: 1px solid #A02167 !important;
+}
+.MuiPickersCalendarHeader-transitionContainer {
+  order:-1;
+  text-align:left !important;
+}
+.MuiTypography-root {
+  text-align:left !important;
+}
+.MuiPickersCalendar-week {
+  justify-content: space-between;
+}
+.MuiSvgIcon-root {
+  fill: #A02167 !important;
+}
+.MuiIconButton-root {
+padding:12px 0px !important;
+}
+.MuiPickersCalendarHeader-dayLabel {
+color:#444444 !important;
+}
+.MuiPickersCalendar-transitionContainer {
+  padding: 0px 20px;
+}
+
+
+
+.MuiPickersCalendarHeader-daysHeader {
+  padding:0px 20px;
+  justify-content: space-between;
+}
+
+.MuiPickersDay-daySelected {
+  color: #fff;
+  font-weight: 500;
+  background-color: #A02167 !important;
+}
+
+.MuiPickersCalendarHeader-switchHeader{
+  padding:5px 20px;
+}
+
+
+
 
 .MuiStepIcon-root.MuiStepIcon-completed {
   color: #20AA46 !important;

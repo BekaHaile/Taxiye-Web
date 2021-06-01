@@ -1,32 +1,10 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from "styled-components";
-import { SecondarySection, SectionTitle, CenteredText,SectionHeaderContainer  } from "../../section";
+import { SecondarySection, SectionTitle, CenteredText, SectionHeaderContainer } from "../../section";
 import { Button } from "../../form/buttons/primary-button";
 import MapViewer from "./map";
 import Infos from "./info";
 
-const mapinfo = {
-    id: "2",
-    header: "Taxiye Addis Ababa",
-    content: [{
-        title: "Open Hours",
-        details: [
-            "Monday - Friday",
-            "8 am - 5 pm",
-            "Saturday",
-            "8 am - 12 pm"
-        ],
-    },
-    {
-        title: "Contact Support",
-        details: [
-            "info@elnetech.com",
-            "6055 - Free call 24/7"
-        ],
-    }
-    ]
-
-};
 const MapInfoContainer = styled("div")`
     text-align: center;
     justify-content:center;
@@ -64,7 +42,10 @@ margin-top:20px;
     
 `;
 
-const MapView = ({offices, title, subTitle, socialMedias}) => {
+const MapView = ({ offices, title, subTitle, socialMedias }) => {
+    const [selectedLocation, setSelectedLocation] = useState(null);
+    const [directionAction, setDirection] = useState(null);
+    const myref = useRef();
     return (
         <>
             <SecondarySection>
@@ -74,13 +55,20 @@ const MapView = ({offices, title, subTitle, socialMedias}) => {
                 </FullSectionHeaderContainer>
             </SecondarySection>
             <MapContainer>
-            <MapViewer />
-            <MapInfoContainer>
-                <Infos socialMedias={socialMedias} info={offices[0]} />
+                <MapViewer directionAction={directionAction} setSelectedLocation={setSelectedLocation} offices={offices} />
+                {
+                    selectedLocation &&
+                    <MapInfoContainer>
+                        <Infos selectedLocation={selectedLocation} socialMedias={socialMedias} />
 
-                <CustomButton>Get directions</CustomButton>
+                        <CustomButton onClick={() => {
+                            if(selectedLocation)
+                            setDirection({ lat: selectedLocation.lat, lng: selectedLocation.lng });
+                        }
+                        }>Get directions</CustomButton>
 
-            </MapInfoContainer>
+                    </MapInfoContainer>
+                }
             </MapContainer>
 
         </>

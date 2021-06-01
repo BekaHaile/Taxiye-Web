@@ -1,5 +1,5 @@
 import React from "react";
-import { Inputs, Form, InlineForm, InputSeparator, Button } from "../hero/inputs";
+import { Inputs, Form, InlineForm, InputSeparator, Button } from "./inputs";
 import { Title, SubTitle, HomeTitles, FormContainer, CustomButton, Link } from "./tab-titles";
 
 const RentalForm = ({ contentView }) => {

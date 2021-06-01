@@ -25,7 +25,7 @@ const ServiceContent = ({ title, subTitle, mainImage, contents }) => {
                     <ContentWrapper>
                         <div>
                             {leftSide.map((content, index) => (
-                                <Block>
+                                <Block  key={index}>
                                     <Container>
                                         <RightBlockTitle>{content.title}</RightBlockTitle>
                                         <RightText>
@@ -41,7 +41,7 @@ const ServiceContent = ({ title, subTitle, mainImage, contents }) => {
                         <div>
 
                             {rightSide.map((content, index) => (
-                                <Block>
+                                <Block  key={index}>
                                     <Numbering>{("0" + (index + counter)).slice(-2)}</Numbering>
                                     <Container>
                                         <BlockTitle>{content.title}</BlockTitle>

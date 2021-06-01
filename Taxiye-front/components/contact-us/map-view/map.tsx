@@ -1,19 +1,22 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import WrappedMap from "../../Map";
 
-const CardImage = styled("img")`
-  border-radius: 10px 10px 0px 0px;
-  margin: 0;
-  width:100%;
-  height:500px;
-`;
-
-const MapViewer = () => {
+const Mapview = ({setSelectedLocation, offices, directionAction}) => {
     return (
         <>
-        <CardImage src={require("../../../assets/images/Offices-map.png")}/>
+        <div style={{ width:"100wh",height: "80vh" }}>
+            <WrappedMap
+                directionAction={directionAction}
+                action={setSelectedLocation}
+                places={offices}
+                googleMapURL="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyCRNebshVW6XSdv4X2Nxm3FGIt3qbA7UKU"
+                loadingElement={<div style={{ height: "100%" }} />}
+                containerElement={<div style={{ height: "100%" }} />}
+                mapElement={<div style={{ height: "100%" }} />}
+            />
+        </div>
         </>
     );
 }
 
-export default MapViewer;
+export default Mapview;

@@ -70,10 +70,10 @@ const Cards = ({ contents }) => {
         <CardWrapper>
             {contents.map((content, index) => (
                 contents.length % 2 != 0 && (contents.length + 1) / 2 == index + 1 ?
-                    <CenteredCard>
+                    <CenteredCard  key={index}>
                         {contentView(content)}
                     </CenteredCard> :
-                    <Card>
+                    <Card  key={index}>
                         {contentView(content)}
                     </Card>
 

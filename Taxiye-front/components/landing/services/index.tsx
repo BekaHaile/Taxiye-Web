@@ -77,8 +77,8 @@ const Services = ({services, title, subTitle}: ServiceProps) => {
       </SectionHeaderContainer>
       <SectionContentContainer>
       <ServicesWrapper>
-        {services.map((service => (
-        <ServiceWrapper>
+        {services.map((service, index) => (
+        <ServiceWrapper key={index}>
           <Image
             
             src={`${process.env.NEXT_PUBLIC_HOST}${service.thumbnail.url}`}
@@ -91,7 +91,7 @@ const Services = ({services, title, subTitle}: ServiceProps) => {
           <Button>Load More</Button>
           </Link>
         </ServiceWrapper>
-        )))}
+        ))}
        
       </ServicesWrapper>
     </SectionContentContainer>
