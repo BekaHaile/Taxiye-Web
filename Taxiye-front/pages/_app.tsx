@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import GlobalStyle from "../theme/global/index";
 import Loading from "../components/loading/";
-import client from "../backend-client";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { Provider } from "react-redux";
 import store from "../redux/store";

@@ -5,6 +5,8 @@ import BookingForm from "./booking-form";
 import RentalForm from "./rental-form";
 import StationForm from "./station-form";
 import DeliveryForm from "./delivery-form";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const TabContainer = styled("div")`
 background: #ffffff;
@@ -47,11 +49,12 @@ const TabButton = styled.a`
 
 const Tab = ({setSelectedContent,contentView}) => {
   const [activeTab, setActiveTab] = useState("demand");
-
+  const router = useRouter();
   return (
     <TabContainer>
      {contentView!=null? <TabHeader></TabHeader>:null}
     <TabWrapper>
+      
       <TabButtonWrappers>
         <TabButton
           className={activeTab === "demand" ? "active" : null}

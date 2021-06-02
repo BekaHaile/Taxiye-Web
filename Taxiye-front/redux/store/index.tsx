@@ -1,6 +1,6 @@
 import {applyMiddleware, createStore} from "redux";
-import reducer from "../reducers/booking/on-demand";
-import {middleWare} from "../middle-ware/on-demand";
+import reducer from "../reducers/booking";
+import {middleWare} from "../middle-ware/booking";
 
 const store = createStore(reducer, applyMiddleware(middleWare));
 

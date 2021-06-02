@@ -33,7 +33,7 @@ color: #363636;
 `;
 
 const StringContainer = styled("div")`
-max-width:410px;
+width:410px;
 `;
 
 const ElementContainer = styled("div")`

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer } from "react-google-maps";
 
 interface props {
@@ -10,25 +9,25 @@ interface props {
     places?: any,
     action?,
     directionAction?
-    direction?
+    originAction?
 }
 
 
-
-function Map({ direction, directionAction, googleMapURL, loadingElement, containerElement, mapElement, places, action }: props) {
-
+function Map({ directionAction, googleMapURL, loadingElement, containerElement, mapElement, places, action }: props) {
     const [directions, setDirection] = useState(null);
-    const [hideOrigin, setHide] = useState(false);
-    const [origin, setOrigin] = useState({ lat: 9.000234, lng: 38.802343 });
+    const [origin, setOrigin] = useState(null);
     const directionsService = new google.maps.DirectionsService();
+    useEffect(() => {
+        getCurrentLocation();
+    }, []);
 
     useEffect(() => {
-        if (directionAction)
+        if (directionAction) {
             handleDestination(directionAction);
+        }
     }, [directionAction]);
 
     const getCurrentLocation = () => {
-
         navigator?.geolocation.getCurrentPosition(
             ({ coords: { latitude: lat, longitude: lng } }) => {
                 const pos = { lat, lng };
@@ -36,18 +35,17 @@ function Map({ direction, directionAction, googleMapURL, loadingElement, contain
 
             }
         );
-
     };
+
     const setAction = (place) => {
-        setHide(false);
         setDirection(null);
         action(place);
     };
-    const handleDestination = (destination) => {
+    const handleDestination = (des) => {
 
         var request = {
             "origin": origin,
-            "destination": destination,
+            "destination": des,
             "travelMode": google.maps.TravelMode.DRIVING
         };
 
@@ -56,8 +54,8 @@ function Map({ direction, directionAction, googleMapURL, loadingElement, contain
                 request,
                 (result, status) => {
                     if (status === google.maps.DirectionsStatus.OK) {
-                        action(null);
-                        setHide(true);
+                        if (action)
+                            action(null);
                         setDirection(
                             result
                         );
@@ -69,7 +67,8 @@ function Map({ direction, directionAction, googleMapURL, loadingElement, contain
             );
     }
 
-
+    if (origin == null)
+        return null;
     return (
         <GoogleMap
             {...googleMapURL}
@@ -78,20 +77,19 @@ function Map({ direction, directionAction, googleMapURL, loadingElement, contain
             {...mapElement}
             defaultZoom={13}
             defaultCenter={origin}
-            onTilesLoaded={() => getCurrentLocation()}
+            onIdle={() => getCurrentLocation()}
             onClick={() => action(null)}
 
         >
-            {
-                !hideOrigin && origin &&
-                <Marker
-                    key={`${origin.lng}-${origin.lat}`}
-                    position={origin}
-                    icon={{
-                        url: require("../../assets/icons/marker.svg"),
-                        scaledSize: new google.maps.Size(50, 50)
-                    }}
-                />}
+
+            <Marker
+                key={`${origin.lng}-${origin.lat}`}
+                position={origin}
+                icon={{
+                    url: require("../../assets/icons/marker.svg"),
+                    scaledSize: new google.maps.Size(50, 50)
+                }}
+            />
 
             {places && places.map(place => {
                 return (
@@ -106,15 +104,12 @@ function Map({ direction, directionAction, googleMapURL, loadingElement, contain
                     />
                 );
             })}
+
             {
-                direction != null ?
-                    <DirectionsRenderer
-                        key={direction}
-                        directions={direction} /> :
-                    directions &&
-                    <DirectionsRenderer
-                        key={directions}
-                        directions={directions} />
+
+                directions && <DirectionsRenderer
+                    key={directions}
+                    directions={directions} />
             }
 
 

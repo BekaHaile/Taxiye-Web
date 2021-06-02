@@ -1,39 +1,76 @@
 import React from "react";
-import { Inputs, Form, InlineForm, InputSeparator, Button } from "./inputs";
+import { LabelText, Form, InlineForm, InputWrapper, FormGroup, Icon } from "./inputs";
 import { Title, SubTitle, HomeTitles, FormContainer, CustomButton, Link } from "./tab-titles";
+import LocationInput from "./input-location";
+import store from "../../redux/store";
+import { originSelected, destinationSelected } from "../../redux/actions/booking";
+import { useSelector } from "react-redux";
+import { DatePicker, TimePicker } from "../form/date-picker";
+
 
 const RentalForm = ({ contentView }) => {
+  const origin = useSelector((state) => state["origin"]);
+  const destination = useSelector((state) => state["destination"]);
+
+
   return (
     <>
       {contentView ? null :
         <HomeTitles>
-          <Title>Take Taxiye with you.</Title>
+
+<Title>Take Taxiye with you.</Title>
           <SubTitle>For local city trips</SubTitle>
         </HomeTitles>
       }
       <Form>
         <FormContainer>
-          <Inputs
-            label="Pickup?"
+
+
+          <LocationInput
+            label="From?"
+            icon={require("../../assets/icons/location.svg")}
             placeholder="Enter pickup location"
             id="location"
-            icon={require("../../assets/icons/location.svg")}
+            action={(location, address) => {
+              store.dispatch(originSelected({ origin: { location, address } }));
+            }}
+            address={origin.address}
           />
-          <Inputs
-            label="Package?"
-            placeholder="Enter drop off for estimate"
-            id="package"
+
+          <LocationInput
+            label="Package"
             icon={require("../../assets/icons/package.svg")}
+            placeholder="Select a package"
+            id="dropoff"
+            action={(location, address) => {
+              store.dispatch(destinationSelected({ destination: { location, address } }));
+            }}
+            address={destination.address}
           />
+
           <InlineForm>
-            <Inputs
-              label="When?"
-              placeholder="Today"
-              id="date"
-              icon={require("../../assets/icons/user/clock.svg")}
-            />
-              <Inputs label="Time?" placeholder="06:45 AM" id="time" />
-            
+            <FormGroup>
+              <Icon src={require("../../assets/icons/user/clock.svg")} />
+              <InputWrapper>
+                <LabelText htmlFor="datepicker"> When? </LabelText>
+                <DatePicker
+                  action={(value) => {
+                    console.log(value);
+                  }}
+                  id="datepicker" placeholder="today" />
+              </InputWrapper>
+            </FormGroup>
+
+            <FormGroup>
+              <InputWrapper>
+                <LabelText htmlFor="datepicker"> Time? </LabelText>
+                <TimePicker
+                  action={(value) => {
+                    console.log(value);
+                  }}
+                  id="datepicker" placeholder="06:54" />
+              </InputWrapper>
+            </FormGroup>
           </InlineForm>
         </FormContainer>
         {

@@ -3,7 +3,7 @@ import { LabelText, Form, InlineForm, InputWrapper, FormGroup, Icon } from "./in
 import { Title, SubTitle, HomeTitles, FormContainer, CustomButton, Link } from "./tab-titles";
 import LocationInput from "./input-location";
 import store from "../../redux/store";
-import { originSelected, destinationSelected } from "../../redux/actions/booking/on-demand";
+import { originSelected, destinationSelected } from "../../redux/actions/booking";
 import { useSelector } from "react-redux";
 import { DatePicker, TimePicker } from "../form/date-picker";
 

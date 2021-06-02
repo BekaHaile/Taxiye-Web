@@ -5,6 +5,7 @@ import { gql } from '@apollo/client';
 import client from "../backend-client";
 import DefaultErrorPage from 'next/error';
 
+
 const query = gql`
 # Write your query or mutation here
 query {

@@ -411,7 +411,16 @@ p,h1,h2,h3,h4,h5,h6{
         transform: rotate(1800deg);
       }
     }
-    
+    #hidden-tab{
+      max-height: 60px;
+      transition: max-height 0.5s ease-out;
+      overflow: hidden;
+    }
+    #shown-tab{
+      max-height: auto;
+      transition: max-height 0.5s ease-in;
+     
+    }
   
 `;
 

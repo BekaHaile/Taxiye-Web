@@ -5,8 +5,9 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 import styles from "../../theme/global/place-autocomplete";
+const searchOptions = { componentRestrictions: { country: ['et'] } }
 
-export default function LocationInput({address, label, placeholder, id, icon, action }) {
+export default function LocationInput({ address, label, placeholder, id, icon, action }) {
     const [add, setAddress] = useState(address);
     const active = require("../../assets/icons/location-white.svg");
     const inactive = require("../../assets/icons/location.svg");
@@ -30,6 +31,7 @@ export default function LocationInput({address, label, placeholder, id, icon, ac
                         value={add}
                         onChange={(value) => setAddress(value)}
                         onSelect={(value) => handleSelect(value)}
+                        searchOptions={searchOptions}
                     >
                         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                             <div>
