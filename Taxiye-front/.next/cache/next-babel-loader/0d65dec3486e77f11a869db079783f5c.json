@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { jsx as _jsx } from \"react/jsx-runtime\";\nimport React from 'react';\nimport Credentail from '../../../../components/account/signup/corporate/credential';\n\nvar credentail = function credentail() {\n  return /*#__PURE__*/_jsx(Credentail, {});\n};\n\nexport default credentail;","map":null,"metadata":{},"sourceType":"module"}

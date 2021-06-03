@@ -1,13 +1,15 @@
 import React from 'react';
-import {DefaultSection, SectionTitle, CenteredText} from '../../section';
+import {DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer } from '../../section';
 import FleetSlider from './slide';
 
-const FleetSection = () => {
+const FleetSection = ({title, subTitle, fleets}) => {
     return(
         <DefaultSection>
-            <SectionTitle>Meet our awesome fleet.</SectionTitle>
-            <CenteredText>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet.</CenteredText>
-            <FleetSlider />
+            <SectionHeaderContainer>
+            <SectionTitle>{title}</SectionTitle>
+            <CenteredText>{subTitle}</CenteredText>
+            </SectionHeaderContainer>
+            <FleetSlider fleets={fleets}/>
         </DefaultSection>
     )
 }

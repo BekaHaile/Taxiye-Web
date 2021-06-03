@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { jsx as _jsx } from \"react/jsx-runtime\";\nimport React from 'react';\nimport Signup from '../../../components/account/login/signup';\n\nvar signup = function signup() {\n  return /*#__PURE__*/_jsx(Signup, {});\n};\n\nexport default signup;","map":null,"metadata":{},"sourceType":"module"}

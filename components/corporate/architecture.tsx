@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {DefaultSection, SectionTitle, CenteredText} from '../section';
+import { DefaultSection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer } from '../section';
 
 const ContentWrapper = styled('div')`
 display: flex;
@@ -13,8 +13,8 @@ font-style: normal;
 font-weight: 600;
 font-size: 24px;
 line-height: 33px;
-margin: 15px 0px;
-color: #E45397;
+margin-bottom: 15px;
+color: #A02167;
 `;
 
 const BlockContent = styled('p')`
@@ -23,7 +23,6 @@ font-size: 16px;
 line-height: 22px;
 text-align: center;
 color: #444444;
-margin-bottom: 15px;
 max-width: 450px;
 `;
 
@@ -36,44 +35,51 @@ padding: 0px 75px;
 `;
 
 const Row = styled('div')`
+display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap:40px;
+padding-bottom:20px;
+`;
+const RowBottom = styled('div')`
 display: flex;
+padding-top:20px;
+`;
+
+const HeaderContainer = styled('div')`
+width:450px;
+text-align: center;
 `;
 
 const Image = styled("img")`
 width: 300px;
 `;
 
-const Architecture = () => {
+const Architecture = ({ title, subTitle, contents }) => {
     return (
         <DefaultSection>
-            <SectionTitle>How it works</SectionTitle>
-            <CenteredText>Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet.</CenteredText>
-            <ContentWrapper>
-                <Row>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/add-new.png")} />
-                        <BlockTitle>Manage employees via dashboard</BlockTitle>
-                        <BlockContent>Sign up to access your Taxiye Corporate Dashboard and Invite your employees.</BlockContent>
-                    </Block>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/mobile.png")} />
-                        <BlockTitle>Employees book their own rides</BlockTitle>
-                        <BlockContent>Your employees book their rides with the toggle of a button through their Taxiye app.</BlockContent>
-                    </Block>
-                </Row>
-                <Row>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/receipt.png")} />
-                        <BlockTitle>You pay for the trip as you want</BlockTitle>
-                        <BlockContent>You can pay for the trip after or gets automatically paid through your Taxiye Corporate balance.</BlockContent>
-                    </Block>
-                    <Block>
-                        <Image src={require("../../assets/images/corporate/track-things.png")} />
-                        <BlockTitle>Track employee expenses and invoices</BlockTitle>
-                        <BlockContent>Track trip expense details and download invoices anytime from the dashboard.</BlockContent>
-                    </Block>
-                </Row>
-            </ContentWrapper>
+            <SectionHeaderContainer>
+                <SectionTitle>{title}</SectionTitle>
+                <CenteredText>{subTitle}</CenteredText>
+            </SectionHeaderContainer>
+            <SectionContentContainer>
+                <ContentWrapper>
+                    <Row>
+                        {contents.map((content, index) => (
+                            <Block  key={index}>
+                                <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+                                <HeaderContainer>
+                                    <BlockTitle>{content.title}</BlockTitle>
+                                    <BlockContent>{content.subTitle}</BlockContent>
+                                </HeaderContainer>
+                            </Block>
+
+
+                        ))}
+
+                    </Row>
+                </ContentWrapper>
+            </SectionContentContainer>
         </DefaultSection>
     );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import styled from "styled-components";
 
 const FooterHeader = styled("h4")`
@@ -8,6 +7,13 @@ const FooterHeader = styled("h4")`
   font-size: 14px;
   line-height: 19px;
   margin: 20px 0px;
+`;
+
+const Image = styled("img")`
+  margin-right:25px;
+`;
+const LastImage = styled("img")`
+  margin-right:0px;
 `;
 
 const FooterLink = styled.a`
@@ -18,7 +24,7 @@ const FooterLink = styled.a`
   margin: 10px 0px;
   && {
     :hover {
-      color: #e45397;
+      color: #A02167;
     }
   }
 `;
@@ -29,7 +35,7 @@ const FooterContent = styled("div")`
   justify-content: flex-end;
   align-items: flex-start;
   padding: 0px;
-  margin: 20px 0px;
+  margin-left: 130px;
 `;
 
 const FooterBottomLink = styled(FooterLink)`
@@ -38,55 +44,72 @@ const FooterBottomLink = styled(FooterLink)`
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 0px 40px;
+  margin:0px;
+  margin-right: 40px;
+`;
+
+const FooterEndBottomLink = styled(FooterBottomLink)`
+  margin-right: 0px;
 `;
 
 const FooterBottomLinkWrapper = styled("div")`
   display: flex;
   justify-content: space-around;
   align-self: flex-end;
-  width: 120%;
+  padding-bottom:20px;
+  padding-left:0px; 
+`;
+
+const FooterInfo = styled("div")`
+display: flex;
+
 `;
 
 const SocialLinkWrapper = styled(FooterBottomLinkWrapper)`
-  width: 20%;
+  padding-bottom:0px;
 `;
 
 const Grid = styled("div")`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 200px;
-  grid-auto-rows: minmax(200px, auto);
-  grid-column: 3;
+  display: flex;
+  flex-direction: row;
+  padding-bottom:20px;
+  margin-left: auto;
+  
 `;
 
 const Footer = styled("div")`
   display: flex;
   flex-direction: column;
-  padding: 60px 60px 0px;
   background: #ffffff;
 `;
 
-const FooterImage = styled(Image)`
-  margin-top: 25px;
-  padding: 0;
+const FooterImage = styled('img')`
+  width:450px;
+  height:430px;
 `;
 
 const LinkWrapper = styled("div")`
   display: flex;
   flex-direction: column;
+  margin-right:150px;
 `;
+const LinkEndWrapper = styled(LinkWrapper)`
+ 
+  margin-right:0px;
+`;
+
 
 const FlexRow = styled("div")`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  padding:60px 60px 0px 60px;
+
 `;
 
 const FlexEnd = styled("div")`
   display: flex;
   align-items: flex-end;
-  margin: 20px 0px;
+  padding-bottom: 20px;
   width: 60%;
   justify-content: space-around;
   align-self: flex-end;
@@ -97,9 +120,8 @@ const FooterSection = () => {
     <Footer>
       <FlexRow>
         <FooterImage
-          src={require("../../assets/images/footer_app_img.png")}
-          width="450px"
-          height="430px"
+          src={require("../../assets/images/footer-image.svg")}
+          
         />
         <FooterContent>
           <Grid>
@@ -111,22 +133,22 @@ const FooterSection = () => {
               <Link href="/corporate">
                 <FooterLink>Corporate</FooterLink>
               </Link>
-              <Link href="/offices">
+              <Link href="/contact-us">
                 <FooterLink>Offices</FooterLink>
               </Link>
-              <Link href="/contact">
+              <Link href="/contact-us">
                 <FooterLink>Contact us</FooterLink>
               </Link>
-              <Link href="/about">
+              <Link href="/about-us">
                 <FooterLink>About us</FooterLink>
               </Link>
-              <Link href="/jobs">
+              <Link href="/articles">
                 <FooterLink>Jobs</FooterLink>
               </Link>
             </LinkWrapper>
             <LinkWrapper>
               <FooterHeader>Driver</FooterHeader>
-              <Link href="#">
+              <Link href="/signup/driver">
                 <FooterLink>Become a driver</FooterLink>
               </Link>
               <Link href="#">
@@ -142,7 +164,7 @@ const FooterSection = () => {
                 <FooterLink>Bonus</FooterLink>
               </Link>
             </LinkWrapper>
-            <LinkWrapper>
+            <LinkEndWrapper>
               <FooterHeader>Passenger</FooterHeader>
               <Link href="#">
                 <FooterLink>Call a taxi</FooterLink>
@@ -159,7 +181,7 @@ const FooterSection = () => {
               <Link href="#">
                 <FooterLink>Help</FooterLink>
               </Link>
-            </LinkWrapper>
+            </LinkEndWrapper>
           </Grid>
           <FlexEnd>
             <Image
@@ -174,24 +196,23 @@ const FooterSection = () => {
             />
           </FlexEnd>
           <FooterBottomLinkWrapper>
+            <FooterInfo>
             <FooterBottomLink>Terms & Conditions</FooterBottomLink>
             <FooterBottomLink>Privacy Policy</FooterBottomLink>
             <FooterBottomLink>{`© ${new Date().getFullYear()} Elnet Technologies plc.`}</FooterBottomLink>
+            </FooterInfo>
             <SocialLinkWrapper>
               <Image
-                src={require("../../assets/icons/facebook.png")}
-                width="11px"
-                height="21px"
+                src={require("../../assets/icons/facebook.svg")}
+                
               />
               <Image
-                src={require("../../assets/icons/twitter.png")}
-                width="11px"
-                height="21px"
+                src={require("../../assets/icons/twitter.svg")}
+                
               />
-              <Image
-                src={require("../../assets/icons/instagram.png")}
-                width="11px"
-                height="21px"
+              <LastImage
+                src={require("../../assets/icons/instagram.svg")}
+                
               />
             </SocialLinkWrapper>
           </FooterBottomLinkWrapper>

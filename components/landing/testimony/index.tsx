@@ -1,23 +1,23 @@
 import React from 'react';
 import Slider from "react-slick";
 import styled from 'styled-components';
-import SliderCard from './slider-card';
-import {GraySection, SectionTitle, CenteredText} from '../../section';
+import TestimonySlider from './slider';
+import { GraySection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer } from '../../section';
 
-const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "1px",
-    slidesToShow: 3,
-    speed: 500
-  };
+const TestimonySliderContainer = styled(SectionContentContainer)`
+width:100%;
+`;
 
-const Testimonies = () => {
-    return(
+const Testimonies = ({title, subTitle, testimonies}) => {
+    return (
         <GraySection>
-            <SectionTitle> Loved for all kinds of reasons. </SectionTitle>
-            <CenteredText> Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra conubia ligula inceptos laoreet. </CenteredText>
+            <SectionHeaderContainer>
+                <SectionTitle> {title} </SectionTitle>
+                <CenteredText> {subTitle} </CenteredText>
+            </SectionHeaderContainer>
+            <TestimonySliderContainer>
+                <TestimonySlider testimonies={testimonies}></TestimonySlider>
+            </TestimonySliderContainer>
         </GraySection>
     )
 }

@@ -1,6 +1,6 @@
 const colors = {
   transparent: "transparent",
-  primary: "#E45397",
+  primary: "#A02167",
   primary_2: "#BD3D78",
   secondary: "#F7D259",
   secondary_2: "#E3A200",
@@ -9,8 +9,8 @@ const colors = {
   black: "#363636",
   grey_2: "#ABA6A6",
   textColorBlack: "#363636",
-  textColor: "#E45397",
-  textSectHead1: "#E45397",
+  textColor: "##A02167",
+  textSectHead1: "##A02167",
   textSectHead2: "#F7D259",
   textSectHead3: "#367FC2",
   textSectHead4: "#3BA9C6",

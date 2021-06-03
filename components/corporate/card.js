@@ -13,15 +13,17 @@ border-radius: 10px;
 flex: none;
 order: 0;
 flex-grow: 0;
-margin: 0px 50px;
 width: 270px;
 height: 310px;
 `;
 
+
 const CardWrapper = styled('div')`
 display: flex;
-justify-content: space-around;
-margin: 50px 0px;
+gap:50px;
+`;
+const CenteredCard = styled(Card)`
+box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);
 `;
 
 const CardTitle = styled('h3')`
@@ -32,7 +34,7 @@ font-size: 20px;
 line-height: 27px;
 text-align: center;
 color: #444444;
-margin: 20px 0px;
+padding-bottom: 20px;
 text-align: center;
 `;
 
@@ -43,33 +45,49 @@ font-size: 16px;
 line-height: 22px;
 text-align: center;
 color: #444444;
-margin: 20px 0px;
+`;
+
+const TitleContainer = styled('div')`
+    padding-top:30px;
 `;
 
 const Image = styled('img')`
-width: 50%;
-`;
 
-const ExpenseCards = () => {
-    return(
+`;
+function contentView(content) {
+    return (
+        <>
+            <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
+            <TitleContainer>
+                <CardTitle>{content.title}</CardTitle>
+                <CardContent>{content.subTitle}</CardContent>
+            </TitleContainer>
+        </>
+    );
+
+}
+
+const ExpenseCards = ({ contents }) => {
+
+    return (
         <CardWrapper>
-            <Card>
-                <Image src={require("../../assets/icons/corporate-1.png")} />
-                <CardTitle>Greater Control</CardTitle>
-                <CardContent>Set your own trip terms, create cost centers, and control budget allocation.</CardContent>
-            </Card>
-            <Card>
-                <Image src={require("../../assets/icons/corporate-2.png")} />
-                <CardTitle>Hassle free accounting</CardTitle>
-                <CardContent>Get rid of the hassle of collecting travel receipts and managing reimbursements.</CardContent>
-            </Card>
-            <Card>
-                <Image src={require("../../assets/icons/corporate-3.png")} />
-                <CardTitle>Effortless booking</CardTitle>
-                <CardContent>Empower your employees to book their own trips with the tap of a button.</CardContent>
-            </Card>
+            {contents.map((content, index) => (
+
+                contents.length % 2 != 0 && (contents.length+1) / 2 == index+1 ?
+                    <CenteredCard  key={index}>{contentView(content)}</CenteredCard> :
+                    <Card  key={index}>
+                        {contentView(content)}
+                    </Card>
+
+
+            ))}
+
+
         </CardWrapper>
     );
+
 }
+
+
 
 export default ExpenseCards;
