@@ -23,7 +23,7 @@ const Avatar = styled("img")`
 
 
 const Button = styled("button")`
-  background: #f7d259;
+  background: #f8b219;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   border-color: transparent;

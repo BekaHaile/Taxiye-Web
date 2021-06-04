@@ -65,17 +65,18 @@ const Hero = ({ hero, children }) => {
     queryText = hero.text;
 
   const HeroWrapper = styled("div")`
+  
     display: flex;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height:85vh;
-    width:100%;
+    height:75vh;
+    width:auto;
   `;
 
   const Container = styled("div")`
-    padding-top:95px;
+  padding-top:95px;
     margin:auto;
   `;
 
