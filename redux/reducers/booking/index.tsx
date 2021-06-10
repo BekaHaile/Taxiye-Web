@@ -1,6 +1,8 @@
 import * as actionsTypes from "../../types/booking";
 const initialState = {
+    cities: [],
     type: "on-demand",
+    city: "",
     origin: {
         address: null,
         location: null
@@ -17,18 +19,24 @@ const initialState = {
         returnTime: "06:30"
     },
     vehicles: [],
+    fetchVehiclesLoading: false,
     vehicle: null,
     delivery: {
         comment: "",
         images: [],
         type: null
     },
-    package: "",
+    package: "Round Trip",
     direction: null,
-    isValid: false
+    isValid: false,
+    paymentMethod: "Cash",
+    couponCode: "",
+    note: "",
+    driver: null,
+    driverLoading: false,
 }
 
-export default function reducer(state = initialState, action) {
+export default function booking(state = initialState, action) {
 
     switch (action.type) {
         case actionsTypes.ORIGIN_SELECTED:
@@ -37,6 +45,7 @@ export default function reducer(state = initialState, action) {
             return { ...state, destination: action.payload.destination };
         case actionsTypes.INPUT_VALIDATED:
             return { ...state, isValid: action.payload.isValid };
+
         case actionsTypes.BOOKING_TYPE_CHANGED:
             return { ...state, type: action.payload.type };
         case actionsTypes.DATE_ADDED:
@@ -46,9 +55,11 @@ export default function reducer(state = initialState, action) {
         case actionsTypes.PACKAGE_SELECTED:
             return { ...state, package: action.payload.package };
         case actionsTypes.VEHICLES_ADDED:
-            return { ...state, vehicles: action.payload.vehicles };
+            return { ...state, vehicles: action.payload.vehicles, city: action.payload.city };
+        case actionsTypes.VEHICLES_LOADING:
+            return { ...state, fetchVehiclesLoading: action.payload.loading };
         case actionsTypes.VEHICLE_SELECTED:
-            return { ...state, journey: action.payload.journey };
+            return { ...state, vehicle: action.payload.vehicle };
 
         case actionsTypes.JOURNEY_TYPE_CHANGED:
             return { ...state, journey: { ...state.journey, type: action.payload.type } };
@@ -63,6 +74,21 @@ export default function reducer(state = initialState, action) {
             return { ...state, delivery: { ...state.delivery, images: action.payload.images } };
         case actionsTypes.DELIVERY_COMMENT_CHANGED:
             return { ...state, delivery: { ...state.delivery, comment: action.payload.comment } };
+
+        case actionsTypes.CITIES_ADDED:
+            return { ...state, cities: action.payload.cities };
+
+        case actionsTypes.PAYMENT_METHOD_CHANGED:
+            return { ...state, paymentMethod: action.payload.paymentMethod };
+        case actionsTypes.COUPON_ADDED:
+            return { ...state, couponCode: action.payload.couponCode };
+        case actionsTypes.NOTE_ADDED:
+            return { ...state, note: action.payload.note };
+
+        case actionsTypes.REQUEST_CONFIRMED:
+            return { ...state, driverLoading: true };
+        case actionsTypes.DRIVER_ASSIGNED:
+            return { ...state, driver: action.payload.driver, driverLoading: false };
 
         default:
             return state;

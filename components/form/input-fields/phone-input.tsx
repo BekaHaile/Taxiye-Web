@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
+
 
 const LabelText = styled("label")`
   font-weight: normal;
@@ -30,40 +31,35 @@ const CodeContainer = styled("div")`
 position: absolute;
 z-index: 4;
 height: 39px;
-margin-top: 10px;
-margin-left:55px;
+margin-top: 9px;
+margin-left:60px;
 `;
 
-const PhoneInput = ({ label, id, placeholder }) => {
-    const [phone_code, setPhoneCode] = useState("251");
-    const [is_phone_valid, setPhoneValidation] = useState(false);
-    const [phone_number, setPhoneNumber] = useState("");
+const PhoneInput = ({ label, id, placeholder, country_code, phone_no, action }) => {
+
 
     return (
         <>
             <LabelText >{label}</LabelText>
             <Container>
-            <CodeContainer>
-                    <Code>{"+"+phone_code}</Code>
-            </CodeContainer>
-            <IntlTelInput
-                onPhoneNumberChange ={(valid, phone, data)=>{ 
-                    setPhoneCode(data.dialCode);
-                    setPhoneValidation(valid);
-                    setPhoneNumber(phone);
-                }}
-                onPhoneNumberFocus = {(valid, phone, data)=>{ 
-                    setPhoneCode(data.dialCode);
-                    setPhoneValidation(valid);
-                    setPhoneNumber(phone);
-                }}
-                placeholder = {placeholder}
-                containerClassName="intl-tel-input"
-                inputClassName="form-control"
-                defaultCountry="et"
-                autoHideDialCode={false}
-                autoPlaceholder={false}
-            />
+                <CodeContainer>
+                    <Code>{country_code}</Code>
+                </CodeContainer>
+                <IntlTelInput
+                    value={phone_no}
+                    onPhoneNumberChange={(valid, phone, data) => {
+                        action(valid, data, phone);
+                    }}
+                    onPhoneNumberFocus={(valid, phone, data) => {
+                        action(valid, data, phone);
+                    }}
+                    placeholder={placeholder}
+                    containerClassName="intl-tel-input"
+                    inputClassName="form-control"
+                    defaultCountry="et"
+                    autoHideDialCode={false}
+                    autoPlaceholder={false}
+                />
             </Container>
         </>
     );

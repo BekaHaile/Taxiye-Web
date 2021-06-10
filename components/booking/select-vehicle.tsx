@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import styles from "../../theme/global/vehicle-selection";
+import { useSelector } from "react-redux";
+import { Loading } from "../loading/loading";
+import { selectVehicle } from "../../redux/actions/booking";
+
+import store from '../../redux/store';
 
 const Container = styled("div")`
 padding:15px;
@@ -28,7 +33,7 @@ padding:5px 0px;
 
 `;
 
-const CardContainer = styled("div")`
+const CardContainer = styled("a")`
 margin-bottom:10px;
 background: #FFFFFF;
 border: 1px solid #CCC;
@@ -37,6 +42,7 @@ border-radius: 5px;
 justify-content:space-between;
 display:flex;
 cursor:pointer;
+text-decoration:none;
 `;
 
 const Text = styled("p")`
@@ -57,89 +63,68 @@ font-weight: bold;
 padding-bottom:20px;
 
 `;
+const Message = styled(Text)`
+font-weight: bold;
+padding:20px 0px;
+text-align:center;
+`;
 
 const Image = styled("img")`
 
 `;
 
 
-const vehicles = [{
-    imageUrl: require("../../assets/images/cars/vehicles/economy.svg"),
-    name: "Economy",
-    capacity: "4",
-    price: "122",
-    currency: "Birr",
-},
-{
-    imageUrl: require("../../assets/images/cars/vehicles/economy.svg"),
-    name: "Economy",
-    capacity: "4",
-    price: "122",
-    currency: "Birr",
-},
-{
-    imageUrl: require("../../assets/images/cars/vehicles/economy.svg"),
-    name: "Economy",
-    capacity: "4",
-    price: "122",
-    currency: "Birr",
-},
-{
-    imageUrl: require("../../assets/images/cars/vehicles/economy.svg"),
-    name: "Economy",
-    capacity: "4",
-    price: "122",
-    currency: "Birr",
-},
-{
-    imageUrl: require("../../assets/images/cars/vehicles/economy.svg"),
-    name: "Economy",
-    capacity: "4",
-    price: "122",
-    currency: "Birr",
-}
-
-
-];
-
 const VehicleList = () => {
 
+
+    const loading = useSelector((state) => state["booking"]["fetchVehiclesLoading"]);
+    const vehicleList = useSelector((state) => state["booking"]["vehicles"]);
+    const isValid = useSelector((state) => state["booking"]["isValid"]);
     const [isSelected, setSelected] = useState(0);
+    const userData = useSelector((state) => state["user"]["userData"]);
 
     return (
         <>
-            <Container>
-                <Title>Select Vehicle</Title>
+            {
+                loading ?
+                    <Loading /> : null}
+            {
+                vehicleList.length <= 0 ? <Message>No Vehicles</Message> : <Container>
+                    <Title>Select Vehicle</Title>
 
-                {vehicles.map((vehicle, index) => (
-                    <CardContainer onClick={()=>{setSelected(index)}} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
-                        <style jsx global>
-                            {styles}
-                        </style>
-                        <CarFlexContainer>
-                            <Image src={vehicle.imageUrl} />
-                            <NormalContainer>
-                                <Text>{vehicle.name}</Text>
-                                <CustomFlexContainer>
-                                    <Image src={require("../../assets/icons/avatar.svg")} />
-                                    <Text>{vehicle.capacity}</Text>
-                                </CustomFlexContainer>
+                    {vehicleList.map((vehicle, index) => (
+                        <CardContainer
+                            onClick={() => {
+                                store.dispatch(selectVehicle(vehicle));
+                                
+                            }}
+                            href="#login"
+                            className={isValid ? "" : "disabled"} onMouseOver={() => { setSelected(index) }} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
+                            <style jsx global>
+                                {styles}
+                            </style>
+                            <CarFlexContainer>
+                                <Image src={require("../../assets/images/cars/vehicles/economy.svg")} />
+                                <NormalContainer>
+                                    <Text>{vehicle.region_name}</Text>
+                                    <CustomFlexContainer>
+                                        <Image src={require("../../assets/icons/avatar.svg")} />
+                                        <Text>4</Text>
+                                    </CustomFlexContainer>
+                                </NormalContainer>
 
-                            </NormalContainer>
+                            </CarFlexContainer>
 
-                        </CarFlexContainer>
-
-                        <FlexContainer>
-                            <PriceText>{vehicle.price + " " + vehicle.currency}</PriceText>
-                        </FlexContainer>
-                        <FlexContainer>
-                            <Image src={require("../../assets/icons/right-arrow.svg")} />
-                        </FlexContainer>
-
-
-                    </CardContainer>
-                ))}
-            </Container>
+                            <FlexContainer>
+                                <PriceText>122 Birr</PriceText>
+                            </FlexContainer>
+                            <FlexContainer>
+                                <Image src={require("../../assets/icons/right-arrow.svg")} />
+                            </FlexContainer>
+                        </CardContainer>
+                    ))}
+                </Container>
+            }
 
         </>
     );

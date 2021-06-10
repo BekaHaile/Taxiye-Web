@@ -34,7 +34,7 @@ body, html {
   justify-content: space-between;
 }
 .MuiSvgIcon-root {
-  fill: #A02167 !important;
+  /*fill: #A02167 !important;*/
 }
 .MuiIconButton-root {
 padding:12px 0px !important;
@@ -426,6 +426,33 @@ p,h1,h2,h3,h4,h5,h6{
       border-radius:5px;
       color:white;
   }
+  .activeCard{
+    border: 2px solid #A02167 !important;
+
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  button:disabled, div.disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+  }
+
+  .MuiRating-root {
+    color: #A02167 !important;
+  }
+
+.MuiRating-iconEmpty {
+  color: rgba(0, 0, 0, 0.26) !important;
+}
   
 `;
 

@@ -4,6 +4,9 @@ import Banner from "../components/hero/landing-hero";
 import { gql } from '@apollo/client';
 import client from "../backend-client";
 import DefaultErrorPage from 'next/error';
+import store from '../redux/store';
+import { citiesAdded } from "../redux/actions/booking";
+import axios from "axios";
 
 
 const query = gql`
@@ -79,11 +82,13 @@ query {
 }
 `
 
+
 export async function getServerSideProps() {
   try {
     const { data, error } = await client.query({
       query: query
     });
+
     return {
       props: {
         data: data

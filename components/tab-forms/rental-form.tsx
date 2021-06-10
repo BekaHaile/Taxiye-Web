@@ -3,17 +3,17 @@ import { LabelText, Form, InlineForm, InputWrapper, FormGroup, Icon } from "./in
 import { Title, SubTitle, HomeTitles, FormContainer, CustomButton, Link } from "./tab-titles";
 import LocationInput from "./input-location";
 import store from "../../redux/store";
-import { originSelected, packageChanged, dateChanged, timeChanged } from "../../redux/actions/booking";
+import { selectOrigin, changePackage, changeDate, changeTime } from "../../redux/actions/booking";
 import { useSelector } from "react-redux";
 import { DatePicker, TimePicker } from "../form/date-picker";
 import DropDown from "../form/dropdown";
 
 
 const RentalForm = ({ contentView }) => {
-  const origin = useSelector((state) => state["origin"]);
-  const packageData = useSelector((state) => state["package"]);
-  const date = useSelector((state) => state["date"]);
-  const time = useSelector((state) => state["time"]);
+  const origin = useSelector((state) => state["booking"]["origin"]);
+  const packageData = useSelector((state) => state["booking"]["package"]);
+  const date = useSelector((state) => state["booking"]["date"]);
+  const time = useSelector((state) => state["booking"]["time"]);
 
 
   return (
@@ -35,7 +35,7 @@ const RentalForm = ({ contentView }) => {
             placeholder="Enter pickup location"
             id="location"
             action={(location, address) => {
-              store.dispatch(originSelected({ origin: { location, address } }));
+              store.dispatch(selectOrigin({ origin: { location, address } }));
             }}
             address={origin.address}
           />
@@ -47,10 +47,9 @@ const RentalForm = ({ contentView }) => {
                 <DropDown
                   value={packageData}
                   action={(val) => {
-                    store.dispatch(packageChanged(val));
-                    console.log(val);
+                    store.dispatch(changePackage(val));
                   }}
-                  items={["Round Trip", "Single Trip"]}
+                  items={["Round Trip", "One Way"]}
                 />
               </InputWrapper>
             </FormGroup>
@@ -64,7 +63,7 @@ const RentalForm = ({ contentView }) => {
                 <DatePicker
                   selectedDate={date}
                   action={(value) => {
-                    store.dispatch(dateChanged(value));
+                    store.dispatch(changeDate(value));
                   }}
                   id="datepicker" placeholder="today" />
               </InputWrapper>
@@ -76,7 +75,7 @@ const RentalForm = ({ contentView }) => {
                 <TimePicker
                   selectedTime={time}
                   action={(value) => {
-                    store.dispatch(timeChanged(value));
+                    store.dispatch(changeTime(value));
                   }}
                   id="datepicker" placeholder="06:54" />
               </InputWrapper>

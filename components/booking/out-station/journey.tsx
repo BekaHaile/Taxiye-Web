@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Inputs, FormGroup, Icon, InputWrapper, LabelText, InlineForm, InputSeparator, Button } from "../../tab-forms/inputs";
 import DropDown from "../../form/dropdown";
 import store from "../../../redux/store";
-import { journeyTypeChanged, journeyDateChanged, journeyTimeChanged } from "../../../redux/actions/booking";
+import { changeJourneyType, changeJourneyDate, changeJourneyTime } from "../../../redux/actions/booking";
 import { useSelector } from "react-redux";
 import {TimePicker, DatePicker} from "../../form/date-picker/index";
 
@@ -14,9 +14,9 @@ padding:5px 20px;
 
 const Journey = () => {
 
-  const journeyType = useSelector((state) => state["journey"].type);
-  const date = useSelector((state) => state["journey"].returndate);
-  const time = useSelector((state) => state["journey"].returnTime);
+  const journeyType = useSelector((state) => state["booking"]["journey"].type);
+  const date = useSelector((state) => state["booking"]["journey"].returndate);
+  const time = useSelector((state) => state["booking"]["journey"].returnTime);
   return (
     <>
       <ChildrenContainer>
@@ -28,9 +28,9 @@ const Journey = () => {
             <DropDown
               value={journeyType}
               action={(val) => {
-                store.dispatch(journeyTypeChanged(val));
+                store.dispatch(changeJourneyType(val));
               }}
-              items={["Round Trip", "Single Trip"]}
+              items={["Round Trip", "One Way"]}
             />
           </InputWrapper>
         </FormGroup>
@@ -43,7 +43,7 @@ const Journey = () => {
                 <DatePicker
                   selectedDate={date}
                   action={(value) => {
-                    store.dispatch(journeyDateChanged(value));
+                    store.dispatch(changeJourneyDate(value));
                   }}
                   id="datepicker" placeholder="today" />
               </InputWrapper>
@@ -55,7 +55,7 @@ const Journey = () => {
                 <TimePicker
                   selectedTime={time}
                   action={(value) => {
-                    store.dispatch(journeyTimeChanged(value));
+                    store.dispatch(changeJourneyTime(value));
                   }}
                   id="datepicker"
                   placeholder="06:54" />

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import VehicleSelection from "../select-vehicle";
 
+
+
+
 const Content = () => {
+
     return (
         <>
-        <VehicleSelection/>
+            <VehicleSelection />
+
         </>
     );
 }

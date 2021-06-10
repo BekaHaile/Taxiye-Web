@@ -66,12 +66,14 @@ const Checkbox: FunctionComponent<InputProps> = ({
   label,
   icon,
   placeholder,
+  onClick,
+  checked
 }) => {
   return (
-    <FormGroup>
-      <input id={id} type="checkbox" />
+    <>
+      <input checked={checked} onClick={()=>onClick(!checked)} id={id} type="checkbox" />
       <CheckBoxLabelText>{placeholder}</CheckBoxLabelText>
-    </FormGroup>
+    </>
   );
 };
 
@@ -130,8 +132,10 @@ type InputProps = {
   shadow?: boolean,
   onInput?,
   onChange?,
+  onClick?,
   lists?: any,
-  value?:string
+  value?:string,
+  checked?:boolean
 
 };
 

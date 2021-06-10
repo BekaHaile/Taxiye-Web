@@ -1,7 +1,9 @@
-import {applyMiddleware, createStore} from "redux";
-import reducer from "../reducers/booking";
-import {middleWare} from "../middle-ware/booking";
+import { createStore} from "redux";
+import reducer from "../reducers";
+import middleWare from "../middle-ware";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(reducer, applyMiddleware(middleWare));
+
+const store = createStore(reducer, composeWithDevTools(middleWare));
 
 export default store;

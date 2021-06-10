@@ -4,6 +4,7 @@ import { Button } from "../form/buttons/primary-button";
 
 const ContentWrapper = styled("div")`
   display: flex;
+
 `;
 
 const CustomButton = styled(Button)`
@@ -61,6 +62,8 @@ const FormContainer = styled("div")`
 const FlexContainer = styled("div")`
 display: flex;
 padding-bottom:40px;
+flex-wrap:wrap;
+gap:5px;
 `;
 const CenteredForm = styled("div")`
     width: fit-content;  

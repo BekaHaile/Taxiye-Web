@@ -39,17 +39,21 @@ type InputProps = {
     id: string;
     label?: string;
     placeholder: string;
+    onChange?
+    value?
 };
 
 const DefaultOtpInput: FunctionComponent<InputProps> = ({
     label,
     id,
-    placeholder
+    placeholder,
+    value,
+    onChange
 }) => {
     return (
         <>
             <LabelText>{label}</LabelText>
-            <Input type="tel" maxLength={6} placeholder={placeholder} id={id} />
+            <Input defaultValue={value} onChange={(e)=>onChange(e.target.value)} type="tel" maxLength={6} placeholder={placeholder} id={id} />
         </>
     );
 };

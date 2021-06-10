@@ -6,30 +6,34 @@ import RentalForm from "./rental-form";
 import StationForm from "./station-form";
 import DeliveryForm from "./delivery-form";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import store from "../../redux/store";
-import { bookingTypeChanged } from "../../redux/actions/booking";
+import { changeBookingType } from "../../redux/actions/booking";
 
 
 const TabContainer = styled("div")`
 background: #ffffff;
 border-radius: 5px;
-display:inherit;
+display:flex;
+flex-direction:column;
+height: -webkit-fill-available;
+max-width:490px;
+
 `;
 
 const TabWrapper = styled("div")`
   display:block;
+  height:inherit;
   margin:auto;
 `;
 const ChildrenContainer = styled("div")`
 overflow-y: auto;
-max-height:500px;
+height: -webkit-fill-available;
+position: relative;
 `;
 
 const TabButtonWrappers = styled("div")`
-  display: flex;
+    display: flex;
     padding: 10px 20px;
-    margin: auto;
     justify-content: space-between;
     text-align: center;
 `;
@@ -50,70 +54,72 @@ const TabButton = styled.a`
   }
 `;
 
-const Tab = ({setSelectedContent,contentView}) => {
-  const activeTab = useSelector((state) => state["type"]);
-
-
-  const router = useRouter(); 
+const Tab = ({ setSelectedContent, contentView }) => {
+  const activeTab = useSelector((state) => state["booking"]["type"]);
   return (
+
+
     <TabContainer>
-     {contentView!=null? <TabHeader></TabHeader>:null}
-    <TabWrapper>
-      
+
+
+      {contentView != null ? <TabHeader></TabHeader> : null}
+
       <TabButtonWrappers>
         <TabButton
           className={activeTab === "on-demand" ? "active" : null}
-          onClick={() =>{ 
-            store.dispatch(bookingTypeChanged("on-demand"));
-            if(setSelectedContent)
-            setSelectedContent("on-demand");
+          onClick={() => {
+            store.dispatch(changeBookingType("on-demand"));
+            if (setSelectedContent)
+              setSelectedContent("on-demand");
           }}
         >
           On Demand
         </TabButton>
         <TabButton
           className={activeTab === "rental" ? "active" : null}
-          onClick={() => { 
-            store.dispatch(bookingTypeChanged("rental"));
-            if(setSelectedContent)
-            setSelectedContent("rental");
+          onClick={() => {
+            store.dispatch(changeBookingType("rental"));
+            if (setSelectedContent)
+              setSelectedContent("rental");
           }}
         >
           Rental
         </TabButton>
         <TabButton
           className={activeTab === "out-station" ? "active" : null}
-          onClick={() => { 
-            store.dispatch(bookingTypeChanged("out-station"));
-            if(setSelectedContent)
-            setSelectedContent("out-station");
+          onClick={() => {
+            store.dispatch(changeBookingType("out-station"));
+            if (setSelectedContent)
+              setSelectedContent("out-station");
           }}
         >
           Out Station
         </TabButton>
         <TabButton
           className={activeTab === "delivery" ? "active" : null}
-          onClick={() => { 
-            store.dispatch(bookingTypeChanged("delivery"));
-            if(setSelectedContent)
-            setSelectedContent("delivery");
+          onClick={() => {
+            store.dispatch(changeBookingType("delivery"));
+            if (setSelectedContent)
+              setSelectedContent("delivery");
           }}
         >
           Delivery
         </TabButton>
       </TabButtonWrappers>
       <ChildrenContainer>
-      
-      {(() => {
-        if (activeTab === "on-demand") return <BookingForm contentView={contentView}/>;
-        if (activeTab === "rental") return <RentalForm contentView={contentView}/>;
-        if (activeTab === "out-station") return <StationForm contentView={contentView}/>;
-        if (activeTab === "delivery") return <DeliveryForm contentView={contentView}/>;
-      })()}
-      
+
+        {(() => {
+          if (activeTab === "on-demand") return <BookingForm contentView={contentView} />;
+          if (activeTab === "rental") return <RentalForm contentView={contentView} />;
+          if (activeTab === "out-station") return <StationForm contentView={contentView} />;
+          if (activeTab === "delivery") return <DeliveryForm contentView={contentView} />;
+        })()}
+
       </ChildrenContainer>
-    </TabWrapper>
+
+
     </TabContainer>
+
   );
 };
 

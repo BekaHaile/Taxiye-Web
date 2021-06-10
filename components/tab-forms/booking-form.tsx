@@ -3,16 +3,21 @@ import { LabelText, Form, InlineForm, InputWrapper, FormGroup, Icon } from "./in
 import { Title, SubTitle, HomeTitles, FormContainer, CustomButton, Link } from "./tab-titles";
 import LocationInput from "./input-location";
 import store from "../../redux/store";
-import { originSelected, destinationSelected, dateChanged, timeChanged } from "../../redux/actions/booking";
+import { selectOrigin, selectDestination, changeDate, changeTime } from "../../redux/actions/booking";
 import { useSelector } from "react-redux";
 import { DatePicker, TimePicker } from "../form/date-picker";
+import { useRouter } from "next/router";
+import { Loader } from "../loading/loading";
 
 
 const BookForm = ({ contentView }) => {
-  const origin = useSelector((state) => state["origin"]);
-  const destination = useSelector((state) => state["destination"]);
-  const date = useSelector((state) => state["date"]);
-  const time = useSelector((state) => state["time"]);
+  const origin = useSelector((state) => state["booking"]["origin"]);
+  const destination = useSelector((state) => state["booking"]["destination"]);
+  const date = useSelector((state) => state["booking"]["date"]);
+  const time = useSelector((state) => state["booking"]["time"]);
+  const router = useRouter();
+  const loading = useSelector((state) => state["booking"]["fetchVehiclesLoading"]);
+  const isValid = useSelector((state) => state["booking"]["isValid"]);
 
 
 
@@ -33,7 +38,7 @@ const BookForm = ({ contentView }) => {
             placeholder="Enter pickup location"
             id="location"
             action={(location, address) => {
-              store.dispatch(originSelected({ origin: { location, address } }));
+              store.dispatch(selectOrigin({ origin: { location, address } }));
             }}
             address={origin.address}
           />
@@ -44,7 +49,7 @@ const BookForm = ({ contentView }) => {
             placeholder="Enter drop off for estimate"
             id="dropoff"
             action={(location, address) => {
-              store.dispatch(destinationSelected({ destination: { location, address } }));
+              store.dispatch(selectDestination({ destination: { location, address } }));
             }}
             address={destination.address}
           />
@@ -57,7 +62,7 @@ const BookForm = ({ contentView }) => {
                 <DatePicker
                   selectedDate={date}
                   action={(value) => {
-                    store.dispatch(dateChanged(value));
+                    store.dispatch(changeDate(value));
                   }}
                   id="datepicker" placeholder="today" />
               </InputWrapper>
@@ -69,9 +74,9 @@ const BookForm = ({ contentView }) => {
                 <TimePicker
                   selectedTime={time}
                   action={(value) => {
-                    store.dispatch(timeChanged(value));
+                    store.dispatch(changeTime(value));
                   }}
-                  id="datepicker" 
+                  id="datepicker"
                   placeholder="06:54" />
               </InputWrapper>
             </FormGroup>
@@ -80,7 +85,10 @@ const BookForm = ({ contentView }) => {
         {
           contentView ? contentView :
             <Link href="/booking">
-              <CustomButton>Request Now</CustomButton>
+              {loading ?
+                <CustomButton disabled={true}><Loader /></CustomButton> :
+                <CustomButton disabled={!isValid}>Request Now</CustomButton>
+              }
             </Link>
         }
 

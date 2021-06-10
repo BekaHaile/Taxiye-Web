@@ -14,7 +14,7 @@ import store from "../redux/store";
 
 
 const queryClient = new QueryClient();
-declare var google;
+
 const FloatingButton = styled("div")`
 `;
 

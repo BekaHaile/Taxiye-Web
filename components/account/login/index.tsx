@@ -1,44 +1,47 @@
-import React from "react";
-import { Checkbox } from "../../form/inputs";
-import Image from "../image";
-import { PhoneInput } from "../../form/input-fields/phone-input";
-import { ContentWrapper, FlexContainer, CustomButton, CheckBoxContainer, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../elements";
-import Link from "next/link";
-const Login = ({hero}) => {
+import React, { useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useSelector } from "react-redux";
+import store from "../../../redux/store";
+import { reset, changeStep, submitPhoneNumber } from "../../../redux/actions/user";
+import { Loading } from "../../loading/loading";
+
+import PhoneInput from "./phone-input";
+import VerificationForm from "./phone-verification";
+import SignupForm from "./signup";
+
+const Login = ({ hero }: any) => {
+  const step = useSelector((state) => state["user"]["step"]);
+  const loading = useSelector((state) => state["user"]["loading"]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (step != 1) {
+      store.dispatch(reset());
+    }
+
+  }, [router.asPath]);
+
   return (
     <>
-      <ContentWrapper>
-        <Image hero={hero}/>
-        <FormContainer>
-          <CenteredForm>
-            <HeaderContainer>
-              <Title>Welcome to Taxiye!</Title>
-              <SubTitle>Please enter your mobile phone number. We’ll send you a text to verify your phone.</SubTitle>
-            </HeaderContainer>
-            <ContentContainer>
-              <InputContainer>
-                <PhoneInput
-                  label="Phone Number *"
-                  placeholder="your phone number"
-                  id="phone" />
-              </InputContainer>
-              <CheckBoxContainer>
-                <Checkbox id="1" placeholder="Keep me signed in" />
-              </CheckBoxContainer>
-              <Link href="/login/verification">
-                <CustomButton>Next</CustomButton>
-              </Link>
-              <FlexContainer>
-                <SubTitle>Problem with your account?</SubTitle>
-                <FlexContainer>
-                  <Avatar src={require("../../../assets/icons/main-search.svg")} />
-                  <NavLink href="/">Support Center</NavLink>
-                </FlexContainer>
-              </FlexContainer>
-            </ContentContainer>
-          </CenteredForm>
-        </FormContainer>
-      </ContentWrapper>
+      {
+        loading ?
+          <Loading /> : null}
+      {
+        step == 3 ? <SignupForm hero={hero} action={() => store.dispatch(changeStep(step + 1))} /> :
+          step == 2 ? <VerificationForm
+            hero={hero} goBack={() => store.dispatch(changeStep(step - 1))}
+            action={() => store.dispatch(changeStep(step + 1))}
+
+          /> :
+            <PhoneInput
+              hero={hero}
+              action={() => {
+                store.dispatch(submitPhoneNumber());
+              }
+              } />
+      }
+
     </>
   );
 };

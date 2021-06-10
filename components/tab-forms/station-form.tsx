@@ -3,16 +3,16 @@ import { LabelText, Form, InlineForm, InputWrapper, FormGroup, Icon } from "./in
 import { Title, SubTitle, HomeTitles, FormContainer, CustomButton, Link } from "./tab-titles";
 import LocationInput from "./input-location";
 import store from "../../redux/store";
-import { originSelected, destinationSelected, dateChanged, timeChanged } from "../../redux/actions/booking";
+import { selectOrigin, selectDestination, changeDate, changeTime } from "../../redux/actions/booking";
 import { useSelector } from "react-redux";
 import { DatePicker, TimePicker } from "../form/date-picker";
 
 
 const OutStationForm = ({ contentView }) => {
-  const origin = useSelector((state) => state["origin"]);
-  const destination = useSelector((state) => state["destination"]);
-  const date = useSelector((state) => state["date"]);
-  const time = useSelector((state) => state["time"]);
+  const origin = useSelector((state) => state["booking"]["origin"]);
+  const destination = useSelector((state) => state["booking"]["destination"]);
+  const date = useSelector((state) => state["booking"]["date"]);
+  const time = useSelector((state) => state["booking"]["time"]);
 
 
   return (
@@ -33,7 +33,7 @@ const OutStationForm = ({ contentView }) => {
             placeholder="Enter pickup location"
             id="location"
             action={(location, address) => {
-              store.dispatch(originSelected({ origin: { location, address } }));
+              store.dispatch(selectOrigin({ origin: { location, address } }));
             }}
             address={origin.address}
           />
@@ -44,7 +44,7 @@ const OutStationForm = ({ contentView }) => {
             placeholder="Enter drop off for estimate"
             id="dropoff"
             action={(location, address) => {
-              store.dispatch(destinationSelected({ destination: { location, address } }));
+              store.dispatch(selectDestination({ destination: { location, address } }));
             }}
             address={destination.address}
           />
@@ -57,7 +57,7 @@ const OutStationForm = ({ contentView }) => {
                 <DatePicker
                   selectedDate={date}
                   action={(value) => {
-                    store.dispatch(dateChanged(value));
+                    store.dispatch(changeDate(value));
                   }}
                   id="datepicker" placeholder="today" />
               </InputWrapper>
@@ -69,7 +69,7 @@ const OutStationForm = ({ contentView }) => {
                 <TimePicker
                   selectedTime={time}
                   action={(value) => {
-                    store.dispatch(timeChanged(value));
+                    store.dispatch(changeDate(value));
                   }}
                   id="datepicker" placeholder="06:54" />
               </InputWrapper>

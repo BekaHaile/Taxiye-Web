@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Link from "next/link";
 
 const HeaderWrapper = styled("div")`
- width:500px;
  display:flex;
  justify-content:space-between;
 padding:0px 20px;

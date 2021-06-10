@@ -40,7 +40,6 @@ export default function ControlledOpenSelect({ value, action, items }) {
 
             <FormControl className={classes.formControl}>
                 <Select
-
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
