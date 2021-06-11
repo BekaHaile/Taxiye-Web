@@ -38,25 +38,23 @@ gap:10px;
 flex-direction:row;
 `;
 
-const Logo = styled("div")`
-display: block;
-background-image:url(${require("../../../assets/icons/avatar.svg")});
-background-repeat: no-repeat;
-background-size: 30px 30px;
-width:20px;
-height:30px;
-&:after {
-    content: "";
-    height: 100px;
+const Logo = styled("img")`
+width:10px;
+height:20px;
+
+`;
+const Stick = styled("div")`
+    align-self: center;
+    height: 100%;
+    width: 2px;
     width: 2px;
     background-color: #A02167;
     position: absolute;
-    bottom: -.5em;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+    height: 26px;
+    left: 24px;
+    margin-top: 17px;
 `;
+
 
 const VerticalContainer = styled("div")`
 display:flex;
@@ -64,6 +62,21 @@ flex-direction:column;
 justify-content:space-between;
 gap:5px;
 width:inherit;
+
+`;
+
+const VerticalContainerPadding = styled(VerticalContainer)`
+padding-top:20px;;
+
+`;
+
+const LogoContainer = styled("div")`
+display:flex;
+flex-direction:column;
+justify-content:start;
+gap:2px;
+width:inherit;
+
 
 `;
 
@@ -78,23 +91,31 @@ const BookingInfo = () => {
             <Container>
 
                 <Container>
-                    <VerticalContainer>
-                        <Logo/>
-                        <Logo />
-                    </VerticalContainer>
+
                     <VerticalContainer>
 
                         <VerticalContainer>
-                            <Title>{origin.address.split(",")[0]}</Title>
-                            <Text>{origin.address}</Text>
+                            <Container>
+                                <Logo src={require("../../../assets/icons/avatar.svg")} />
+                                <div>
+                                    <Title>{origin.address.split(",")[0]}</Title>
+                                    <Text>{origin.address}</Text>
+                                </div>
+                            </Container>
                         </VerticalContainer>
-
+                        <Stick/>
                         <VerticalContainer>
-                            <Title>{destination.address.split(",")[0]}</Title>
-                            <Text>{destination.address}</Text>
+                            <Container>
+                                <Logo src={require("../../../assets/icons/avatar.svg")} />
+                                <div>
+                                    <Title>{destination.address.split(",")[0]}</Title>
+                                    <Text>{destination.address}</Text>
+                                </div>
+                            </Container>
                         </VerticalContainer>
                     </VerticalContainer>
                 </Container>
+
                 <VerticalContainer>
                     <VerticalContainer>
                         <Title>Pick up</Title>

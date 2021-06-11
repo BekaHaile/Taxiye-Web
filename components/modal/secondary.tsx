@@ -48,12 +48,13 @@ export default function Modal(props) {
                 open={props.show}
                 onClose={() => props.onClose()}
                 aria-labelledby="responsive-dialog-title"
-            >
+            >{props.showCloseIcon?
                 <CloseModalContainer>
                     <CloseModal onClick={() => props.onClose()} color="primary">
                         &times;
-          </CloseModal>
-                </CloseModalContainer>
+                    </CloseModal>
+                </CloseModalContainer>:null
+                }
                 <DialogContent>
                     {props.children}
 
