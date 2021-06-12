@@ -38,7 +38,7 @@ const CloseModalContainer = styled("div")`
 
 export default function Modal(props) {
     const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
         <Container>

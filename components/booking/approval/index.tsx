@@ -8,6 +8,8 @@ import PaymentMethod from "./payment-method";
 import { useSelector } from "react-redux";
 import Modal from "../../modal/secondary";
 import { useState } from 'react';
+import store from '../../../redux/store';
+import { submitTerminatioReason, cancelRequest } from "../../../redux/actions/booking";
 
 const Container = styled("div")`
 width: -webkit-fill-available;
@@ -15,6 +17,9 @@ width: -webkit-fill-available;
 const FlexContainer = styled("div")`
 display:flex;
 gap:10px;
+flex-direction:${props => props.direction ? props.direction : "row"};
+text-align: center;
+
 `;
 const ContentContainer = styled("div")`
     padding: 10px 20px;
@@ -37,6 +42,10 @@ const ModalButtonContainer = styled("div")`
 const CustomButton = styled(Button)`
     padding: 5px 20px; 
     width:100%;  
+`;
+const CustomButtonContainer = styled("div")`
+    padding: 0px 20px; 
+   
 `;
 
 const MainContainer = styled("div")`
@@ -112,9 +121,23 @@ display:flex;
 flex-direction:row;
 gap:20px;
 `;
+
 const Icon = styled("img")`
 display:flex;
 flex-direction:row;
+width:30px;
+height:30px;
+
+`;
+const CenteredIcon = styled(Icon)`
+margin:auto;
+display:block;
+`;
+const CustomPrimaryButton = styled(PrimaryButton)`
+text-align: start;
+&:hover{
+border:1px solid #A02167;
+}
 `;
 const Text = styled("p")`
 font-family: Open Sans;
@@ -123,6 +146,7 @@ font-weight: 600;
 font-size: 14px;
 line-height: 19px;
 color:${props => props.color ? props.color : "#444444"} ;
+align-self: center;
 `;
 
 
@@ -131,6 +155,7 @@ const Approve = () => {
     const driver = useSelector((state) => state["booking"]["driver"]);
     const driverLoading = useSelector((state) => state["booking"]["driverLoading"]);
     const paymentMethod = useSelector((state) => state["booking"]["paymentMethod"]);
+    const cancelRide = useSelector((state) => state["booking"]["cancelRide"]);
     const [exitModal, setExitModal] = useState(false);
     const [cancelModal, setCancelModal] = useState(false);
     return (
@@ -150,12 +175,21 @@ const Approve = () => {
                 </Container>
                 <ButtonContainer>
                     {driverLoading ?
-                        <CustomButton onClick={() => setExitModal(true)}>Cancel Request</CustomButton> :
-                        <CustomButton onClick={() => setCancelModal(true)}>Cancel Ride</CustomButton>
+                        <CustomButtonContainer>
+                            <CustomButton onClick={() => setExitModal(true)}>Cancel Request</CustomButton>
+                        </CustomButtonContainer>
+                        :
+                        <FlexContainer direction="column" onClick={() => setCancelModal(true)}>
+                            <CenteredIcon src={require("../../../assets/icons/black-danger-icon.svg")} />
+                            <Text> Cancel Ride</Text>
+                        </FlexContainer>
+
                     }
                     {driverLoading ? ExitModalView(exitModal, setExitModal) :
                         driver &&
-                        CancelModalView(cancelModal, setCancelModal, driver)}
+                            !cancelRide ? CancelModalView(cancelModal, setCancelModal, driver) :
+                            CanceledModalView(cancelRide)
+                    }
                 </ButtonContainer>
             </MainContainer>
 
@@ -193,7 +227,7 @@ function CancelModalView(cancelModal, setCancelModal, driver) {
                         <RatingContainer>
                             <Rating className="MuiRating-root">
                                 <span className="MuiRating-icon MuiRating-iconFilled"><svg className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg></span>
-                                <RatingText >{driver.ratting}</RatingText>
+                                <RatingText >{driver.rating}</RatingText>
                             </Rating>
                         </RatingContainer>
                     </ProfileImage>
@@ -213,7 +247,10 @@ function CancelModalView(cancelModal, setCancelModal, driver) {
                         </ButtonContent>
                     </PrimaryButton>
 
-                    <PrimaryButton color="red" onClick={() => setCancelModal(false)}>
+                    <PrimaryButton color="red" onClick={() => {
+                        setCancelModal(false);
+                        store.dispatch(cancelRequest());
+                    }}>
                         <ButtonContent>
                             <Icon src={require("../../../assets/icons/danger-icon.svg")} />
                             <Text color="red">Cancel Ride</Text>
@@ -226,27 +263,33 @@ function CancelModalView(cancelModal, setCancelModal, driver) {
     );
 }
 
-function CanceledModalView(cancelModal, setCancelModal, driver) {
+function CanceledModalView(cancelModal) {
+
+    let reasons = [
+
+        "Request was incorrect.",
+        "Too expensive",
+        "Driver is too far.",
+        "Changed my mind.",
+        "Other"
+
+    ];
     return (
         <>
-            <Modal showCloseIcon={false} onClose={() => setCancelModal(false)} show={cancelModal}>
+            <Modal onClose={() => store.dispatch(submitTerminatioReason("Other"))} showCloseIcon={false} show={cancelModal}>
                 <Container>
                     <ModalTitle>The Ride has been successfully cancelled</ModalTitle>
                     <ModalSubTitle>to help us improve, tell us why.</ModalSubTitle>
                 </Container>
                 <ButtonContainer>
-
-                    <PrimaryButton>
-                        <ButtonContent>
-                            <Text >Request was incorrect.</Text>
-                            <Text >Too expensive</Text>
-                            <Text >Driver is too far.</Text>
-                            <Text >Changed my mind.</Text>
-                            <Text >Other</Text>
-                        </ButtonContent>
-                    </PrimaryButton>
-
-
+                    {reasons.map((title, key) =>
+                        <CustomPrimaryButton onClick={() => store.dispatch(submitTerminatioReason(title))} key={key}>
+                            <Text>
+                                {title}
+                            </Text>
+                        </CustomPrimaryButton>
+                    )
+                    }
                 </ButtonContainer>
             </Modal>
         </>

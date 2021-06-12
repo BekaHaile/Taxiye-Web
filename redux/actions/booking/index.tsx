@@ -138,5 +138,13 @@ export const assignDriver = (driver) => ({
 
 });
 
+export const cancelRequest = () => ({
+    type: actions.REQUEST_CANCELED,
+});
 
-
+export const submitTerminatioReason = (reason) => ({
+    type: actions.TERMINATION_REASON_ADDED,
+    payload: {
+        reason: reason
+    }
+});

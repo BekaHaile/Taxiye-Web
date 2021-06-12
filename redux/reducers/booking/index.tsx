@@ -34,6 +34,8 @@ const initialState = {
     note: "",
     driver: null,
     driverLoading: false,
+    cancelRide: false,
+    reason:""
 }
 
 export default function booking(state = initialState, action) {
@@ -90,6 +92,10 @@ export default function booking(state = initialState, action) {
         case actionsTypes.DRIVER_ASSIGNED:
             return { ...state, driver: action.payload.driver, driverLoading: false };
 
+        case actionsTypes.REQUEST_CANCELED:
+            return { ...state, cancelRide: true };
+        case actionsTypes.TERMINATION_REASON_ADDED:
+            return { ...state, reason: action.payload.reason, cancelRide: false };
         default:
             return state;
     }

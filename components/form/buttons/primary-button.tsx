@@ -47,7 +47,9 @@ const PrimaryButton = styled.button`
   font-size: 14px;
   line-height: 19px;
   border: 1px solid ${props => props.color ? props.color: "#979797"};
-  
+  &:hover{
+    border:1px solid #A02167;
+    }
 `;
 
 export {Button, SecondaryButton, PrimaryButton}
