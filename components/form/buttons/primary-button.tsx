@@ -34,5 +34,20 @@ const SecondaryButton = styled.button`
   line-height: 19px;
   border: 1px solid #A02167;
 `;
+const PrimaryButton = styled.button`
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  border: 1px solid ${props => props.color ? props.color: "#979797"};
+  
+`;
 
-export {Button, SecondaryButton}
+export {Button, SecondaryButton, PrimaryButton}
