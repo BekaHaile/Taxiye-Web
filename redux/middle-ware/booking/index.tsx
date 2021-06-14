@@ -1,5 +1,6 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
+import {showSuccess} from "../common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -47,6 +48,7 @@ export const booking = (store) => (next) => async (action) => {
             next(navigationActions.goTo("confirm")) :
             next(navigationActions.goTo("login"));
     }
+
     else if (action.type == "REQUEST_CONFIRMED") {
         next(navigationActions.goTo("approve"));
         await sleep(3000);
@@ -62,6 +64,11 @@ export const booking = (store) => (next) => async (action) => {
                 arrivingIn: "2 Mins"
             }
         ));
+    }
+    else if (action.type == "TERMINATION_REASON_ADDED") {
+
+        next(navigationActions.goTo(""));
+        showSuccess(next);
     }
 
 };

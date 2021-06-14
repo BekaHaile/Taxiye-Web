@@ -11,6 +11,7 @@ import Loading from "../components/loading/";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { Provider } from "react-redux";
 import store from "../redux/store";
+import SnackBar from "../components/modal/snackbar";
 
 
 const queryClient = new QueryClient();
@@ -90,8 +91,10 @@ export default function MyApp({ Component, pageProps }) {
             <Loading /> :
             <>
               <Component {...pageProps} />
+              <SnackBar/>
             </>
           }
+          
         </Provider>
       </>)
       ;
@@ -125,9 +128,11 @@ export default function MyApp({ Component, pageProps }) {
                 </FloatingButton>
               </div>
               <Component {...pageProps} />
+              <SnackBar/>
               <Footer />
             </>
           }
+          
         </QueryClientProvider>
       </Provider>
     </>

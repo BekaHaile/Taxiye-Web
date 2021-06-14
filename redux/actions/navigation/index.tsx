@@ -11,13 +11,27 @@ export const goTo = (page) => {
 export const goBack = () => {
     return {
         type: actions.NAVIGATION_STARTED,
-        
+
     }
 };
 
 export const goFuture = () => {
     return {
         type: actions.NAVIGATION_STARTED,
-        
+
+    }
+};
+
+export const showMessage = (show, message, type) => {
+    return {
+        type: actions.MESSAGE_SHOWED,
+        payload: {
+            message: {
+                show: show,
+                text: message,
+                type: type
+            }
+        }
+
     }
 };

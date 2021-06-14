@@ -1,5 +1,8 @@
 import * as actions from "../../actions/user";
 import axios from "axios";
+import { showError } from "../common";
+
+
 export const user = (store) => (next) => async (action) => {
     let data = store.getState().user;
     if (action.type == "PHONE_SUBMITTED") {
@@ -17,11 +20,16 @@ export const user = (store) => (next) => async (action) => {
                     next(actions.changeOtpStatus({ loading: false, otpSent: true }));
                 }
                 else {
+                    showError(next);
                     next(actions.changeOtpStatus({ loading: false, otpSent: false }));
                 }
             }
+            else {
+                next(actions.changeOtpStatus({ loading: false, otpSent: false }));
+            }
         } catch (e) {
-            next(actions.setLoading(false));
+            showError(next);
+            next(actions.changeOtpStatus({ loading: false, otpSent: false }));
         }
     } else if (action.type == "OTP_RESENT") {
         next(actions.changeOtpStatus({ loading: true, otpSent: false, }));
@@ -42,6 +50,7 @@ export const user = (store) => (next) => async (action) => {
                 }
             }
         } catch (e) {
+            showError(next);
             next(actions.changeOtpStatus({ loading: false, otpSent: false, }));
         }
     }
@@ -65,6 +74,7 @@ export const user = (store) => (next) => async (action) => {
                 }
             }
         } catch (e) {
+            showError(next);
             next(actions.setLoading(false));
         }
     }
@@ -80,7 +90,7 @@ async function submitPhone(data) {
         const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data);
         return res.data;
     } catch (e) {
-        console.log(e);
+        return null;
     }
 }
 
