@@ -34,16 +34,22 @@ flex-direction:column;
 justify-content:space-between;
 gap:5px;
 width:inherit;
-
 `;
 
-const BookingInfo = () => {
+
+const MainTitle = styled(Title)`
+padding-bottom:20px;
+padding-top:10px;
+`;
+
+const BookingInfo = ({ title }:any) => {
     const origin = useSelector((state) => state["booking"]["origin"]);
     const destination = useSelector((state) => state["booking"]["destination"]);
     const date = useSelector((state) => state["booking"]["date"]);
     const time = useSelector((state) => state["booking"]["time"]);
     return (
         <>
+            {title && <MainTitle>{title}</MainTitle>}
             <Container>
                 <VerticalContainer>
                     <VerticalContainer>

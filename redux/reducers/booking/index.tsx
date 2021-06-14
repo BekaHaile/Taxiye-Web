@@ -35,7 +35,7 @@ const initialState = {
     driver: null,
     driverLoading: false,
     cancelRide: false,
-    reason:""
+    reason: ""
 }
 
 export default function booking(state = initialState, action) {
@@ -96,6 +96,10 @@ export default function booking(state = initialState, action) {
             return { ...state, cancelRide: true };
         case actionsTypes.TERMINATION_REASON_ADDED:
             return { ...state, reason: action.payload.reason, cancelRide: false };
+
+        case actionsTypes.STEP_CHANGED:
+            return { ...state, step: action.payload.step };
+
         default:
             return state;
     }

@@ -148,3 +148,11 @@ export const submitTerminatioReason = (reason) => ({
         reason: reason
     }
 });
+
+export const setStep = (step) => ({
+    type: actions.STEP_CHANGED,
+    payload: {
+        step: step
+    }
+});
+

@@ -96,9 +96,7 @@ const VehicleList = () => {
                         <CardContainer
                             onClick={() => {
                                 store.dispatch(selectVehicle(vehicle));
-                                
                             }}
-                            href="#login"
                             className={isValid ? "" : "disabled"} onMouseOver={() => { setSelected(index) }} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
                             <style jsx global>
                                 {styles}

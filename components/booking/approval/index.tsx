@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
 import { Button, SecondaryButton, PrimaryButton } from "../../form/buttons/primary-button";
-import BookingInfo from "./booking-info";
+import OnDemandBookingInfo from "../info/ondemand-booking-info";
+import RentalBookingInfo from "../info/rental-booking-info";
+import OutStationBookingInfo from "../info/outstation-booking-info";
+import DeliveryBookingInfo from "../info/delivery-booking-info";
 import DriverInfo from "./driver-info";
 import Loading from "./loading";
 import PaymentMethod from "./payment-method";
@@ -158,6 +161,9 @@ const Approve = () => {
     const cancelRide = useSelector((state) => state["booking"]["cancelRide"]);
     const [exitModal, setExitModal] = useState(false);
     const [cancelModal, setCancelModal] = useState(false);
+
+    const type = useSelector((state) => state["booking"]["type"]);
+
     return (
         <>
             <MainContainer>
@@ -168,7 +174,16 @@ const Approve = () => {
                         </ContentContainer>
                     }
                     <ContentContainer>
-                        <BookingInfo />
+                        {type == "on-demand" ?
+                            <OnDemandBookingInfo title="Trip Detail" /> :
+                            type == "rental" ?
+                                <RentalBookingInfo title="Rental Detail" /> :
+                                type == "out-station" ?
+                                    <OutStationBookingInfo title="Trip Detail" /> :
+                                    type == "delivery" ?
+                                        <DeliveryBookingInfo title="Delivery Detail" /> :
+                                        null
+                        }
                     </ContentContainer>
                     {driverLoading ? <Loading /> : <PaymentMethod paymentMethod={paymentMethod} />}
 

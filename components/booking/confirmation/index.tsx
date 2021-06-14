@@ -5,9 +5,13 @@ import PaymentMethod from "./payment-method";
 import CouponCode from "./coupon-code";
 import Note from "./note";
 import Header from "./header";
-import BookingInfo from "./booking-info";
+import OnDemandBookingInfo from "../info/ondemand-booking-info";
+import RentalBookingInfo from "../info/rental-booking-info";
+import OutStationBookingInfo from "../info/outstation-booking-info";
+import DeliveryBookingInfo from "../info/delivery-booking-info";
 import { confirmRequest } from "../../../redux/actions/booking";
 import store from "../../../redux/store";
+import { useSelector } from 'react-redux';
 
 const Container = styled("div")`
 width: -webkit-fill-available;
@@ -47,6 +51,7 @@ justify-content:space-between;
 
 
 const Confirm = (content) => {
+    const type = useSelector((state) => state["booking"]["type"]);
     return (
         <>
             <MainContainer>
@@ -54,9 +59,18 @@ const Confirm = (content) => {
                     <HeaderContainer>
                         <Header />
                     </HeaderContainer>
-                    
+
                     <ContentContainer>
-                        <BookingInfo />
+                        {type == "on-demand" ?
+                            <OnDemandBookingInfo /> :
+                            type == "rental" ?
+                                <RentalBookingInfo /> :
+                                type == "out-station" ?
+                                    <OutStationBookingInfo /> :
+                                    type == "delivery" ?
+                                        <DeliveryBookingInfo /> :
+                                        null
+                        }
                     </ContentContainer>
                     <ContentContainer>
                         <PaymentMethod />
@@ -70,7 +84,7 @@ const Confirm = (content) => {
                     </ContentContainer>
                 </Container>
                 <ButtonContainer>
-                    <CustomButton onClick={()=>store.dispatch(confirmRequest())}>Confirm and request</CustomButton>
+                    <CustomButton onClick={() => store.dispatch(confirmRequest())}>Confirm and request</CustomButton>
                 </ButtonContainer>
             </MainContainer>
 

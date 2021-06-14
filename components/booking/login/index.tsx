@@ -91,14 +91,6 @@ const Login = () => {
     const userData = useSelector((state) => state["user"]["userData"]);
 
     const phone_number = `${country_code}${phone_no}`;
-    const router = useRouter();
-
-    // useEffect(() => {
-    //     if (step != 1) {
-    //         store.dispatch(reset());
-    //       }
-
-    // }, [router.asPath]);
 
     const handleClick = () => {
         setShow(true);
@@ -120,7 +112,7 @@ const Login = () => {
                     <BackButton onClick={() => step > 1 ? store.dispatch(changeStep(step - 1)) : goTo("")} src={require("../../../assets/icons/back-arrow.svg")} />
                     {
                         step == 3 ? <SignupForm action={() => store.dispatch(goTo("confirm"))} /> :
-                            step == 2 ? <VerificationForm changeOtp={(val) =>store.dispatch(changeOtp(val))} phone_number={phone_number} setShow={handleClick} goBack={() => store.dispatch(changeStep(step - 1))} action={() => store.dispatch(submitOtp())} /> :
+                            step == 2 ? <VerificationForm changeOtp={(val) => store.dispatch(changeOtp(val))} phone_number={phone_number} setShow={handleClick} goBack={() => store.dispatch(changeStep(step - 1))} action={() => store.dispatch(submitOtp())} /> :
                                 <InputForm title="Enter your phone number"
                                     action={() => {
                                         store.dispatch(submitPhoneNumber());

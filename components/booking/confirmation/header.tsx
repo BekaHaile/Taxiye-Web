@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import Link from "next/link";
+import store from "../../../redux/store";
 import {useSelector} from "react-redux";
+import {goTo} from "../../../redux/actions/navigation";
+
 
 const Title = styled("div")`
 font-family: Open Sans;
@@ -56,9 +58,9 @@ const Note = () => {
     return (
         <>
             <Container>
-                <Link href="/">
-                <BackButton src={require("../../../assets/icons/back-arrow.svg")} />
-                </Link>
+               
+                <BackButton onClick={()=>store.dispatch(goTo(""))} src={require("../../../assets/icons/back-arrow.svg")} />
+               
                 <HorizontalFlex>
                     <Image src={data.car} />
                     <VerticalFlex>

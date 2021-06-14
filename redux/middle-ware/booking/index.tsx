@@ -7,10 +7,58 @@ export const booking = (store) => (next) => async (action) => {
     next(action);
     let data = store.getState().booking;
 
-    if (action.type == "DESTINATION_SELECTED" || action.type == "ORIGIN_SELECTED") {
+    if (action.type == "DESTINATION_SELECTED" ||
+        action.type == "ORIGIN_SELECTED" ||
+        action.type == "DATE_ADDED" ||
+        action.type == "TIME_ADDED" ||
+        action.type == "PACKAGE_SELECTED" ||
+        action.type == "JOURNEY_TYPE_CHANGED" ||
+        action.type == "JOURNEY_DATE_CHANGED" ||
+        action.type == "JOURNEY_TIME_CHANGED" ||
+        action.type == "BOOKING_TYPE_CHANGED") {
 
+        if (data["type"] == "on-demand") {
+            if (data["origin"].location !== null && data["destination"].location !== null) {
+                next(actions.loadVehicles(true));
+                try {
+                    let res = await fetchVehicles(data["origin"].location);
+                    if (res) {
+                        next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
+                        next(actions.validateInput(true));
+                    }
+                } catch (e) {
 
-        if (data["origin"].location !== null && data["destination"].location !== null) {
+                }
+                next(actions.loadVehicles(false));
+            }
+        }
+        else if (data["type"] == "rental") {
+            next(actions.loadVehicles(true));
+            try {
+                let res = await fetchVehicles(data["origin"].location);
+                if (res) {
+                    next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
+                    next(actions.validateInput(true));
+                }
+            } catch (e) {
+
+            }
+            next(actions.loadVehicles(false));
+        }
+        else if (data["type"] == "out-station") {
+            next(actions.loadVehicles(true));
+            try {
+                let res = await fetchVehicles(data["origin"].location);
+                if (res) {
+                    next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
+                    next(actions.validateInput(true));
+                }
+            } catch (e) {
+
+            }
+            next(actions.loadVehicles(false));
+        }
+        else if (data["type"] == "delivery") {
             next(actions.loadVehicles(true));
             try {
                 let res = await fetchVehicles(data["origin"].location);
@@ -28,9 +76,12 @@ export const booking = (store) => (next) => async (action) => {
     }
 
     else if (action.type == "VEHICLE_SELECTED") {
-        data["userData"] ?
-            next(navigationActions.goTo("confirm")) :
+        if (data["userData"])
+            next(navigationActions.goTo("confirm"));
+        else {
             next(navigationActions.goTo("login"));
+            next(actions.setStep(1));
+        }
 
     }
     else if (action.type == "OTP_SUBMITTED") {
@@ -64,10 +115,10 @@ async function sleep(ms) {
     });
 }
 
-async function fetchVehicles(location) {
+async function fetchVehicles(body) {
     try {
         const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
-        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/ride/available-vehicles`, location);
+        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/ride/available-vehicles`, body);
         return res.data;
     } catch (e) {
         console.log(e);

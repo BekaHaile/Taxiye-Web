@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import styles from "../../../theme/global/vehicle-selection";
+import { useSelector } from "react-redux";
+import { Loading } from "../../loading/loading";
+import { selectVehicle } from "../../../redux/actions/booking";
 
+import store from '../../../redux/store';
 const Container = styled("div")`
 padding:15px;
 `;
@@ -12,13 +16,19 @@ text-align:center;
 
 const FlexContainer = styled("div")`
 display:flex;
-justify-content:space-between;
+justify-content:space-around;
 flex-direction:row;
-gap: 40px;
+
+
+`;
+const CarWraperContainer = styled(FlexContainer)`
+flex-wrap:wrap;
+column-gap: 40px;
 `;
 
 const CarFlexContainer = styled(FlexContainer)`
 gap:20px;
+
 `;
 
 
@@ -33,7 +43,7 @@ justify-content:space-between;
 display:flex;
 cursor:pointer;
 padding:10px 20px;
-width: -webkit-fill-available;
+min-width: 200px;
 
 `;
 
@@ -92,43 +102,51 @@ const vehicles = [{
     currency: "Birr",
 },
 
-
-
 ];
+
+const Message = styled(Text)`
+font-weight: bold;
+padding:20px 0px;
+text-align:center;
+`;
 
 const VehicleList = () => {
 
+    const loading = useSelector((state) => state["booking"]["fetchVehiclesLoading"]);
+    const vehicleList = useSelector((state) => state["booking"]["vehicles"]);
+    const isValid = useSelector((state) => state["booking"]["isValid"]);
     const [isSelected, setSelected] = useState(0);
 
     return (
         <>
-            <Container>
-                <Title>Select delivery type</Title>
-                <FlexContainer>
-                    {vehicles.map((vehicle, index) => (
-                        <CardContainer onClick={() => { setSelected(index) }} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
-                            <style jsx global>
-                                {styles}
-                            </style>
-                            <CarFlexContainer>
-                                <Image src={vehicle.imageUrl} />
-                                <NormalContainer>
-                                    <Text>{vehicle.name}</Text>
+            {
+                loading ?
+                    <Loading /> : null}
+            {
+                vehicleList.length <= 0 ? <Message>No Vehicles</Message> :
+                    <Container>
+                        <Title>Select delivery type</Title>
+                        <CarWraperContainer>
+                            {vehicleList.map((vehicle, index) => (
+                                <CardContainer onMouseOver={() => { setSelected(index) }} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
+                                    <style jsx global>
+                                        {styles}
+                                    </style>
+                                    <CarFlexContainer>
+                                        <Image src={require("../../../assets/images/cars/vehicles/economy.svg")} />
+                                        <NormalContainer>
+                                            <Text>{vehicle.region_name}</Text>
 
-                                    <PriceText>{"~ "+vehicle.price + " " + vehicle.currency}</PriceText>
+                                            <PriceText>~ 122 Birr</PriceText>
+                                        </NormalContainer>
 
+                                    </CarFlexContainer>
 
-                                </NormalContainer>
-
-                            </CarFlexContainer>
-
-
-
-
-                        </CardContainer>
-                    ))}
-                </FlexContainer>
-            </Container>
+                                </CardContainer>
+                            ))}
+                        </CarWraperContainer>
+                    </Container>
+            }
 
         </>
     );
