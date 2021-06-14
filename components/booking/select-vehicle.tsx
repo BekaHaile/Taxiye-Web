@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import styles from "../../theme/global/vehicle-selection";
 import { useSelector } from "react-redux";
-import { Loading } from "../loading/loading";
+import { PrimaryLoading } from "../loading/loading";
 import { selectVehicle } from "../../redux/actions/booking";
 
 import store from '../../redux/store';
@@ -81,47 +81,45 @@ const VehicleList = () => {
     const vehicleList = useSelector((state) => state["booking"]["vehicles"]);
     const isValid = useSelector((state) => state["booking"]["isValid"]);
     const [isSelected, setSelected] = useState(0);
-    const userData = useSelector((state) => state["user"]["userData"]);
 
     return (
         <>
             {
                 loading ?
-                    <Loading /> : null}
-            {
-                vehicleList.length <= 0 ? <Message>No Vehicles</Message> : <Container>
-                    <Title>Select Vehicle</Title>
+                    <PrimaryLoading /> :
+                    vehicleList.length <= 0 ? <Message>No Vehicles</Message> : <Container>
+                        <Title>Select Vehicle</Title>
 
-                    {vehicleList.map((vehicle, index) => (
-                        <CardContainer
-                            onClick={() => {
-                                store.dispatch(selectVehicle(vehicle));
-                            }}
-                            className={isValid ? "" : "disabled"} onMouseOver={() => { setSelected(index) }} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
-                            <style jsx global>
-                                {styles}
-                            </style>
-                            <CarFlexContainer>
-                                <Image src={require("../../assets/images/cars/vehicles/economy.svg")} />
-                                <NormalContainer>
-                                    <Text>{vehicle.region_name}</Text>
-                                    <CustomFlexContainer>
-                                        <Image src={require("../../assets/icons/avatar.svg")} />
-                                        <Text>4</Text>
-                                    </CustomFlexContainer>
-                                </NormalContainer>
+                        {vehicleList.map((vehicle, index) => (
+                            <CardContainer
+                                onClick={() => {
+                                    store.dispatch(selectVehicle(vehicle));
+                                }}
+                                className={isValid ? "" : "disabled"} onMouseOver={() => { setSelected(index) }} id={isSelected == index ? "vehicleSelected" : null} key={vehicle.name}>
+                                <style jsx global>
+                                    {styles}
+                                </style>
+                                <CarFlexContainer>
+                                    <Image src={require("../../assets/images/cars/vehicles/economy.svg")} />
+                                    <NormalContainer>
+                                        <Text>{vehicle.region_name}</Text>
+                                        <CustomFlexContainer>
+                                            <Image src={require("../../assets/icons/avatar.svg")} />
+                                            <Text>4</Text>
+                                        </CustomFlexContainer>
+                                    </NormalContainer>
 
-                            </CarFlexContainer>
+                                </CarFlexContainer>
 
-                            <FlexContainer>
-                                <PriceText>122 Birr</PriceText>
-                            </FlexContainer>
-                            <FlexContainer>
-                                <Image src={require("../../assets/icons/right-arrow.svg")} />
-                            </FlexContainer>
-                        </CardContainer>
-                    ))}
-                </Container>
+                                <FlexContainer>
+                                    <PriceText>122 Birr</PriceText>
+                                </FlexContainer>
+                                <FlexContainer>
+                                    <Image src={require("../../assets/icons/right-arrow.svg")} />
+                                </FlexContainer>
+                            </CardContainer>
+                        ))}
+                    </Container>
             }
 
         </>

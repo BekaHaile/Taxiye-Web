@@ -1,7 +1,9 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
-import axios from "axios";
-import { setLoading } from "../../actions/user";
+import { getOnDemandVehicleInfo } from "./on-demand";
+import { getRentalVehicleInfo } from "./rental";
+import { getOutStationVehicleInfo } from "./out-station";
+import { getDeliveryVehicleInfo } from "./delivery";
 export const booking = (store) => (next) => async (action) => {
 
     next(action);
@@ -18,61 +20,17 @@ export const booking = (store) => (next) => async (action) => {
         action.type == "BOOKING_TYPE_CHANGED") {
 
         if (data["type"] == "on-demand") {
-            if (data["origin"].location !== null && data["destination"].location !== null) {
-                next(actions.loadVehicles(true));
-                try {
-                    let res = await fetchVehicles(data["origin"].location);
-                    if (res) {
-                        next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
-                        next(actions.validateInput(true));
-                    }
-                } catch (e) {
-
-                }
-                next(actions.loadVehicles(false));
-            }
+            await getOnDemandVehicleInfo(data, next);
         }
         else if (data["type"] == "rental") {
-            next(actions.loadVehicles(true));
-            try {
-                let res = await fetchVehicles(data["origin"].location);
-                if (res) {
-                    next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
-                    next(actions.validateInput(true));
-                }
-            } catch (e) {
-
-            }
-            next(actions.loadVehicles(false));
+            await getRentalVehicleInfo(data, next);
         }
         else if (data["type"] == "out-station") {
-            next(actions.loadVehicles(true));
-            try {
-                let res = await fetchVehicles(data["origin"].location);
-                if (res) {
-                    next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
-                    next(actions.validateInput(true));
-                }
-            } catch (e) {
-
-            }
-            next(actions.loadVehicles(false));
+            await getOutStationVehicleInfo(data, next);
         }
         else if (data["type"] == "delivery") {
-            next(actions.loadVehicles(true));
-            try {
-                let res = await fetchVehicles(data["origin"].location);
-                if (res) {
-                    next(actions.addVehicles(res.city ? res.city : "", Array.from(res.vehicles)));
-                    next(actions.validateInput(true));
-                }
-            } catch (e) {
-
-            }
-            next(actions.loadVehicles(false));
+            await getDeliveryVehicleInfo(data, next);
         }
-
-
     }
 
     else if (action.type == "VEHICLE_SELECTED") {
@@ -115,13 +73,4 @@ async function sleep(ms) {
     });
 }
 
-async function fetchVehicles(body) {
-    try {
-        const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
-        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/ride/available-vehicles`, body);
-        return res.data;
-    } catch (e) {
-        console.log(e);
-    }
-}
 

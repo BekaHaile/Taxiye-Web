@@ -109,7 +109,7 @@ const Login = () => {
 
                 </FlexContainer>
                 <Container>
-                    <BackButton onClick={() => step > 1 ? store.dispatch(changeStep(step - 1)) : goTo("")} src={require("../../../assets/icons/back-arrow.svg")} />
+                    <BackButton onClick={() => step > 1 ? store.dispatch(changeStep(step - 1)) : store.dispatch(goTo(""))} src={require("../../../assets/icons/back-arrow.svg")} />
                     {
                         step == 3 ? <SignupForm action={() => store.dispatch(goTo("confirm"))} /> :
                             step == 2 ? <VerificationForm changeOtp={(val) => store.dispatch(changeOtp(val))} phone_number={phone_number} setShow={handleClick} goBack={() => store.dispatch(changeStep(step - 1))} action={() => store.dispatch(submitOtp())} /> :
