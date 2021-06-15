@@ -156,3 +156,24 @@ export const setStep = (step) => ({
     }
 });
 
+export const setLandmark = (landmark) => ({
+    type: actions.LANDMARK_ADDED,
+    payload: {
+        landmark: landmark
+    }
+});
+
+export const setHouseNumber = (house_number) => ({
+    type: actions.HOUSE_NUMBER_ADDED,
+    payload: {
+        house_number: house_number
+    }
+});
+
+export const setIsAddressValid = (isAddressValid) => ({
+    type: actions.VALIDATED_ADDRESS,
+    payload: {
+        isAddressValid: isAddressValid
+    }
+});
+

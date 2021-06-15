@@ -1,6 +1,6 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
-import {showSuccess} from "../common";
+import { showSuccess } from "../common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -65,6 +65,13 @@ export const booking = (store) => (next) => async (action) => {
             }
         ));
     }
+
+    else if (action.type == "HOUSE_NUMBER_ADDED") {
+        if (data["house_number"] != null && data["house_number"] != "")
+            next(actions.setIsAddressValid);
+
+    }
+
     else if (action.type == "TERMINATION_REASON_ADDED") {
 
         next(navigationActions.goTo(""));

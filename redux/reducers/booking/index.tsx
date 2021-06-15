@@ -35,7 +35,10 @@ const initialState = {
     driver: null,
     driverLoading: false,
     cancelRide: false,
-    reason: ""
+    reason: "",
+    landmark: "",
+    house_number: "",
+    isAddressValid:false
 }
 
 export default function booking(state = initialState, action) {
@@ -99,6 +102,13 @@ export default function booking(state = initialState, action) {
 
         case actionsTypes.STEP_CHANGED:
             return { ...state, step: action.payload.step };
+
+        case actionsTypes.HOUSE_NUMBER_ADDED:
+            return { ...state, house_no: action.payload.house_number };
+        case actionsTypes.LANDMARK_ADDED:
+            return { ...state, landmark: action.payload.landmark };
+            case actionsTypes.VALIDATED_ADDRESS:
+                return { ...state, isAddressValid: action.payload.isAddressValid };
 
         default:
             return state;

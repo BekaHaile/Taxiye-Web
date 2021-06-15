@@ -5,6 +5,7 @@ import OnDemand from "./on-demand/";
 import Rental from "./rental/";
 import OutStation from "./out-station";
 import Delivery from "./delivery/";
+import D from "./delivery/meta";
 
 import { useSelector } from "react-redux";
 
@@ -35,7 +36,8 @@ const Container = () => {
 
     return (
         <ContainerWrapper>
-            {page == "login" ? <Login /> :
+            {
+            page == "login" ? <Login /> :
             page == "confirm" ? <Confirmation/> :
             page == "approve" ? <Approve/> :
                 <Tabs

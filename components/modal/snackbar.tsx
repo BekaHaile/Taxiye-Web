@@ -8,14 +8,14 @@ import store from '../../redux/store';
 import { showMessage } from "../../redux/actions/navigation";
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={2} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& > * + *': {
-            marginTop: theme.spacing(2),
+            marginTop: theme.spacing(1),
         },
     },
 }));
@@ -34,7 +34,12 @@ export default function SnackBar() {
     return (
         <div className={classes.root}>
 
-            <Snackbar open={message.show} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                open={message.show} autoHideDuration={5000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={message.type}>
                     {message.text}
                 </Alert>

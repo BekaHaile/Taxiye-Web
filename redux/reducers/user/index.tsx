@@ -10,15 +10,16 @@ const initialState = {
     step: 1,
     otp: "",
     isOtpValid: false,
-    agreeToTerms:false,
-    userData:null,
-    user:{
-        firstName:"",
-        lastName:"",
-        email:"",
-        gender:"Male",
+    agreeToTerms: false,
+    userData: null,
+    user: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        gender: "Male",
 
     }
+
 }
 
 export default function userReducer(state = initialState, action) {
@@ -46,9 +47,7 @@ export default function userReducer(state = initialState, action) {
         case actionsTypes.OTP_SENT:
             return { ...state, otpSent: action.payload.otpSent, loading: action.payload.loading };
         case actionsTypes.RESET:
-            return {initialState };
-
-
+            return { initialState };
         default:
             return state;
     }
