@@ -1,4 +1,3 @@
-import axios from "axios";
 import { showMessage } from "../actions/navigation";
 
 export function showError(next) {
@@ -9,10 +8,18 @@ export function showError(next) {
     ));
 }
 
+export function showTimeOut(next) {
+    next(showMessage(
+        true,
+        "Timeout Error, please try again!",
+        "error"
+    ));
+}
+
 export function showSuccess(next) {
     next(showMessage(
         true,
-        "Success, request has been completed",
+        "Success, request has been completed!",
         "success"
     ));
 }

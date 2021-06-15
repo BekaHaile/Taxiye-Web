@@ -87,7 +87,7 @@ export const user = (store) => (next) => async (action) => {
 async function submitPhone(data) {
     try {
         const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
-        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data);
+        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data, {timeout:5000});
         return res.data;
     } catch (e) {
         return null;

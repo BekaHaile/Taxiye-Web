@@ -6,6 +6,7 @@ import store from "../../redux/store";
 import { selectOrigin, selectDestination, changeDate, changeTime } from "../../redux/actions/booking";
 import { useSelector } from "react-redux";
 import { DatePicker, TimePicker } from "../form/date-picker";
+import { Loader } from "../loading/loading";
 
 
 const DeliveryForm = ({ contentView }) => {
@@ -13,6 +14,9 @@ const DeliveryForm = ({ contentView }) => {
   const destination = useSelector((state) => state["booking"]["destination"]);
   const date = useSelector((state) => state["booking"]["date"]);
   const time = useSelector((state) => state["booking"]["time"]);
+  const loading = useSelector((state) => state["booking"]["fetchVehiclesLoading"]);
+  const isValid = useSelector((state) => state["booking"]["isValid"]);
+
   return (
     <>
       {contentView ? null :
@@ -79,7 +83,10 @@ const DeliveryForm = ({ contentView }) => {
         {
           contentView ? contentView :
             <Link href="/booking">
-              <CustomButton>Request Now</CustomButton>
+               {loading ?
+                <CustomButton disabled={true}><Loader /></CustomButton> :
+                <CustomButton disabled={!isValid}>Request Now</CustomButton>
+              }
             </Link>
         }
 
