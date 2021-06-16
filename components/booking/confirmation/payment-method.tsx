@@ -26,7 +26,7 @@ color: #444444;
 padding-bottom:20px;
 `;
 
-const Confirm = () => {
+const PaymentMethod = () => {
     const lists = ["Cash", "ElSabi"];
     const paymentMethod = useSelector((state) => state["booking"]["paymentMethod"]);
     return (
@@ -45,4 +45,4 @@ const Confirm = () => {
     );
 }
 
-export default Confirm;
+export default PaymentMethod;

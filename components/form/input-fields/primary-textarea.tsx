@@ -44,6 +44,8 @@ const LabelText = styled("label")`
 
 type InputProps = {
   id: string;
+  action?,
+  value?,
   label?: string;
   placeholder: string;
 };
@@ -51,13 +53,13 @@ type InputProps = {
 const DefaultTextArea: FunctionComponent<InputProps> = ({
   label,
   id,
-  placeholder
+  placeholder,
 }) => {
   return (
     <>
       <div>
-      <LabelText>{label}</LabelText>
-      <TextArea placeholder={placeholder} id={id} />
+        <LabelText>{label}</LabelText>
+        <TextArea placeholder={placeholder} id={id} />
       </div>
     </>
   );
@@ -66,14 +68,16 @@ const DefaultTextArea: FunctionComponent<InputProps> = ({
 const SecondaryTextArea: FunctionComponent<InputProps> = ({
   label,
   id,
-  placeholder
+  value,
+  placeholder,
+  action,
 }) => {
   return (
     <>
-    <div>
-      <LabelText>{label}</LabelText>
-      <AnotherTextArea placeholder={placeholder} id={id} />
-      </div>
+
+      {label && <LabelText>{label}</LabelText>}
+      <AnotherTextArea value={value} onInput={(event) => action(event)} placeholder={placeholder} id={id} />
+
     </>
   );
 };

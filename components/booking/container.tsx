@@ -5,7 +5,7 @@ import OnDemand from "./on-demand/";
 import Rental from "./rental/";
 import OutStation from "./out-station";
 import Delivery from "./delivery/";
-import D from "./delivery/meta";
+import Meta from "./delivery/meta";
 
 import { useSelector } from "react-redux";
 
@@ -40,6 +40,7 @@ const Container = () => {
             page == "login" ? <Login /> :
             page == "confirm" ? <Confirmation/> :
             page == "approve" ? <Approve/> :
+            page == "info" ? <Meta/> :
                 <Tabs
                     setSelectedContent={setSelectedContent}
                     contentView={<ChildrenContainer>

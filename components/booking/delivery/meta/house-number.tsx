@@ -27,12 +27,13 @@ margin:10px 0px;
   }
 `;
 const HouseNumber = () => {
-  const address = useSelector((state) => state["booking"]["address"]);
+  const house_number = useSelector((state) => state["booking"]["house_number"]);
   return (
     <>
       <Title>House No. / Apartment Name</Title>
       <Input
-        value={address}
+        type="number"
+        value={house_number}
         id="house"
         placeholder="Enter house number or apartment name here"
         onChange={(e) => store.dispatch(setHouseNumber(e.target.value))}

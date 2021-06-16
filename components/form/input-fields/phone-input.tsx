@@ -59,6 +59,9 @@ const PhoneInput = ({ label, id, placeholder, country_code, phone_no, action }) 
                     defaultCountry="et"
                     autoHideDialCode={false}
                     autoPlaceholder={false}
+                    onlyCountries={["et", "ke", "ss"]}
+                    preferredCountries={[]}
+                    
                 />
             </Container>
         </>

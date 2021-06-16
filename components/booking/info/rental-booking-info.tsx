@@ -26,6 +26,9 @@ display:flex;
 gap:10px;
 flex-direction:row;
 `;
+const TopContainer = styled(Container)`
+justify-content:space-between;
+`;
 const Wrapper = styled("div")`
 display:flex;
 gap:20px;
@@ -57,7 +60,7 @@ const BookingInfo = ({title}:any) => {
         <>
             {title && <MainTitle>{title}</MainTitle>}
             <Wrapper>
-                <Container>
+                <TopContainer>
                     <Container>
                         <Icon src={require("../../../assets/icons/location.svg")} />
                         <VerticalContainer>
@@ -75,7 +78,7 @@ const BookingInfo = ({title}:any) => {
                             </Text>
                         </VerticalContainer>
                     </Container>
-                </Container>
+                </TopContainer>
 
                 <Container>
                     <Icon src={require("../../../assets/icons/package.svg")} />
@@ -90,3 +93,7 @@ const BookingInfo = ({title}:any) => {
 }
 
 export default BookingInfo;
+
+
+
+

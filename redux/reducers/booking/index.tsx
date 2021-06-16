@@ -38,7 +38,7 @@ const initialState = {
     reason: "",
     landmark: "",
     house_number: "",
-    isAddressValid:false
+    isAddressValid: false
 }
 
 export default function booking(state = initialState, action) {
@@ -52,7 +52,7 @@ export default function booking(state = initialState, action) {
             return { ...state, isValid: action.payload.isValid };
 
         case actionsTypes.BOOKING_TYPE_CHANGED:
-            return { ...state, type: action.payload.type };
+            return { ...state, type: action.payload.type, vehicles: [] };
         case actionsTypes.DATE_ADDED:
             return { ...state, date: action.payload.date };
         case actionsTypes.TIME_ADDED:
@@ -75,8 +75,19 @@ export default function booking(state = initialState, action) {
 
         case actionsTypes.DELIVERY_TYPE_CHANGED:
             return { ...state, delivery: { ...state.delivery, type: action.payload.type } };
-        case actionsTypes.DELIVERY_IMAGES_ADDED:
-            return { ...state, delivery: { ...state.delivery, images: action.payload.images } };
+        case actionsTypes.DELIVERY_IMAGES_ADDED: {
+            return { ...state, delivery: { ...state.delivery, images: [...state.delivery.images, action.payload.images] } };
+        }
+        case actionsTypes.DELIVERY_IMAGE_REMOVED: {
+            return {
+                ...state, delivery: {
+                    ...state.delivery, images: [
+                        ...state.delivery.images.slice(0, action.payload.index),
+                        ...state.delivery.images.slice(action.payload.index + 1)]
+                }
+            };
+        }
+
         case actionsTypes.DELIVERY_COMMENT_CHANGED:
             return { ...state, delivery: { ...state.delivery, comment: action.payload.comment } };
 
@@ -104,11 +115,11 @@ export default function booking(state = initialState, action) {
             return { ...state, step: action.payload.step };
 
         case actionsTypes.HOUSE_NUMBER_ADDED:
-            return { ...state, house_no: action.payload.house_number };
+            return { ...state, house_number: action.payload.house_number };
         case actionsTypes.LANDMARK_ADDED:
             return { ...state, landmark: action.payload.landmark };
-            case actionsTypes.VALIDATED_ADDRESS:
-                return { ...state, isAddressValid: action.payload.isAddressValid };
+        case actionsTypes.VALIDATED_ADDRESS:
+            return { ...state, isAddressValid: action.payload.isAddressValid };
 
         default:
             return state;

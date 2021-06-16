@@ -1,6 +1,6 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
-import { showSuccess } from "../common";
+import { showSuccess, showInfo } from "../common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -35,7 +35,13 @@ export const booking = (store) => (next) => async (action) => {
     }
 
     else if (action.type == "VEHICLE_SELECTED") {
-        if (data["userData"])
+        if (data["type"] == "delivery") {
+            if (data["delivery"]["comment"] == null || data["delivery"]["comment"] == "")
+                showInfo(next, "Please tell us what you need to be deliverd!", "warning");
+            else
+                next(navigationActions.goTo("info"));
+        }
+        else if (data["userData"])
             next(navigationActions.goTo("confirm"));
         else {
             next(navigationActions.goTo("login"));
@@ -43,6 +49,15 @@ export const booking = (store) => (next) => async (action) => {
         }
 
     }
+    else if (action.type == "DELIVERY_SELECTED") {
+        if (data["userData"])
+            next(navigationActions.goTo("confirm"));
+        else {
+            next(navigationActions.goTo("login"));
+            next(actions.setStep(1));
+        }
+    }
+
     else if (action.type == "OTP_SUBMITTED") {
         data["userData"] ?
             next(navigationActions.goTo("confirm")) :
@@ -68,12 +83,12 @@ export const booking = (store) => (next) => async (action) => {
 
     else if (action.type == "HOUSE_NUMBER_ADDED") {
         if (data["house_number"] != null && data["house_number"] != "")
-            next(actions.setIsAddressValid);
-
+            next(actions.setIsAddressValid(true));
+        else
+            next(actions.setIsAddressValid(false));
     }
 
     else if (action.type == "TERMINATION_REASON_ADDED") {
-
         next(navigationActions.goTo(""));
         showSuccess(next);
     }

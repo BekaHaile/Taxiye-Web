@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { Button } from "../../form/buttons/primary-button";
 import PaymentMethod from "./payment-method";
+import DeliveryItems from "./delivery-items";
 import CouponCode from "./coupon-code";
 import Note from "./note";
 import Header from "./header";
@@ -15,6 +16,7 @@ import { useSelector } from 'react-redux';
 
 const Container = styled("div")`
 width: -webkit-fill-available;
+overflow-y:scroll;
 `;
 const HeaderContainer = styled("div")`
 background: #FFFFFF;
@@ -48,18 +50,25 @@ width: -webkit-fill-available;
 max-width:490px;
 justify-content:space-between;
 `;
-
+const ContainerWithNoBorder = styled(ContentContainer)`
+border-bottom: none;
+`;
 
 const Confirm = (content) => {
     const type = useSelector((state) => state["booking"]["type"]);
     return (
         <>
             <MainContainer>
+                
                 <Container>
-                    <HeaderContainer>
-                        <Header />
-                    </HeaderContainer>
-
+                <HeaderContainer>
+                    <Header />
+                </HeaderContainer>
+                    {
+                        type == "delivery" ? <ContentContainer>
+                            <DeliveryItems />
+                        </ContentContainer> : null
+                    }
                     <ContentContainer>
                         {type == "on-demand" ?
                             <OnDemandBookingInfo /> :
@@ -78,10 +87,10 @@ const Confirm = (content) => {
                     <ContentContainer>
                         <CouponCode />
                     </ContentContainer>
-                    <ContentContainer>
+                    <ContainerWithNoBorder>
                         <Note />
 
-                    </ContentContainer>
+                    </ContainerWithNoBorder>
                 </Container>
                 <ButtonContainer>
                     <CustomButton onClick={() => store.dispatch(confirmRequest())}>Confirm and request</CustomButton>

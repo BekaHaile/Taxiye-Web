@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { Button, SecondaryButton, PrimaryButton } from "../../../form/buttons/primary-button";
-import DriverInfo from "./driver-info";
+import Header from "./header";
 import DeliveryInfo from "../../info/delivery-booking-info";
 import HouseNumber from "./house-number";
 import Landmark from "./land-mark";
@@ -9,6 +9,7 @@ import Note from "./note";
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 import store from '../../../../redux/store';
+import {selectDelivery } from "../../../../redux/actions/booking";
 
 const Container = styled("div")`
 width: -webkit-fill-available;
@@ -25,15 +26,13 @@ const ButtonContainer = styled("div")`
   flex-direction:column;
   gap:10px;
 `;
-const ModalButtonContainer = styled("div")`
-    display:flex;
-    justify-content: flex-end;
-    padding-top: 30px;
-    gap:20px;
+const ContainerWithNoBorder = styled(ContentContainer)`
+border-bottom: none;
 `;
 
 const CustomButton = styled(Button)`
     padding: 5px 20px; 
+    margin:20px 0px;
     width:100%;  
 `;
 const CustomButtonContainer = styled("div")`
@@ -51,23 +50,6 @@ width: -webkit-fill-available;
 max-width:490px;
 justify-content:space-between;
 `;
-const ModalTitle = styled("p")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 22px;
-text-align: center;
-`;
-const ModalSubTitle = styled("p")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 19px;
-text-align: center;
-padding:20px 0px 40px 0px;
-`;
 
 const Icon = styled("img")`
 display:flex;
@@ -76,7 +58,10 @@ width:30px;
 height:30px;
 
 `;
-
+const HeaderContainer = styled("div")`
+background: #FFFFFF;
+box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
+`;
 
 
 const Meta = () => {
@@ -87,15 +72,11 @@ const Meta = () => {
     return (
         <>
             <MainContainer>
-                <Container>
-                    {!driverLoading &&
-                        <ContentContainer>
-                            <DriverInfo />
-                        </ContentContainer>
-                    }
-                </Container>
-                <Container>
 
+                <Container>
+                    <HeaderContainer>
+                        <Header />
+                    </HeaderContainer>
                     <ContentContainer>
                         <DeliveryInfo />
                     </ContentContainer>
@@ -105,14 +86,14 @@ const Meta = () => {
                     <ContentContainer>
                         <Landmark />
                     </ContentContainer>
-                    <ContentContainer>
+                    <ContainerWithNoBorder>
                         <Note />
-                    </ContentContainer>
+                    </ContainerWithNoBorder>
 
                 </Container>
                 <ButtonContainer>
                     <CustomButtonContainer>
-                        <CustomButton disabled={!isAddressValid}>Continue</CustomButton>
+                        <CustomButton onClick={() => store.dispatch(selectDelivery())} disabled={!isAddressValid}>Continue</CustomButton>
                     </CustomButtonContainer>
 
                 </ButtonContainer>

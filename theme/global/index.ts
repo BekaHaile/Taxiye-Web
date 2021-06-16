@@ -453,6 +453,30 @@ p,h1,h2,h3,h4,h5,h6{
 .MuiRating-iconEmpty {
   color: rgba(0, 0, 0, 0.26) !important;
 }
+
+
+::-webkit-scrollbar:hover {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px grey; 
+  border-radius: 10px;
+  
+  
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
   
 `;
 

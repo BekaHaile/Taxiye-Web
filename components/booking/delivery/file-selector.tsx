@@ -92,32 +92,24 @@ transform: scale(2);
 
 
 
-const Document = ({setImage, imageUrl}) => {
+const Document = ({ action}) => {
+
     return (
         <>
 
             <Card>
-                {imageUrl != "" ?
-                    <CloseButton onClick={() => {
-                        setImage("");
-                        document.getElementById("upload-photo").nodeValue = null;
 
-                        ;
-                    }}> <CloseIcon src={require("../../../assets/icons/close.svg")} /> </CloseButton> : null}
-                {imageUrl == "" ?
-                    <CenteredElement htmlFor="upload-photo">
-                        Upload Photo
-                </CenteredElement> :
-                    null}
-                {imageUrl != "" ? <ImagePreview src={imageUrl} /> : null}
+                <CenteredElement htmlFor="upload-photo">
+                    Upload Photo
+                </CenteredElement>
+
                 <FileSelector onChange={(event) => {
-                    URL.revokeObjectURL(imageUrl);
-                    var data = event.target.files[0];
-                    var binaryData = [];
-                    binaryData.push(data);
-                    var url = URL.createObjectURL(new Blob(binaryData));
-                    setImage(url);
-                }} type="file" name="photo" id="upload-photo" />
+
+                    var data = event.target.files;
+
+                    action(data);
+
+                }} type="file" name="photo" id="upload-photo" multiple accept="image/*" />
 
 
             </Card>

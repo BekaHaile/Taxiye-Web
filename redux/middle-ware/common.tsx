@@ -31,3 +31,11 @@ export function showWarning(next) {
         "warning"
     ));
 }
+
+export function showInfo(next, message, type) {
+    next(showMessage(
+        true,
+        message,
+        type
+    ));
+}

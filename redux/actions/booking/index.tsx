@@ -177,3 +177,31 @@ export const setIsAddressValid = (isAddressValid) => ({
     }
 });
 
+export const selectDelivery = () => ({
+    type: actions.DELIVERY_SELECTED,
+  
+});
+
+
+export const changeDeliveryComment = (comment) => ({
+    type: actions.DELIVERY_COMMENT_CHANGED,
+    payload: {
+        comment: comment
+    }
+});
+
+
+export const addDeliveryItemImages = (images) => ({
+    type: actions.DELIVERY_IMAGES_ADDED,
+    payload: {
+        images: images
+    }
+});
+export const removeDeliveryItemImages = (index) => ({
+    type: actions.DELIVERY_IMAGE_REMOVED,
+    payload: {
+        index: index
+    }
+});
+
+
