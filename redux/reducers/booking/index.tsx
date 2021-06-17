@@ -12,7 +12,7 @@ const initialState = {
         location: null
     },
     date: new Date(),
-    time: "06:30",
+    time: new Date().getHours()+":"+new Date().getMinutes(),
     journey: {
         type: "Round Trip",
         returnDate: new Date(),
@@ -24,7 +24,7 @@ const initialState = {
     delivery: {
         comment: "",
         images: [],
-        type: null
+        image:null,
     },
     package: "Round Trip",
     direction: null,
@@ -73,11 +73,14 @@ export default function booking(state = initialState, action) {
         case actionsTypes.JOURNEY_TIME_CHANGED:
             return { ...state, journey: { ...state.journey, returnTime: action.payload.time } };
 
-        case actionsTypes.DELIVERY_TYPE_CHANGED:
-            return { ...state, delivery: { ...state.delivery, type: action.payload.type } };
+
         case actionsTypes.DELIVERY_IMAGES_ADDED: {
             return { ...state, delivery: { ...state.delivery, images: [...state.delivery.images, action.payload.images] } };
         }
+        case actionsTypes.DELIVERY_IMAGES_UPLOADED: {
+            return { ...state, delivery: { ...state.delivery, image: action.payload.image} };
+        }
+        
         case actionsTypes.DELIVERY_IMAGE_REMOVED: {
             return {
                 ...state, delivery: {

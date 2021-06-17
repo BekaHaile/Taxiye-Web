@@ -93,4 +93,50 @@ export const reset = () => {
 };
 
 
+export const addFirstName = (firstName) => {
+    return {
+        type: actions.FIRST_NAME_ADDED,
+        payload: {
+            firstName: firstName
+        }
+    }
+};
+
+export const addLastName = (lastName) => {
+    return {
+        type: actions.LAST_NAME_ADDED,
+        payload: {
+            lastName: lastName
+        }
+    }
+};
+
+export const addEmail = (email) => {
+    return {
+        type: actions.EMAIL_ADDED,
+        payload: {
+            email: email
+        }
+    }
+};
+
+
+export const setUserIsValid = (isUserValid) => {
+    return {
+        type: actions.USERISVALIDATED,
+        payload:{
+            isUserValid:isUserValid
+        }
+    }
+};
+
+export const setTermsAgreement = (agreeToTerms) => {
+    return {
+        type: actions.TERMS_CHANGED,
+        payload:{
+            agreeToTerms:agreeToTerms
+        }
+    }
+};
+
 

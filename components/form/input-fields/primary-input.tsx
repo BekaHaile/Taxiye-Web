@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 const Input = styled('input')`
@@ -28,20 +28,25 @@ type InputProps = {
   label?: string;
   placeholder: string;
   type?: string;
+  onChange?;
+  value?;
+
 };
 
 const DefaultInput: FunctionComponent<InputProps> = ({
-    label,
-    id,
-    placeholder,
-    type
-  }) => {
-    return (
-      <>
+  label,
+  id,
+  placeholder,
+  type,
+  value,
+  onChange
+}) => {
+  return (
+    <>
       <LabelText>{label}</LabelText>
-     <Input type={type} placeholder={placeholder} id={id}/>
-     </>
-    );
-  };
+      <Input onChange={onChange} value={value} type={type} placeholder={placeholder} id={id} />
+    </>
+  );
+};
 
-export {DefaultInput, Input}
+export { DefaultInput, Input }

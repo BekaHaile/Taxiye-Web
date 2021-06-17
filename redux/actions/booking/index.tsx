@@ -190,6 +190,12 @@ export const changeDeliveryComment = (comment) => ({
     }
 });
 
+export const uploadDeliveryItemImages = (image) => ({
+    type: actions.DELIVERY_IMAGES_UPLOADED,
+    payload: {
+        image: image
+    }
+});
 
 export const addDeliveryItemImages = (images) => ({
     type: actions.DELIVERY_IMAGES_ADDED,

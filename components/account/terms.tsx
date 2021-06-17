@@ -42,12 +42,12 @@ color: #A02167;
 }
 `;
 
-const Terms = () => {
+const Terms = ({action, checked}) => {
     return (
         <>
             <AgreementContainer>
                
-                    <CheckBox type="checkbox" id="terms" name="interest" value="coding" />
+                    <CheckBox checked={checked} onChange={()=>action(!checked)}  type="checkbox" id="terms" name="interest" />
                     <CheckBoxLabel>I agree to Taxiye's</CheckBoxLabel>
                 
                 <LinkWithLine href="/">Terms of service</LinkWithLine>

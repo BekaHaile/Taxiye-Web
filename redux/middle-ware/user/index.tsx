@@ -78,8 +78,16 @@ export const user = (store) => (next) => async (action) => {
             next(actions.setLoading(false));
         }
     }
+
     else {
         next(action);
+        let new_data = store.getState().user;
+        if (action.type == "FIRST_NAME_ADDED" ||
+            action.type == "LAST_NAME_ADDED" ||
+            action.type == "EMAIL_ADDED" ||
+            action.type == "TERMS_CHANGED")
+            validateUser(new_data, next);
+
     }
 
 };
@@ -87,10 +95,27 @@ export const user = (store) => (next) => async (action) => {
 async function submitPhone(data) {
     try {
         const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
-        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data, {timeout:5000});
+        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data, { timeout: 5000 });
         return res.data;
     } catch (e) {
         return null;
     }
+}
+
+async function validateUser(data, next) {
+    if (data["user"]["firstName"] != null && data["user"]["firstName"] != "" &&
+        data["user"]["lastName"] != null && data["user"]["lastName"] != "" &&
+        data["user"]["email"] != null && data["user"]["email"] != "" &&
+        data["agreeToTerms"] &&
+        validateEmail(data["user"]["email"]))
+        next(actions.setUserIsValid(true));
+    else {
+        next(actions.setUserIsValid(false));
+    }
+}
+
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 

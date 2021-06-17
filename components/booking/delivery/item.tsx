@@ -3,7 +3,7 @@ import styled from "styled-components";
 import store from '../../../redux/store';
 import { SecondaryTextArea } from "../../form/input-fields/primary-textarea";
 import FileSelector from "./file-selector";
-import { changeDeliveryComment, addDeliveryItemImages, removeDeliveryItemImages } from "../../../redux/actions/booking";
+import { changeDeliveryComment, uploadDeliveryItemImages, removeDeliveryItemImages } from "../../../redux/actions/booking";
 import { useSelector } from 'react-redux';
 
 const Text = styled("p")`
@@ -98,7 +98,7 @@ const Item = () => {
                         for (var i = 0; i < data.length; ++i) {
                             var binaryData = [];
                             binaryData.push(data[i]);
-                            store.dispatch(addDeliveryItemImages(binaryData));
+                            store.dispatch(uploadDeliveryItemImages(binaryData));
                         }
                         
 

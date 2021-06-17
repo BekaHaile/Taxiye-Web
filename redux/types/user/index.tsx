@@ -10,7 +10,16 @@ export const OTP_ADDED = "OTP_ADDED";
 export const OTP_SENT = "OTP_SENT";
 export const OTP_SUBMITTED = "OTP_SUBMITTED";
 
+export const FIRST_NAME_ADDED = "FIRST_NAME_ADDED";
+export const LAST_NAME_ADDED = "LAST_NAME_ADDED";
+export const EMAIL_ADDED = "EMAIL_ADDED";
+
+export const TERMS_CHANGED = "TERMS_CHANGED";
+
+export const USERISVALIDATED = "USERISVALIDATED";
+
 export const RESET = "RESET";
+
 
 
 

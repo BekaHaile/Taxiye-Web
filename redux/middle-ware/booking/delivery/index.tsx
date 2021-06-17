@@ -22,3 +22,22 @@ export async function getDeliveryVehicleInfo(data, next) {
         next(actions.loadVehicles(false));
     }
 }
+
+export async function uploadFile(data, next) {
+    next(actions.loadVehicles(true));
+    try {
+        await sleep(2000);
+        next(actions.addDeliveryItemImages(data["delivery"]["image"]));
+    } catch (e) {
+        showError(next);
+        next(actions.loadVehicles(false));
+    }
+
+    next(actions.loadVehicles(false));
+}
+
+async function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}

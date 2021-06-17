@@ -4,7 +4,7 @@ import { showSuccess, showInfo } from "../common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
-import { getDeliveryVehicleInfo } from "./delivery";
+import { getDeliveryVehicleInfo, uploadFile } from "./delivery";
 export const booking = (store) => (next) => async (action) => {
 
     next(action);
@@ -56,6 +56,11 @@ export const booking = (store) => (next) => async (action) => {
             next(navigationActions.goTo("login"));
             next(actions.setStep(1));
         }
+    }
+
+    else if (action.type == "DELIVERY_IMAGES_UPLOADED") {
+        
+        await uploadFile(data, next);
     }
 
     else if (action.type == "OTP_SUBMITTED") {

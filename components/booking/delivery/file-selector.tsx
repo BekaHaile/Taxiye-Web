@@ -109,7 +109,7 @@ const Document = ({ action}) => {
 
                     action(data);
 
-                }} type="file" name="photo" id="upload-photo" multiple accept="image/*" />
+                }} type="file" name="photo" id="upload-photo" accept="image/*" />
 
 
             </Card>

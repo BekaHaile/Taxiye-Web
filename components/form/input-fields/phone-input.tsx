@@ -48,9 +48,11 @@ const PhoneInput = ({ label, id, placeholder, country_code, phone_no, action }) 
                 <IntlTelInput
                     value={phone_no}
                     onPhoneNumberChange={(valid, phone, data) => {
+                        // let isValid = valid && (phone.length == 9);
                         action(valid, data, phone);
                     }}
                     onPhoneNumberFocus={(valid, phone, data) => {
+                        // let isValid = valid && (phone.length == 9);
                         action(valid, data, phone);
                     }}
                     placeholder={placeholder}
@@ -61,6 +63,7 @@ const PhoneInput = ({ label, id, placeholder, country_code, phone_no, action }) 
                     autoPlaceholder={false}
                     onlyCountries={["et", "ke", "ss"]}
                     preferredCountries={[]}
+                    formatOnInit={false}
                     
                 />
             </Container>

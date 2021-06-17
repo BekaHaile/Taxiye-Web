@@ -13,6 +13,7 @@ import {selectDelivery } from "../../../../redux/actions/booking";
 
 const Container = styled("div")`
 width: -webkit-fill-available;
+overflow:auto;
 `;
 
 const ContentContainer = styled("div")`
@@ -49,6 +50,7 @@ height: -webkit-fill-available;
 width: -webkit-fill-available;
 max-width:490px;
 justify-content:space-between;
+
 `;
 
 const Icon = styled("img")`
