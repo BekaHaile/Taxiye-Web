@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "../../image";
-import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, InputContainer, Title, SubTitle } from "../../elements";
+import {FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, InputContainer, Title, SubTitle } from "../../elements";
 import colors from "../../../../theme/main/colors";
 import { DefaultInput } from "../../../form/input-fields/primary-input";
 import Link from "next/link";
-import NeedHelp from "../../terms";
+// import NeedHelp from "../../terms";
 
 const LinkWithLine = styled("a")`
 color:${colors.primary};
@@ -37,8 +36,6 @@ transform: translate(0%, -50%);
 const Credential = () => {
   return (
     <>
-      <ContentWrapper>
-        <Image />
         <FormContainer>
           <LeftAlignedForm>
             <HeaderContainer>
@@ -86,11 +83,9 @@ const Credential = () => {
               <Link href="/signup/corporate/finish">
                 <CustomButton>Get Started</CustomButton>
               </Link>
-              <NeedHelp/>
             </ContentContainer>
           </LeftAlignedForm>
         </FormContainer>
-      </ContentWrapper>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import * as actions from "../../actions/user";
 import axios from "axios";
-import { showError } from "../common";
+import { showError, validateEmail } from "../common";
 
 
 export const user = (store) => (next) => async (action) => {
@@ -114,8 +114,5 @@ async function validateUser(data, next) {
     }
 }
 
-function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
+
 

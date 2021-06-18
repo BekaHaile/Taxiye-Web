@@ -5,9 +5,10 @@ import Router from 'next/router'
 import Link from 'next/link';
 import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../../elements";
 import styled from "styled-components";
-import NeedHelp from "../../need-help";
-
+import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
 import Modal from "../../../modal";
+import {resendOtp} from "../../../../redux/actions/user";
 const BolderNavLink = styled(NavLink)`
 font-weight: 600;
 `;
@@ -67,60 +68,46 @@ transform: translate(0%, -50%);
 `;
 
 const PhoneVerification = () => {
+   
     const [show, setShow] = useState(false);
-    const [sendSms, setSendTextShow] = useState(false);
+    const step = useSelector((state) => state["user"]["step"]);
+    const loading = useSelector((state) => state["user"]["loading"]);
+
+    const phone_no = useSelector((state) => state["user"]["phone_no"]);
+    const otpSent = useSelector((state) => state["user"]["otpSent"]);
+    const country_code = useSelector((state) => state["user"]["country_code"]);
+
+    const userData = useSelector((state) => state["user"]["userData"]);
+
+    const phone_number = `${country_code}${phone_no}`;
     return (
         <>
-            <ContentWrapper>
-                <Image/>
+          
                 <FormContainer>
                     <LeftAlignedForm>
-                        <HeaderContainer>
-                            <Title>Verify your Phone Number</Title>
-                            <SubTitle>Verify your number by typing the 6 digit code we sent via text.</SubTitle>
-                        </HeaderContainer>
-                        <ContentContainer>
-                            <InputContainer>
-                                <DefaultInput
-                                    label="Verification code *"
-                                    placeholder="__ __ __ __ __ __"
-                                    id="phone" />
-                            </InputContainer>
-
-                            <FlexContainer>
-                                <SubTitle>We sent a code to the following number</SubTitle>
-                                <BolderNavLink onClick={() => Router.back()}>+251 911 39 96 31</BolderNavLink>
-                                <BolderNavLink onClick={() => setShow(true)}>Resend code</BolderNavLink>
-                            </FlexContainer>
-                            <Link href="/signup/corporate/credential">
-                            <CustomButton>Continue</CustomButton>
-                            </Link>
-                            <FlexContainer>
-                                <NeedHelp/>
-                                <SmallerNavLink onClick={() => Router.back()}>Change Phone Number</SmallerNavLink>
-                            </FlexContainer>
-                        </ContentContainer>
+                    
                     </LeftAlignedForm>
                 </FormContainer>
-                <Modal onClose={() => setShow(false)} show={show}>
+                
+                <Modal onClose={() => setShow(false)} show={!otpSent && show && !loading}>
                     <Container>
-                    <ModalTitle>We will resend code to +251 911 39 96 31</ModalTitle>
+                        <ModalTitle>We will resend code to {phone_number}</ModalTitle>
                     </Container>
-                    <FixedCustomButton onClick={()=> {setShow(false); setSendTextShow(true);}}>Text me</FixedCustomButton>
+                    <FixedCustomButton onClick={() => { store.dispatch(resendOtp()); }}>Text me</FixedCustomButton>
                 </Modal>
 
-                <Modal onClose={() => setSendTextShow(false)} show={sendSms}>
-                    <Container>
-                    <ModalTitle>We have sent 6 digit code to +251 911 39 96 31</ModalTitle>
-                    <InfoText>please check your inbox</InfoText>
-                    <CodeSentContainer>
-                        <img src={require("../../../../assets/icons/checked.svg")}></img>
-                        <CodeSentText> Code sent</CodeSentText>
-                    </CodeSentContainer>
-                    </Container>
-                    <FixedCustomButton onClick={() => setSendTextShow(false)}>Done</FixedCustomButton>
+                <Modal onClose={() => setShow(false)} show={otpSent && show && !loading}>
+                    <div>
+                        <ModalTitle>We have sent 6 digit code to {phone_number}</ModalTitle>
+                        <InfoText>please check your inbox</InfoText>
+                        <CodeSentContainer>
+                            <img src={require("../../../assets/icons/checked.svg")}></img>
+                            <CodeSentText> Code sent</CodeSentText>
+                        </CodeSentContainer>
+                    </div>
+                    <FixedCustomButton onClick={() => setShow(false)}>Done</FixedCustomButton>
                 </Modal>
-            </ContentWrapper>
+            
         </>
     );
 };

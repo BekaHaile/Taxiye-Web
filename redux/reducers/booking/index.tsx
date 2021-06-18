@@ -1,4 +1,4 @@
-import * as actionsTypes from "../../types/booking";
+import * as actionTypes from "../../types/booking";
 let date = new Date();
 const initialState = {
     cities: [],
@@ -47,50 +47,50 @@ const initialState = {
 export default function booking(state = initialState, action) {
 
     switch (action.type) {
-        case actionsTypes.ORIGIN_SELECTED:
+        case actionTypes.ORIGIN_SELECTED:
             return { ...state, origin: action.payload.origin };
-        case actionsTypes.DESTINATION_SELECTED:
+        case actionTypes.DESTINATION_SELECTED:
             return { ...state, destination: action.payload.destination };
-        case actionsTypes.INPUT_VALIDATED:
+        case actionTypes.INPUT_VALIDATED:
             return { ...state, isValid: action.payload.isValid };
 
-        case actionsTypes.BOOKING_TYPE_CHANGED:
+        case actionTypes.BOOKING_TYPE_CHANGED:
             return { ...state, type: action.payload.type, vehicles: [] };
-        case actionsTypes.DATE_ADDED:
+        case actionTypes.DATE_ADDED:
             return { ...state, date: action.payload.date };
-        case actionsTypes.TIME_ADDED:
+        case actionTypes.TIME_ADDED:
             return { ...state, time: action.payload.time };
-        case actionsTypes.PACKAGE_SELECTED:
+        case actionTypes.PACKAGE_SELECTED:
             return { ...state, package: action.payload.package };
-        case actionsTypes.VEHICLES_ADDED:
+        case actionTypes.VEHICLES_ADDED:
             return { ...state, vehicles: action.payload.vehicles, city: action.payload.city };
-        case actionsTypes.VEHICLES_LOADING:
+        case actionTypes.VEHICLES_LOADING:
             return { ...state, fetchVehiclesLoading: action.payload.loading };
-        case actionsTypes.VEHICLE_SELECTED:
+        case actionTypes.VEHICLE_SELECTED:
             return { ...state, vehicle: action.payload.vehicle };
 
-        case actionsTypes.JOURNEY_TYPE_CHANGED:
+        case actionTypes.JOURNEY_TYPE_CHANGED:
             return { ...state, journey: { ...state.journey, type: action.payload.type } };
-        case actionsTypes.JOURNEY_DATE_CHANGED:
+        case actionTypes.JOURNEY_DATE_CHANGED:
             return { ...state, journey: { ...state.journey, returnDate: action.payload.date } };
-        case actionsTypes.JOURNEY_TIME_CHANGED:
+        case actionTypes.JOURNEY_TIME_CHANGED:
             return { ...state, journey: { ...state.journey, returnTime: action.payload.time } };
 
-        case actionsTypes.PAYMENT_METHODS_FETCHED:
+        case actionTypes.PAYMENT_METHODS_FETCHED:
             return { ...state, payment_methods: action.payload.payment_methods };
 
-            case actionsTypes.PAYMENT_LOADING_STATE_CHANGED:
+            case actionTypes.PAYMENT_LOADING_STATE_CHANGED:
                 return { ...state, paymentMethodLoading: action.payload.paymentMethodLoading };
 
 
-        case actionsTypes.DELIVERY_IMAGES_ADDED: {
+        case actionTypes.DELIVERY_IMAGES_ADDED: {
             return { ...state, delivery: { ...state.delivery, images: [...state.delivery.images, action.payload.images] } };
         }
-        case actionsTypes.DELIVERY_IMAGES_UPLOADED: {
+        case actionTypes.DELIVERY_IMAGES_UPLOADED: {
             return { ...state, delivery: { ...state.delivery, image: action.payload.image } };
         }
 
-        case actionsTypes.DELIVERY_IMAGE_REMOVED: {
+        case actionTypes.DELIVERY_IMAGE_REMOVED: {
             return {
                 ...state, delivery: {
                     ...state.delivery, images: [
@@ -100,37 +100,37 @@ export default function booking(state = initialState, action) {
             };
         }
 
-        case actionsTypes.DELIVERY_COMMENT_CHANGED:
+        case actionTypes.DELIVERY_COMMENT_CHANGED:
             return { ...state, delivery: { ...state.delivery, comment: action.payload.comment } };
 
-        case actionsTypes.CITIES_ADDED:
+        case actionTypes.CITIES_ADDED:
             return { ...state, cities: action.payload.cities };
 
-        case actionsTypes.PAYMENT_METHOD_CHANGED:
+        case actionTypes.PAYMENT_METHOD_CHANGED:
             return { ...state, paymentMethod: action.payload.paymentMethod };
-        case actionsTypes.COUPON_ADDED:
+        case actionTypes.COUPON_ADDED:
             return { ...state, couponCode: action.payload.couponCode };
-        case actionsTypes.NOTE_ADDED:
+        case actionTypes.NOTE_ADDED:
             return { ...state, note: action.payload.note };
 
-        case actionsTypes.REQUEST_CONFIRMED:
+        case actionTypes.REQUEST_CONFIRMED:
             return { ...state, driverLoading: true };
-        case actionsTypes.DRIVER_ASSIGNED:
+        case actionTypes.DRIVER_ASSIGNED:
             return { ...state, driver: action.payload.driver, driverLoading: false };
 
-        case actionsTypes.REQUEST_CANCELED:
+        case actionTypes.REQUEST_CANCELED:
             return { ...state, cancelRide: true };
-        case actionsTypes.TERMINATION_REASON_ADDED:
+        case actionTypes.TERMINATION_REASON_ADDED:
             return { ...state, reason: action.payload.reason, cancelRide: false };
 
-        case actionsTypes.STEP_CHANGED:
+        case actionTypes.STEP_CHANGED:
             return { ...state, step: action.payload.step };
 
-        case actionsTypes.HOUSE_NUMBER_ADDED:
+        case actionTypes.HOUSE_NUMBER_ADDED:
             return { ...state, house_number: action.payload.house_number };
-        case actionsTypes.LANDMARK_ADDED:
+        case actionTypes.LANDMARK_ADDED:
             return { ...state, landmark: action.payload.landmark };
-        case actionsTypes.VALIDATED_ADDRESS:
+        case actionTypes.VALIDATED_ADDRESS:
             return { ...state, isAddressValid: action.payload.isAddressValid };
 
         default:

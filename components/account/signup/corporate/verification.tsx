@@ -5,16 +5,19 @@ import { DefaultOtpInput } from "../../../form/input-fields/otp-field";
 import Router from 'next/router';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import NeedHelp from "../../need-help";
 
 
 const BolderNavLink = styled(NavLink)`
 font-weight: 600;
 `;
+const SmallerNavLink = styled(NavLink)`
+font-size:12px;
+`;
 
-
-const VerificationInputForm = ({changeOtp, phone_number, action, setShow, goBack}:any) => {
-    const isValid = useSelector((state) => state["user"]["isOtpValid"]);
-    const otp = useSelector((state) => state["user"]["otp"]);
+const VerificationInputForm = ({ changeOtp, phone_number, action, setShow, goBack }: any) => {
+    const isValid = useSelector((state) => state["corporate"]["isOtpValid"]);
+    const otp = useSelector((state) => state["corporate"]["otp"]);
     return (
         <>
             <HeaderContainer>
@@ -28,8 +31,8 @@ const VerificationInputForm = ({changeOtp, phone_number, action, setShow, goBack
                         placeholder=""
                         id="phone"
                         value={otp}
-                        onChange={(val)=>changeOtp(val)}
-                        />
+                        onChange={(val) => changeOtp(val)}
+                    />
                 </InputContainer>
 
                 <FlexContainer>
@@ -37,14 +40,10 @@ const VerificationInputForm = ({changeOtp, phone_number, action, setShow, goBack
                     <BolderNavLink onClick={() => goBack()}>{phone_number}</BolderNavLink>
                     <BolderNavLink onClick={() => setShow(true)}>Resend code</BolderNavLink>
                 </FlexContainer>
-                <CustomButton disabled={!isValid} onClick={() => action()}>Next</CustomButton>
+                <CustomButton disabled={!isValid} onClick={() => action()}>Continue</CustomButton>
                 <FlexContainer>
-                    <SubTitle>Problem receiving the code?</SubTitle>
-                    <FlexContainer>
-                        <Avatar src={require("../../../../assets/icons/main-search.svg")} />
-                        <NavLink href="/">Support Center</NavLink>
-                        <NavLink onClick={() => goBack()}>Change Phone Number</NavLink>
-                    </FlexContainer>
+                    <NeedHelp />
+                    <SmallerNavLink onClick={() => Router.back()}>Change Phone Number</SmallerNavLink>
                 </FlexContainer>
             </ContentContainer>
         </>

@@ -35,11 +35,10 @@ transform: translate(0%, -50%);
 
 
 
-const Credential = () => {
+const WrapUp = () => {
     return (
         <>
-            <ContentWrapper>
-                <Image />
+            
                 <FormContainer>
                     <LeftAlignedForm>
                         <HeaderContainer>
@@ -70,9 +69,9 @@ const Credential = () => {
                         </ContentContainer>
                     </LeftAlignedForm>
                 </FormContainer>
-            </ContentWrapper>
+            
         </>
     );
 };
 
-export default Credential;
+export default WrapUp;

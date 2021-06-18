@@ -57,7 +57,6 @@ const Loading = () => {
             <LoadingView>
                 <LoadingContent >
                     <MainLoader />
-
                 </LoadingContent>
             </LoadingView>
         </>

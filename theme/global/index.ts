@@ -477,7 +477,32 @@ p,h1,h2,h3,h4,h5,h6{
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000; 
 }
+
+select{
+  outline-color: #A02167;
   
+}
+.defaultDropDown {
+  position: relative;
+  
+}
+.defaultDropDown:after {
+  content: url(${require("../../assets/icons/drop-down-icon.svg")});
+  
+  color: #444444;
+
+  right: 20px;
+  top: 22px;
+  padding: 0 0 2px;  
+  position: absolute;
+  pointer-events: none;
+}
+.defaultDropDown select{
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+  }
+
 `;
 
 
