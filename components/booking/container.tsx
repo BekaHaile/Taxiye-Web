@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tabs from "../tab-forms/tab";
 import styled from "styled-components";
 import OnDemand from "./on-demand/";
@@ -8,10 +8,12 @@ import Delivery from "./delivery/";
 import Meta from "./delivery/meta";
 
 import { useSelector } from "react-redux";
+import { initiatePaymentMethodCall } from "../../redux/actions/booking";
 
 import Login from "./login";
 import Approve from "./approval";
 import Confirmation from "./confirmation";
+import store from '../../redux/store';
 
 const ContainerWrapper = styled("div")`
 position:absolute;
@@ -29,31 +31,34 @@ padding:5px 0px;
 
 
 const Container = () => {
-    
-    const [selectedContent, setSelectedContent] = useState("demand");
+
+    const activeTab = useSelector((state) => state["booking"]["type"]);
     const page = useSelector((state) => state["navigation"]["page"]);
-    
+    useEffect(() => {
+        if (page == "confirm") {
+            store.dispatch(initiatePaymentMethodCall());
+        }
+    }, [page]);
 
     return (
         <ContainerWrapper>
             {
-            page == "login" ? <Login /> :
-            page == "confirm" ? <Confirmation/> :
-            page == "approve" ? <Approve/> :
-            page == "info" ? <Meta/> :
-                <Tabs
-                    setSelectedContent={setSelectedContent}
-                    contentView={<ChildrenContainer>
-                        {
-                            selectedContent == "rental" ?
-                                <Rental /> :
-                                selectedContent == "out-station" ?
-                                    <OutStation /> :
-                                    selectedContent == "delivery" ?
-                                        <Delivery /> :
-                                        <OnDemand />
-                        }
-                    </ChildrenContainer>} />
+                page == "login" ? <Login /> :
+                    page == "confirm" ? <Confirmation /> :
+                        page == "approve" ? <Approve /> :
+                            page == "info" ? <Meta /> :
+                                <Tabs
+                                    contentView={<ChildrenContainer>
+                                        {
+                                            activeTab == "rental" ?
+                                                <Rental /> :
+                                                activeTab == "out-station" ?
+                                                    <OutStation /> :
+                                                    activeTab == "delivery" ?
+                                                        <Delivery /> :
+                                                        <OnDemand />
+                                        }
+                                    </ChildrenContainer>} />
             }
         </ContainerWrapper>
     );

@@ -1,6 +1,8 @@
 import * as actionsTypes from "../../types/booking";
+let date = new Date();
 const initialState = {
     cities: [],
+    payment_methods: [],
     type: "on-demand",
     city: "",
     origin: {
@@ -11,12 +13,12 @@ const initialState = {
         address: null,
         location: null
     },
-    date: new Date(),
-    time: new Date().getHours()+":"+new Date().getMinutes(),
+    date: date,
+    time: ('0' + date.getHours()).slice(-2) + ":" + date.getMinutes(),
     journey: {
         type: "Round Trip",
-        returnDate: new Date(),
-        returnTime: "06:30"
+        returnDate: date,
+        returnTime: ('0' + date.getHours()).slice(-2) + ":" + date.getMinutes(),
     },
     vehicles: [],
     fetchVehiclesLoading: false,
@@ -24,7 +26,7 @@ const initialState = {
     delivery: {
         comment: "",
         images: [],
-        image:null,
+        image: null,
     },
     package: "Round Trip",
     direction: null,
@@ -34,6 +36,7 @@ const initialState = {
     note: "",
     driver: null,
     driverLoading: false,
+    paymentMethodLoading: false,
     cancelRide: false,
     reason: "",
     landmark: "",
@@ -73,14 +76,20 @@ export default function booking(state = initialState, action) {
         case actionsTypes.JOURNEY_TIME_CHANGED:
             return { ...state, journey: { ...state.journey, returnTime: action.payload.time } };
 
+        case actionsTypes.PAYMENT_METHODS_FETCHED:
+            return { ...state, payment_methods: action.payload.payment_methods };
+
+            case actionsTypes.PAYMENT_LOADING_STATE_CHANGED:
+                return { ...state, paymentMethodLoading: action.payload.paymentMethodLoading };
+
 
         case actionsTypes.DELIVERY_IMAGES_ADDED: {
             return { ...state, delivery: { ...state.delivery, images: [...state.delivery.images, action.payload.images] } };
         }
         case actionsTypes.DELIVERY_IMAGES_UPLOADED: {
-            return { ...state, delivery: { ...state.delivery, image: action.payload.image} };
+            return { ...state, delivery: { ...state.delivery, image: action.payload.image } };
         }
-        
+
         case actionsTypes.DELIVERY_IMAGE_REMOVED: {
             return {
                 ...state, delivery: {

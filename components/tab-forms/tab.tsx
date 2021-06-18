@@ -54,7 +54,7 @@ const TabButton = styled.a`
   }
 `;
 
-const Tab = ({ setSelectedContent, contentView }) => {
+const Tab = ({contentView }) => {
   const activeTab = useSelector((state) => state["booking"]["type"]);
   return (
 
@@ -69,8 +69,7 @@ const Tab = ({ setSelectedContent, contentView }) => {
           className={activeTab === "on-demand" ? "active" : null}
           onClick={() => {
             store.dispatch(changeBookingType("on-demand"));
-            if (setSelectedContent)
-              setSelectedContent("on-demand");
+          
           }}
         >
           On Demand
@@ -79,8 +78,7 @@ const Tab = ({ setSelectedContent, contentView }) => {
           className={activeTab === "rental" ? "active" : null}
           onClick={() => {
             store.dispatch(changeBookingType("rental"));
-            if (setSelectedContent)
-              setSelectedContent("rental");
+            
           }}
         >
           Rental
@@ -89,8 +87,7 @@ const Tab = ({ setSelectedContent, contentView }) => {
           className={activeTab === "out-station" ? "active" : null}
           onClick={() => {
             store.dispatch(changeBookingType("out-station"));
-            if (setSelectedContent)
-              setSelectedContent("out-station");
+            
           }}
         >
           Out Station
@@ -99,8 +96,7 @@ const Tab = ({ setSelectedContent, contentView }) => {
           className={activeTab === "delivery" ? "active" : null}
           onClick={() => {
             store.dispatch(changeBookingType("delivery"));
-            if (setSelectedContent)
-              setSelectedContent("delivery");
+            
           }}
         >
           Delivery

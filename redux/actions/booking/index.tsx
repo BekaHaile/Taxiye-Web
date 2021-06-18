@@ -203,6 +203,7 @@ export const addDeliveryItemImages = (images) => ({
         images: images
     }
 });
+
 export const removeDeliveryItemImages = (index) => ({
     type: actions.DELIVERY_IMAGE_REMOVED,
     payload: {
@@ -210,4 +211,20 @@ export const removeDeliveryItemImages = (index) => ({
     }
 });
 
+export const setPaymentMethods = (payment_methods) => ({
+    type: actions.PAYMENT_METHODS_FETCHED,
+    payload: {
+        payment_methods: payment_methods
+    }
+});
+export const initiatePaymentMethodCall = () => ({
+    type: actions.FETCH_PAYMENT_METHOD_CALLED,
+  
+});
 
+export const setPaymentMethodLoading = (loading) => ({
+    type: actions.PAYMENT_LOADING_STATE_CHANGED,
+    payload: {
+        loading: loading
+    }
+});

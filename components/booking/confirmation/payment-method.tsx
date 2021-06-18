@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { changePayemntMethod } from "../../../redux/actions/booking";
 import store from "../../../redux/store";
+import { Loader } from '../../loading/loading';
 
 const FlexContainer = styled("div")`
 display:flex;
@@ -27,16 +28,20 @@ padding-bottom:20px;
 `;
 
 const PaymentMethod = () => {
-    const lists = ["Cash", "ElSabi"];
+    const payment_methods = useSelector((state) => state["booking"]["payment_methods"]);
     const paymentMethod = useSelector((state) => state["booking"]["paymentMethod"]);
+    const paymentMethodLoading = useSelector((state) => state["booking"]["paymentMethodLoading"]);
+
     return (
         <>
             <Title>Payment Method</Title>
             <FlexContainer>
                 {
-                    lists.map((list, key) =>
-                        <Method key={key} onClick={() => store.dispatch(changePayemntMethod(list))} className={paymentMethod == list ? "activeCard" : ""}>{list}</Method>
-                    )
+                    paymentMethodLoading ?
+                        <Loader /> :
+                        payment_methods.map((list, key) =>
+                            <Method key={key} onClick={() => store.dispatch(changePayemntMethod(list))} className={paymentMethod == list ? "activeCard" : ""}>{list}</Method>
+                        )
                 }
 
             </FlexContainer>

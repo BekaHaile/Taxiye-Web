@@ -1,6 +1,7 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
 import { showSuccess, showInfo } from "../common";
+import { fetchPaymentMethods } from "./common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -97,6 +98,15 @@ export const booking = (store) => (next) => async (action) => {
         next(navigationActions.goTo(""));
         showSuccess(next);
     }
+    else if (action.type == "FETCH_PAYMENT_METHOD_CALLED") {
+        next(actions.setPaymentMethodLoading(true));
+        sleep(2000);
+        let payment_methods = fetchPaymentMethods();
+        next(actions.setPaymentMethods(payment_methods));
+        next(actions.setPaymentMethodLoading(false));
+    }
+
+    
 
 };
 

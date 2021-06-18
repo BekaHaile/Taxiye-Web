@@ -45,10 +45,12 @@ export function DatePicker({selectedDate, id, placeholder,action }) {
 export function TimePicker({selectedTime, id, placeholder, action}) {
 
   const handleDateChange = (time) => {
+    console.log(selectedTime);
     action(time.target.value);
   };
 
   return (
+    <>
     <TextField
       id={id}
       className="pickers"
@@ -63,5 +65,6 @@ export function TimePicker({selectedTime, id, placeholder, action}) {
         step: 300,
       }}
     />
+    </>
   );
 }
