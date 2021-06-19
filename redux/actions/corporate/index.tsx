@@ -64,3 +64,47 @@ export const initiateSubmitCompanyData = () => {
         type: actions.COMPANY_DATA_SUBMIT_INITIATED,
     }
 };
+
+
+export const goToStep = (step) => {
+    return {
+        type: actions.STEP_CHANGED,
+        payload:{
+            step:step
+        }
+    }
+};
+
+
+export const changeOtpStatus = ({ loading, otpSent }) => {
+    return {
+        type: actions.CORPORATE_OTP_SENT,
+        payload: {
+            otpSent: otpSent,
+            loading: loading
+        }
+    }
+};
+
+export const changeOtp = (otp) => {
+    return {
+        type: actions.CORPORATE_OTP_ADDED,
+        payload: {
+            otp: otp
+        }
+
+    }
+};
+
+export const resendOtp = () => {
+    return {
+        type: actions.CORPORATE_OTP_RESENT,
+    }
+};
+
+export const submitOtp = () => {
+    return {
+        type: actions.CORPORATE_OTP_SUBMITTED,
+    }
+};
+

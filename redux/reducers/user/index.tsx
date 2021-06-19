@@ -1,4 +1,4 @@
-import * as actionsTypes from "../../types/user";
+import * as actionTypes from "../../types/user";
 const initialState = {
     phone_no: "",
     country_code: "+251",
@@ -24,13 +24,13 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
-        case actionsTypes.FIRST_NAME_ADDED:
+        case actionTypes.FIRST_NAME_ADDED:
             return { ...state, user: { ...state.user, firstName: action.payload.firstName } };
-        case actionsTypes.LAST_NAME_ADDED:
+        case actionTypes.LAST_NAME_ADDED:
             return { ...state, user: { ...state.user, lastName: action.payload.lastName } };
-        case actionsTypes.EMAIL_ADDED:
+        case actionTypes.EMAIL_ADDED:
             return { ...state, user: { ...state.user, email: action.payload.email } };
-        case actionsTypes.PHONE_ADDED:
+        case actionTypes.PHONE_ADDED:
             return {
                 ...state,
                 phone_no: action.payload.phone_no,
@@ -38,25 +38,25 @@ export default function userReducer(state = initialState, action) {
                 country: action.payload.country,
                 isValid: action.payload.isValid
             };
-        case actionsTypes.PHONE_SUBMITTED:
+        case actionTypes.PHONE_SUBMITTED:
             return { ...state };
-        case actionsTypes.OTP_SUBMITTED:
+        case actionTypes.OTP_SUBMITTED:
             return { ...state };
-        case actionsTypes.OTP_ADDED:
+        case actionTypes.OTP_ADDED:
             return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 6 };
-        case actionsTypes.LOADING_UPDATED:
+        case actionTypes.LOADING_UPDATED:
             return { ...state, loading: action.payload.loading };
-        case actionsTypes.KEEP_ME_SIGNED_IN_CHANGED:
+        case actionTypes.KEEP_ME_SIGNED_IN_CHANGED:
             return { ...state, keepMeSignedIn: action.payload.keepMeSignedIn };
-        case actionsTypes.STEP_CHANGED:
+        case actionTypes.STEP_CHANGED:
             return { ...state, step: action.payload.step };
-        case actionsTypes.OTP_SENT:
+        case actionTypes.OTP_SENT:
             return { ...state, otpSent: action.payload.otpSent, loading: action.payload.loading };
-        case actionsTypes.USERISVALIDATED:
+        case actionTypes.USERISVALIDATED:
             return { ...state, isUserValid: action.payload.isUserValid };
-        case actionsTypes.TERMS_CHANGED:
+        case actionTypes.TERMS_CHANGED:
             return { ...state, agreeToTerms: action.payload.agreeToTerms };
-        case actionsTypes.RESET:
+        case actionTypes.RESET:
             return { initialState };
 
         default:

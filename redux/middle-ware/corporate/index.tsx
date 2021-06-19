@@ -1,8 +1,8 @@
 
 import * as actions from "../../actions/corporate";
 import axios from "axios";
-import * as navigationActions from "../../actions/navigation";
-import { validateEmail } from "../common";
+import { validateEmail, showError } from "../common";
+
 export const corporate = (store) => (next) => async (action) => {
     next(action);
     let data = store.getState().corporate;
@@ -21,18 +21,68 @@ export const corporate = (store) => (next) => async (action) => {
             next(actions.setValidation(false));
 
     }
+
     else if (action.type == "COMPANY_DATA_SUBMIT_INITIATED") {
-        
+
         try {
             next(actions.initiateLoading(true));
             await submitCompanyData({});
             next(actions.initiateLoading(false));
-            next(navigationActions.goTo("corporate-verify"));
-            
+            next(actions.goToStep(2));
+
         } catch (e) {
             next(actions.setValidation(false));
         }
     }
+    else if (action.type == "CORPORATE_OTP_RESENT") {
+        next(actions.changeOtpStatus({ loading: true, otpSent: false, }));
+        try {
+            let res = await submitPhone(
+                {
+                    "phone_no": `${data["country_code"]}${data["phone_no"]}`,
+                    "country": `${data["country"]}`
+                }
+            );
+            if (res) {
+                if (res.status === "OK") {
+
+                    next(actions.changeOtpStatus({ loading: false, otpSent: true, }));
+                }
+                else {
+                    next(actions.changeOtpStatus({ loading: false, otpSent: false }));
+                }
+            }
+        } catch (e) {
+            showError(next);
+            next(actions.changeOtpStatus({ loading: false, otpSent: false, }));
+        }
+    }
+
+    else if (action.type == "CORPORATE_OTP_SUBMITTED") {
+        next(actions.initiateLoading(true));
+        try {
+            let res = await submitPhone(
+                {
+                    "phone_no": `${data["country_code"]}${data["phone_no"]}`,
+                    "country": `${data["country"]}`
+                }
+            );
+            if (res) {
+                if (res.status === "OK") {
+                    next(actions.goToStep(3));
+                    next(actions.changeOtpStatus({ loading: false, otpSent: true }));
+                }
+                else {
+                    next(actions.changeOtpStatus({ loading: false, otpSent: false }));
+                }
+            }
+        } catch (e) {
+            showError(next);
+            next(actions.initiateLoading(false));
+        }
+    }
+
+
 }
 
 async function submitCompanyData(data) {
@@ -40,6 +90,18 @@ async function submitCompanyData(data) {
     try {
         await sleep(2000);
         return [];
+        const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
+        const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data, { timeout: 5000 });
+        return res.data;
+    } catch (e) {
+        return null;
+    }
+}
+
+async function submitPhone(data) {
+    try {
+        await sleep(2000);
+        return {status:"OK"};
         const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
         const res = await axios.post(`${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`, data, { timeout: 5000 });
         return res.data;

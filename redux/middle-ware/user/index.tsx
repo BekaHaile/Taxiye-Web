@@ -32,6 +32,7 @@ export const user = (store) => (next) => async (action) => {
             next(actions.changeOtpStatus({ loading: false, otpSent: false }));
         }
     } else if (action.type == "OTP_RESENT") {
+        alert("User");
         next(actions.changeOtpStatus({ loading: true, otpSent: false, }));
         try {
             let res = await submitPhone(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer, InfoWindow } from "react-google-maps";
 
 interface props {
     googleMapURL?: string
@@ -16,6 +16,7 @@ interface props {
 function Map({ originAction, directionAction, googleMapURL, loadingElement, containerElement, mapElement, places, action }: props) {
     const [directions, setDirection] = useState(null);
     const directionsService = new google.maps.DirectionsService();
+    const [markers, setMarkers] = useState([]);
 
     useEffect(() => {
         if (directionAction) {
@@ -32,20 +33,24 @@ function Map({ originAction, directionAction, googleMapURL, loadingElement, cont
             "travelMode": google.maps.TravelMode.DRIVING
         };
 
-            directionsService.route(
-                request,
-                (result, status) => {
-                    if (status === google.maps.DirectionsStatus.OK) {
-                     
-                        setDirection(
-                            result
-                        );
+        directionsService.route(
+            request,
+            (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
 
-                    } else {
-                        console.log(result);
-                    }
+                    setDirection(
+                        result
+                    );
+                    var leg = result.routes[0].legs[0];
+                    var s = makeMarker(leg.start_location, "start");
+                    var e = makeMarker(leg.end_location, "end");
+                    setMarkers([s, e]);
+
+                } else {
+                    console.log(result);
                 }
-            );
+            }
+        );
     }
 
 
@@ -56,20 +61,41 @@ function Map({ originAction, directionAction, googleMapURL, loadingElement, cont
             {...containerElement}
             {...mapElement}
             defaultZoom={3}
-            defaultCenter={{lat:7, lng:10}}
+            defaultCenter={{ lat: 7, lng: 10 }}
 
         >
             {
                 directions && <DirectionsRenderer
                     key={directions}
+                    options={{
+                        draggable: true,
+                        suppressMarkers: true
+                    }
+                    }
+                    onDirectionsChanged={() => console.log(directions)}
                     directions={directions} />
             }
+            {markers}
 
 
         </GoogleMap>
     );
 
 }
+function makeMarker(position, type) {
+    return <Marker
+        key={position}
+        position={position}
+        icon={{
+            url: type == "start" ? require("../../assets/icons/origin.svg") : require("../../assets/icons/destination.svg"),
+            scaledSize: new google.maps.Size(30, 30)
+        }}
+        
+    />
+}
+
+
+
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
 

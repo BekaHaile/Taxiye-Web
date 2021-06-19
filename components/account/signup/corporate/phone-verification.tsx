@@ -1,21 +1,13 @@
 import React, { useState } from "react";
-import Image from "../../image";
-import { DefaultInput } from "../../../form/input-fields/primary-input";
-import Router from 'next/router'
-import Link from 'next/link';
-import { ContentWrapper, FlexContainer, CustomButton, ContentContainer, HeaderContainer, CenteredForm, FormContainer, Avatar, NavLink, Title, SubTitle, InputContainer } from "../../elements";
+import { CustomButton, CenteredForm, FormContainer, NavLink } from "../../elements";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
 import Modal from "../../../modal";
-import {resendOtp} from "../../../../redux/actions/user";
-const BolderNavLink = styled(NavLink)`
-font-weight: 600;
-`;
+import { goToStep, changeOtp, changeOtpStatus, resendOtp, submitOtp } from "../../../../redux/actions/corporate";
+import Verification from "./verification";
+import {Loading} from "../../../loading/loading";
 
-const SmallerNavLink = styled(NavLink)`
-font-size:12px;
-`;
 
 const Container = styled('div')`
 padding-bottom:30px;
@@ -68,46 +60,56 @@ transform: translate(0%, -50%);
 `;
 
 const PhoneVerification = () => {
-   
+
     const [show, setShow] = useState(false);
-    const step = useSelector((state) => state["user"]["step"]);
-    const loading = useSelector((state) => state["user"]["loading"]);
+    const loading = useSelector((state) => state["corporate"]["loading"]);
 
-    const phone_no = useSelector((state) => state["user"]["phone_no"]);
-    const otpSent = useSelector((state) => state["user"]["otpSent"]);
-    const country_code = useSelector((state) => state["user"]["country_code"]);
+    const phone_no = useSelector((state) => state["corporate"]["phone_no"]);
+    const otpSent = useSelector((state) => state["corporate"]["otpSent"]);
+    const country_code = useSelector((state) => state["corporate"]["country_code"]);
 
-    const userData = useSelector((state) => state["user"]["userData"]);
+    const userData = useSelector((state) => state["corporate"]["userData"]);
 
     const phone_number = `${country_code}${phone_no}`;
+    const handleClick = () => {
+        setShow(true);
+        store.dispatch(changeOtpStatus({ loading: false, otpSent: false }));
+    }
+    const goBack = () => {
+
+        store.dispatch(goToStep(1));
+    }
+
     return (
         <>
-          
-                <FormContainer>
-                    <LeftAlignedForm>
-                    
-                    </LeftAlignedForm>
-                </FormContainer>
-                
-                <Modal onClose={() => setShow(false)} show={!otpSent && show && !loading}>
-                    <Container>
-                        <ModalTitle>We will resend code to {phone_number}</ModalTitle>
-                    </Container>
-                    <FixedCustomButton onClick={() => { store.dispatch(resendOtp()); }}>Text me</FixedCustomButton>
-                </Modal>
+            {
+                loading ?
+                    <Loading /> : null}
+            <FormContainer>
+                <LeftAlignedForm>
+                    <Verification changeOtp={(val) => store.dispatch(changeOtp(val))} phone_number={phone_number} setShow={handleClick} goBack={goBack} action={() => store.dispatch(submitOtp())} />
+                </LeftAlignedForm>
+            </FormContainer>
 
-                <Modal onClose={() => setShow(false)} show={otpSent && show && !loading}>
-                    <div>
-                        <ModalTitle>We have sent 6 digit code to {phone_number}</ModalTitle>
-                        <InfoText>please check your inbox</InfoText>
-                        <CodeSentContainer>
-                            <img src={require("../../../assets/icons/checked.svg")}></img>
-                            <CodeSentText> Code sent</CodeSentText>
-                        </CodeSentContainer>
-                    </div>
-                    <FixedCustomButton onClick={() => setShow(false)}>Done</FixedCustomButton>
-                </Modal>
-            
+            <Modal onClose={() => setShow(false)} show={!otpSent && show && !loading}>
+                <Container>
+                    <ModalTitle>We will resend code to {phone_number}</ModalTitle>
+                </Container>
+                <FixedCustomButton onClick={() => { store.dispatch(resendOtp()); }}>Text me</FixedCustomButton>
+            </Modal>
+
+            <Modal onClose={() => setShow(false)} show={otpSent && show && !loading}>
+                <div>
+                    <ModalTitle>We have sent 6 digit code to {phone_number}</ModalTitle>
+                    <InfoText>please check your inbox</InfoText>
+                    <CodeSentContainer>
+                        <img src={require("../../../../assets/icons/checked.svg")}></img>
+                        <CodeSentText> Code sent</CodeSentText>
+                    </CodeSentContainer>
+                </div>
+                <FixedCustomButton onClick={() => setShow(false)}>Done</FixedCustomButton>
+            </Modal>
+
         </>
     );
 };

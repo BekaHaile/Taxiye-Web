@@ -13,16 +13,16 @@ import Verification from "./phone-verification";
 
 
 const Signup = ({ hero }) => {
-  const page = useSelector((state) => state["navigation"]["page"]);
+  const step = useSelector((state) => state["corporate"]["step"]);
   return (
     <>
       <ContentWrapper>
         <Image hero={hero} />
-        {page == "corporate-verify" ?
+        {step == 2 ?
           <Verification /> :
-          page == "corporate-credential" ?
+          step == 3 ?
             <Credential /> :
-            page == "corporate-wrapup" ?
+            step == 4 ?
               <WrapUp /> :
               <Company/>
         }

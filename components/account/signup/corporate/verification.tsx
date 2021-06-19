@@ -43,7 +43,7 @@ const VerificationInputForm = ({ changeOtp, phone_number, action, setShow, goBac
                 <CustomButton disabled={!isValid} onClick={() => action()}>Continue</CustomButton>
                 <FlexContainer>
                     <NeedHelp />
-                    <SmallerNavLink onClick={() => Router.back()}>Change Phone Number</SmallerNavLink>
+                    <SmallerNavLink onClick={() => goBack()}>Change Phone Number</SmallerNavLink>
                 </FlexContainer>
             </ContentContainer>
         </>

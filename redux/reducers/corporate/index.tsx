@@ -9,8 +9,10 @@ const initialState = {
     isValid: false,
     no_of_employees: 1,
     loading: false,
+    step: 1,
+    otpSent: false,
+    otp: "",
     isOtpValid: false,
-    otp: ""
 }
 
 export default function corporateReducer(state = initialState, action) {
@@ -33,7 +35,14 @@ export default function corporateReducer(state = initialState, action) {
             return { ...state, isValid: action.payload.isValid }
         case actionTypes.LOADING_INITIATED:
             return { ...state, loading: action.payload.loading }
-
+        case actionTypes.STEP_CHANGED:
+            return { ...state, step: action.payload.step }
+        case actionTypes.CORPORATE_OTP_SUBMITTED:
+            return { ...state };
+        case actionTypes.CORPORATE_OTP_ADDED:
+            return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 6 };
+        case actionTypes.CORPORATE_OTP_SENT:
+            return { ...state, otpSent: action.payload.otpSent, loading: action.payload.loading };
         default:
             return state;
     }
