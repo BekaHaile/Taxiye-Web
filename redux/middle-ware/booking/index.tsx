@@ -100,8 +100,7 @@ export const booking = (store) => (next) => async (action) => {
     }
     else if (action.type == "FETCH_PAYMENT_METHOD_CALLED") {
         next(actions.setPaymentMethodLoading(true));
-        sleep(2000);
-        let payment_methods = fetchPaymentMethods();
+        let payment_methods = await fetchPaymentMethods();
         next(actions.setPaymentMethods(payment_methods));
         next(actions.setPaymentMethodLoading(false));
     }

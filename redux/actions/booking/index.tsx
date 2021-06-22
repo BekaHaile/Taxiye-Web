@@ -222,9 +222,9 @@ export const initiatePaymentMethodCall = () => ({
   
 });
 
-export const setPaymentMethodLoading = (loading) => ({
+export const setPaymentMethodLoading = (paymentMethodLoading) => ({
     type: actions.PAYMENT_LOADING_STATE_CHANGED,
     payload: {
-        loading: loading
+        paymentMethodLoading: paymentMethodLoading
     }
 });

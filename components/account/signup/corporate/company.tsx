@@ -9,8 +9,9 @@ import { DefaultDropDown } from "../../../form/dropdown/drop-down";
 import NeedHelp from "../../need-help";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
-import { initiateSubmitCompanyData, addPhone, addCompanyEmail, addCompanyEmployeesNumber, addCompanyName } from "../../../../redux/actions/corporate";
+import { initiateSubmitCompanyData, addPhone, addCompanyEmail, addCompanyEmployeesNumber, setTermsAgreement, addCompanyName } from "../../../../redux/actions/corporate";
 import { Loading } from "../../../loading/loading";
+import TermsConsent from "../../terms";
 
 const LinkWithLine = styled("a")`
 color:${colors.primary};
@@ -36,7 +37,10 @@ left: 75.5px;
 transform: translate(0%, -50%);
 }
 `;
+const TermsConsentContainer = styled("div")`
 
+
+`;
 
 
 const Company = () => {
@@ -46,6 +50,7 @@ const Company = () => {
   const country_code = useSelector((state) => state["corporate"]["country_code"]);
   const phone_no = useSelector((state) => state["corporate"]["phone_no"]);
   const isValid = useSelector((state) => state["corporate"]["isValid"]);
+  const agreeToTerms = useSelector((state) => state["corporate"]["agreeToTerms"]);
   const loading = useSelector((state) => state["corporate"]["loading"]);
   return (
     <>
@@ -107,11 +112,15 @@ const Company = () => {
                   onChange={(event) => store.dispatch(addCompanyEmployeesNumber(event.target.value))} items={[3, 2, 4, 5, 1]}
                   value={no_of_employees}
                   label="Number of Employees *"
-                  placeholder=""
+                  placeholder="Select one"
                   id="employeenumber" />
               </InputContainer>
             </CustomFlexContainer>
-
+            <TermsConsentContainer>
+              <TermsConsent checked={agreeToTerms} action={(checked) => {
+                store.dispatch(setTermsAgreement(checked));
+              }} />
+            </TermsConsentContainer>
 
             <CustomButton onClick={() => store.dispatch(initiateSubmitCompanyData())} disabled={!isValid}>Continue</CustomButton>
 

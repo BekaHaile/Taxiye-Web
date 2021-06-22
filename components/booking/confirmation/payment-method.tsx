@@ -34,14 +34,15 @@ const PaymentMethod = () => {
 
     return (
         <>
-            <Title>Payment Method</Title>
+            {payment_methods && <Title>Payment Method</Title>}
             <FlexContainer>
                 {
                     paymentMethodLoading ?
                         <Loader /> :
-                        payment_methods.map((list, key) =>
-                            <Method key={key} onClick={() => store.dispatch(changePayemntMethod(list))} className={paymentMethod == list ? "activeCard" : ""}>{list}</Method>
-                        )
+                        payment_methods!=null? payment_methods.map((list, key) =>
+                            <Method key={key} onClick={() => store.dispatch(changePayemntMethod(list.name))} className={paymentMethod == list.name ? "activeCard" : ""}>{list.name}</Method>
+                           
+                        ):null
                 }
 
             </FlexContainer>

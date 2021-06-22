@@ -49,6 +49,8 @@ export const setValidation = (isValid) => {
 };
 
 
+
+
 export const initiateLoading = (loading) => {
     return {
         type: actions.LOADING_INITIATED,
@@ -102,9 +104,69 @@ export const resendOtp = () => {
     }
 };
 
+
 export const submitOtp = () => {
     return {
         type: actions.CORPORATE_OTP_SUBMITTED,
     }
 };
 
+
+export const addFullName = (admin_full_name) => {
+    
+    return {
+        type: actions.ADMIN_NAME_ADDED,
+        payload: {
+            admin_full_name: admin_full_name
+        }
+    }
+};
+export const addAdminEmail = (admin_email) => {
+    return {
+        type: actions.ADMIN_EMAIL_ADDED,
+        payload: {
+            admin_email: admin_email
+        }
+    }
+};
+
+export const addPassword = (password) => {
+    return {
+        type: actions.ADMIN_PASSWORD_ADDED,
+        payload: {
+            password: password
+        }
+    }
+};
+
+export const addConfirmationPassword = (confirmation_password) => {
+    return {
+        type: actions.ADMIN_CONFIRMATION_PASSWORD_ADDED,
+        payload: {
+            confirmation_password: confirmation_password
+        }
+    }
+};
+
+export const setAdminValidation = (isAdminValid) => {
+    return {
+        type: actions.ADMIN_VALIDATION_UPDATED,
+        payload: {
+            isAdminValid: isAdminValid
+        }
+    }
+};
+
+export const initiateSubmitAdminData = () => {
+    return {
+        type: actions.ADMIN_DATA_SUBMIT_INITIATED,
+    }
+};
+export const setTermsAgreement = (agreeToTerms) => {
+    return {
+        type: actions.CORPORATE_TERMS_CHANGED,
+        payload:{
+            agreeToTerms:agreeToTerms
+        }
+    }
+};

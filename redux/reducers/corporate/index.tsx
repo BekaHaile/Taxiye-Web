@@ -6,6 +6,7 @@ const initialState = {
     country_code: "+251",
     country: "",
     isPhoneValid: false,
+    agreeToTerms: false,
     isValid: false,
     no_of_employees: 1,
     loading: false,
@@ -13,6 +14,12 @@ const initialState = {
     otpSent: false,
     otp: "",
     isOtpValid: false,
+    admin_full_name: "",
+    admin_email: "",
+    password: "",
+    confirmation_password: "",
+    isAdminValid: false,
+
 }
 
 export default function corporateReducer(state = initialState, action) {
@@ -43,6 +50,20 @@ export default function corporateReducer(state = initialState, action) {
             return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 6 };
         case actionTypes.CORPORATE_OTP_SENT:
             return { ...state, otpSent: action.payload.otpSent, loading: action.payload.loading };
+
+        case actionTypes.ADMIN_NAME_ADDED:
+            return { ...state, admin_full_name: action.payload.admin_full_name };
+        case actionTypes.ADMIN_EMAIL_ADDED:
+            return { ...state, admin_email: action.payload.admin_email };
+        case actionTypes.ADMIN_PASSWORD_ADDED:
+            return { ...state, password: action.payload.password };
+        case actionTypes.ADMIN_CONFIRMATION_PASSWORD_ADDED:
+            return { ...state, confirmation_password: action.payload.confirmation_password };
+        case actionTypes.ADMIN_VALIDATION_UPDATED:
+            return { ...state, isAdminValid: action.payload.isAdminValid }
+        case actionTypes.CORPORATE_TERMS_CHANGED:
+            return { ...state, agreeToTerms: action.payload.agreeToTerms };
+
         default:
             return state;
     }

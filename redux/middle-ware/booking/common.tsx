@@ -13,10 +13,17 @@ export async function fetchVehicles(body) {
 
 export async function fetchPaymentMethods() {
     try {
+        await sleep(3000);
         return [{ name: "Cash" }, { name: "Elsabi" }];
 
     } catch (e) {
         throw e;
         return null;
     }
+}
+
+async function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
 }
