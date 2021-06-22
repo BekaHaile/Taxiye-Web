@@ -19,12 +19,21 @@ const FormattedLinks = styled.a`
   text-align: center;
   color: #ababab;
   text-decoration: none;
-  padding: 5px 20px 5px 20px;
-  border-right: 1px solid #ababab;
+  padding: 5px;
+  &:after {
+    margin-left:10px;
+    content:"";
+    border: 1px solid #ababab;
+   
+  }
 `;
 
+
 const CornerLink = styled(FormattedLinks)`
-border: none;
+&:after{
+  border: none;
+}
+
 `;
 
 const TopBar = () => {
@@ -49,10 +58,7 @@ const TopBar = () => {
         <FormattedLinks>Support</FormattedLinks>
       </Link>
       <Link href="#">
-        <FormattedLinks>Call Us On 6055</FormattedLinks>
-      </Link>
-      <Link href="#">
-        <CornerLink>Login</CornerLink>
+        <CornerLink>Call Us On 6055</CornerLink>
       </Link>
     </Container>
   );

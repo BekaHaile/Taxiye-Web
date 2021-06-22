@@ -1,14 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import {GraySection, CenteredText, SectionTitle} from '../section';
+import {GraySection, CenteredText, SectionTitle, SectionHeaderContainer, SectionContentContainer} from '../section';
 import Cards from './card';
 
-const ExpenseTracker = () => {
+const CustomSectionTitle = styled(SectionTitle)`
+width:400px;
+text-align:center;
+margin:auto;
+`;
+
+const ExpenseTracker = ({title, subTitle, contents}) => {
     return(
         <GraySection>
-            <SectionTitle>Cut down your employee travel expenses</SectionTitle>
-            <CenteredText>Taxiye can help your company save a few bucks in managing employee travel.</CenteredText>
-            <Cards />
+            <SectionHeaderContainer>
+            <CustomSectionTitle>{title}</CustomSectionTitle>
+            <CenteredText>{subTitle}</CenteredText>
+            </SectionHeaderContainer>
+            <SectionContentContainer>
+            <Cards contents={contents}/>
+            </SectionContentContainer>
         </GraySection>
     );
 }
