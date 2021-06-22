@@ -2,7 +2,6 @@ import React, { useState, FunctionComponent } from "react";
 import styled from "styled-components";
 import { Input } from "./primary-input";
 
-
 const CustomInput = styled(Input)`
 margin:8px -2px;
 border-left:none;
@@ -43,68 +42,79 @@ margin: 8px 0;
 `;
 
 const CountryCodeContainer = styled("div")`
-display:flex;
+  display: flex;
 `;
 
 const Code = styled("div")`
-position: absolute;
+  position: absolute;
   top: 50%;
-  left:20px;
+  left: 20px;
   transform: translate(-50%, -50%);
 `;
 
 const CodeContainer = styled("div")`
-position: relative;
+  position: relative;
 `;
 const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
   color: #444444;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 `;
-
 
 const { countries } = require("../../../assets/Data/country-code.json");
 
-let countriesList = countries.length > 0
-    && countries.map((item, i) => {
-        return (
-            item.numbercode == "+251" ?
-                <option selected={true} key={i} value={item.numbercode}>{item.emoji}&emsp;{item.numbercode}&emsp;{item.name}</option> :
-                <option key={i} value={item.numbercode}>{item.emoji}&emsp;{item.numbercode}&emsp;{item.name}</option>
-
-        )
-    });
+let countriesList =
+  countries.length > 0 &&
+  countries.map((item, i) => {
+    return item.numbercode == "+251" ? (
+      <option selected={true} key={i} value={item.numbercode}>
+        {item.emoji}&emsp;{item.numbercode}&emsp;{item.name}
+      </option>
+    ) : (
+      <option key={i} value={item.numbercode}>
+        {item.emoji}&emsp;{item.numbercode}&emsp;{item.name}
+      </option>
+    );
+  });
 
 const Container = styled("div")`
-display:flex;
+  display: flex;
 `;
 
 const PhoneInputField = ({ label, id, placeholder }) => {
-    const [phone_code, setPhoneCode] = useState("+251");
-    const [phonenumber, setPhoneNumber] = useState("");
-    return (
-        <>  <LabelText >{label}</LabelText>
-
-            <Container>
-                <CountryCodeContainer>
-                    <Selector id="phonecode" onChange={(event) => { setPhoneCode(event.target.value); }}>
-                        {countriesList}
-                    </Selector>
-
-                </CountryCodeContainer>
-                <CodeContainer>
-                    <Code>{phone_code}</Code>
-                </CodeContainer>
-                <CustomInput type="number" onInput={(event: any) => { setPhoneNumber(phone_code + event.target.value); }} placeholder={placeholder} id={id} />
-
-            </Container>
-
-        </>
-    );
+  const [phone_code, setPhoneCode] = useState("+251");
+  const [phonenumber, setPhoneNumber] = useState("");
+  return (
+    <>
+      {" "}
+      <LabelText>{label}</LabelText>
+      <Container>
+        <CountryCodeContainer>
+          <Selector
+            id="phonecode"
+            onChange={(event) => {
+              setPhoneCode(event.target.value);
+            }}
+          >
+            {countriesList}
+          </Selector>
+        </CountryCodeContainer>
+        <CodeContainer>
+          <Code>{phone_code}</Code>
+        </CodeContainer>
+        <CustomInput
+          type="number"
+          onInput={(event: any) => {
+            setPhoneNumber(phone_code + event.target.value);
+          }}
+          placeholder={placeholder}
+          id={id}
+        />
+      </Container>
+    </>
+  );
 };
 
-
-
-export { PhoneInputField }
+export { PhoneInputField };

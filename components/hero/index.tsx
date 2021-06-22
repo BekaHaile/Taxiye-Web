@@ -1,7 +1,6 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-
 
 const SlogganWrapper = styled("div")`
 display; flex;
@@ -20,7 +19,6 @@ const Slogan = styled("h1")`
   line-height: 49px;
   color: #ffffff;
 `;
-
 
 const CenteredSlogan = styled(Slogan)`
   text-align: center;
@@ -48,38 +46,40 @@ const Breadcrump = styled("h2")`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #A02167;
+  color: #a02167;
   padding-bottom: 10px;
   &::firstline {
     text-transform: uppercase;
   }
 `;
 
-const Hero = ({ hero, children }) => {
+interface Props {
+  hero?: any;
+  children?: any;
+}
+
+const Hero: FunctionComponent<Props> = ({ hero, children }) => {
   const router = useRouter();
   let slogan = hero.title;
   let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero.background.url}`;
   let description = hero.subTitle;
   let queryText = "";
-  if (hero.text != null)
-    queryText = hero.text;
+  if (hero.text != null) queryText = hero.text;
 
   const HeroWrapper = styled("div")`
-  
     display: flex;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height:75vh;
-    width:auto;
+    height: 75vh;
+    width: auto;
   `;
 
   const Container = styled("div")`
-  padding-top:95px;
-    margin:auto;
+    padding-top: 95px;
+    margin: auto;
   `;
-
 
   let routes = router.asPath.split("/");
   routes.shift();
@@ -88,15 +88,22 @@ const Hero = ({ hero, children }) => {
 
   return (
     <>
-      <HeroWrapper >
+      <HeroWrapper>
         <Container>
           <SlogganWrapper>
             <Breadcrump>
               {`Home / 
-                  ${navigatedLink.charAt(0).toUpperCase() + navigatedLink.slice(1)}
-                  ${queryText != "" ? ` / 
+                  ${
+                    navigatedLink.charAt(0).toUpperCase() +
+                    navigatedLink.slice(1)
+                  }
+                  ${
+                    queryText != ""
+                      ? ` / 
                   ${queryText.charAt(0).toUpperCase() + queryText.slice(1)}
-                  `: ``}`}
+                  `
+                      : ``
+                  }`}
             </Breadcrump>
             <CenteredSlogan>{slogan}</CenteredSlogan>
             <Description>{description}</Description>
@@ -104,7 +111,6 @@ const Hero = ({ hero, children }) => {
           </SlogganWrapper>
         </Container>
       </HeroWrapper>
-
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from 'react';
 import styled from "styled-components";
 import colors from "../../theme/main/colors";
 
@@ -24,7 +24,6 @@ padding-left:10px;
 }
 `;
 
-
 const LinkWithLine = styled("a")`
 color:${colors.primary};
 padding-left:5px;
@@ -42,20 +41,28 @@ color: #A02167;
 }
 `;
 
-const Terms = ({action, checked}) => {
-    return (
-        <>
-            <AgreementContainer>
-               
-                    <CheckBox checked={checked} onChange={()=>action(!checked)}  type="checkbox" id="terms" name="interest" />
-                    <CheckBoxLabel>I agree to Taxiye's</CheckBoxLabel>
-                
-                <LinkWithLine href="/">Terms of service</LinkWithLine>
-                
-            </AgreementContainer>
-        </>
-    );
+interface Props {
+  checked?: boolean;
+  action?;
 }
 
+const Terms: FunctionComponent<Props> = ({ action, checked }) => {
+  return (
+    <>
+      <AgreementContainer>
+        <CheckBox
+          checked={checked}
+          onChange={() => action(!checked)}
+          type="checkbox"
+          id="terms"
+          name="interest"
+        />
+        <CheckBoxLabel>I agree to Taxiye's</CheckBoxLabel>
+
+        <LinkWithLine href="/">Terms of service</LinkWithLine>
+      </AgreementContainer>
+    </>
+  );
+};
 
 export default Terms;

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 const Button = styled("button")`
-  background: #A02167;
+  background: #a02167;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 10px;
@@ -48,14 +48,13 @@ const Input = styled("input")`
 
 const FormGroup = styled("div")`
   display: flex;
-  gap:15px;
+  gap: 15px;
   padding: 10px 0px;
   width: -webkit-fill-available;
-  
 `;
 
 const Icon = styled("img")`
-  height:fit-content;
+  height: fit-content;
   margin-top: 6px;
 `;
 
@@ -71,7 +70,7 @@ const InlineForm = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap:50px;
+  gap: 50px;
   && {
     input {
     }
@@ -79,12 +78,12 @@ const InlineForm = styled("div")`
 `;
 
 const InputSeparator = styled("div")`
-display: flex;
-align-self: flex-end;
+  display: flex;
+  align-self: flex-end;
 `;
 
-const InputWrapper = styled('div')`
-width: -webkit-fill-available;
+const InputWrapper = styled("div")`
+  width: -webkit-fill-available;
 `;
 
 type InputProps = {
@@ -100,15 +99,12 @@ const Inputs: FunctionComponent<InputProps> = ({
   label,
   icon,
   placeholder,
-  ref
+  ref,
 }) => {
   return (
     <FormGroup>
-      {icon !== undefined ? (
-        <Icon src={icon} />
-      ) : null}
+      {icon !== undefined ? <Icon src={icon} /> : null}
       <InputWrapper>
-
         <LabelText htmlFor={id}> {label} </LabelText>
 
         <Input
@@ -118,10 +114,20 @@ const Inputs: FunctionComponent<InputProps> = ({
           autoComplete="off"
           ref={ref}
         />
-
       </InputWrapper>
     </FormGroup>
   );
 };
 
-export { Form,InputWrapper, InlineForm, Button, Inputs, InputSeparator, Input, FormGroup, Icon, LabelText };
+export {
+  Form,
+  InputWrapper,
+  InlineForm,
+  Button,
+  Inputs,
+  InputSeparator,
+  Input,
+  FormGroup,
+  Icon,
+  LabelText,
+};

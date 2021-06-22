@@ -46,7 +46,7 @@ const Hero = ({ hero }) => {
                 <div>
                     <HomeContainer>
                         <HomeSlogan>{slogan}</HomeSlogan>
-                        <TabbedForms setSelectedContent={null} contentView={null} />
+                        <TabbedForms/>
                     </HomeContainer>
                 </div>
             </HomeHero>
