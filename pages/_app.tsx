@@ -74,6 +74,7 @@ export default function MyApp({ Component, pageProps }) {
   if (router.pathname.includes("/login")
     || router.pathname.includes("/signup")
     || router.pathname.includes("/booking")
+    || router.pathname.includes("/cms")
   )
     return (
       <>

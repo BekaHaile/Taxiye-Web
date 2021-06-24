@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import "antd/dist/antd.css";
 
 import colors from '../main/colors';
 
@@ -502,6 +503,8 @@ select{
     -moz-appearance: none !important;
     appearance: none !important;
   }
+
+  
 
 `;
 
