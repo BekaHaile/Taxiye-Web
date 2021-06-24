@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import { Layout, Menu, Avatar, Typography, Space } from "antd";
 const { Text } = Typography;
 import {
@@ -50,8 +51,11 @@ const CompanyName = styled(Text)`
   line-height: 16px;
   color: #979797;
 `;
+interface Props {
+  setSelected;
+}
 
-const Slider = () => {
+const Slider: FunctionComponent<Props> = ({ setSelected }) => {
   const [collapsed, onCollapse] = useState(false);
 
   return (
@@ -69,17 +73,21 @@ const Slider = () => {
           </Space>
         </Space>
       </ProfileView>
-      <Menu defaultSelectedKeys={["1"]} mode="inline">
-        <Menu.Item key="1" icon={<HomeOutlined />}>
+      <Menu
+        onSelect={(item) => setSelected(item.key)}
+        defaultSelectedKeys={["home-page"]}
+        mode="inline"
+      >
+        <Menu.Item key="home-page" icon={<HomeOutlined />}>
           Home
         </Menu.Item>
-        <Menu.Item key="2" icon={<TeamOutlined />}>
+        <Menu.Item key="employees" icon={<TeamOutlined />}>
           Employees
         </Menu.Item>
-        <Menu.Item key="3" icon={<GroupOutlined />}>
+        <Menu.Item key="groups" icon={<GroupOutlined />}>
           Groups
         </Menu.Item>
-        <Menu.Item key="4" icon={<DesktopOutlined />}>
+        <Menu.Item key="dispatch" icon={<DesktopOutlined />}>
           Dispatch
         </Menu.Item>
 
@@ -91,7 +99,7 @@ const Slider = () => {
           Requests
         </Menu.Item>
       </Menu>
-      <BottomMenu defaultSelectedKeys={["1"]} mode="inline">
+      <BottomMenu defaultSelectedKeys={["home-page"]} mode="inline">
         <Menu.Item key="8" icon={<SettingOutlined />}>
           Account Settings
         </Menu.Item>
