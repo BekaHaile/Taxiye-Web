@@ -3,6 +3,10 @@ import { Layout } from "antd";
 import Sider from "./sider";
 import HomePage from "./home";
 import Employees from "./employees";
+import Groups from "./groups";
+import OnGoingRides from "./rides/on-going";
+import CompeletedRides from "./rides/completed";
+import Request from "./requests";
 
 const { Content } = Layout;
 
@@ -16,6 +20,10 @@ const Cms = () => {
           {(() => {
             if (selected === "home-page") return <HomePage />;
             else if (selected === "employees") return <Employees />;
+            else if (selected === "groups") return <Groups />;
+            else if (selected === "on-going") return <OnGoingRides />;
+            else if (selected === "completed") return <CompeletedRides />;
+            else if (selected === "requests") return <Request />;
             else return null;
           })()}
         </Content>

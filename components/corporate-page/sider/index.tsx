@@ -91,11 +91,11 @@ const Slider: FunctionComponent<Props> = ({ setSelected }) => {
           Dispatch
         </Menu.Item>
 
-        <SubMenu key="sub1" icon={<CarOutlined />} title="Rides">
-          <Menu.Item key="5">Ongoing</Menu.Item>
-          <Menu.Item key="6">Completed</Menu.Item>
+        <SubMenu key="rides" icon={<CarOutlined />} title="Rides">
+          <Menu.Item key="on-going">Ongoing</Menu.Item>
+          <Menu.Item key="completed">Completed</Menu.Item>
         </SubMenu>
-        <Menu.Item key="7" icon={<FileOutlined />}>
+        <Menu.Item key="requests" icon={<FileOutlined />}>
           Requests
         </Menu.Item>
       </Menu>
