@@ -98,9 +98,8 @@ const Slider: FunctionComponent<Props> = ({ setSelected }) => {
         <Menu.Item key="requests" icon={<FileOutlined />}>
           Requests
         </Menu.Item>
-      </Menu>
-      <BottomMenu defaultSelectedKeys={["home-page"]} mode="inline">
-        <Menu.Item key="8" icon={<SettingOutlined />}>
+
+        <Menu.Item key="account-setting" icon={<SettingOutlined />}>
           Account Settings
         </Menu.Item>
         <Menu.Item key="9" icon={<LogoutOutlined />}>
@@ -109,7 +108,7 @@ const Slider: FunctionComponent<Props> = ({ setSelected }) => {
         <Link href="/">
           <Logo src={require("../../../assets/images/logo/logo2.svg")} />
         </Link>
-      </BottomMenu>
+      </Menu>
     </Sider>
   );
 };

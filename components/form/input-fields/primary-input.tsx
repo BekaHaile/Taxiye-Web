@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-const Input = styled('input')`
+const Input = styled("input")`
 width: 100%;
 padding: 12px 20px;
 margin-bottom: 40px;
@@ -16,7 +16,9 @@ margin-top:10px;
     border: 2px solid #A02167;
   }
 `;
+
 const LabelText = styled("label")`
+  font-family: Open Sans;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
@@ -30,7 +32,6 @@ type InputProps = {
   type?: string;
   onChange?;
   value?;
-
 };
 
 const DefaultInput: FunctionComponent<InputProps> = ({
@@ -39,14 +40,21 @@ const DefaultInput: FunctionComponent<InputProps> = ({
   placeholder,
   type,
   value,
-  onChange
+  onChange,
 }) => {
   return (
     <>
       <LabelText>{label}</LabelText>
-      <Input onChange={onChange} value={value} type={type} placeholder={placeholder} id={id} />
+      <Input
+        onChange={onChange}
+        value={value}
+        type={type}
+        placeholder={placeholder}
+        id={id}
+      />
     </>
   );
 };
 
-export { DefaultInput, Input }
+
+export { DefaultInput, Input };

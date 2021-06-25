@@ -18,8 +18,12 @@ export default css.global`
 }
 .suggestion-item.active{
     border-radius: 5px;
-    
     background-color:#A02167;
-    color:white;
+    color:white !important;
+}
+.suggestion-item:hover{
+    border-radius: 5px;
+    background-color:#A02167;
+    color:white !important;
 }
 `

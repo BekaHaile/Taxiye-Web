@@ -6,7 +6,20 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import styles from "../../theme/global/place-autocomplete";
 import { Loader } from "../loading/loading";
+import styled from "styled-components";
 const searchOptions = { componentRestrictions: { country: ["et"] } };
+
+const LoadingContainer = styled("div")`
+  position: absolute;
+  right: -20px;
+  top:50%;
+  width:50px;
+  height:50px;
+`;
+
+const Container = styled("div")`
+  position: relative;
+`;
 
 export default function LocationInput({
   address,
@@ -47,7 +60,7 @@ export default function LocationInput({
               getSuggestionItemProps,
               loading,
             }) => (
-              <div>
+              <Container>
                 <Input
                   {...getInputProps({
                     placeholder: placeholder,
@@ -55,16 +68,16 @@ export default function LocationInput({
                   })}
                   type="search"
                 />
+                <LoadingContainer>
+                  {loading && (
+                      <Loader />
+                  )}
+                </LoadingContainer>
                 <div
                   className={
                     suggestions.length > 0 ? "map-autocomplete-dropdown" : ""
                   }
                 >
-                  {loading && (
-                    <div className="map-autocomplete-dropdown">
-                      <Loader />
-                    </div>
-                  )}
                   {suggestions.map((suggestion, index) => {
                     const className = suggestion.active
                       ? "suggestion-item active"
@@ -87,7 +100,7 @@ export default function LocationInput({
                     );
                   })}
                 </div>
-              </div>
+              </Container>
             )}
           </PlacesAutocomplete>
         </InputWrapper>

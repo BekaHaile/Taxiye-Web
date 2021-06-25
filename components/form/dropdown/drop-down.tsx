@@ -5,14 +5,13 @@ const DropDown = styled("select")`
   background: #fff;
   border-radius: 5px;
   width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 40px;
-    display: inline-block;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 10px;
-  
+  padding: 12px 20px;
+  margin-bottom: 40px;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 10px;
 `;
 const LabelText = styled("label")`
   font-weight: normal;
@@ -27,19 +26,19 @@ type InputProps = {
   label?: string;
   placeholder: string;
   type?: string;
-  value?
-  onChange?
-  items?
+  value?;
+  onChange?;
+  items?;
 };
 
 const GenderDropDown: FunctionComponent<InputProps> = ({
   label,
   id,
-  placeholder
+  placeholder,
 }) => {
   return (
     <>
-      <LabelText >{label}</LabelText>
+      <LabelText>{label}</LabelText>
       <div>
         <DropDown placeholder={placeholder} id={id}>
           <option> Male</option>
@@ -53,11 +52,11 @@ const GenderDropDown: FunctionComponent<InputProps> = ({
 const CountryDropDown: FunctionComponent<InputProps> = ({
   label,
   id,
-  placeholder
+  placeholder,
 }) => {
   return (
     <>
-      <LabelText >{label}</LabelText>
+      <LabelText>{label}</LabelText>
       <div>
         <DropDown placeholder={placeholder} id={id}>
           <option> Male</option>
@@ -73,23 +72,29 @@ const DefaultDropDown: FunctionComponent<InputProps> = ({
   placeholder,
   value,
   onChange,
-  items
+  items,
 }) => {
   return (
     <>
-      <LabelText >{label}</LabelText>
+      <LabelText>{label}</LabelText>
       <div className="defaultDropDown">
-        <DropDown value={value} onChange={onChange} placeholder={placeholder} id={id}>
-          {
-            items.map((item, key) => {
-              return <option key={key} value={item}>{item}</option>
-            })
-          }
-
+        <DropDown
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          id={id}
+        >
+          {items.map((item, key) => {
+            return (
+              <option key={key} value={item}>
+                {item}
+              </option>
+            );
+          })}
         </DropDown>
       </div>
     </>
   );
 };
 
-export { GenderDropDown, CountryDropDown, DefaultDropDown }
+export { GenderDropDown, CountryDropDown, DefaultDropDown, DropDown };
