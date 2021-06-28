@@ -64,7 +64,7 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
   let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero.background.url}`;
   let description = hero.subTitle;
   let queryText = "";
-  if (slogan != null) queryText = slogan;
+  if (hero.text != null) queryText = hero.text;
 
   const HeroWrapper = styled("div")`
     display: flex;
