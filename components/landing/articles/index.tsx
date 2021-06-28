@@ -1,19 +1,30 @@
-import React from 'react';
-import {SectionTitle, GraySection, CenteredText,SectionHeaderContainer, SectionContentContainer } from '../../section';
-import ArticleSlider from './slider';
+import React from "react";
+import {
+  SectionTitle,
+  GraySection,
+  CenteredText,
+  SectionHeaderContainer,
+  SectionContentContainer,
+} from "../../section";
+import ArticleSlider from "./slider";
+import styled from "styled-components";
 
-const LastestArticles = ({title, subTitle, articles}) => {
-    return(
-        <GraySection>
-            <SectionHeaderContainer>
-            <SectionTitle>
-                {title}
-            </SectionTitle>
-            <CenteredText>{subTitle}</CenteredText>
-            </SectionHeaderContainer>
-            <ArticleSlider articles={articles}/>
-        </GraySection>
-    );
-}
+const Container = styled("div")`
+  width: 1300px;
+`;
+
+const LastestArticles = ({ title, subTitle, articles }) => {
+  return (
+    <GraySection>
+      <SectionHeaderContainer>
+        <SectionTitle>{title}</SectionTitle>
+        <CenteredText>{subTitle}</CenteredText>
+      </SectionHeaderContainer>
+      <Container>
+        <ArticleSlider articles={articles} />
+      </Container>
+    </GraySection>
+  );
+};
 
 export default LastestArticles;
