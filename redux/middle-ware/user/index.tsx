@@ -97,8 +97,6 @@ async function validateUser(data, next) {
     data["user"]["firstName"] != "" &&
     data["user"]["lastName"] != null &&
     data["user"]["lastName"] != "" &&
-    data["user"]["email"] != null &&
-    data["user"]["email"] != "" &&
     data["agreeToTerms"] &&
     validateEmail(data["user"]["email"])
   )

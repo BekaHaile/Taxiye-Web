@@ -6,7 +6,7 @@ import {
   InputWrapper,
   FormGroup,
   Icon,
-} from "../../../tab-forms/inputs";
+} from "../../../../tab-forms/inputs";
 import {
   Title,
   SubTitle,
@@ -14,19 +14,19 @@ import {
   FormContainer,
   CustomButton,
   Link,
-} from "../../../tab-forms/tab-titles";
-import LocationInput from "../../../tab-forms/input-location";
-import store from "../../../../redux/store";
+} from "../../../../tab-forms/tab-titles";
+import LocationInput from "../../../../tab-forms/input-location";
+import store from "../../../../../redux/store";
 import {
   selectOrigin,
   selectDestination,
   changeDate,
   changeTime,
-} from "../../../../redux/actions/corporate/employees";
+} from "../../../../../redux/actions/corporate/employees";
 import { useSelector } from "react-redux";
-import { DatePicker, TimePicker } from "../../../form/date-picker";
+import { DatePicker, TimePicker } from "../../../../form/date-picker";
 import { useRouter } from "next/router";
-import { Loader } from "../../../loading/loading";
+import { Loader } from "../../../../loading/loading";
 import styled from "styled-components";
 const BookForm = () => {
   const origin = useSelector((state) => state["corporate_employees"]["origin"]);
@@ -41,7 +41,7 @@ const BookForm = () => {
         <FormContainer>
           <LocationInput
             label="From?"
-            icon={require("../../../../assets/icons/location.svg")}
+            icon={require("../../../../../assets/icons/location.svg")}
             placeholder="Enter pickup location"
             id="location"
             action={(location, address) => {
@@ -52,7 +52,7 @@ const BookForm = () => {
 
           <LocationInput
             label="Where to?"
-            icon={require("../../../../assets/icons/flag.svg")}
+            icon={require("../../../../../assets/icons/flag.svg")}
             placeholder="Enter drop off for estimate"
             id="dropoff"
             action={(location, address) => {
@@ -65,7 +65,7 @@ const BookForm = () => {
 
           <InlineForm>
             <FormGroup>
-              <Icon src={require("../../../../assets/icons/user/clock.svg")} />
+              <Icon src={require("../../../../../assets/icons/user/clock.svg")} />
               <InputWrapper>
                 <LabelText htmlFor="datepicker"> When? </LabelText>
                 <DatePicker

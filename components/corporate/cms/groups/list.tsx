@@ -38,7 +38,7 @@ const Title = styled(Text)`
   line-height: 25px;
   color: #444444;
   &:after{
-    content:url(${require("../../../assets/icons/edit-icon.svg")});
+    content:url(${require("../../../../assets/icons/edit-icon.svg")});
     position: absolute;
     right: 17px;
    

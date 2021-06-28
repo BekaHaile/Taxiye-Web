@@ -54,12 +54,14 @@ const DefaultTextArea: FunctionComponent<InputProps> = ({
   label,
   id,
   placeholder,
+  action,
+  value
 }) => {
   return (
     <>
       <div>
         <LabelText>{label}</LabelText>
-        <TextArea placeholder={placeholder} id={id} />
+        <TextArea value={value} onInput={action} placeholder={placeholder} id={id} />
       </div>
     </>
   );

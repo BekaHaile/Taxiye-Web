@@ -44,7 +44,7 @@ const DefaultInput: FunctionComponent<InputProps> = ({
 }) => {
   return (
     <>
-      <LabelText>{label}</LabelText>
+      {label && <LabelText>{label}</LabelText>}
       <Input
         onChange={onChange}
         value={value}
@@ -55,6 +55,5 @@ const DefaultInput: FunctionComponent<InputProps> = ({
     </>
   );
 };
-
 
 export { DefaultInput, Input };

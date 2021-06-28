@@ -62,7 +62,7 @@ const SafteyCenter = ({ title, subTitle, contents }) => {
         <BlockContainer>
           {contents.map((content, index) => (
             <Block  key={index}>
-              <Image src={`http://localhost:1337${content.thumbnail.url}`} />
+              <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
               <div>
                 <BlockTitle>{content.title}</BlockTitle>
                 <SafetyText>

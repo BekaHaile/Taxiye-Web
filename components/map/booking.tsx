@@ -69,7 +69,11 @@ function Map({ originAction, directionAction, googleMapURL, loadingElement, cont
                     key={directions}
                     options={{
                         draggable: true,
-                        suppressMarkers: true
+                        suppressMarkers: true,
+                        polylineOptions: {
+                            strokeOpacity: 0.9,
+                            strokeColor: '#A02167',
+                        },
                     }
                     }
                     onDirectionsChanged={() => console.log(directions)}

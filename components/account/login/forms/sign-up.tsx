@@ -16,7 +16,7 @@ const SignupForm = ({ action }) => {
     const lastName = useSelector((state) => state["user"]["lastName"]);
     const email = useSelector((state) => state["user"]["email"]);
     const isUserValid = useSelector((state) => state["user"]["isUserValid"]);
-    const agreeToTerms = useSelector((state) => state["agreeToTerms"]);
+    const agreeToTerms = useSelector((state) => state["user"]["agreeToTerms"]);
 
     return (
         <>
@@ -52,13 +52,13 @@ const SignupForm = ({ action }) => {
                         onChange={(event) => {
                             store.dispatch(addEmail(event.target.value));
                         }}
-                        label="Email Address *"
+                        label="Email Address"
                         placeholder="Johndoe@gmail.com"
                         id="emailaddress" />
                 </InputContainer>
                 <TermsConsentContainer>
-                    <TermsConsent checked={agreeToTerms} action={(checked) => {
-                        store.dispatch(setTermsAgreement(checked));
+                    <TermsConsent checked={agreeToTerms} action={(status) => {
+                        store.dispatch(setTermsAgreement(status));
                     }} />
                 </TermsConsentContainer>
 

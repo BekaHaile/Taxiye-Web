@@ -508,6 +508,22 @@ select{
     margin: 0px 0 40px 0 !important;
 }
 
+#map_info_container{
+  position: absolute;
+  right: -500px;
+  opacity: 0;
+overflow:hidden;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#map_info_container.active{
+  opacity: 1;
+  right: 0;
+}
+
 `;
 
 export default GlobalStyle;

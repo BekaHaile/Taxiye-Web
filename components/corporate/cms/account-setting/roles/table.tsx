@@ -37,7 +37,7 @@ const columns = [
     title: "Actions",
     dataIndex: "actions",
 
-    render: () => <Icon src={require("../../../../assets/icons/delete.svg")}/>,
+    render: () => <Icon src={require("../../../../../assets/icons/delete.svg")}/>,
   },
 ];
 

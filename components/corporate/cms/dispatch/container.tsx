@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Booking from "./book";
-import { CustomButton } from "../../tab-forms/tab-titles";
+import { CustomButton } from "../../../tab-forms/tab-titles";
 import { useSelector } from "react-redux";
-import { Loader } from "../../loading/loading";
+import { Loader } from "../../../loading/loading";
 
 const ContainerWrapper = styled("div")`
   position: absolute;

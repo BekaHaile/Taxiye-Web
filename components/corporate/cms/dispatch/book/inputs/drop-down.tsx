@@ -1,7 +1,7 @@
-import { Input } from "../../../../form/input-fields/primary-input";
+import { Input } from "../../../../../form/input-fields/primary-input";
 import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
-import { Loader } from "../../../../loading/loading";
+import { Loader } from "../../../../../loading/loading";
 const LabelText = styled("label")`
   font-family: Open Sans;
   font-weight: normal;

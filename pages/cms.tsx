@@ -1,5 +1,5 @@
 import React from 'react';
-import CMS from '../components/corporate-page';
+import CMS from '../components/corporate/cms';
 
 
 export default function index() {

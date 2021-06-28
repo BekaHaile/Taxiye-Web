@@ -7,6 +7,7 @@ const Container = styled("div")`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+max-width:1160px;
 
 `;
 const CardContainer = styled("div")`

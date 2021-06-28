@@ -35,25 +35,25 @@ const Icon = styled("img")`
 const lists = [
   {
     title: "Employees",
-    icon: require("../../../assets/icons/employees-icon.svg"),
+    icon: require("../../../../assets/icons/employees-icon.svg"),
     content: "4545 Birr",
     color:"#1890FF"
   },
   {
     title: "Total Rides this month",
-    icon: require("../../../assets/icons/car-icon.svg"),
+    icon: require("../../../../assets/icons/car-icon.svg"),
     content: "4545 Birr",
     color:"#A02167"
   },
   {
     title: "Total Bills this month",
-    icon: require("../../../assets/icons/bill-icon.svg"),
+    icon: require("../../../../assets/icons/bill-icon.svg"),
     content: "4545 Birr",
     color:"#F8B219"
   },
   {
     title: "Available Balance ",
-    icon: require("../../../assets/icons/balance-icon.svg"),
+    icon: require("../../../../assets/icons/balance-icon.svg"),
     content: "4545 Birr",
     color:"#20AA46"
   },

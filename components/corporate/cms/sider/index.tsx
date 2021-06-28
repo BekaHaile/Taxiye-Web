@@ -106,7 +106,7 @@ const Slider: FunctionComponent<Props> = ({ setSelected }) => {
           Log out
         </Menu.Item>
         <Link href="/">
-          <Logo src={require("../../../assets/images/logo/logo2.svg")} />
+          <Logo src={require("../../../../assets/images/logo/logo2.svg")} />
         </Link>
       </Menu>
     </Sider>

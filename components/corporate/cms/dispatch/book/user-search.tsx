@@ -1,12 +1,12 @@
 import React from "react";
-import { Form, Icon, FormGroup } from "../../../tab-forms/inputs";
-import { FormContainer } from "../../../tab-forms/tab-titles";
+import { Form, Icon, FormGroup } from "../../../../tab-forms/inputs";
+import { FormContainer } from "../../../../tab-forms/tab-titles";
 import { PrimarySearchInput } from "./inputs/input";
-import store from "../../../../redux/store";
+import store from "../../../../../redux/store";
 import {
   addQuery,
   setSelectedEmployee,
-} from "../../../../redux/actions/corporate/employees";
+} from "../../../../../redux/actions/corporate/employees";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
@@ -33,7 +33,7 @@ const SearchUser = () => {
       <Form>
         <FormContainer>
           <FormGroup>
-            <Icon src={require("../../../../assets/icons/user.svg")} />
+            <Icon src={require("../../../../../assets/icons/user.svg")} />
             <Container>
               <PrimarySearchInput
                 label="Search employee"

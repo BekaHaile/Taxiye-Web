@@ -31,7 +31,7 @@ const FormView = () => {
         <Form.Item>
           <AvatarContainer>
             <Avatar src="" size={70} icon={<UserOutlined />}></Avatar>
-            <Icon src={require("../../../../assets/icons/add-icon.svg")}>
+            <Icon src={require("../../../../../assets/icons/add-icon.svg")}>
               
             </Icon>
           </AvatarContainer>

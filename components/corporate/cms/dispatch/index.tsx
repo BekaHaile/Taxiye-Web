@@ -1,5 +1,5 @@
 import React from 'react';
-import WrappedMap from "../../map/booking";
+import WrappedMap from "../../../map/booking";
 import { useSelector } from "react-redux";
 import Container from "./container";
 

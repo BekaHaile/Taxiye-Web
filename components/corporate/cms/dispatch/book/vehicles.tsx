@@ -1,13 +1,13 @@
 import React from "react";
-import { Form, Icon, FormGroup } from "../../../tab-forms/inputs";
-import { FormContainer } from "../../../tab-forms/tab-titles";
+import { Form, Icon, FormGroup } from "../../../../tab-forms/inputs";
+import { FormContainer } from "../../../../tab-forms/tab-titles";
 import { PrimaryDropDown } from "./inputs/drop-down";
-import store from "../../../../redux/store";
+import store from "../../../../../redux/store";
 import {
   addQuery,
   setSelectedEmployee,
   setSelectedVehicle,
-} from "../../../../redux/actions/corporate/employees";
+} from "../../../../../redux/actions/corporate/employees";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useState } from "react";
@@ -38,7 +38,7 @@ const Vehicles = () => {
         <FormContainer>
           <FormGroup>
             <CustomIcon
-              src={require("../../../../assets/icons/car-icon.svg")}
+              src={require("../../../../../assets/icons/car-icon.svg")}
             />
             <Container>
               <PrimaryDropDown

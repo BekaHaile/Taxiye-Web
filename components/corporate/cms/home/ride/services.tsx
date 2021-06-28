@@ -29,7 +29,7 @@ const CustomCard = styled(Card)`
   display: flex;
   cursor:pointer;
   &:after {
-    content: url(${require("../../../../assets/icons/arrow-right.svg")});;
+    content: url(${require("../../../../../assets/icons/arrow-right.svg")});;
     margin: auto;
     right: 0;
     position: absolute;
@@ -47,7 +47,7 @@ const HomePage = () => {
       <Container>
         <CustomCard>
           <Space size={16}>
-            <Icon src={require("../../../../assets/icons/budget-icon.svg")} />
+            <Icon src={require("../../../../../assets/icons/budget-icon.svg")} />
             <Space direction="vertical">
               <Title>Create Group</Title>
               <SubTitle>
@@ -58,7 +58,7 @@ const HomePage = () => {
         </CustomCard>
         <CustomCard>
           <Space size={16}>
-            <Icon src={require("../../../../assets/icons/budget-icon.svg")} />
+            <Icon src={require("../../../../../assets/icons/budget-icon.svg")} />
             <Space direction="vertical">
               <Title>Invite Employees</Title>
               <SubTitle>
@@ -69,7 +69,7 @@ const HomePage = () => {
         </CustomCard>
         <CustomCard>
           <Space size={16}>
-            <Icon src={require("../../../../assets/icons/budget-icon.svg")} />
+            <Icon src={require("../../../../../assets/icons/budget-icon.svg")} />
             <Space direction="vertical">
               <Title>Request Budget</Title>
               <SubTitle>

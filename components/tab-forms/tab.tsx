@@ -42,10 +42,10 @@ const TabButton = styled.a`
   line-height: 29px;
   color: #444444;
   text-decoration: none;
-  padding: 5px 20px;
+  padding: 0px 20px;
   &&.active {
     color: #ffffff;
-    height: 29px;
+    text-align:center;
     background: #a02167;
     border-radius: 50px;
     text-align: center;
