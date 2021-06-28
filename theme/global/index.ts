@@ -504,26 +504,9 @@ select{
     appearance: none !important;
   }
 
-  .Dropdown-control {
-  border:0 !important;
-  border-bottom: 0.711458px solid #ABABAB !important;
-  padding-left: 0px;
-  }
-  .Dropdown-arrow {
-  top:50%;
-  transform:translate(0, -50%);
-  content:"dfdfdf";
-  }
-  .Dropdown-placeholder{
-    font-family: Open Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 12px;
-line-height: 16px;
-color: #444444;
-  }
-
-  
+  .ant-tabs-top > .ant-tabs-nav {
+    margin: 0px 0 40px 0 !important;
+}
 
 `;
 

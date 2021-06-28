@@ -1,11 +1,10 @@
 import React from "react";
-import { Table, Space,Button } from "antd";
+import { Table, Space, Button, Tag } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 
-
 const Link = styled("a")`
-  color:#A02167;
+  color: #a02167;
 `;
 
 const columns = [
@@ -33,11 +32,19 @@ const columns = [
     title: "Status",
     dataIndex: "status",
     sorter: true,
+    render: (val) => {
+      let color = "green";
+      if (val === "Inactive") {
+        color = "volcano";
+      } else if (val === "Pending") {
+        color = "geekblue";
+      }
+      return <Tag color={color}>{val}</Tag>;
+    },
   },
   {
     title: "Actions",
     dataIndex: "actions",
-
     render: () => (
       <Space size={16}>
         <Link>Deactivate</Link>

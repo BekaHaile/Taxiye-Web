@@ -3,10 +3,9 @@ import Card from "./card";
 import Slider from "../../slider";
 const settings = {
   itemsToShow: 3,
-  itemPadding: [25, 0],
+  itemPadding: [20, 20],
   transitionMs: 700
 }
-
 const FleetSlider = ({ fleets }) => {
 
   return (

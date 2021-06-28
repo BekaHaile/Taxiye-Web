@@ -31,7 +31,7 @@ const BlockContainer = styled("div")`
   flex-wrap: wrap;
   justify-content: center;
   row-gap:60px;
-  
+  max-width:1200px;
 
 `;
 

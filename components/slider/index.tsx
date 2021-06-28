@@ -20,7 +20,7 @@ const Slider = ({ settings, content }) => {
         )
     }
     return (
-        <Carousel isRTL={false} renderArrow={myArrow} itemsToShow={settings.itemsToShow} itemPadding={settings.itemPadding} transitionMs={settings.transitionMs}>
+        <Carousel  isRTL={false} renderArrow={myArrow} itemsToShow={settings.itemsToShow} itemPadding={settings.itemPadding} transitionMs={settings.transitionMs}>
             {content}
         </Carousel>
     );

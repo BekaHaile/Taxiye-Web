@@ -18,7 +18,7 @@ export async function fetchVehicles(body) {
 export async function fetchPaymentMethods() {
   try {
     await sleep(3000);
-    return [{ name: "Cash" }, { name: "Elsabi" }];
+    return [{ name: "Cash" }];
   } catch (e) {
     throw e;
     return null;

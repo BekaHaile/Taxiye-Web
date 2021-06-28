@@ -1,62 +1,53 @@
 import React from "react";
-import { Table, Space, Button, Tag } from "antd";
+import { Table, Space, Button, Select } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
+const { Option } = Select;
 
-const Link = styled("a")``;
+const Icon = styled("img")`
+  
+`;
 
 const columns = [
   {
-    title: "Request Id",
-    dataIndex: "id",
-    sorter: true,
+    title: "Team member",
+    dataIndex: "name",
   },
   {
-    title: "Reason",
-    dataIndex: "reason",
-    sorter: true,
+    title: "Email",
+    dataIndex: "email",
   },
+
   {
-    title: "Debit Limit",
-    dataIndex: "debit_limit",
-    sorter: true,
-  },
-  {
-    title: "Maximum User Limit",
-    dataIndex: "maximum_user_limit",
-    sorter: true,
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    sorter: true,
+    title: "Roles",
+    dataIndex: "role",
     render: (val) => {
-      let color = "green";
-      if (val === "Cancelled") {
-        color = "volcano";
-      } else if (val === "Pending") {
-        color = "geekblue";
-      }
-      return <Tag color={color}>{val}</Tag>;
+      return (
+        <Select defaultValue={val}>
+          <Option value="Adminstrator">Adminstrator</Option>
+          <Option value="Moderator">Moderator</Option>
+
+          <Option value="Dispatcher">Dispatcher</Option>
+        </Select>
+      );
     },
   },
+
   {
     title: "Actions",
     dataIndex: "actions",
 
-    render: () => <Link>Cancel</Link>,
+    render: () => <Icon src={require("../../../../assets/icons/delete.svg")}/>,
   },
 ];
 
 const data = [];
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 3; i++) {
   data.push({
     key: i,
-    id: `Edward King`,
-    reason: "El Auto Employees",
-    debit_limit: `782.01 Birr`,
-    maximum_user_limit: 554 - i,
-    status: `Approved`,
+    name: `Edward King`,
+    email: "email@email.com",
+    role: i == 0 ? "Adminstrator" : i == 1 ? "Moderator" : "Dispatcher",
   });
 }
 const TableView = () => {

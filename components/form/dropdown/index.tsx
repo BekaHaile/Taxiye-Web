@@ -49,8 +49,6 @@ export default function OpenSelect({ value, action, items }) {
                             return <MenuItem className={classes.select} key={key} value={item}>{item}</MenuItem>
                         })
                     }
-
-
                 </Select>
             </FormControl>
         </>
