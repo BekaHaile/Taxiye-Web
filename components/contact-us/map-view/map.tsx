@@ -1,5 +1,5 @@
 import React from 'react';
-import WrappedMap from "../../Map";
+import WrappedMap from "../../map";
 
 const Mapview = ({setSelectedLocation, offices, directionAction}) => {
     return (
