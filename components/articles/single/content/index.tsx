@@ -32,12 +32,13 @@ const Article = ({ article }) => {
         <InnerContainer>
           <Header header={articleHeader} />
           {articleBody.map((body, index) =>
-            body.__typename === "ComponentTextMedia" ? (
+            body.__component === "text.media" ? (
               <Media key={index} media={body} />
-            ) : body.__typename === "ComponentTextQuote" ? (
+            ) : body.__component === "text.quote" ? (
               <Quote key={index} quote={body.content} />
             ) : (
               <ParagraphText key={index} paragraph={body.content} />
+            
             )
           )}
         </InnerContainer>

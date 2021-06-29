@@ -5,6 +5,7 @@ import TestimonySlider from './slider';
 import { GraySection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer } from '../../section';
 
 const TestimonySliderContainer = styled(SectionContentContainer)`
+max-width:1300px;
 width:100%;
 `;
 
