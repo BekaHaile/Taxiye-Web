@@ -87,12 +87,27 @@ export const addVehicles = (city, vehicles) => ({
   },
 });
 
+export const addAvailableVehicles = ( availableVehicles) => ({
+  type: actions.AVAILABLE_VEHICLES_ADDED,
+  payload: {
+    availableVehicles: availableVehicles,
+  },
+});
+
 export const loadVehicles = (loading) => ({
   type: actions.VEHICLES_LOADING,
   payload: {
     loading: loading,
   },
 });
+
+export const loadingAvailbleVehicles = (loading) => ({
+  type: actions.AVAILABLE_VEHICLES_LOADING,
+  payload: {
+    loading: loading,
+  },
+});
+
 
 export const changePayemntMethod = (paymentMethod) => ({
   type: actions.PAYMENT_METHOD_CHANGED,

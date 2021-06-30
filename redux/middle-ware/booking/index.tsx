@@ -1,7 +1,7 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
-import { showSuccess, showInfo } from "../common";
-import { fetchPaymentMethods } from "./common";
+import { showSuccess, showInfo, showError } from "../common";
+import { fetchPaymentMethods, fetchListOfVehicles } from "./common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -31,21 +31,35 @@ export const booking = (store) => (next) => async (action) => {
       await getDeliveryVehicleInfo(data, next);
     }
   } else if (action.type == "VEHICLE_SELECTED") {
-    if (data["type"] == "delivery") {
-      if (
-        data["delivery"]["comment"] == null ||
-        data["delivery"]["comment"] == ""
-      )
-        showInfo(
-          next,
-          "Please tell us what you need to be deliverd!",
-          "warning"
-        );
-      else next(navigationActions.goTo("info"));
-    } else if (data["userData"]) next(navigationActions.goTo("confirm"));
-    else {
-      next(navigationActions.goTo("login"));
-      next(actions.setStep(1));
+    try {
+      next(actions.loadingAvailbleVehicles(true));
+
+      var res = await fetchListOfVehicles(data["vehicle"], data["city"]);
+      next(actions.loadingAvailbleVehicles(false));
+      if (res != null) {
+        if (res.length <= 0) {
+          return;
+        }
+        next(actions.addAvailableVehicles(res));
+        if (data["type"] == "delivery") {
+          if (
+            data["delivery"]["comment"] == null ||
+            data["delivery"]["comment"] == ""
+          )
+            showInfo(
+              next,
+              "Please tell us what you need to be deliverd!",
+              "warning"
+            );
+          else next(navigationActions.goTo("info"));
+        } else if (data["userData"]) next(navigationActions.goTo("confirm"));
+        else {
+          next(navigationActions.goTo("login"));
+          next(actions.setStep(1));
+        }
+      }
+    } catch (e) {
+      showError(next);
     }
   } else if (action.type == "DELIVERY_SELECTED") {
     if (data["userData"]) next(navigationActions.goTo("confirm"));

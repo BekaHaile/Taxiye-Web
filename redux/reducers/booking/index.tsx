@@ -22,7 +22,9 @@ const initialState = {
   },
   vehicles: [],
   fetchVehiclesLoading: false,
+  availableVehiclesLoading: false,
   vehicle: null,
+  availableVehicles:[],
   delivery: {
     comment: "",
     images: [],
@@ -69,8 +71,13 @@ export default function booking(state = initialState, action) {
       };
     case actionTypes.VEHICLES_LOADING:
       return { ...state, fetchVehiclesLoading: action.payload.loading };
+      case actionTypes.AVAILABLE_VEHICLES_LOADING:
+        return { ...state, availableVehiclesLoading: action.payload.loading };
     case actionTypes.VEHICLE_SELECTED:
       return { ...state, vehicle: action.payload.vehicle };
+      case actionTypes.AVAILABLE_VEHICLES_ADDED:
+        return { ...state, availableVehicles: action.payload.availableVehicles };
+      
 
     case actionTypes.JOURNEY_TYPE_CHANGED:
       return {
