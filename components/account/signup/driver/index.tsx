@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "../../image";
+import theme from "../../../../theme/main";
 import {
   ContentWrapper,
   FlexContainer,
@@ -62,7 +63,7 @@ const InfoText = styled("p")`
   font-size: 12px;
   line-height: 16px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-top: 10px;
   padding-bottom: 20px;
 `;

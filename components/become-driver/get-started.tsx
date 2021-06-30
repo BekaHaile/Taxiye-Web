@@ -1,10 +1,11 @@
 import React from "react";
 import {GraySection,SectionTitle,SectionHeaderContainer, SectionContentContainer  } from "../section";
 import styled from "styled-components";
+import theme from "../../theme/main";
 const SloganButton = styled("button")`
   min-width: 120px;
   height: 34px;
-  background: #A02167;
+  background: ${theme.colors.primary};
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   margin: 30px 0px;

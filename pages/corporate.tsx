@@ -7,6 +7,7 @@ import Loading from "../components/loading/";
 import { gql } from '@apollo/client';
 import client from "../backend-client";
 import DefaultErrorPage from 'next/error';
+import theme from '../theme/main';
 
 const query = gql`
 query{  
@@ -59,7 +60,7 @@ query{
 `
 
 const SloganButton = styled("button")`
-background: #A02167;
+background: ${theme.colors.primary};
 box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
 border-radius: 5px;
 padding: 5px 20px;

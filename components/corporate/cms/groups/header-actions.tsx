@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, Input, Card, Typography, Space } from "antd";
+import theme from "../../../../theme/main";
+
 const { Text } = Typography;
 const { Search } = Input;
 import { PlusOutlined } from "@ant-design/icons";
@@ -10,7 +12,7 @@ const Title = styled(Text)`
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const CustomSpace = styled(Space)`
   width: 100%;

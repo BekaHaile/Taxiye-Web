@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import theme from "../../../../theme/main";
 import {
   CustomButton,
   CenteredForm,
@@ -58,7 +59,7 @@ const InfoText = styled("p")`
   font-size: 12px;
   line-height: 16px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-top: 10px;
   padding-bottom: 20px;
 `;

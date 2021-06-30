@@ -11,6 +11,7 @@ import { Loading } from "../../loading/loading";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { CustomButton } from "../../account/elements";
+import theme from '../../../theme/main';
 
 import Modal from "../../modal/secondary";
 
@@ -71,7 +72,7 @@ font-weight: normal;
 font-size: 12px;
 line-height: 16px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-top:10px;
 padding-bottom:20px;
 `;

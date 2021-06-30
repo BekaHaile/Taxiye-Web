@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Link from "next/link";
+import theme from '../../../../theme/main';
 
 const Container = styled("div")`
 text-align: center;
@@ -8,7 +9,7 @@ padding-top:30px;
 `;
 
 const CustomLink = styled("a")`
-color:#A02167;
+color:${theme.colors.primary};
 `;
 
 const Figure = styled("figure")`

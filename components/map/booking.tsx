@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer, InfoWindow } from "react-google-maps";
+import theme from '../../theme/main';
+import { withGoogleMap, GoogleMap, Marker, DirectionsRenderer, InfoWindow } from "react-google-maps";
 
 interface props {
-    googleMapURL?: string
     loadingElement: any
     containerElement: any
     mapElement: any
@@ -13,7 +13,9 @@ interface props {
 }
 
 
-function Map({ originAction, directionAction, googleMapURL, loadingElement, containerElement, mapElement, places, action }: props) {
+function Map({ originAction, directionAction, loadingElement, containerElement, mapElement, places, action }: props) {
+    if(google==null)
+    return null;
     const [directions, setDirection] = useState(null);
     const directionsService = new google.maps.DirectionsService();
     const [markers, setMarkers] = useState([]);
@@ -56,7 +58,6 @@ function Map({ originAction, directionAction, googleMapURL, loadingElement, cont
 
     return (
         <GoogleMap
-            {...googleMapURL}
             {...loadingElement}
             {...containerElement}
             {...mapElement}
@@ -72,7 +73,7 @@ function Map({ originAction, directionAction, googleMapURL, loadingElement, cont
                         suppressMarkers: true,
                         polylineOptions: {
                             strokeOpacity: 0.9,
-                            strokeColor: '#A02167',
+                            strokeColor: `${theme.colors.primary}`,
                         },
                     }
                     }
@@ -101,7 +102,7 @@ function makeMarker(position, type) {
 
 
 
-const WrappedMap = withScriptjs(withGoogleMap(Map));
+const WrappedMap = withGoogleMap(Map);
 
 
 export default WrappedMap;

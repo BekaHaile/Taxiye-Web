@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import colors from '../../../theme/main/colors';
+import theme from '../../../theme/main';
 import  Socials from "./socials";
 
 
@@ -10,7 +10,7 @@ const HeaderTitle = styled('h3')`
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
-    color:${colors.primary};
+    color:${theme.colors.primary};
 `;
 
 
@@ -20,7 +20,7 @@ const HeaderSubTitle = styled('p')`
     font-weight: normal;
     font-size: 18px;
     line-height: 25px;
-    color: #444444;
+    color:${theme.colors.primaryTextColor};;
 `;
 const ContentTitle = styled('h5')`
     font-family: Open Sans;
@@ -35,7 +35,7 @@ const ContentDetailText = styled('p')`
     font-size: 16px;
     line-height: 22px;
     padding-top: 8px;
-    color: #444444;
+    color:${theme.colors.primaryTextColor};;
 `;
 const ContentContainer = styled('div')`
     padding-top:40px;

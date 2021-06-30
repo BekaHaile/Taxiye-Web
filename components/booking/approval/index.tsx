@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../theme/main";
 import {
   Button,
   SecondaryButton,
@@ -141,7 +142,7 @@ const CenteredIcon = styled(Icon)`
 const CustomPrimaryButton = styled(PrimaryButton)`
   text-align: start;
   &:hover {
-    border: 1px solid #a02167;
+    border: 1px solid ${theme.colors.primary};
   }
 `;
 const Text = styled.p<{ color?: string }>`
@@ -150,7 +151,7 @@ const Text = styled.p<{ color?: string }>`
   font-weight: 600;
   font-size: 14px;
   line-height: 19px;
-  color: ${(props) => (props.color ? props.color : "#444444")};
+  color: ${(props) => (props.color ? props.color : `${theme.colors.primaryTextColor}`)};
   align-self: center;
 `;
 

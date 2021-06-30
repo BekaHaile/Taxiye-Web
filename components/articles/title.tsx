@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../theme/main';
 
 const Block = styled("div")`
 
@@ -20,7 +21,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 20px;
 line-height: 27px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 display: inline-block;
 position: relative;
 
@@ -28,7 +29,7 @@ position: relative;
     content: "";
     height: 2px;
     width: 60%;
-    background-color: #A02167;
+    background-color: ${theme.colors.primary};
     position: absolute;
     bottom: -.2em;
     left: 50%;

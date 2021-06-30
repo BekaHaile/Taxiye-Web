@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col, Card, Typography, Space } from "antd";
+import theme from "../../../../theme/main";
 
 const { Text } = Typography;
 import { TeamOutlined } from "@ant-design/icons";
@@ -12,7 +13,7 @@ const Title = styled(Text)`
   line-height: 22px;
   display: flex;
   align-items: center;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
 `;
 const Conent = styled(Text)`
   font-family: Roboto;

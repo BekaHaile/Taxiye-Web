@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
@@ -8,7 +7,6 @@ import {
 } from "react-google-maps";
 
 interface props {
-  googleMapURL: string;
   loadingElement: any;
   containerElement: any;
   mapElement: any;
@@ -20,7 +18,6 @@ interface props {
 
 function Map({
   directionAction,
-  googleMapURL,
   loadingElement,
   containerElement,
   mapElement,
@@ -81,7 +78,6 @@ function Map({
   if (origin == null) return null;
   return (
     <GoogleMap
-      {...googleMapURL}
       {...loadingElement}
       {...containerElement}
       {...mapElement}
@@ -122,6 +118,6 @@ function Map({
   );
 }
 
-const WrappedMap = withScriptjs(withGoogleMap(Map));
+const WrappedMap = withGoogleMap(Map);
 
 export default WrappedMap;

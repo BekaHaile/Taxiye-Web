@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../theme/main";
 import {
   DefaultSection,
   SectionTitle,
@@ -37,7 +38,7 @@ const Description = styled("p")`
   font-size: 14px;
   line-height: 19px;
 
-  color: #363636;
+  color: ${theme.colors.primaryLabelColor};;
   max-width: 500px;
   flex: 1;
 `;

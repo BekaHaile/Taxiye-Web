@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col, Card, Typography, Space } from "antd";
+import theme from "../../../../../theme/main";
 
 const { Text } = Typography;
 const Title = styled(Text)`
@@ -9,7 +10,7 @@ const Title = styled(Text)`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const SubTitle = styled(Text)`
   font-family: Open Sans;
@@ -17,7 +18,7 @@ const SubTitle = styled(Text)`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const Container = styled("div")`
   height: 420px;

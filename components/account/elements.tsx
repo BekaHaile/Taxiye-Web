@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Form } from "../form/inputs";
 import { Button } from "../form/buttons/primary-button";
+import theme from "../../theme/main";
 
 const ContentWrapper = styled("div")`
   display: flex;
@@ -17,7 +18,7 @@ const NavLink = styled.a`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #A02167;
+  color: ${theme.colors.primary};
   margin-top:0px;
   padding:0px 0px;
   padding-right:20px;
@@ -36,7 +37,7 @@ padding-right:10px;
 
 /* Black / 444 */
 
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const SubTitle = styled("p")`
@@ -48,7 +49,7 @@ line-height: 19px;
 padding-right:10px;
 /* Black / 444 */
 
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const FormContainer = styled("div")`

@@ -1,6 +1,7 @@
 import React, { useState, FunctionComponent } from "react";
 import styled from "styled-components";
 import { Input } from "./primary-input";
+import theme from "../../../theme/main";
 
 const CustomInput = styled(Input)`
 margin:8px -2px;
@@ -12,7 +13,7 @@ border-bottom-left-radius: 0px;
 padding-left:50px;
 && {
     :focus {
-        border:2px solid #A02167;
+        border:2px solid ${theme.colors.primary};
         border-left:none;
     }
 `;
@@ -59,7 +60,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-bottom: 10px;
 `;
 

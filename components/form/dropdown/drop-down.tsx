@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import theme from "../../../theme/main";
 
 const DropDown = styled("select")`
   background: #fff;
   border-radius: 5px;
   width: 100%;
-  padding: 12px 20px;
+  padding: 8px 20px;
   margin-bottom: 40px;
   display: inline-block;
   border: 2px solid #ccc;
@@ -13,11 +14,14 @@ const DropDown = styled("select")`
   box-sizing: border-box;
   margin-top: 10px;
 `;
+const SecondaryDropDown = styled(DropDown)`
+  padding: 12px 20px;
+`;
 const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   width: 100%;
 `;
 
@@ -97,4 +101,4 @@ const DefaultDropDown: FunctionComponent<InputProps> = ({
   );
 };
 
-export { GenderDropDown, CountryDropDown, DefaultDropDown, DropDown };
+export { GenderDropDown, CountryDropDown, DefaultDropDown, SecondaryDropDown };

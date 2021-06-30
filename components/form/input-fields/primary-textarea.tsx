@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import theme from "../../../theme/main";
 
 const TextArea = styled('textarea')`
 width: 100%;
@@ -18,11 +19,11 @@ line-height: 19px;
 
 /* Grey / 97 */
 
-color: #979797;
+color: ${theme.colors.secondaryTextColor};
 && {
   :focus {
     outline: none;
-    border: 2px solid #A02167;
+    border: 2px solid ${theme.colors.primary};
   }
 
 
@@ -39,7 +40,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 type InputProps = {

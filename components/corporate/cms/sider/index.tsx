@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import { Layout, Menu, Avatar, Typography, Space } from "antd";
+import theme from "../../../../theme/main";
 const { Text } = Typography;
 import {
   DesktopOutlined,
@@ -41,7 +42,7 @@ const Name = styled(Text)`
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const CompanyName = styled(Text)`
   font-family: Open Sans;
@@ -49,7 +50,7 @@ const CompanyName = styled(Text)`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
 `;
 interface Props {
   setSelected;

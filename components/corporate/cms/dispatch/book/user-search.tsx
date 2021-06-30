@@ -40,7 +40,7 @@ const SearchUser = () => {
                 placeholder="Enter employee name"
                 id="employee"
                 items={employees}
-                loading={search_loading}
+                loading={true}
                 selectedItem={selectedItem}
                 show={show}
                 onBlur={() => {

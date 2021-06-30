@@ -2,12 +2,14 @@ import { Input } from "../../../../../form/input-fields/primary-input";
 import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import { Loader } from "../../../../../loading/loading";
+import theme from "../../../../../../theme/main";
+
 const LabelText = styled("label")`
   font-family: Open Sans;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 const Container = styled("div")`
@@ -30,7 +32,7 @@ const Title = styled("div")`
   font-weight: 600;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const SubTitle = styled("div")`
   font-family: Open Sans;
@@ -38,7 +40,7 @@ const SubTitle = styled("div")`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
 `;
 const LoadingContainer = styled("div")`
   position: absolute;
@@ -57,7 +59,7 @@ const MainDropDown = styled(Input)`
     :focus {
       outline: none;
       border:0;
-      border-bottom: 1px solid #A02167;
+      border-bottom: 1px solid ${theme.colors.primary};
     }
 `;
 

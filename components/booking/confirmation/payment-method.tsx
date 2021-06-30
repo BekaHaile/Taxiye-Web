@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { changePayemntMethod } from "../../../redux/actions/booking";
 import store from "../../../redux/store";
 import { Loader } from '../../loading/loading';
+import theme from '../../../theme/main';
 
 const FlexContainer = styled("div")`
 display:flex;
@@ -23,7 +24,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-bottom:20px;
 `;
 

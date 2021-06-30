@@ -1,6 +1,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../theme/main";
 
 const Card = styled('div')`
 justify-content: center;
@@ -30,7 +31,7 @@ font-weight: normal;
 font-size: 14px;
 line-height: 22px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-top: 30px;
 `;
 

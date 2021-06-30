@@ -4,6 +4,7 @@ import styles from "../../../theme/global/vehicle-selection";
 import { useSelector } from "react-redux";
 import { PrimaryLoading } from "../../loading/loading";
 import { selectVehicle } from "../../../redux/actions/booking";
+import theme from "../../../theme/main";
 
 import store from "../../../redux/store";
 const Container = styled("div")`
@@ -52,7 +53,7 @@ const Text = styled("p")`
   font-weight: 600;
   font-size: 14px;
   line-height: 19px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   text-overflow: ellipsis;
 `;
 
@@ -62,7 +63,7 @@ const PriceText = styled(Text)`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-top: 5px;
 `;
 

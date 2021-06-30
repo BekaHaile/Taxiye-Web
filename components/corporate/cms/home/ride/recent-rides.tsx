@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Space, Typography, Table } from "antd";
+import theme from "../../../../../theme/main";
 const { Text } = Typography;
 const Title = styled(Text)`
   font-family: Roboto;
@@ -10,7 +11,7 @@ const Title = styled(Text)`
   line-height: 22px;
   display: flex;
   align-items: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const Container = styled("div")`
   height: 422px;

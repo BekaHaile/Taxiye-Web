@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Rating from "./rating";
+import theme from "../../../theme/main";
 
 const Card = styled("div")`
   width: fit-content;
@@ -37,14 +38,14 @@ const CardSubTitle = styled("h5")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 const CardText = styled("p")`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   width: 400px;
 `;
 const HeaderContainer = styled("div")`

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import theme from "../../../theme/main";
 
 const Input = styled('input')`
 width: 100%;
@@ -14,7 +15,7 @@ font-size:16px;
 && {
   :focus {
     outline: none;
-    border: 2px solid #A02167;
+    border: 2px solid ${theme.colors.primary};
   }
   padding-left: 25px;
   letter-spacing: 22px; 
@@ -32,7 +33,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 type InputProps = {

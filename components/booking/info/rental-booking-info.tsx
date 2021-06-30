@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import DateView from "../../form/Date";
+import theme from '../../../theme/main';
 
 const Title = styled("div")`
 font-family: Open Sans;
@@ -9,7 +10,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const Text = styled("div")`
@@ -18,7 +19,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 16px;
-color: #979797;
+color: ${theme.colors.secondaryTextColor};
 `;
 
 const Container = styled("div")`

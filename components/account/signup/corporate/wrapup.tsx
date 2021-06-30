@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "../../image";
+import theme from "../../../../theme/main";
 import {
   ContentWrapper,
   FlexContainer,
@@ -33,12 +34,12 @@ font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 16px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 }
 `;
 
 const PrimaryText = styled(Text)`
-color: #A02167;
+color:  ${theme.colors.primary};
 }
 `;
 

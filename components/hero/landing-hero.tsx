@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import TabbedForms from "../tab-forms/tab";
+import theme from "../../theme/main";
 
 const Slogan = styled("h1")`
   font-weight: bold;
   font-size: 36px;
   line-height: 49px;
-  color: #ffffff;
+  color: ${theme.colors.heroTitleColor};
 `;
 
 const HomeSlogan = styled(Slogan)`

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../theme/main';
 
 const BlockTitle = styled("h3")`
 font-family: Open Sans;
@@ -8,7 +9,7 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 
-color: #363636;
+color: ${theme.colors.primaryLabelColor};;
 `;
 
 const BlockContent = styled("p")`

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import DateView from "../../form/Date";
+import theme from '../../../theme/main';
 
 const Title = styled("div")`
 font-family: Open Sans;
@@ -9,7 +10,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 const MainTitle = styled(Title)`
 padding-bottom:20px;
@@ -22,7 +23,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 16px;
-color: #979797;
+color: ${theme.colors.secondaryTextColor};
 `;
 
 const HorizontalContainer = styled("div")`
@@ -48,7 +49,7 @@ const Stick = styled("div")`
     height: 100%;
     width: 2px;
     width: 2px;
-    background-color: #A02167;
+    background-color: ${theme.colors.primary};
     position: absolute;
     height: 26px;
     left: 24px;

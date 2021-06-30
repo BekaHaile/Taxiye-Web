@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import theme from "../../../theme/main";
 
 const Card = styled("div")`
   padding: 50px 20px;
@@ -13,7 +14,7 @@ const Card = styled("div")`
 
 const CardTitle = styled("h3")`
   font-size: 24px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding: 0;
 `;
 
@@ -21,7 +22,7 @@ const CardText = styled("p")`
   font-weight: normal;
   font-size: 16px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   width: 280px;
   padding:0;
 `;
@@ -30,7 +31,7 @@ const Price = styled("p")`
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding: 0;
 `;
 

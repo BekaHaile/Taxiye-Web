@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import theme from "../../theme/main";
 
 const SlogganWrapper = styled("div")`
 display; flex;
@@ -17,7 +18,7 @@ const Slogan = styled("h1")`
   font-weight: bold;
   font-size: 36px;
   line-height: 49px;
-  color: #ffffff;
+  color: ${theme.colors.heroTitleColor};
 `;
 
 const CenteredSlogan = styled(Slogan)`
@@ -30,7 +31,7 @@ const Description = styled("p")`
   font-size: 18px;
   line-height: 25px;
   text-align: center;
-  color: #ffffff;
+  color: ${theme.colors.heroSubTitleColor};
   padding-bottom: 30px;
 `;
 
@@ -46,7 +47,7 @@ const Breadcrump = styled("h2")`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #a02167;
+  color: ${theme.colors.primary};
   padding-bottom: 10px;
   &::firstline {
     text-transform: uppercase;

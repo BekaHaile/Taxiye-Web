@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "../../image";
+import Link from 'next/link'
 import {
   ContentWrapper,
   FlexContainer,
@@ -13,7 +13,7 @@ import {
   Title,
   SubTitle,
 } from "../../elements";
-import colors from "../../../../theme/main/colors";
+import theme from "../../../../theme/main";
 import { PhoneInput } from "../../../form/input-fields/phone-input";
 import { DefaultInput } from "../../../form/input-fields/primary-input";
 import { DefaultDropDown } from "../../../form/dropdown/drop-down";
@@ -31,10 +31,9 @@ import {
 import { Loading } from "../../../loading/loading";
 import TermsConsent from "../../terms";
 
-const LinkWithLine = styled("a")`
-color:${colors.primary};
+const LinkWithLine = styled(Link)`
+color: ${theme.colors.primary};
 padding-left:5px;
-
 }
 `;
 
@@ -43,9 +42,13 @@ padding-right:0px;
 }
 `;
 
+const CustomHeaderFlexContainer = styled(FlexContainer)`
+padding-bottom:0px;
+}
+`;
 const CustomFlexContainer = styled(FlexContainer)`
 padding-bottom:0px;
-row-gap:60px;
+gap:60px;
 }
 `;
 
@@ -84,10 +87,10 @@ const Company = () => {
         <LeftAlignedForm>
           <HeaderContainer>
             <Title>Company Sign up</Title>
-            <CustomFlexContainer>
+            <CustomHeaderFlexContainer>
               <CustomSubTitle>Already have an account?</CustomSubTitle>
               <LinkWithLine href="/">Sign in</LinkWithLine>
-            </CustomFlexContainer>
+            </CustomHeaderFlexContainer>
           </HeaderContainer>
           <ContentContainer>
             <CustomFlexContainer>

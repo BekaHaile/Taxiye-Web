@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../../form/buttons/primary-button";
+import theme from "../../../theme/main";
 
 const Card = styled("div")`
 width:100px;
@@ -47,7 +48,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 cursor: pointer;
 text-align:center;
 font-family: Open Sans;
@@ -59,7 +60,7 @@ text-align: center;
 
 /* Black / 444 */
 
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const ImagePreview = styled("img")`

@@ -8,6 +8,7 @@ import DeliveryForm from "./delivery-form";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
 import { changeBookingType } from "../../redux/actions/booking";
+import theme from "../../theme/main";
 
 const TabContainer = styled("div")`
   background: #ffffff;
@@ -40,13 +41,13 @@ const TabButton = styled.a`
   font-weight: normal;
   font-size: 14px;
   line-height: 29px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   text-decoration: none;
   padding: 0px 20px;
   &&.active {
     color: #ffffff;
     text-align:center;
-    background: #a02167;
+    background: ${theme.colors.primary};
     border-radius: 50px;
     text-align: center;
   }

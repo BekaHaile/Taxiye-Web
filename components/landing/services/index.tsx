@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import {DefaultSection, SectionTitle, CenteredText,SectionHeaderContainer, SectionContentContainer } from '../../section';
+import theme from "../../../theme/main";
 
 const ServiceTitle = styled("h3")`
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-bottom:10px;
 `;
 
@@ -17,7 +18,7 @@ const ServiceText = styled("p")`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   width: 290px;
   padding-bottom:10px;
 `;
@@ -42,14 +43,14 @@ const ServiceWrapper = styled("div")`
 
 const Button = styled("button")`
   height: 34px;
-  border: 1px solid #A02167;
+  border: 1px solid ${theme.colors.primary};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #A02167;
+  color: ${theme.colors.primary};
   background: #fff;
   padding: 5px 20px
 `;

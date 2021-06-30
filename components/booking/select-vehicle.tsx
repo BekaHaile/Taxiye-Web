@@ -4,6 +4,7 @@ import styles from "../../theme/global/vehicle-selection";
 import { useSelector } from "react-redux";
 import { PrimaryLoading } from "../loading/loading";
 import { selectVehicle } from "../../redux/actions/booking";
+import theme from '../../theme/main';
 
 import store from '../../redux/store';
 
@@ -51,7 +52,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const PriceText = styled(Text)`

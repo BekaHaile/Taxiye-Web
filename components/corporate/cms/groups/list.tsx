@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../../theme/main";
+
 import { Row, Col, Card, Space, Typography } from "antd";
 import {
   EditOutlined,
@@ -36,7 +38,7 @@ const Title = styled(Text)`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   &:after{
     content:url(${require("../../../../assets/icons/edit-icon.svg")});
     position: absolute;
@@ -50,7 +52,7 @@ const SubTitle = styled(Text)`
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const CardActionTitle = styled(Text)`
   font-family: Open Sans;
@@ -58,7 +60,7 @@ const CardActionTitle = styled(Text)`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
 `;
 const CardActionSubText = styled(Text)`
   font-family: Open Sans;
@@ -67,7 +69,7 @@ const CardActionSubText = styled(Text)`
   font-size: 13px;
   line-height: 18px;
   text-align: start;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 const Icon = styled("img")`

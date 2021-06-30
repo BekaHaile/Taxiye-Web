@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../../../theme/main";
 
 const HeaderContainer = styled("div")`
   background: #ffffff;
@@ -14,7 +15,7 @@ const Title = styled("span")`
   font-weight: bold;
   font-size: 14px;
   line-height: 19px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   vertical-align: middle;
   display: inline-block;
 `;

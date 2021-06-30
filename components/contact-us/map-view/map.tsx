@@ -9,7 +9,6 @@ const Mapview = ({setSelectedLocation, offices, directionAction}) => {
                 directionAction={directionAction}
                 action={setSelectedLocation}
                 places={offices}
-                googleMapURL="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places&key=AIzaSyCRNebshVW6XSdv4X2Nxm3FGIt3qbA7UKU"
                 loadingElement={<div style={{ height: "100%" }} />}
                 containerElement={<div style={{ height: "100%" }} />}
                 mapElement={<div style={{ height: "100%" }} />}

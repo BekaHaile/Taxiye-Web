@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import theme from "../../theme/main";
 
 const FooterHeader = styled("h4")`
   font-weight: 600;
@@ -20,11 +21,11 @@ const FooterLink = styled.a`
   font-style: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   margin: 10px 0px;
   && {
     :hover {
-      color: #A02167;
+      color: ${theme.colors.primary};
     }
   }
 `;
@@ -80,7 +81,7 @@ const Grid = styled("div")`
 const Footer = styled("div")`
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: ${theme.colors.footerColor};
 `;
 
 const FooterImage = styled('img')`

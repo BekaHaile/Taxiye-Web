@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DefaultSection, SectionTitle, CenteredText, SectionHeaderContainer, SectionContentContainer } from '../section';
-
+import theme from '../../theme/main';
 const ContentWrapper = styled('div')`
 display: flex;
 flex-direction: column;
@@ -14,7 +14,7 @@ font-weight: 600;
 font-size: 24px;
 line-height: 33px;
 margin-bottom: 15px;
-color: #A02167;
+color: ${theme.colors.primary};
 `;
 
 const BlockContent = styled('p')`
@@ -22,7 +22,7 @@ font-weight: normal;
 font-size: 16px;
 line-height: 22px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 max-width: 450px;
 `;
 

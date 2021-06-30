@@ -4,13 +4,15 @@ import { Button, Input, Card, Typography, Space } from "antd";
 const { Text } = Typography;
 const { Search } = Input;
 import { PlusOutlined } from "@ant-design/icons";
+import theme from "../../../../theme/main";
+
 const Title = styled(Text)`
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const CustomSpace = styled(Space)`
   width: 100%;

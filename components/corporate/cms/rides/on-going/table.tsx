@@ -2,10 +2,11 @@ import React from "react";
 import { Table, Space,Button } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
+import theme from "../../../../../theme/main";
 
 
 const Link = styled("a")`
-  color:#A02167;
+  color: ${theme.colors.primary};
 `;
 
 const columns = [

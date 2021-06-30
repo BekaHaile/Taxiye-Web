@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import theme from "../../theme/main";
 
 const HeaderWrapper = styled("div")`
   display: flex;
@@ -24,10 +25,10 @@ const NavLink = styled.a`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   &&.active {
     height: 32px;
-    border: 1px solid #a02167;
+    border: 1px solid ${theme.colors.primary};
     box-sizing: border-box;
     border-radius: 5px;
   }

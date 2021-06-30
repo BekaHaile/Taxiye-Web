@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import theme from "../../theme/main";
 
 const Button = styled("button")`
-  background: #a02167;
+  background: ${theme.colors.primary};
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 10px;
@@ -22,7 +23,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 const Input = styled("input")`
@@ -31,7 +32,7 @@ const Input = styled("input")`
   ::placeholder {
     font-size: 14px;
     line-height: 19px;
-    color: #979797;
+    color: ${theme.colors.secondaryTextColor};
     font-weight: normal;
   }
   display: flex;
@@ -42,7 +43,7 @@ const Input = styled("input")`
   && {
     :focus {
       outline: none;
-      border-bottom: 1px solid #A02167;
+      border-bottom: 1px solid ${theme.colors.primary};
     }
 `;
 

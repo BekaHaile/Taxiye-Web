@@ -4,6 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import theme from "../../theme/main";
 
 const NavWrapper = styled("div")`
   display: flex;
@@ -12,7 +13,7 @@ const NavWrapper = styled("div")`
   align-items: center;
   padding: 0px 50px 0px 60px;
   height: 65px;
-  background: #ffffff;
+  background: ${theme.colors.headerColor};
   filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.25));
 `;
 const Avatar = styled("img")`
@@ -34,7 +35,7 @@ const Button = styled("button")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding: 5px 20px;
 `;
 
@@ -49,11 +50,11 @@ const NavLink = styled.a`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding: 5px 20px;
   &&.active {
     height: 32px;
-    border: 1px solid #A02167;
+    border: 1px solid ${theme.colors.primary};
     box-sizing: border-box;
     border-radius: 5px;
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../theme/main';
 
 const Card = styled('div')`
 display: flex;
@@ -33,7 +34,7 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-bottom: 20px;
 text-align: center;
 `;
@@ -44,7 +45,7 @@ font-weight: normal;
 font-size: 16px;
 line-height: 22px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const TitleContainer = styled('div')`

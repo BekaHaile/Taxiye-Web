@@ -3,11 +3,12 @@ import styled from "styled-components";
 import Carousel from "react-elastic-carousel";
 import styles from "../../../../../theme/global/slider";
 import Slider from "../../../../slider/";
+import theme from '../../../../../theme/main';
 
 const Card = styled("div")`
 width:152px;
 height:160px;
-border: 1px solid #444444;
+border: 1px solid${theme.colors.primaryTextColor};;
 box-sizing: border-box;
 border-radius: 5px;
 justify-content:center;
@@ -33,7 +34,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 18px;
 line-height: 25px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 

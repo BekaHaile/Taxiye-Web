@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import theme from "../../theme/main";
 
 const Container = styled("div")`
-  background: #272727;
+  background: ${theme.colors.topHeaderColor};
   height: 30px;
   display: flex;
   flex-direction: row;

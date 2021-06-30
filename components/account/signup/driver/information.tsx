@@ -77,6 +77,9 @@ const Signup = ({ handleNext, activeStep, steps }) => {
               label="Phone Number *"
               placeholder="your phone number"
               id="phonenumber"
+              country_code="+251"
+              phone_no="93453765673"
+              action={()=>console.log("dfkhdf")}
             />
             <SubTitleWithSpace>
               We’ll send you a text to verify your phone.

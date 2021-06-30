@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import theme from "../../theme/main";
 
 const LoadingView = styled("div")`
     display: block;
@@ -31,7 +32,7 @@ const LoadingContent = styled("div")`
 const MainLoader = styled("div")`
 border: 5px solid #f3f3f3;
 border-radius: 50%;
-border-top: 5px solid #A02167;
+border-top: 5px solid ${theme.colors.primary};
 width: 20px;
 height: 20px;
 -webkit-animation: spin 0.5s linear infinite; /* Safari */
@@ -40,7 +41,7 @@ animation: spin 0.7s linear infinite;
 const Loader = styled("div")`
 border: 5px solid #f3f3f3;
 border-radius: 50%;
-border-top: 5px solid #A02167;
+border-top: 5px solid ${theme.colors.primary};
 width: 10px;
 height: 10px;
 -webkit-animation: spin 0.5s linear infinite; /* Safari */

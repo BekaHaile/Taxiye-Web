@@ -1,6 +1,7 @@
 import React from "react";
 import { CenteredText, GraySection, SectionTitle, SectionHeaderContainer, SectionContentContainer } from "../section";
 import styled from "styled-components";
+import theme from "../../theme/main";
 
 const CardContainer = styled("div")`
 display: flex;
@@ -18,7 +19,7 @@ font-size: 16px;
 line-height: 22px;
 margin:10px 0px;
 
-color: #363636;
+color: ${theme.colors.primaryLabelColor};;
 `;
 
 const Title = styled("h3")`
@@ -29,7 +30,7 @@ font-size: 20px;
 line-height: 27px;
 margin:0px;
 
-color: #363636;
+color: ${theme.colors.primaryLabelColor};;
 `;
 
 const StringContainer = styled("div")`

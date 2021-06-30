@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css'
+import theme from '../main';
 
 export default css.global`
 .map-autocomplete-dropdown{
@@ -18,12 +19,12 @@ export default css.global`
 }
 .suggestion-item.active{
     border-radius: 5px;
-    background-color:#A02167;
+    background-color:${theme.colors.primary};
     color:white !important;
 }
 .suggestion-item:hover{
     border-radius: 5px;
-    background-color:#A02167;
+    background-color:${theme.colors.primary};
     color:white !important;
 }
 `

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../../theme/main";
 import { Typography, Space } from "antd";
 const { Text } = Typography;
 
@@ -9,7 +10,7 @@ const Title = styled(Text)`
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 const SubTitle = styled(Text)`
   font-family: Open Sans;

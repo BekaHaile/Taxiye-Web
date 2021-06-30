@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import IntlTelInput from "react-intl-tel-input";
 import "react-intl-tel-input/dist/main.css";
+import theme from "../../../theme/main";
 
 const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-bottom: 10px;
 `;
 
@@ -22,7 +23,7 @@ const Code = styled("div")`
   font-size: 14px;
   line-height: 19px;
   padding-top: 12.5px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 const CodeContainer = styled("div")`
