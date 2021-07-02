@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import theme from "../../theme/main";
+import styled from "styled-components";
 import {
   withGoogleMap,
   GoogleMap,
@@ -7,6 +8,24 @@ import {
   DirectionsRenderer,
   InfoWindow,
 } from "react-google-maps";
+
+const Container = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+const InnerContainer = styled("div")`
+  display: flex;
+  gap: 5px;
+`;
+
+const Avatar = styled("img")`
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 50%;
+  display: block;
+`;
 
 interface props {
   loadingElement: any;
@@ -98,12 +117,20 @@ function Map({
               scaledSize: new google.maps.Size(15, 22),
             }}
           >
-            {selectedVehicle == vehicle &&(
+            {selectedVehicle == vehicle && (
               <InfoWindow onCloseClick={() => setSelectedVehicle(null)}>
-                <div>
-                  <h4>Full Name: {vehicle.name}</h4>
-                  <p>Phone Number: {vehicle.phone_no}</p>
-                </div>
+                <Container>
+                  <Avatar src={vehicle.driver_image} />
+                  <InnerContainer>
+                    <h4>ID:</h4> {vehicle.driver_id}
+                  </InnerContainer>
+                  <InnerContainer>
+                    <h4>Full Name:</h4> {vehicle.name}
+                  </InnerContainer>
+                  <InnerContainer>
+                    <h4>Phone Number:</h4> {vehicle.phone_no}
+                  </InnerContainer>
+                </Container>
               </InfoWindow>
             )}
           </Marker>

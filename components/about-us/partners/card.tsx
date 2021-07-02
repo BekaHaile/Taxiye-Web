@@ -20,7 +20,7 @@ height: 186px;
 const CardWrapper = styled('div')`
 display: flex;
 justify-content: center;
-
+flex-wrap:wrap;
 
 `;
 

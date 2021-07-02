@@ -1,5 +1,10 @@
 import React from "react";
-import {GraySection,SectionTitle,SectionHeaderContainer, SectionContentContainer  } from "../section";
+import {
+  GraySection,
+  SectionTitle,
+  SectionHeaderContainer,
+  SectionContentContainer,
+} from "../section";
 import styled from "styled-components";
 import theme from "../../theme/main";
 const SloganButton = styled("button")`
@@ -19,21 +24,22 @@ const SloganButton = styled("button")`
   vertical-align: middle;
 `;
 const CustomSectionTitle = styled(SectionTitle)`
-
-width:600px;
+  width: 600px;
+  @media (max-width: 768px) {
+    width: auto;
+  }
 `;
 
-const SignUp = ({title}) => {
+const SignUp = ({ title }) => {
   return (
     <>
-    <GraySection>
-    <SectionHeaderContainer>
-      <CustomSectionTitle>{title}</CustomSectionTitle>
-      </SectionHeaderContainer>
-      <SectionContentContainer>
-      <SloganButton>Get Started</SloganButton>
-      </SectionContentContainer>
-
+      <GraySection>
+        <SectionHeaderContainer>
+          <CustomSectionTitle>{title}</CustomSectionTitle>
+        </SectionHeaderContainer>
+        <SectionContentContainer>
+          <SloganButton>Get Started</SloganButton>
+        </SectionContentContainer>
       </GraySection>
     </>
   );

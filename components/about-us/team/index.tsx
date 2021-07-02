@@ -8,6 +8,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 gap:30px;
+flex-wrap:wrap;
 `;
 const Container = styled("div")`
 

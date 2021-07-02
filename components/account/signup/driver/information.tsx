@@ -17,6 +17,15 @@ import {
 } from "../../../form/dropdown/drop-down";
 import TermsConsent from "../../terms";
 import NeedHelp from "../../need-help";
+import { useSelector } from "react-redux";
+import {
+  addFullName,
+  genderSelected,
+  countrySelected,
+  addPhone,
+  changeTerm
+} from "../../../../redux/actions/driver";
+import store from "../../../../redux/store";
 
 const CustomHeaderContainer = styled(HeaderContainer)`
 padding-bottom:40px;
@@ -36,6 +45,14 @@ padding-top:10px;
 `;
 
 const Signup = ({ handleNext, activeStep, steps }) => {
+  const country_code = useSelector((state) => state["driver"]["country_code"]);
+  const phone_no = useSelector((state) => state["driver"]["phone_no"]);
+  const isFirstFormValid = useSelector((state) => state["driver"]["isFirstFormValid"]);
+  const full_name = useSelector((state) => state["driver"]["full_name"]);
+  const gender = useSelector((state) => state["driver"]["gender"]);
+  const country = useSelector((state) => state["driver"]["country"]);
+  const agreeToTerms = useSelector((state) => state["driver"]["agreeToTerms"]);
+
   return (
     <>
       <CustomHeaderContainer>
@@ -48,9 +65,11 @@ const Signup = ({ handleNext, activeStep, steps }) => {
         <CustomFlexContainer>
           <InputContainer>
             <DefaultInput
-              label="Full name*"
+              label="Full name *"
               placeholder="your full name"
               id="fullname"
+              value={full_name}
+              onChange={(e) => store.dispatch(addFullName(e.target.value))}
             />
           </InputContainer>
 
@@ -59,6 +78,8 @@ const Signup = ({ handleNext, activeStep, steps }) => {
               label="Gender *"
               placeholder="Select Gender"
               id="gender"
+              value={gender}
+              onChange={(e) => store.dispatch(genderSelected(e.target.value))}
             />
           </InputContainer>
         </CustomFlexContainer>
@@ -69,6 +90,10 @@ const Signup = ({ handleNext, activeStep, steps }) => {
               label="Country *"
               placeholder="Ethiopia"
               id="country"
+              value={country}
+              onChange={(e) => {
+                store.dispatch(countrySelected(e.target.value));
+              }}
             />
           </InputContainer>
 
@@ -77,18 +102,29 @@ const Signup = ({ handleNext, activeStep, steps }) => {
               label="Phone Number *"
               placeholder="your phone number"
               id="phonenumber"
-              country_code="+251"
-              phone_no="93453765673"
-              action={()=>console.log("dfkhdf")}
+              country_code={country_code}
+              phone_no={phone_no}
+              action={(isValid, data, phone_no) => {
+                store.dispatch(
+                  addPhone({
+                    country: `${data.name}`,
+                    phone_no: phone_no,
+                    country_code: `+${data.dialCode}`,
+                    isValid: isValid,
+                  })
+                );
+              }}
             />
             <SubTitleWithSpace>
               We’ll send you a text to verify your phone.
             </SubTitleWithSpace>
           </InputContainer>
         </CustomFlexContainer>
-        <TermsConsent />
+        <TermsConsent action={(status)=>store.dispatch(changeTerm(status))} checked={agreeToTerms} />
         <FlexContainer>
-          <Button onClick={handleNext}>Continue</Button>
+          <Button disabled={!isFirstFormValid} onClick={handleNext}>
+            Continue
+          </Button>
         </FlexContainer>
         <NeedHelp />
       </ContentContainer>

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import theme from "../../../theme/main";
+import { countryList } from "./country-list";
 
 const DropDown = styled("select")`
   background: #fff;
@@ -21,7 +22,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   width: 100%;
 `;
 
@@ -35,41 +36,37 @@ type InputProps = {
   items?;
 };
 
-const GenderDropDown: FunctionComponent<InputProps> = ({
-  label,
-  id,
-  placeholder,
-}) => {
+
+const GenderDropDown = ({ label, id, placeholder, value, onChange }) => {
   return (
     <>
-      <LabelText>{label}</LabelText>
-      <div>
-        <DropDown placeholder={placeholder} id={id}>
-          <option> Male</option>
-          <option> Female</option>
-        </DropDown>
-      </div>
+      <DefaultDropDown
+        label={label}
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+        items={['Male','Female']}
+        value={value}
+      />
     </>
   );
 };
 
-const CountryDropDown: FunctionComponent<InputProps> = ({
-  label,
-  id,
-  placeholder,
-}) => {
+const CountryDropDown = ({ label, id, placeholder, value, onChange }) => {
   return (
     <>
-      <LabelText>{label}</LabelText>
-      <div>
-        <DropDown placeholder={placeholder} id={id}>
-          <option> Male</option>
-          <option> Female</option>
-        </DropDown>
-      </div>
+      <DefaultDropDown
+        label={label}
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+        items={countryList}
+        value={value}
+      />
     </>
   );
 };
+
 const DefaultDropDown: FunctionComponent<InputProps> = ({
   label,
   id,

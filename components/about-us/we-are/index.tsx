@@ -24,6 +24,7 @@ const FlexRow = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap:wrap;
 `;
 
 const Container = styled("div")`
@@ -54,12 +55,19 @@ const SecondaryImage = styled("img")`
   position: absolute;
   bottom: 0;
   right: 0;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
 
 const PrimaryImage = styled("img")`
   position: absolute;
   height: 400px;
   width: 400px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ImageContainer = styled("div")`

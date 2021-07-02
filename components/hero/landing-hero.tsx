@@ -19,6 +19,10 @@ const HomeContainer = styled("div")`
   display: inline-block;
   padding-left: 60px;
   margin-top: 95px;
+  @media (max-width: 768px) {
+    padding-left: 0px;
+    margin-top: 0px;
+  }
 `;
 
 const Hero = ({ hero }) => {

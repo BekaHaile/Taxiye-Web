@@ -5,6 +5,7 @@ import user from "./user";
 import navigation from "./navigation";
 import corporate from "./corporate";
 import corporate_employees from "./corporate/employees";
+import driver from "./driver";
 
 export default combineReducers({
   contact_us,
@@ -12,5 +13,6 @@ export default combineReducers({
   user,
   navigation,
   corporate,
-  corporate_employees
+  corporate_employees,
+  driver
 });

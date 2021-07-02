@@ -36,7 +36,7 @@ const FooterContent = styled("div")`
   justify-content: flex-end;
   align-items: flex-start;
   padding: 0px;
-  margin-left: 130px;
+  
 `;
 
 const FooterBottomLink = styled(FooterLink)`
@@ -63,6 +63,7 @@ const FooterBottomLinkWrapper = styled("div")`
 
 const FooterInfo = styled("div")`
 display: flex;
+flex-wrap:wrap;
 
 `;
 
@@ -75,7 +76,8 @@ const Grid = styled("div")`
   flex-direction: row;
   padding-bottom:20px;
   margin-left: auto;
-  
+  justify-content:space-between;
+  width:100%;  
 `;
 
 const Footer = styled("div")`
@@ -85,14 +87,19 @@ const Footer = styled("div")`
 `;
 
 const FooterImage = styled('img')`
-  width:450px;
-  height:430px;
+  /*width:450px;
+  height:430px;*/
+  @media (max-width: 768px) {
+    margin:auto;
+    
+  }
+  
 `;
 
 const LinkWrapper = styled("div")`
   display: flex;
   flex-direction: column;
-  margin-right:150px;
+  
 `;
 const LinkEndWrapper = styled(LinkWrapper)`
  
@@ -104,6 +111,11 @@ const FlexRow = styled("div")`
   display: flex;
   justify-content: space-between;
   padding:60px 60px 0px 60px;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    padding:0px;
+    padding-top:60px;
+  }
 
 `;
 
@@ -114,6 +126,11 @@ const FlexEnd = styled("div")`
   width: 60%;
   justify-content: space-around;
   align-self: flex-end;
+  flex-wrap:wrap;
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const FooterSection = () => {

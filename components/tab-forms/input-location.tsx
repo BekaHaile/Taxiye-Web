@@ -27,8 +27,7 @@ export default function LocationInput({
   placeholder,
   id,
   icon,
-  action,
-  value
+  action
 }) {
   const [add, setAddress] = useState(address);
   const active = require("../../assets/icons/location-white.svg");

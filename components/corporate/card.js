@@ -22,6 +22,8 @@ height: 310px;
 const CardWrapper = styled('div')`
 display: flex;
 gap:50px;
+flex-wrap:wrap;
+justify-content:center;
 `;
 const CenteredCard = styled(Card)`
 box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);

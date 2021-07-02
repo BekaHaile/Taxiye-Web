@@ -18,6 +18,7 @@ const CardWrapper = styled('div')`
 display: flex;
 justify-content: space-around;
 gap:50px;
+flex-wrap:wrap;
 `;
 const CenteredCard = styled(Card)`
 box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);

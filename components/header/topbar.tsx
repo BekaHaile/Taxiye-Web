@@ -27,6 +27,9 @@ const FormattedLinks = styled.a`
     border: 1px solid #ababab;
    
   }
+  &:hover {
+    color: ${theme.colors.primary};
+  }
 `;
 
 

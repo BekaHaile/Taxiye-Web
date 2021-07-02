@@ -4,11 +4,13 @@ import { user } from "./user";
 import { corporate } from "./corporate";
 import { corporate_employees } from "./corporate/employees";
 import { contact_us } from "./contact-us";
+import { driver } from "./driver";
 
 export default applyMiddleware(
   booking,
   user,
   corporate,
   corporate_employees,
-  contact_us
+  contact_us,
+  driver
 );

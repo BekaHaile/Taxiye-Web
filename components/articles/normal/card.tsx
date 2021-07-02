@@ -12,7 +12,9 @@ const Card = styled("div")`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   background: #fff;
- 
+  @media (max-width: 768px) {
+    margin: 0 20px;
+  }
 `;
 
 const CardImage = styled("img")`
@@ -20,6 +22,10 @@ const CardImage = styled("img")`
   margin: 0;
   width: 340px;
   height: 230px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const CardBody = styled("div")`
@@ -29,13 +35,10 @@ const CardBody = styled("div")`
   padding: 20px;
 `;
 
-const Image = styled("img")`
- 
-`;
-
+const Image = styled("img")``;
 
 const Info = styled("div")`
-  padding-right:10px;
+  padding-right: 10px;
 `;
 
 const AuthorText = styled("span")`
@@ -49,7 +52,6 @@ const AuthorText = styled("span")`
 const ArticleInfoWrapper = styled("div")`
   display: flex;
   padding-bottom: 10px;
-  
 `;
 
 const ArticleTitle = styled("h1")`
@@ -57,7 +59,7 @@ const ArticleTitle = styled("h1")`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   padding: 0px 0px 10px 0px;
 `;
 
@@ -66,8 +68,8 @@ const ArticleText = styled("p")`
   font-weight: normal;
   font-size: 14px;
   line-height: 150%;
-  color:${theme.colors.primaryTextColor};;
-  padding-bottom:20px;
+  color: ${theme.colors.primaryTextColor};
+  padding-bottom: 20px;
 `;
 
 const Button = styled("button")`
@@ -80,7 +82,7 @@ const Button = styled("button")`
   text-align: center;
   color: ${theme.colors.primary};
   background: #fff;
-  padding:5px 20px;
+  padding: 5px 20px;
 `;
 
 const TextWrapper = styled("div")`
@@ -92,36 +94,31 @@ const ImageContainer = styled("div")`
   width: 340px;
 `;
 
-
-
-
-
 const ArticleCard = ({ article }) => {
   return (
     <Card>
       <ImageContainer>
-        <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`} />
+        <CardImage
+          src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`}
+        />
       </ImageContainer>
       <CardBody>
         <TextWrapper>
           <ArticleInfoWrapper>
             <Info>
-              <Image
-                src={require("../../../assets/icons/user/vector.svg")}
-              />
-              {
-                article.user &&
-                <AuthorText>{article.user.firstname} {article.user.lastname.charAt(0) + `.`}</AuthorText>
-              }
+              <Image src={require("../../../assets/icons/user/vector.svg")} />
+              {article.user && (
+                <AuthorText>
+                  {article.user.firstname}{" "}
+                  {article.user.lastname.charAt(0) + `.`}
+                </AuthorText>
+              )}
             </Info>
             <Info>
-              <Image
-                src={require("../../../assets/icons/user/clock.svg")}
-              />
+              <Image src={require("../../../assets/icons/user/clock.svg")} />
               <AuthorText>
                 <DateView format="MMMM D, YYYY" date={article.published_at} />
               </AuthorText>
-
             </Info>
           </ArticleInfoWrapper>
           <ArticleTitle>{article.headerTitle}</ArticleTitle>
@@ -130,7 +127,6 @@ const ArticleCard = ({ article }) => {
         <Link href={`/articles/${article.id}`}>
           <Button>Read More</Button>
         </Link>
-
       </CardBody>
     </Card>
   );

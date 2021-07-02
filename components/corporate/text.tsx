@@ -8,7 +8,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 20px;
 line-height: 27px;
-
+text-align:center;
 color: ${theme.colors.primaryLabelColor};;
 `;
 

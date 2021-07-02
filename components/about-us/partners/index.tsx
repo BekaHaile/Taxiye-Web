@@ -8,12 +8,14 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 max-width:1160px;
+flex-wrap:wrap;
 
 `;
 const CardContainer = styled("div")`
 display: flex;
 flex-direction: row;
 justify-content: center;
+flex-wrap:wrap;
 
 `;
 

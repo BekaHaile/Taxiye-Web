@@ -9,6 +9,9 @@ const HeaderWrapper = styled("div")`
   position: fixed;
   width:100%;
   z-index: 1;
+  @media (max-width: 768px) {
+    display:none;
+  }
 `;
 
 const Header = () => {

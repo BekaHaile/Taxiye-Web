@@ -13,6 +13,11 @@ body, html {
 h1, h2, h3, h4, h5, h6 {
   color:${theme.colors.primaryTextColor}; 
 }
+a{
+  &:hover {
+    color: ${theme.colors.primary};
+  }
+}
 .pickers{
   width: -webkit-fill-available !important;
 }

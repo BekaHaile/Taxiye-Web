@@ -1,9 +1,20 @@
-import * as actions from "../../actions/user";
+import * as actions from "../../actions/driver";
+import { showError } from "../common";
 import axios from "axios";
-import { showError, validateEmail } from "../common";
 
-export const user = (store) => (next) => async (action) => {
-  let data = store.getState().user;
+export const driver = (store) => (next) => async (action) => {
+  next(action);
+  let data = store.getState().driver;
+
+  if (
+    action.type == "DRIVER_FULLNAME_ADDED" ||
+    action.type == "DRIVER_GENDER_ADDED" ||
+    action.type == "DRIVER_COUNTRY_ADDED" ||
+    action.type == "DRIVER_PHONE_ADDED" ||
+    action.type == "DRIVER_TERMS_CHANGED"
+  ) {
+    await validateUser(data, next);
+  }
   if (action.type == "PHONE_SUBMITTED") {
     next(actions.setLoading(true));
     try {
@@ -26,7 +37,7 @@ export const user = (store) => (next) => async (action) => {
       showError(next);
       next(actions.changeOtpStatus({ loading: false, otpSent: false }));
     }
-  } else if (action.type == "OTP_RESENT") {
+  } else if (action.type == "DRIVER_OTP_RESENT") {
     next(actions.changeOtpStatus({ loading: true, otpSent: false }));
     try {
       let res = await submitPhone({
@@ -44,37 +55,34 @@ export const user = (store) => (next) => async (action) => {
       showError(next);
       next(actions.changeOtpStatus({ loading: false, otpSent: false }));
     }
-  } else if (action.type == "OTP_SUBMITTED") {
+  } else if (action.type == "INITIATE_SUBMIT_DRIVER_FORM") {
     next(actions.setLoading(true));
-    try {
-      let res = await submitPhone({
-        phone_no: `${data["country_code"]}${data["phone_no"]}`,
-        country: `${data["country"]}`,
-      });
-      if (res) {
-        if (res.status === "OK") {
-          next(actions.changeStep(data["step"] + 1));
-          next(actions.changeOtpStatus({ loading: false, otpSent: true }));
-        } else {
-          next(actions.changeOtpStatus({ loading: false, otpSent: false }));
-        }
-      }
-    } catch (e) {
-      showError(next);
-      next(actions.setLoading(false));
-    }
-  } else {
-    next(action);
-    let new_data = store.getState().user;
-    if (
-      action.type == "FIRST_NAME_ADDED" ||
-      action.type == "LAST_NAME_ADDED" ||
-      action.type == "EMAIL_ADDED" ||
-      action.type == "TERMS_CHANGED"
-    )
-      validateUser(new_data, next);
+    await sleep(3000);
+    next(actions.driverFormSubmitted(true));
+    next(actions.changeStep(data["step"] + 1));
   }
 };
+
+async function validateUser(data, next) {
+  if (
+    data["full_name"] != null &&
+    data["full_name"] != "" &&
+    data["gender"] != null &&
+    data["gender"] != "" &&
+    data["country"] != null &&
+    data["country"] != "" &&
+    data["phone_no"] != "" &&
+    data["phone_no"] != null &&
+    data["country_code"] != "" &&
+    data["country_code"] != null &&
+    data["isPhoneValid"] &&
+    data["agreeToTerms"]
+  )
+    next(actions.validateFirstForm(true));
+  else {
+    next(actions.validateFirstForm(false));
+  }
+}
 
 async function submitPhone(data) {
   try {
@@ -90,17 +98,8 @@ async function submitPhone(data) {
   }
 }
 
-async function validateUser(data, next) {
-  if (
-    data["user"]["firstName"] != null &&
-    data["user"]["firstName"] != "" &&
-    data["user"]["lastName"] != null &&
-    data["user"]["lastName"] != "" &&
-    data["agreeToTerms"] &&
-    validateEmail(data["user"]["email"])
-  )
-    next(actions.setUserIsValid(true));
-  else {
-    next(actions.setUserIsValid(false));
-  }
+async function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }

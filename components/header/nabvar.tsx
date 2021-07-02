@@ -58,6 +58,10 @@ const NavLink = styled.a`
     box-sizing: border-box;
     border-radius: 5px;
   }
+  &:hover {
+    color: ${theme.colors.primary};
+   
+  }
 `;
 const SecondaryNavLink = styled(NavLink)`
  display:flex;

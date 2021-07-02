@@ -34,10 +34,6 @@ font-size: 12px;
 line-height: 16px;
 text-decoration-line: underline;
 
-/* Taxiye/Purple/Main */
-
-color:${theme.colors.primary};
-
 }
 `;
 

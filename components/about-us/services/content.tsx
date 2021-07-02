@@ -6,13 +6,12 @@ const BlockTitle = styled("h3")`
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
-  color: ${theme.colors.primaryLabelColor};;
+  color: ${theme.colors.primaryLabelColor};
   margin: 0px 0px;
-  width:inherit;
+  width: inherit;
 `;
 const RightBlockTitle = styled(BlockTitle)`
-
-  text-align:right;
+  text-align: right;
 `;
 
 const BlockContent = styled("p")`
@@ -21,7 +20,7 @@ const BlockContent = styled("p")`
   font-size: 14px;
   line-height: 22px;
   text-align: center;
-  color: ${theme.colors.primaryLabelColor};;
+  color: ${theme.colors.primaryLabelColor};
   margin-top: 5px;
 `;
 
@@ -30,25 +29,25 @@ const ContentWrapper = styled("div")`
   align-items: center;
   justify-content: space-between;
   margin: 0px 0px;
-  
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
-const Container = styled('div')`
-width: 250px;
+const Container = styled("div")`
+  width: 250px;
 `;
 
 const Text = styled(BlockContent)`
-width: 250px;
-text-align: left;
+  width: 250px;
+  text-align: left;
 `;
-
-
 
 const RightText = styled(Text)`
-width: 250px;
-text-align: right;
+  width: 250px;
+  text-align: right;
 `;
-
 
 const Block = styled("div")`
   display: flex;
@@ -58,15 +57,27 @@ const Block = styled("div")`
 `;
 
 const Numbering = styled("p")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: 800;
-font-size: 48px;
-line-height: 65px;
-text-align: center;
-color: #D5D5D5;
-margin:0px 20px;
-  
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 65px;
+  text-align: center;
+  color: #d5d5d5;
+  margin: 0px 20px;
+  @media (max-width: 768px) {
+    order:-1;
+  }
 `;
 
-export {BlockTitle, BlockContent, Block, Numbering, ContentWrapper, Text, RightBlockTitle, RightText, Container}
+export {
+  BlockTitle,
+  BlockContent,
+  Block,
+  Numbering,
+  ContentWrapper,
+  Text,
+  RightBlockTitle,
+  RightText,
+  Container,
+};
