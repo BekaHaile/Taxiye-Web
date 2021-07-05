@@ -7,6 +7,7 @@ import {
 } from "../section";
 import styled from "styled-components";
 import theme from "../../theme/main";
+import Link from "next/link";
 const SloganButton = styled("button")`
   min-width: 120px;
   height: 34px;
@@ -38,7 +39,9 @@ const SignUp = ({ title }) => {
           <CustomSectionTitle>{title}</CustomSectionTitle>
         </SectionHeaderContainer>
         <SectionContentContainer>
+          <Link href="/signup/driver">
           <SloganButton>Get Started</SloganButton>
+          </Link>
         </SectionContentContainer>
       </GraySection>
     </>

@@ -1,4 +1,8 @@
 import * as actionTypes from "../../types/driver";
+/*
+// Here
+*/
+
 const initialState = {
   phone_no: "",
   country_code: "+251",
@@ -12,12 +16,11 @@ const initialState = {
   loading: false,
   otpSent: false,
   step: 0,
+  subStep: 0,
   otp: "",
   isOtpValid: false,
-  vehicleType: {
-    name: "Mini",
-    image: require("../../../assets/images/cars/mini.svg"),
-  },
+  vehicleType: null,
+
   vehicles: [
     {
       name: "Sedan",
@@ -52,13 +55,32 @@ const initialState = {
       image: require("../../../assets/images/cars/lada.svg"),
     },
   ],
-  formStatus:false
+  formStatus: false,
+  portraitPicture: null,
+  portraitPictureId: "",
+
+  driverLicensePicture: null,
+  driverLicensePictureId: "",
+
+  vehicleFrontViewPicture: null,
+  vehicleFrontViewPictureId: "",
+  vehicleBackViewPicture: null,
+  vehicleBackViewPictureId: "",
+
+  ownershipCertificatePicture: null,
+  ownershipCertificatePictureId: "",
+
+  uploading: false,
+  progress: 0,
 };
 
 export default function driverReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.STEP_CHANGED:
       return { ...state, step: action.payload.step };
+    case actionTypes.SUB_STEP_CHANGED:
+      return { ...state, subStep: action.payload.subStep };
+
     case actionTypes.DRIVER_FULLNAME_ADDED:
       return { ...state, full_name: action.payload.full_name };
     case actionTypes.DRIVER_GENDER_ADDED:
@@ -100,7 +122,89 @@ export default function driverReducer(state = initialState, action) {
       return { ...state, vehicleType: action.payload.vehicleType };
 
     case actionTypes.DRIVER_FORM_SUBMITTED:
-      return { ...state, formStatus: action.payload.status, loading:false };
+      return { ...state, formStatus: action.payload.status, loading: false };
+
+    case actionTypes.PROGRESS_CHANGED:
+      return { ...state, progress: action.payload.progress };
+
+    case actionTypes.PORTRAIT_IMAGE_ADDED:
+      return { ...state, portraitPicture: action.payload.portraitPicture };
+    case actionTypes.UPLOAD_PORTRAITE_IMAGE_INITIATED:
+      return { ...state, uploading: true };
+    case actionTypes.PORTRAIT_IMAGE_UPLOADED:
+      return {
+        ...state,
+        uploading: false,
+        progress: 0,
+        portraitPictureId: action.payload.id,
+        subStep: action.payload.step,
+      };
+    case actionTypes.PORTRAIT_IMAGE_DELETED:
+      return { ...state, portraitPicture: null };
+
+    case actionTypes.DRIVER_LICENSE_IMAGE_ADDED:
+      return {
+        ...state,
+        driverLicensePicture: action.payload.driverLicensePicture,
+      };
+    case actionTypes.UPLOAD_DRIVER_LICENSE_IMAGE_INITIATED:
+      return { ...state, uploading: true };
+    case actionTypes.DRIVER_LICENSE_IMAGE_UPLOADED:
+      return {
+        ...state,
+        uploading: false,
+        progress: 0,
+        driverLicensePictureId: action.payload.id,
+        subStep: action.payload.step,
+      };
+    case actionTypes.DRIVER_LICENSE_IMAGE_DELETED:
+      return { ...state, driverLicensePicture: null };
+
+    case actionTypes.OWNERSHIP_CERTIFICATE_IMAGE_ADDED:
+      return {
+        ...state,
+        ownershipCertificatePicture: action.payload.ownershipCertificatePicture,
+      };
+    case actionTypes.UPLOAD_OWNERSHIP_CERTIFICATE_IMAGE_INITIATED:
+      return { ...state, uploading: true };
+    case actionTypes.OWNERSHIP_CERTIFICATE_IMAGE_UPLOADED:
+      return {
+        ...state,
+        uploading: false,
+        progress: 0,
+        ownershipCertificatePictureId: action.payload.id,
+        step: action.payload.step,
+      };
+    case actionTypes.OWNERSHIP_CERTIFICATE_IMAGE_DELETED:
+      return { ...state, ownershipCertificatePicture: null };
+
+    case actionTypes.VEHICLE_FRONT_VIEW_IMAGE_ADDED:
+      return {
+        ...state,
+        vehicleFrontViewPicture: action.payload.vehicleFrontViewPicture,
+      };
+
+    case actionTypes.VEHICLE_FRONT_VIEW_IMAGE_DELETED:
+      return { ...state, vehicleFrontViewPicture: null };
+
+    case actionTypes.VEHICLE_BACK_VIEW_IMAGE_ADDED:
+      return {
+        ...state,
+        vehicleBackViewPicture: action.payload.vehicleBackViewPicture,
+      };
+    case actionTypes.VEHICLE_BACK_VIEW_IMAGE_DELETED:
+      return { ...state, vehicleBackViewPicture: null };
+    case actionTypes.UPLOAD_VEHICLE_IMAGE_INITIATED:
+      return { ...state, uploading: true };
+    case actionTypes.VEHICLE_IMAGE_UPLOADED:
+      return {
+        ...state,
+        uploading: false,
+        progress: 0,
+        vehicleFrontViewPictureId: action.payload.frontId,
+        vehicleBackViewPictureId: action.payload.backId,
+        subStep: action.payload.step,
+      };
 
     default:
       return state;

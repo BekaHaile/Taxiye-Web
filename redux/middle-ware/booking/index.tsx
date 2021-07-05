@@ -31,6 +31,19 @@ export const booking = (store) => (next) => async (action) => {
       await getDeliveryVehicleInfo(data, next);
     }
   } else if (action.type == "VEHICLE_SELECTED") {
+    if (data["type"] == "delivery") {
+      if (
+        data["delivery"]["comment"] == null ||
+        data["delivery"]["comment"] == ""
+      ) {
+        showInfo(
+          next,
+          "Please tell us what you need to be deliverd!",
+          "warning"
+        );
+        return;
+      }
+    }
     try {
       next(actions.loadingAvailbleVehicles(true));
 
@@ -42,16 +55,7 @@ export const booking = (store) => (next) => async (action) => {
         }
         next(actions.addAvailableVehicles(res));
         if (data["type"] == "delivery") {
-          if (
-            data["delivery"]["comment"] == null ||
-            data["delivery"]["comment"] == ""
-          )
-            showInfo(
-              next,
-              "Please tell us what you need to be deliverd!",
-              "warning"
-            );
-          else next(navigationActions.goTo("info"));
+          next(navigationActions.goTo("info"));
         } else if (data["userData"]) next(navigationActions.goTo("confirm"));
         else {
           next(navigationActions.goTo("login"));

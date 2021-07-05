@@ -1,65 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "../../../../form/buttons/primary-button";
-import { HeaderContainer, Title, SubTitle } from "../../../elements";
+import { Title, SubTitle } from "../../../elements";
 import DriverLicense from "./drivers-license";
 import OwnershipCertificate from "./ownership-certificate";
 import VehicleImage from "./vehicle-images";
-import { CustomButton } from "../../../elements";
-
 import PortraitPicture from "./portrait-picture";
 import Modal from "../../../../modal/secondary";
-import theme from "../../../../../theme/main";
 import { useState } from "react";
 import store from "../../../../../redux/store";
-import {submitDriverForm} from "../../../../../redux/actions/driver";
-
-const Container = styled("div")`
-  padding-bottom: 30px;
-`;
-const BackButton = styled("img")`
-  padding-bottom: 10px;
-`;
-const ModalTitle = styled("p")`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  text-align: center;
-  width:410px;
-`;
-const CustomHeaderContainer = styled(HeaderContainer)`
-padding-bottom:40px;
-}`;
-
-const FixedCustomButton = styled(CustomButton)`
-  margin-bottom: 0px;
-`;
-
-const ModalContentContainer = styled("div")`
-text-align:center;
-`;
-
-const InfoText = styled("p")`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  color: ${theme.colors.primaryTextColor};
-  padding-top: 10px;
-  padding-bottom: 20px;
-`;
-
-const FixedCustomButtonWithSpace = styled(FixedCustomButton)`
-color:${theme.colors.primary};
-border: 1px solid ${theme.colors.primary};
-margin-right:30px;
-background-color:${theme.colors.transparent};
-}
-`;
+import {
+  submitDriverForm,
+  uploadPortraitPicture,
+  uploadDriverLicensePicture,
+  uploadOwnershipCertificatePicture,
+  uploadVehiclePictures
+} from "../../../../../redux/actions/driver";
+import {
+  BackButton,
+  Container,
+  CustomHeaderContainer,
+  FixedCustomButton,
+  FixedCustomButtonWithSpace,
+  InfoText,
+  ModalContentContainer,
+  ModalTitle,
+} from "./modal-content";
+import { useSelector } from "react-redux";
 
 const titles = [
   {
@@ -90,6 +57,22 @@ const titles = [
 
 const Documents = ({ handleNext, activeSubStep }) => {
   const [showConsent, setshowConsent] = useState(false);
+  const portraitPicture = useSelector(
+    (state) => state["driver"]["portraitPicture"]
+  );
+  const driverLicensePicture = useSelector(
+    (state) => state["driver"]["driverLicensePicture"]
+  );
+  const vehicleFrontViewPicture = useSelector(
+    (state) => state["driver"]["vehicleFrontViewPicture"]
+  );
+  const vehicleBackViewPicture = useSelector(
+    (state) => state["driver"]["vehicleBackViewPicture"]
+  );
+  const ownershipCertificatePicture = useSelector(
+    (state) => state["driver"]["ownershipCertificatePicture"]
+  );
+
   return (
     <>
       <CustomHeaderContainer>
@@ -99,13 +82,55 @@ const Documents = ({ handleNext, activeSubStep }) => {
       </CustomHeaderContainer>
       {titles[activeSubStep].page}
 
-      {activeSubStep + 1 == 4 ? (
-        <Button onClick={() => setshowConsent(true)}>Finish</Button>
-      ) : (
-        <Button onClick={handleNext}>Continue</Button>
-      )}
+      {(() => {
+        if (activeSubStep + 1 == 4)
+          return (
+            <Button
+              disabled={ownershipCertificatePicture == null}
+              onClick={() =>
+                store.dispatch(uploadOwnershipCertificatePicture())
+              }
+            >
+              Finish
+            </Button>
+          );
+        else if (activeSubStep == 0)
+          return (
+            <Button
+              disabled={portraitPicture == null}
+              onClick={() => store.dispatch(uploadPortraitPicture())}
+            >
+              Continue
+            </Button>
+          );
+        else if (activeSubStep == 1)
+          return (
+            <Button
+              disabled={driverLicensePicture == null}
+              onClick={() => store.dispatch(uploadDriverLicensePicture())}
+            >
+              Continue
+            </Button>
+          );
+        else if (activeSubStep == 2)
+          return (
+            <Button
+              disabled={
+                vehicleFrontViewPicture == null ||
+                vehicleBackViewPicture == null
+              }
+              onClick={() => store.dispatch(uploadVehiclePictures())}
+            >
+              Continue
+            </Button>
+          );
+      })()}
 
-      <Modal showCloseIcon={true} onClose={() => setshowConsent(false)} show={showConsent}>
+      <Modal
+        showCloseIcon={true}
+        onClose={() => setshowConsent(false)}
+        show={showConsent}
+      >
         <Container>
           <ModalTitle>
             I accept that documents uploaded by me are true and correct. I
@@ -120,10 +145,14 @@ const Documents = ({ handleNext, activeSubStep }) => {
           <FixedCustomButtonWithSpace onClick={() => setshowConsent(false)}>
             Cancel
           </FixedCustomButtonWithSpace>
-          <FixedCustomButton onClick={()=>{
+          <FixedCustomButton
+            onClick={() => {
               setshowConsent(false);
               store.dispatch(submitDriverForm());
-            }}>I agree</FixedCustomButton>
+            }}
+          >
+            I agree
+          </FixedCustomButton>
         </ModalContentContainer>
       </Modal>
     </>

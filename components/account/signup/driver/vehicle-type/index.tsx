@@ -7,6 +7,8 @@ import {
   Title,
   SubTitle,
 } from "../../../elements";
+import { useSelector } from "react-redux";
+
 
 import SliderContainer from "./slider-container";
 
@@ -15,6 +17,7 @@ padding-bottom:40px;
 }`;
 
 const Signup = ({ handleNext, handleBack }) => {
+  const selectedCar = useSelector((state)=>state["driver"]["vehicleType"]);
   return (
     <>
       <CustomHeaderContainer>
@@ -25,7 +28,7 @@ const Signup = ({ handleNext, handleBack }) => {
       </CustomHeaderContainer>
       <ContentContainer>
         <SliderContainer />
-        <Button onClick={handleNext}>Continue</Button>
+        <Button disabled={selectedCar==null} onClick={handleNext}>Continue</Button>
       </ContentContainer>
     </>
   );

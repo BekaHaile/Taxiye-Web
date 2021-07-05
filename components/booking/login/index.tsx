@@ -108,10 +108,12 @@ const Login = () => {
 
       <MainContainer>
         <FlexContainer>
+          <Link href="/">
           <img
             onClick={() => goTo("")}
             src={require("../../../assets/images/logo/logo.svg")}
           />
+          </Link>
         </FlexContainer>
         <Container>
           <BackButton

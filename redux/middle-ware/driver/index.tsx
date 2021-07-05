@@ -60,6 +60,22 @@ export const driver = (store) => (next) => async (action) => {
     await sleep(3000);
     next(actions.driverFormSubmitted(true));
     next(actions.changeStep(data["step"] + 1));
+  } else if (action.type == "UPLOAD_PORTRAITE_IMAGE_INITIATED") {
+    var id = await uploadImage(data, next);
+    next(actions.setUploadedPortraitePicture(id.id, 1));
+  } else if (action.type == "UPLOAD_DRIVER_LICENSE_IMAGE_INITIATED") {
+    var id = await uploadImage(data, next);
+    next(actions.setUploadedDriverLicensePicture(id.id, 2));
+  } else if (action.type == "UPLOAD_OWNERSHIP_CERTIFICATE_IMAGE_INITIATED") {
+    var id = await uploadImage(data, next);
+    next(
+      actions.setUploadedOwnershipCertificatePicture(id.id, data["step"] + 1)
+    );
+  } else if (action.type == "UPLOAD_VEHICLE_IMAGE_INITIATED") {
+    var id = await uploadImage(data, next);
+    next(
+      actions.setUploadedVehiclePictures(id.frontId, id.backId, data["subStep"] + 1)
+    );
   }
 };
 
@@ -86,6 +102,27 @@ async function validateUser(data, next) {
 
 async function submitPhone(data) {
   try {
+    const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
+    const res = await axios.post(
+      `${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`,
+      data,
+      { timeout: 5000 }
+    );
+    return res.data;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function uploadImage(data, next) {
+  try {
+    var i = 1;
+    while (i < 100) {
+      await sleep(1000);
+      i += i * Math.random() * 5;
+      next(actions.changeProgress(Math.floor(i)));
+    }
+    return { id: "1", frontId: "1", backId: "2" };
     const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
     const res = await axios.post(
       `${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`,

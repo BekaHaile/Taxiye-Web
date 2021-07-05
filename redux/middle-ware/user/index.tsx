@@ -69,6 +69,7 @@ export const user = (store) => (next) => async (action) => {
     if (
       action.type == "FIRST_NAME_ADDED" ||
       action.type == "LAST_NAME_ADDED" ||
+      action.type == "GENDER_CHANGED" ||
       action.type == "EMAIL_ADDED" ||
       action.type == "TERMS_CHANGED"
     )
@@ -95,6 +96,7 @@ async function validateUser(data, next) {
     data["user"]["firstName"] != null &&
     data["user"]["firstName"] != "" &&
     data["user"]["lastName"] != null &&
+    data["user"]["gender"] != null &&
     data["user"]["lastName"] != "" &&
     data["agreeToTerms"] &&
     validateEmail(data["user"]["email"])

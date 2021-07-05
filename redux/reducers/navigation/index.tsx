@@ -1,4 +1,9 @@
 import * as actionsTypes from "../../types/navigation";
+/*
+// Here page navigation state will be managed
+// Additionally information that needs to be shown
+// Will be fired here
+*/
 const initialState = {
   page: "",
   message: {

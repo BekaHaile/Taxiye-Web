@@ -19,7 +19,6 @@ padding-bottom:60px;
 text-align: center;
 `;
 
-
 const Container = styled("div")`
 
 `;

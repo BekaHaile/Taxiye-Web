@@ -72,8 +72,6 @@ position:relative;
 `;
 
 
-
-
 const Item = () => {
     const images = useSelector((state) => state["booking"]["delivery"]["images"]);
     const comment = useSelector((state) => state["booking"]["delivery"]["comment"]);

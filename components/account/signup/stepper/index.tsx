@@ -10,7 +10,7 @@ import VehicleType from "../driver/vehicle-type/";
 import Documents from "../driver/documents/";
 import LastPage from "../driver/finish";
 import { useSelector } from "react-redux";
-import { changeStep } from "../../../../redux/actions/driver";
+import { changeStep, changeSubStep } from "../../../../redux/actions/driver";
 import store from "../../../../redux/store";
 
 const StepperContainer = styled("div")`
@@ -29,7 +29,7 @@ const steps = [
 
 export default function HorizontalLinearStepper() {
   const activeStep = useSelector((state) => state["driver"]["step"]);
-  const [activeSubStep, setActiveSubStep] = React.useState(0);
+  const activeSubStep = useSelector((state) => state["driver"]["subStep"]);;
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => {
@@ -47,7 +47,7 @@ export default function HorizontalLinearStepper() {
       newSkipped.delete(activeStep);
     }
     if (activeSubStep < 3 && activeStep == 3) {
-      setActiveSubStep((activeSubStep) => activeSubStep + 1);
+      store.dispatch(changeSubStep(activeSubStep + 1));
       return;
     }
    
@@ -57,7 +57,7 @@ export default function HorizontalLinearStepper() {
 
   const handleBack = () => {
     if (activeSubStep > 0 && activeStep == 3) {
-      setActiveSubStep((activeSubStep) => activeSubStep - 1);
+      store.dispatch(changeSubStep(activeSubStep - 1));
       return;
     }
     store.dispatch(changeStep(activeStep - 1));

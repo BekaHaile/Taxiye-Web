@@ -22,5 +22,6 @@ export const RESET = "RESET";
 export const LOADING_UPDATED = "LOADING_UPDATED";
 export const KEEP_ME_SIGNED_IN_CHANGED = "KEEP_ME_SIGNED_IN_CHANGED";
 export const STEP_CHANGED = "STEP_CHANGED";
+export const GENDER_CHANGED = "GENDER_CHANGED";
 
 export const OTP_RESENT = "OTP_RESENT";

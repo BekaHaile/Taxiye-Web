@@ -11,7 +11,7 @@ const FooterHeader = styled("h4")`
 `;
 
 const Image = styled("img")`
-  margin-right:25px;
+  
 `;
 const LastImage = styled("img")`
   margin-right:0px;
@@ -123,10 +123,10 @@ const FlexEnd = styled("div")`
   display: flex;
   align-items: flex-end;
   padding-bottom: 20px;
-  width: 60%;
   justify-content: space-around;
   align-self: flex-end;
   flex-wrap:wrap;
+  gap:30px;
   @media (max-width: 768px) {
     width: 100%;
     justify-content: center;

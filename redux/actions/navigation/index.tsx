@@ -1,4 +1,10 @@
 import * as actions from "../../types/navigation";
+
+/*
+// This function is responsible to managed page changes actions
+// Whenever page is change it will fire a navigation started action 
+// 
+*/
 export const goTo = (page) => {
   return {
     type: actions.NAVIGATION_STARTED,
@@ -7,6 +13,10 @@ export const goTo = (page) => {
     },
   };
 };
+
+/*
+// 
+*/
 
 export const goBack = () => {
   return {
@@ -19,6 +29,12 @@ export const goFuture = () => {
     type: actions.NAVIGATION_STARTED,
   };
 };
+
+/*
+// Called whenever there is a service that needs to enable/show
+// Snackbar. This function takes show status, message and type as an
+// Argument and fires message showed action
+*/
 
 export const showMessage = (show, message, type) => {
   return {

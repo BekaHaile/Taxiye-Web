@@ -51,7 +51,7 @@ const Terms: FunctionComponent<Props> = ({ action, checked }) => {
           onChange={() => action(!checked)}
           type="checkbox"
           id="terms"
-          name="interest"
+          name="terms"
         />
         <CheckBoxLabel>I agree to Taxiye's</CheckBoxLabel>
 

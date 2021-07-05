@@ -68,6 +68,7 @@ export default function booking(state = initialState, action) {
         ...state,
         vehicles: action.payload.vehicles,
         city: action.payload.city,
+        availableVehicles:[]
       };
     case actionTypes.VEHICLES_LOADING:
       return { ...state, fetchVehiclesLoading: action.payload.loading };

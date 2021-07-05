@@ -7,6 +7,11 @@ import corporate from "./corporate";
 import corporate_employees from "./corporate/employees";
 import driver from "./driver";
 
+/*
+// Here combine reducers function is called so as to
+// Create multiple reducers on a single store
+// The stores will be accessed with keys specified here 
+*/
 export default combineReducers({
   contact_us,
   booking,

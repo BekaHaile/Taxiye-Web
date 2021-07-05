@@ -480,13 +480,18 @@ p,h1,h2,h3,h4,h5,h6{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background: ${theme.colors.primary}; 
   border-radius: 5px;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height:3px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: ${theme.colors.primary};
+  opacity:0.2; 
 }
 
 select{

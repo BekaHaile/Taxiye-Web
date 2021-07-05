@@ -6,7 +6,7 @@ export async function fetchVehicles(body) {
     const res = await axios.post(
       `${NEXT_PUBLIC_AGGREGATE_HOST}/ride/available-vehicles`,
       body,
-      { timeout: 5000 }
+      { timeout: 10000 }
     );
     return res.data;
   } catch (e) {
