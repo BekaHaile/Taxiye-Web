@@ -9,6 +9,15 @@ export const addQuery = (query) => {
   };
 };
 
+export const addApiQuery = (q) => {
+  return {
+    type: actions.API_QUERY_ADDED,
+    payload: {
+      q: q,
+    },
+  };
+};
+
 export const setSearchLoading = (search_loading) => {
   return {
     type: actions.SEARCH_LOADING_INITIATED,
@@ -44,56 +53,62 @@ export const setSelectedEmployee = (selected_employee) => {
   };
 };
 
-
 export const selectOrigin = ({ origin }) => {
-    return {
-      type: actions.ORIGIN_SELECTED,
-      payload: {
-        origin: origin,
-      },
-    };
+  return {
+    type: actions.ORIGIN_SELECTED,
+    payload: {
+      origin: origin,
+    },
   };
-  
-  export const selectDestination = ({ destination }) => ({
-    type: actions.DESTINATION_SELECTED,
-    payload: {
-      destination: destination,
-    },
-  });
-  
-  export const changeDate = (date) => ({
-    type: actions.DATE_ADDED,
-    payload: {
-      date: date,
-    },
-  });
-  
-  export const changeTime = (time) => ({
-    type: actions.TIME_ADDED,
-    payload: {
-      time: time,
-    },
-  });
+};
 
-  export const validateInput = (isValid) => ({
-    type: actions.REQUEST_VALIDATED,
-    payload: {
-      isValid: isValid,
-    },
-  });
-  
-  export const addVehicles = (city, vehicles) => ({
-    type: actions.VEHICLES_ADDED,
-    payload: {
-      vehicles: vehicles,
-      city: city,
-    },
-  });
-  export const setSelectedVehicle = (selected_vehicle) => ({
-    type: actions.VEHICLE_SELECTED,
-    payload: {
-        selected_vehicle: selected_vehicle,
-    },
-  });
+export const selectDestination = ({ destination }) => ({
+  type: actions.DESTINATION_SELECTED,
+  payload: {
+    destination: destination,
+  },
+});
 
-  
+export const changeDate = (date) => ({
+  type: actions.DATE_ADDED,
+  payload: {
+    date: date,
+  },
+});
+
+export const changeTime = (time) => ({
+  type: actions.TIME_ADDED,
+  payload: {
+    time: time,
+  },
+});
+
+export const validateInput = (isValid) => ({
+  type: actions.REQUEST_VALIDATED,
+  payload: {
+    isValid: isValid,
+  },
+});
+
+export const addVehicles = (city, vehicles) => ({
+  type: actions.VEHICLES_ADDED,
+  payload: {
+    vehicles: vehicles,
+    city: city,
+  },
+});
+export const setSelectedVehicle = (selected_vehicle) => ({
+  type: actions.VEHICLE_SELECTED,
+  payload: {
+    selected_vehicle: selected_vehicle,
+  },
+});
+
+/**
+ *
+ * @param query
+ * @returns
+ */
+export const getEmployees = () => ({
+  type: actions.GET_EMPLOYEES_INITIATED,
+});

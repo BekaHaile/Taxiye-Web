@@ -48,6 +48,16 @@ height: 10px;
 animation: spin 0.7s linear infinite;
 margin: auto;
 `;
+const SecondaryLoader = styled("div")`
+border: 5px solid #f3f3f3;
+border-radius: 50%;
+border-top: 5px solid ${theme.colors.primary};
+width: 30px;
+height: 30px;
+-webkit-animation: spin 0.5s linear infinite; /* Safari */
+animation: spin 0.7s linear infinite;
+margin: auto;
+`;
 const Container = styled("div")`
 justify-content:center;
 `;
@@ -89,4 +99,4 @@ function PrimaryLoading(props) {
         </Container>
     );
 }
-export {Loading, Loader, PrimaryLoading};
+export {Loading, Loader, PrimaryLoading, MainLoader};

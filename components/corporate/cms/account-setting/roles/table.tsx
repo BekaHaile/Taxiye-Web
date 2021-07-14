@@ -1,17 +1,23 @@
 import React from "react";
-import { Table, Space, Button, Select } from "antd";
+import { Table, Space, Button, Select, Avatar } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 const { Option } = Select;
 
-const Icon = styled("img")`
-  
-`;
+const Icon = styled("img")``;
 
 const columns = [
   {
     title: "Team member",
     dataIndex: "name",
+    render: (val) => {
+      return (
+        <Space>
+          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          {val}
+        </Space>
+      );
+    },
   },
   {
     title: "Email",
@@ -37,7 +43,9 @@ const columns = [
     title: "Actions",
     dataIndex: "actions",
 
-    render: () => <Icon src={require("../../../../../assets/icons/delete.svg")}/>,
+    render: () => (
+      <Icon src={require("../../../../../assets/icons/delete.svg")} />
+    ),
   },
 ];
 

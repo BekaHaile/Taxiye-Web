@@ -15,7 +15,7 @@ export const driver = (store) => (next) => async (action) => {
   ) {
     await validateUser(data, next);
   }
-  if (action.type == "PHONE_SUBMITTED") {
+  if (action.type == "DRIVER_PHONE_SUBMITTED") {
     next(actions.setLoading(true));
     try {
       let res = await submitPhone({
@@ -36,6 +36,25 @@ export const driver = (store) => (next) => async (action) => {
     } catch (e) {
       showError(next);
       next(actions.changeOtpStatus({ loading: false, otpSent: false }));
+    }
+  } else if (action.type == "DRIVER_OTP_SUBMITTED") {
+    next(actions.setLoading(true));
+    try {
+      let res = await submitPhone({
+        phone_no: `${data["country_code"]}${data["phone_no"]}`,
+        country: `${data["country"]}`,
+      });
+      if (res) {
+        if (res.status === "OK") {
+          next(actions.changeStep(data["step"] + 1));
+          next(actions.changeOtpStatus({ loading: false, otpSent: true }));
+        } else {
+          next(actions.changeOtpStatus({ loading: false, otpSent: false }));
+        }
+      }
+    } catch (e) {
+      showError(next);
+      next(actions.setLoading(false));
     }
   } else if (action.type == "DRIVER_OTP_RESENT") {
     next(actions.changeOtpStatus({ loading: true, otpSent: false }));
@@ -74,7 +93,11 @@ export const driver = (store) => (next) => async (action) => {
   } else if (action.type == "UPLOAD_VEHICLE_IMAGE_INITIATED") {
     var id = await uploadImage(data, next);
     next(
-      actions.setUploadedVehiclePictures(id.frontId, id.backId, data["subStep"] + 1)
+      actions.setUploadedVehiclePictures(
+        id.frontId,
+        id.backId,
+        data["subStep"] + 1
+      )
     );
   }
 };

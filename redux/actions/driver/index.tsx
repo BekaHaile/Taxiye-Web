@@ -39,6 +39,7 @@ export const addPhone = ({ phone_no, country, country_code, isValid }) => {
   };
 };
 
+
 export const changeTerm = (agreeToTerms) => {
   return {
     type: actions.TERMS_CHANGED,
@@ -47,6 +48,13 @@ export const changeTerm = (agreeToTerms) => {
     },
   };
 };
+
+export const submitPhone = () => {
+  return {
+    type: actions.PHONE_SUBMITTED,
+  };
+};
+
 
 export const validateFirstForm = (isFirstFormValid) => {
   return {

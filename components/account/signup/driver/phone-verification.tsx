@@ -21,6 +21,7 @@ import {
   changeOtpStatus,
   resendOtp,
   changeOtp,
+  submitOtp
 } from "../../../../redux/actions/driver";
 
 import Modal from "../../../modal/secondary";
@@ -138,7 +139,9 @@ const PhoneVerification = ({ handleNext, handleBack }) => {
                 Resend code
               </BolderNavLink>
             </FlexContainer>
-            <CustomButton disabled={!isOtpValid} onClick={handleNext}>
+            <CustomButton disabled={!isOtpValid} onClick={()=>{
+              store.dispatch(submitOtp());
+            }}>
               Continue
             </CustomButton>
             <FlexContainer>

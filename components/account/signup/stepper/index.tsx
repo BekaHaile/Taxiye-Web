@@ -29,7 +29,7 @@ const steps = [
 
 export default function HorizontalLinearStepper() {
   const activeStep = useSelector((state) => state["driver"]["step"]);
-  const activeSubStep = useSelector((state) => state["driver"]["subStep"]);;
+  const activeSubStep = useSelector((state) => state["driver"]["subStep"]);
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => {
@@ -50,7 +50,7 @@ export default function HorizontalLinearStepper() {
       store.dispatch(changeSubStep(activeSubStep + 1));
       return;
     }
-   
+
     store.dispatch(changeStep(activeStep + 1));
     setSkipped(newSkipped);
   };
@@ -60,7 +60,8 @@ export default function HorizontalLinearStepper() {
       store.dispatch(changeSubStep(activeSubStep - 1));
       return;
     }
-    store.dispatch(changeStep(activeStep - 1));
+    if (activeStep == 2) store.dispatch(changeStep(0));
+    else store.dispatch(changeStep(activeStep - 1));
   };
 
   const goTo = (step) => {

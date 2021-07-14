@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Row, Col, Card, Typography, Space } from "antd";
 import TopActions from "./header-actions";
 import List from "./list";
+import CreateGroup from "./forms";
+import { useSelector } from "react-redux";
 
 
 const CustomSpace = styled(Space)`
@@ -11,12 +13,18 @@ const CustomSpace = styled(Space)`
 `;
 
 const Groups = () => {
+  const route = useSelector((state) => state["corporate_group"]["route"]);
+ 
   return (
     <>
-      <CustomSpace size={16} direction="vertical">
-        <TopActions />
-        <List />
-      </CustomSpace>
+      {route == "create" ? (
+        <CreateGroup />
+      ) : (
+        <CustomSpace size={16} direction="vertical">
+          <TopActions />
+          <List />
+        </CustomSpace>
+      )}
     </>
   );
 };

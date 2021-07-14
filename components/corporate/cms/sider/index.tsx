@@ -23,6 +23,8 @@ const { SubMenu } = Menu;
 const ProfileView = styled.div`
   height: 150px;
   text-align: center;
+  padding:20px;
+
 `;
 const BottomMenu = styled(Menu)`
   position: absolute;
@@ -36,15 +38,15 @@ const Logo = styled.img`
   display: block;
 `;
 
-const Name = styled(Text)`
+const Name = styled("p")`
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
-const CompanyName = styled(Text)`
+const CompanyName = styled("p")`
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
@@ -64,6 +66,7 @@ const Slider: FunctionComponent<Props> = ({ setSelected }) => {
       style={{ backgroundColor: "#fff" }}
       collapsed={collapsed}
       onCollapse={onCollapse}
+      width={256}
     >
       <ProfileView className="user-profile">
         <Space size={5} align="center" direction="vertical">
@@ -99,16 +102,17 @@ const Slider: FunctionComponent<Props> = ({ setSelected }) => {
         <Menu.Item key="requests" icon={<FileOutlined />}>
           Requests
         </Menu.Item>
-
-        <Menu.Item key="account-setting" icon={<SettingOutlined />}>
-          Account Settings
-        </Menu.Item>
-        <Menu.Item key="9" icon={<LogoutOutlined />}>
-          Log out
-        </Menu.Item>
-        <Link href="/">
-          <Logo src={require("../../../../assets/images/logo/logo2.svg")} />
-        </Link>
+        <Menu.ItemGroup className="bottom_menu_items">
+          <Menu.Item key="account-setting" icon={<SettingOutlined />}>
+            Account Settings
+          </Menu.Item>
+          <Menu.Item onClick={()=>alert("ya")} key="9" icon={<LogoutOutlined />}>
+            Log out
+          </Menu.Item>
+          <Link href="/">
+            <Logo src={require("../../../../assets/images/logo/logo2.svg")} />
+          </Link>
+        </Menu.ItemGroup>
       </Menu>
     </Sider>
   );

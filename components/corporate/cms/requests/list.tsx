@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Table, Space, Button, Tag } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
+import { fetchRequests } from "../../../../redux/actions/corporate/requests";
 
 const Link = styled("a")``;
 
@@ -48,18 +51,13 @@ const columns = [
   },
 ];
 
-const data = [];
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    id: `Edward King`,
-    reason: "El Auto Employees",
-    debit_limit: `782.01 Birr`,
-    maximum_user_limit: 554 - i,
-    status: `Approved`,
-  });
-}
+
 const TableView = () => {
+  useEffect(() => {
+    store.dispatch(fetchRequests());
+  }, []);
+  const loading = useSelector((state) => state["corporate_requests"]["loading"]);
+  const requests = useSelector((state) => state["corporate_requests"]["requests"]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (selectedRowKeys) => {
@@ -105,7 +103,7 @@ const TableView = () => {
     ],
   };
   return (
-    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+    <Table loading={loading} rowSelection={rowSelection} columns={columns} dataSource={requests} />
   );
 };
 

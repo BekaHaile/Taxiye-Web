@@ -406,7 +406,9 @@ p,h1,h2,h3,h4,h5,h6{
       margin: 8px;
       box-sizing: border-box;
       border: 32px solid ${theme.colors.primary};
-      border-color: ${theme.colors.primary} transparent ${theme.colors.primary} transparent;
+      border-color: ${theme.colors.primary} transparent ${
+  theme.colors.primary
+} transparent;
       animation: lds-hourglass 1.2s infinite;
     }
     @keyframes lds-hourglass {
@@ -537,6 +539,16 @@ overflow:hidden;
 #map_info_container.active{
   opacity: 1;
   right: 0;
+}
+
+.group_radio .ant-radio{
+  margin:auto !important;
+}
+
+.bottom_menu_items{
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
 }
 
 `;

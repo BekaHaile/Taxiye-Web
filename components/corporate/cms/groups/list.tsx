@@ -1,13 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import theme from "../../../../theme/main";
+import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
+import { fetchGroups } from "../../../../redux/actions/corporate/group";
 
-import { Row, Col, Card, Space, Typography } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { Row, Col, Card, Space, Typography, Spin, Empty } from "antd";
+
 const { Text } = Typography;
 
 const MainCard = styled(Card)`
@@ -17,15 +16,17 @@ const MainCard = styled(Card)`
   border-radius: 5px;
 `;
 
+const LoaderCard = styled(Card)`
+  text-align: center;
+`;
+
 const Container = styled("div")`
   padding: 16px !important;
 `;
 
-
 const FlexContainer = styled(Space)`
   width: 100%;
-  cursor:pointer;
-  
+  cursor: pointer;
 `;
 
 const VerticalFlexContainer = styled(Space)`
@@ -38,12 +39,11 @@ const Title = styled(Text)`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
-  color:${theme.colors.primaryTextColor};;
-  &:after{
-    content:url(${require("../../../../assets/icons/edit-icon.svg")});
+  color: ${theme.colors.primaryTextColor};
+  &:after {
+    content: url(${require("../../../../assets/icons/edit-icon.svg")});
     position: absolute;
     right: 17px;
-   
   }
 `;
 const SubTitle = styled(Text)`
@@ -52,7 +52,7 @@ const SubTitle = styled(Text)`
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 const CardActionTitle = styled(Text)`
   font-family: Open Sans;
@@ -69,84 +69,91 @@ const CardActionSubText = styled(Text)`
   font-size: 13px;
   line-height: 18px;
   text-align: start;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 
 const Icon = styled("img")`
   height: 24px;
   width: 24px;
 `;
+const Loader = styled(Spin)``;
+const EmptyData = styled(Empty)`
+  margin: auto;
+`;
+
 const Hr = styled("hr")`
-  opacity:0.3;
+  opacity: 0.3;
 `;
 
 const MainRow = styled(Row)`
- 
-`;
-
-const groups = [
-  {
-    title: "Taxiye Employees",
-    balance: "10,000.00 Birr",
-    maximum_rides: 3333,
-    employees: 455,
-    payment: "Manual",
-  },
-  {
-    title: "Taxiye Employees",
-    balance: "10,000.00 Birr",
-    maximum_rides: 3333,
-    employees: 455,
-    payment: "Manual",
-  },
-  
-  {
-    title: "Taxiye Employees",
-    balance: "10,000.00 Birr",
-    maximum_rides: 3333,
-    employees: 455,
-    payment: "Manual",
-  },
-];
+row-gap:24px !important;`;
 
 const List = () => {
+  useEffect(() => {
+    store.dispatch(fetchGroups());
+  }, []);
+  const loading = useSelector((state) => state["corporate_group"]["loading"]);
+  const groups = useSelector((state) => state["corporate_group"]["groups"]);
   return (
     <>
       <Container>
-        <MainRow gutter={24}>
-          {groups.map((group) => (
-            <Col className="gutter-row" span={8}>
-              <MainCard bodyStyle={{ padding: "16px" }}>
-                <VerticalFlexContainer direction="vertical" size={16}>
-                  <FlexContainer direction="vertical" size={16}>
-                    <Title>{group.title}</Title>
+        {loading ? (
+          <LoaderCard>
+            <Loader />
+          </LoaderCard>
+        ) : (
+          groups && (
+            <MainRow gutter={24}>
+              {groups.length == 0 ? (
+                <EmptyData
+                  description={
+                    <span>
+                      No Groups Data{" "}
+                      <a onClick={() => store.dispatch(fetchGroups())}>Retry</a>
+                    </span>
+                  }
+                />
+              ) : (
+                groups.map((group) => (
+                  <Col className="gutter-row" span={8}>
+                    <MainCard bodyStyle={{ padding: "16px" }}>
+                      <VerticalFlexContainer direction="vertical" size={16}>
+                        <FlexContainer direction="vertical" size={16}>
+                          <Title>{group.title}</Title>
 
-                    <SubTitle>{group.balance}</SubTitle>
-                  </FlexContainer>
-                  <Hr/>
-                  <Space size={48}>
-                    <Space align="start" direction="vertical">
-                      <CardActionTitle>Max. Rides</CardActionTitle>
-                      <CardActionSubText>
-                        {group.maximum_rides}
-                      </CardActionSubText>
-                    </Space>
+                          <SubTitle>{group.balance}</SubTitle>
+                        </FlexContainer>
+                        <Hr />
+                        <Space size={48}>
+                          <Space align="start" direction="vertical">
+                            <CardActionTitle>Max. Rides</CardActionTitle>
+                            <CardActionSubText>
+                              {group.maximum_rides}
+                            </CardActionSubText>
+                          </Space>
 
-                    <Space align="start" direction="vertical">
-                      <CardActionTitle>Employees</CardActionTitle>
-                      <CardActionSubText>{group.employees}</CardActionSubText>
-                    </Space>
+                          <Space align="start" direction="vertical">
+                            <CardActionTitle>Employees</CardActionTitle>
+                            <CardActionSubText>
+                              {group.employees}
+                            </CardActionSubText>
+                          </Space>
 
-                    <Space align="start" direction="vertical">
-                      <CardActionTitle>Payment</CardActionTitle>
-                      <CardActionSubText>{group.payment}</CardActionSubText>
-                    </Space>
-                  </Space>
-                </VerticalFlexContainer>
-              </MainCard>
-            </Col>
-          ))}
-        </MainRow>
+                          <Space align="start" direction="vertical">
+                            <CardActionTitle>Payment</CardActionTitle>
+                            <CardActionSubText>
+                              {group.payment}
+                            </CardActionSubText>
+                          </Space>
+                        </Space>
+                      </VerticalFlexContainer>
+                    </MainCard>
+                  </Col>
+                ))
+              )}
+            </MainRow>
+          )
+        )}
       </Container>
     </>
   );

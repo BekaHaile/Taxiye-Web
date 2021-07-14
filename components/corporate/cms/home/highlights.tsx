@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Col, Card, Typography, Space } from "antd";
+import { Row, Col, Card, Typography, Space, Spin, Skeleton } from "antd";
 import theme from "../../../../theme/main";
+import { useSelector } from "react-redux";
 
 const { Text } = Typography;
 import { TeamOutlined } from "@ant-design/icons";
@@ -27,53 +28,74 @@ const MainCard = styled(Card)`
   border: 1px solid #eff2f5;
   box-sizing: border-box;
   border-radius: 5px;
-  padding:15px !important;
+  padding: 15px !important;
 `;
 const Icon = styled("img")`
   height: 24px;
   width: 24px;
+`;
+const Loader = styled("div")`
+  padding-top:10px;
 `;
 const lists = [
   {
     title: "Employees",
     icon: require("../../../../assets/icons/employees-icon.svg"),
     content: "4545 Birr",
-    color:"#1890FF"
+    key:"employees",
+    color: "#1890FF",
   },
   {
     title: "Total Rides this month",
     icon: require("../../../../assets/icons/car-icon.svg"),
     content: "4545 Birr",
-    color:"#A02167"
+    key:"rides",
+    color: "#A02167",
   },
   {
     title: "Total Bills this month",
     icon: require("../../../../assets/icons/bill-icon.svg"),
     content: "4545 Birr",
-    color:"#F8B219"
+    key:"bills",
+    color: "#F8B219",
   },
   {
     title: "Available Balance ",
     icon: require("../../../../assets/icons/balance-icon.svg"),
     content: "4545 Birr",
-    color:"#20AA46"
+    key:"balance",
+    color: "#20AA46",
   },
 ];
 
 const Services = () => {
+  const loading = useSelector(
+    (state) => state["corporate_home"]["overviewLoading"]
+  );
+  const overview = useSelector(
+    (state) => state["corporate_home"]["overview"]
+  );
   return (
     <>
       <Row gutter={24}>
-        {lists.map((list) => (
+        { lists.map((list) => (
           <Col className="gutter-row" span={6}>
-            <MainCard bodyStyle={{padding: "0"}} bordered={false}>
+            <MainCard bodyStyle={{ padding: "0" }} bordered={false}>
               <Title>{list.title}</Title>
-              <div style={{ color: list.color }}>
-                <Space size={5}>
-                <Icon src={list.icon} />
-                  <Conent style={{ color: list.color }}>{list.content}</Conent>
-                </Space>
-              </div>
+              {loading ? (
+                <Loader>
+                  <Skeleton.Input  style={{ width: 250, height:20 }} active={true}/>
+                  </Loader>
+              ) : (
+                <div style={{ color: list.color }}>
+                  <Space size={5}>
+                    <Icon src={list.icon} />
+                    <Conent style={{ color: list.color }}>
+                      {overview && overview[list.key]}
+                    </Conent>
+                  </Space>
+                </div>
+              )}
             </MainCard>
           </Col>
         ))}

@@ -5,6 +5,12 @@ const { Text } = Typography;
 const { Search } = Input;
 import { PlusOutlined } from "@ant-design/icons";
 import theme from "../../../../theme/main";
+import store from "../../../../redux/store";
+import { useSelector } from "react-redux";
+import {
+  getEmployees,
+  addApiQuery,
+} from "../../../../redux/actions/corporate/employees";
 
 const Title = styled(Text)`
   font-family: Open Sans;
@@ -12,7 +18,7 @@ const Title = styled(Text)`
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 const CustomSpace = styled(Space)`
   width: 100%;
@@ -20,9 +26,23 @@ const CustomSpace = styled(Space)`
 `;
 
 const Employees = () => {
-  const onSearch = () => {
-    console.log("searching");
+  const loading = useSelector(
+    (state) => state["corporate_employees"]["loading"]
+  );
+  const query = useSelector((state) => state["corporate_employees"]["q"]);
+  const onSearch = (val) => {
+    if (val == "") store.dispatch(addApiQuery(""));
+    store.dispatch(getEmployees());
   };
+
+  const onInput = (e) => {
+    var val = e.target.value;
+    if (val == "") {
+      store.dispatch(getEmployees());
+    }
+    store.dispatch(addApiQuery(val));
+  };
+
   return (
     <>
       <Card>
@@ -30,11 +50,15 @@ const Employees = () => {
           <Title>Employees</Title>
           <Space size={16}>
             <Search
+              value={query}
               placeholder="Search by name"
               allowClear
               onSearch={onSearch}
+              onInput={onInput}
+              loading={loading}
+              disabled={loading}
             />
-            <Button type="primary" icon={<PlusOutlined />}>
+            <Button disabled={loading} type="primary" icon={<PlusOutlined />}>
               Add New
             </Button>
           </Space>

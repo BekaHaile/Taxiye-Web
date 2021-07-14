@@ -64,6 +64,7 @@ export const booking = (store) => (next) => async (action) => {
       }
     } catch (e) {
       showError(next);
+      next(actions.loadingAvailbleVehicles(false));
     }
   } else if (action.type == "DELIVERY_SELECTED") {
     if (data["userData"]) next(navigationActions.goTo("confirm"));

@@ -35,6 +35,7 @@ const Container = styled("div")`
   padding: 0px 20px;
   position: relative;
   overflow-y: auto;
+  
 `;
 const FlexContainer = styled("div")`
   padding: 20px;

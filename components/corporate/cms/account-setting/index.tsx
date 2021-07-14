@@ -17,10 +17,10 @@ function callback(key) {
 const AccountSetting = () => {
   return (
     <>
-      <MainCard>
-        <Tabs defaultActiveKey="1" onChange={callback}>
-          <TabPane tab="Account Information" key="1">
-            <AccountInformation/>
+      <MainCard  bodyStyle={{height:"100%"}}>
+        <Tabs style={{height:"100%"}} defaultActiveKey="1" onChange={callback}>
+          <TabPane  tab="Account Information" key="1">
+            <AccountInformation />
           </TabPane>
           <TabPane tab="Company Information" key="2">
             <CompanyInformation/>

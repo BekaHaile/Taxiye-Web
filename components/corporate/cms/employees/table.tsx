@@ -3,6 +3,7 @@ import { Table, Space, Button, Tag } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../../../theme/main";
+import { useSelector } from "react-redux";
 
 const Link = styled("a")`
   color: ${theme.colors.primary};
@@ -55,20 +56,15 @@ const columns = [
   },
 ];
 
-const data = [];
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    group: "El Auto Employees",
-    monthly_budget: `782.01 Birr`,
-    monthly_ride_limit: 554 - i,
-    status: `Active`,
-  });
-}
 const TableView = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
+  const loading = useSelector(
+    (state) => state["corporate_employees"]["loading"]
+  );
+  const employees = useSelector(
+    (state) => state["corporate_employees"]["employees"]
+  );
   const onSelectChange = (selectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys);
@@ -112,7 +108,12 @@ const TableView = () => {
     ],
   };
   return (
-    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+    <Table
+      loading={loading}
+      rowSelection={rowSelection}
+      columns={columns}
+      dataSource={employees}
+    />
   );
 };
 

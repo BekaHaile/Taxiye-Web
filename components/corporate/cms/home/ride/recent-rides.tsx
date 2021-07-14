@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Space, Typography, Table } from "antd";
 import theme from "../../../../../theme/main";
+import { useSelector } from "react-redux";
 const { Text } = Typography;
 const Title = styled(Text)`
   font-family: Roboto;
@@ -11,14 +12,14 @@ const Title = styled(Text)`
   line-height: 22px;
   display: flex;
   align-items: center;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 const Container = styled("div")`
   height: 422px;
 `;
 const TableContainer = styled("div")`
   overflow-y: scroll;
-  height:422px;
+  height: 422px;
   ::-webkit-scrollbar {
     width: 0;
     background: transparent;
@@ -43,82 +44,26 @@ const columns = [
     dataIndex: "amount",
   },
 ];
-const data = [
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-];
+
 const RecentRides = () => {
+  const loading = useSelector(
+    (state) => state["corporate_home"]["recentRidesLoading"]
+  );
+  const recentRides = useSelector(
+    (state) => state["corporate_home"]["recentRides"]
+  );
   return (
     <>
       <Container>
         <Space style={{ width: "100%" }} size={16} direction="vertical">
           <Title>Recent Rides</Title>
+
           <TableContainer>
             <Table
+              loading={loading}
               pagination={false}
               columns={columns}
-              dataSource={data}
+              dataSource={recentRides}
               size="middle"
             />
           </TableContainer>

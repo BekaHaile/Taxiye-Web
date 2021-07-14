@@ -3,6 +3,7 @@ let date = new Date();
 const initialState = {
   employees: [],
   query: "",
+  q:"",
   loading: false,
   search_loading: false,
   selected_employee: null,
@@ -41,7 +42,13 @@ export default function corporateEmployeeReducer(state = initialState, action) {
         query: action.payload.selected_employee.name,
       };
     case actionTypes.EMPLOYEE_LIST_FETCHED:
-      return { ...state, employees: action.payload.employees };
+      return {
+        ...state,
+        employees: action.payload.employees,
+      };
+
+    case actionTypes.API_QUERY_ADDED:
+      return { ...state, q: action.payload.q };
 
     case actionTypes.ORIGIN_SELECTED:
       return { ...state, origin: action.payload.origin };

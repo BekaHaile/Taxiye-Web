@@ -23,7 +23,8 @@ import {
   genderSelected,
   countrySelected,
   addPhone,
-  changeTerm
+  changeTerm,
+  submitPhone
 } from "../../../../redux/actions/driver";
 import store from "../../../../redux/store";
 
@@ -47,7 +48,9 @@ padding-top:10px;
 const Signup = ({ handleNext, activeStep, steps }) => {
   const country_code = useSelector((state) => state["driver"]["country_code"]);
   const phone_no = useSelector((state) => state["driver"]["phone_no"]);
-  const isFirstFormValid = useSelector((state) => state["driver"]["isFirstFormValid"]);
+  const isFirstFormValid = useSelector(
+    (state) => state["driver"]["isFirstFormValid"]
+  );
   const full_name = useSelector((state) => state["driver"]["full_name"]);
   const gender = useSelector((state) => state["driver"]["gender"]);
   const country = useSelector((state) => state["driver"]["country"]);
@@ -120,9 +123,18 @@ const Signup = ({ handleNext, activeStep, steps }) => {
             </SubTitleWithSpace>
           </InputContainer>
         </CustomFlexContainer>
-        <TermsConsent action={(status)=>store.dispatch(changeTerm(status))} checked={agreeToTerms} />
+        <TermsConsent
+          action={(status) => store.dispatch(changeTerm(status))}
+          checked={agreeToTerms}
+        />
         <FlexContainer>
-          <Button disabled={!isFirstFormValid} onClick={handleNext}>
+          <Button
+            disabled={!isFirstFormValid}
+            onClick={() => {
+              // handleNext();
+              store.dispatch(submitPhone());
+            }}
+          >
             Continue
           </Button>
         </FlexContainer>
