@@ -6,7 +6,7 @@ import theme from "../../../theme/main";
 const Card = styled("div")`
   width: fit-content;
   align-items: center;
-  background: #ffffff;
+  background: ${theme.colors.white};;
   box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   padding: 15px 40px;

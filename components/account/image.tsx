@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import theme from "../../theme/main";
 
 const Logo = styled("img")`
   margin: 11px 20px;
@@ -11,7 +12,7 @@ const Text = styled("p")`
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
-  color: #ffffff;
+  color: ${theme.colors.white};
   bottom: 0px;
   left: 20px;
   position: absolute;

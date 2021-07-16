@@ -8,8 +8,7 @@ const Card = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  baackground: #ffffff;
-  background: #fff;
+  baackground: ${theme.colors.white};
   margin-top:34px;
  
 `;
@@ -68,7 +67,7 @@ const Button = styled("button")`
   line-height: 19px;
   text-align: center;
   color: ${theme.colors.primary};
-  background: #fff;
+  background: ${theme.colors.white};
   padding:5px 20px;
 `;
 

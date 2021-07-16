@@ -42,11 +42,11 @@ const Icon = styled("img")`
   height: 35px;
   width: 35px;
 `;
-const HomePage = () => {
+const Services = ({setSelected}) => {
   return (
     <>
       <Container>
-        <CustomCard>
+        <CustomCard onClick={()=>setSelected("groups")}>
           <Space size={16}>
             <Icon src={require("../../../../../assets/icons/budget-icon.svg")} />
             <Space direction="vertical">
@@ -57,7 +57,7 @@ const HomePage = () => {
             </Space>
           </Space>
         </CustomCard>
-        <CustomCard>
+        <CustomCard onClick={()=>setSelected("employees")}>
           <Space size={16}>
             <Icon src={require("../../../../../assets/icons/budget-icon.svg")} />
             <Space direction="vertical">
@@ -68,7 +68,7 @@ const HomePage = () => {
             </Space>
           </Space>
         </CustomCard>
-        <CustomCard>
+        <CustomCard onClick={()=>setSelected("requests")}>
           <Space size={16}>
             <Icon src={require("../../../../../assets/icons/budget-icon.svg")} />
             <Space direction="vertical">
@@ -85,4 +85,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Services;

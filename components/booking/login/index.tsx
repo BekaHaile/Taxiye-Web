@@ -23,7 +23,7 @@ import theme from "../../../theme/main";
 import Modal from "../../modal/secondary";
 
 const MainContainer = styled("div")`
-  background: #ffffff;
+  background: ${theme.colors.white};;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

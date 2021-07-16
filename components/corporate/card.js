@@ -8,7 +8,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 35px 20px;
-background: #FFFFFF;
+background: ${theme.colors.white};;
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 border-radius: 10px;
 flex: none;

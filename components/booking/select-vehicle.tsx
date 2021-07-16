@@ -32,7 +32,7 @@ const CustomFlexContainer = styled(FlexContainer)`
 
 const CardContainer = styled("a")`
   margin-bottom: 10px;
-  background: #ffffff;
+  background: ${theme.colors.white};
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;

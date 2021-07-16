@@ -7,7 +7,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 35px 20px;
-background: #FFFFFF;
+background: ${theme.colors.white};
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 border-radius: 10px;
 
@@ -31,7 +31,7 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 text-align: center;
-color:${theme.colors.primaryTextColor};;
+color:${theme.colors.primaryTextColor};
 padding-bottom: 20px;
 text-align: center;
 `;

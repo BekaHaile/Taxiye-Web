@@ -30,7 +30,10 @@ const Icon = styled("img")`
 const FormView = () => {
   const [form] = Form.useForm();
   const full_name = useSelector(
-    (state) => state["corporate_account"]["user"]["first_name"]
+    (state) => state["corporate_account"]["user"]["full_name"]
+  );
+  const profile = useSelector(
+    (state) => state["corporate_account"]["user"]["profile"]
   );
   const email = useSelector(
     (state) => state["corporate_account"]["user"]["email"]
@@ -55,7 +58,7 @@ const FormView = () => {
       >
         <Form.Item>
           <AvatarContainer>
-            <Avatar src="" size={70} icon={<UserOutlined />}></Avatar>
+            <Avatar src={profile} size={70} icon={<UserOutlined />}></Avatar>
             <Icon
               src={require("../../../../../assets/icons/add-icon.svg")}
             ></Icon>

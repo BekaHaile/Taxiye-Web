@@ -10,7 +10,7 @@ const Button = styled("button")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #ffffff;
+  color: ${theme.colors.white};;
   border-color: transparent;
   font-family: Open Sans;
   font-style: normal;
@@ -19,7 +19,7 @@ const Button = styled("button")`
   line-height: 19px;
 `;
 const SecondaryButton = styled.button`
-  background: #fff;
+  background: ${theme.colors.white};;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 5px 20px;
@@ -36,7 +36,7 @@ const SecondaryButton = styled.button`
   border: 1px solid ${theme.colors.primary};
 `;
 const PrimaryButton = styled.button`
-  background: #fff;
+  background: ${theme.colors.white};;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 14px;

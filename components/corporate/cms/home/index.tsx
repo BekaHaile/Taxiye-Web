@@ -11,7 +11,7 @@ import {
   getRecentRidesData,
 } from "../../../../redux/actions/corporate/home";
 
-const HomePage = () => {
+const HomePage = ({setSelected}) => {
   useEffect(() => {
     store.dispatch(getOverviewData());
     store.dispatch(getRecentRidesData());
@@ -21,7 +21,7 @@ const HomePage = () => {
       <Space style={{ width: "100%" }} direction="vertical" size={24}>
         <ToolBar />
         <Highlights />
-        <Rides />
+        <Rides setSelected={setSelected}/>
       </Space>
     </>
   );

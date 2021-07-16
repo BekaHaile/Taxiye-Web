@@ -65,7 +65,7 @@ color:${theme.colors.primaryTextColor} !important;
 }
 
 .MuiPickersDay-daySelected {
-  color: #fff;
+  color: ${theme.colors.white};;
   font-weight: 500;
   background-color: ${theme.colors.primary} !important;
 }
@@ -133,6 +133,9 @@ color:${theme.colors.primaryTextColor} !important;
 .intl-tel-input {
   margin-top: 10px; 
 }
+.intl.intl-tel-input {
+  margin-top: 10px; 
+}
 .intl-tel-input.allow-dropdown input[type=tel]:focus {
   
   border: 2px solid ${colors.primary};
@@ -198,7 +201,7 @@ div:nth-of-type(even).rec-carousel-item-visible {
 
 .react-tel-input .flag-dropdown {
  border-right:none;
- background-color:#fff;
+ background-color:${theme.colors.white};;
  -webkit-border-radius: 3px 0 0 3px;
 border-radius: 5px 0 0 5px;
 }
@@ -311,7 +314,7 @@ p,h1,h2,h3,h4,h5,h6{
     width: 100%;
     margin:0px;
     padding:0px;
-    background: #FFFFFF;
+    background: ${theme.colors.white};;
     font-family: 'Open Sans', sans-serif;
   }
   a, button, img {
@@ -378,7 +381,7 @@ p,h1,h2,h3,h4,h5,h6{
     font-size: 14px;
     line-height: 19px;
     text-align: center;
-    color: #FFFFFF;
+    color: ${theme.colors.white};;
     border-radius:20px;
     text-align:center;
     z-index:100;

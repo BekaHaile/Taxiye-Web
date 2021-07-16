@@ -58,7 +58,7 @@ const CustomButtonContainer = styled("div")`
 `;
 
 const MainContainer = styled("div")`
-  background: #ffffff;
+  background: ${theme.colors.white};
   border-radius: 5px;
   display: flex;
   flex-direction: column;

@@ -14,11 +14,11 @@ const Cms = () => {
   const [selected, setSelected] = useState("home-page");
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider setSelected={setSelected} />
+      <Sider selected={selected} setSelected={setSelected} />
       <Layout className="site-layout">
         <Content style={{ margin: selected === "dispatch" ? "0px" : "16px" }}>
           {(() => {
-            if (selected === "home-page") return <HomePage />;
+            if (selected === "home-page") return <HomePage setSelected={setSelected}/>;
             else if (selected === "employees") return <Employees />;
             else if (selected === "groups") return <Groups />;
             else if (selected === "dispatch") return <Dispatch />;

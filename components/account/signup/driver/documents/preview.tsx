@@ -19,7 +19,7 @@ const CloseButton = styled("div")`
   right: -5px;
   top: -5px;
   background: ${theme.colors.primary};
-  color: #fff;
+  color: ${theme.colors.white};
   font-weight: bold;
   font-size: 8px;
   cursor: pointer;

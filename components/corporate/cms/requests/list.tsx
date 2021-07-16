@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Table, Space, Button, Tag } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
@@ -45,19 +45,30 @@ const columns = [
   },
   {
     title: "Actions",
-    dataIndex: "actions",
+    dataIndex: "status",
 
-    render: () => <Link>Cancel</Link>,
+    render: (val) => {
+      
+      if (val === "Cancelled") {
+        return (<Link>Delete</Link>);
+      } else if (val === "Pending") {
+        return (<Link>Cancel</Link>);
+      }
+      
+    },
   },
 ];
-
 
 const TableView = () => {
   useEffect(() => {
     store.dispatch(fetchRequests());
   }, []);
-  const loading = useSelector((state) => state["corporate_requests"]["loading"]);
-  const requests = useSelector((state) => state["corporate_requests"]["requests"]);
+  const loading = useSelector(
+    (state) => state["corporate_requests"]["loading"]
+  );
+  const requests = useSelector(
+    (state) => state["corporate_requests"]["requests"]
+  );
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (selectedRowKeys) => {
@@ -103,7 +114,12 @@ const TableView = () => {
     ],
   };
   return (
-    <Table loading={loading} rowSelection={rowSelection} columns={columns} dataSource={requests} />
+    <Table
+      loading={loading}
+      rowSelection={rowSelection}
+      columns={columns}
+      dataSource={requests}
+    />
   );
 };
 

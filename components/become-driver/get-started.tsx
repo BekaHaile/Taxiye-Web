@@ -20,7 +20,7 @@ const SloganButton = styled("button")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #ffffff;
+  color: ${theme.colors.white};
   border-color: transparent;
   vertical-align: middle;
 `;

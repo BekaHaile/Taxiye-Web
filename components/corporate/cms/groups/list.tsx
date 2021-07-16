@@ -10,7 +10,7 @@ import { Row, Col, Card, Space, Typography, Spin, Empty } from "antd";
 const { Text } = Typography;
 
 const MainCard = styled(Card)`
-  background: #ffffff;
+  background: ${theme.colors.white};;
   border: 1px solid #eff2f5;
   box-sizing: border-box;
   border-radius: 5px;

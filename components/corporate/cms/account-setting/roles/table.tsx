@@ -2,19 +2,24 @@ import React from "react";
 import { Table, Space, Button, Select, Avatar } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import {
+  UserOutlined,
+} from "@ant-design/icons";
 const { Option } = Select;
+
 
 const Icon = styled("img")``;
 
 const columns = [
   {
     title: "Team member",
-    dataIndex: "name",
+    dataIndex: "profile",
     render: (val) => {
       return (
         <Space>
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          {val}
+          <Avatar src={val.image} icon={<UserOutlined />} />
+          {val.name}
         </Space>
       );
     },
@@ -49,16 +54,16 @@ const columns = [
   },
 ];
 
-const data = [];
-for (let i = 0; i < 3; i++) {
-  data.push({
-    key: i,
-    name: `Edward King`,
-    email: "email@email.com",
-    role: i == 0 ? "Adminstrator" : i == 1 ? "Moderator" : "Dispatcher",
-  });
-}
+
 const TableView = () => {
+
+  const users = useSelector(
+    (state) => state["corporate_account"]["roles"]["users"]
+  );
+  const loading = useSelector(
+    (state) => state["corporate_account"]["roles"]["loading"]
+  );
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (selectedRowKeys) => {
@@ -104,7 +109,7 @@ const TableView = () => {
     ],
   };
   return (
-    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+    <Table loading={loading} rowSelection={rowSelection} columns={columns} dataSource={users} />
   );
 };
 

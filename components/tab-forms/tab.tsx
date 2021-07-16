@@ -11,7 +11,7 @@ import { changeBookingType } from "../../redux/actions/booking";
 import theme from "../../theme/main";
 
 const TabContainer = styled("div")`
-  background: #ffffff;
+  background: ${theme.colors.white};;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ const TabButton = styled.a`
   text-decoration: none;
   padding: 0px 20px;
   &&.active {
-    color: #ffffff;
+    color: ${theme.colors.white};;
     text-align:center;
     background: ${theme.colors.primary};
     border-radius: 50px;

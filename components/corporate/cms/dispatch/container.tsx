@@ -4,10 +4,11 @@ import Booking from "./book";
 import { CustomButton } from "../../../tab-forms/tab-titles";
 import { useSelector } from "react-redux";
 import { Loader } from "../../../loading/loading";
+import theme from "../../../../theme/main";
 
 const ContainerWrapper = styled("div")`
   position: absolute;
-  background: #ffffff;
+  background: ${theme.colors.white};;
   top: 0px;
   margin: 20px;
   height: -webkit-fill-available;
@@ -16,7 +17,7 @@ const ContainerWrapper = styled("div")`
   justify-content: space-between;
 `;
 const MainContainer = styled("div")`
-  background: #ffffff;
+  background: ${theme.colors.white};;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

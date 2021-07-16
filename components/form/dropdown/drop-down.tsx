@@ -4,7 +4,7 @@ import theme from "../../../theme/main";
 import { countryList } from "./country-list";
 
 const DropDown = styled("select")`
-  background: #fff;
+  background: ${theme.colors.white};;
   border-radius: 5px;
   width: 100%;
   padding: 8px 20px;

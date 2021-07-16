@@ -3,10 +3,11 @@ let date = new Date();
 const initialState = {
   employees: [],
   query: "",
-  q:"",
+  q: "",
   loading: false,
   search_loading: false,
   selected_employee: null,
+  route: "",
   city: "",
   origin: {
     address: null,
@@ -25,6 +26,11 @@ const initialState = {
 
 export default function corporateEmployeeReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.EMPLOYEE_ROUTE_CHANGED:
+      return {
+        ...state,
+        route: action.payload.route,
+      };
     case actionTypes.QUERY_ADDED:
       return { ...state, query: action.payload.query, selected_employee: null };
     case actionTypes.LOADING_INITIATED:

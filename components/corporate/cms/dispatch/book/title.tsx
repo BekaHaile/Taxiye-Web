@@ -3,7 +3,7 @@ import styled from "styled-components";
 import theme from "../../../../../theme/main";
 
 const HeaderContainer = styled("div")`
-  background: #ffffff;
+  background: ${theme.colors.white};;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
   height:50px;
   line-height: 50px;

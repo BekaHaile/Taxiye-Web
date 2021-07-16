@@ -10,7 +10,7 @@ const Button = styled("button")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #ffffff;
+  color: ${theme.colors.white};;
   border-color: transparent;
   font-family: Open Sans;
   font-style: normal;

@@ -17,7 +17,7 @@ const MapInfoContainer = styled("div")`
   right: 0px;
   top: 0px;
   margin: auto;
-  background-color: #fff;
+  background-color: ${theme.colors.white};;
   width: 400px;
   height: -webkit-fill-available;
 `;

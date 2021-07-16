@@ -14,7 +14,7 @@ const LabelText = styled("label")`
 
 const Container = styled("div")`
   position: absolute;
-  background-color: #fff;
+  background-color: ${theme.colors.white};;
   width: 100%;
   border-radius: 5px;
   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1);

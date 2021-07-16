@@ -112,3 +112,12 @@ export const setSelectedVehicle = (selected_vehicle) => ({
 export const getEmployees = () => ({
   type: actions.GET_EMPLOYEES_INITIATED,
 });
+
+export const changeRoute = (route) => {
+  return {
+    type: actions.EMPLOYEE_ROUTE_CHANGED,
+    payload: {
+      route: route,
+    },
+  };
+};

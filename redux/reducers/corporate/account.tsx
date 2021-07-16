@@ -1,28 +1,40 @@
 import * as actionTypes from "../../types/corporate/account";
 const initialState = {
   user: {
-    full_name: "",
-    email: "",
-    profile: "",
-    phone_no: "",
+    full_name: "Ayele Tolosa",
+    email: "ayele@gmail.com",
+    profile: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+    phone_no: "978768767",
     country_code: "+251",
-    country: "",
+    country: "Ethiopia",
     isPhoneValid: false,
     isValid: false,
   },
   company: {
-    name: "",
-    debit_limit: "",
-    address: "",
-    max_user_limit: "",
-    official_email: "",
-    vat_number: "",
-    invoice_email: "",
-    phone_no: "",
+    name: "Elnet Techologies",
+    debit_limit: "500",
+    address: "Gerji, Addis Ababa",
+    max_user_limit: "50",
+    official_email: "elnet@elnet.com",
+    vat_number: "87300638",
+    invoice_email: "invoice@elnet.com",
+    phone_no: "911676573",
     country_code: "+251",
-    country: "",
+    country: "Ethiopia",
     isPhoneValid: false,
     isValid: false,
+  },
+  roles: {
+    users: [],
+    query: "",
+    loading: false,
+    user: {
+      full_name: "",
+      email: "",
+      role: "Moderator",
+      loading: false,
+      isValid: false,
+    },
   },
 };
 
@@ -160,6 +172,106 @@ export default function corporateAccountReducer(state = initialState, action) {
         company: {
           ...state.company,
           isValid: action.payload.isValid,
+        },
+      };
+
+    case actionTypes.ROLES_DATA_FETCHED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          users: action.payload.users,
+        },
+      };
+
+    case actionTypes.ROLES_TAB_LOADING_CHANGED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          loading: action.payload.loading,
+        },
+      };
+
+    case actionTypes.ROLES_DATA_QUERY_ADDED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          query: action.payload.query,
+        },
+      };
+    case actionTypes.NEW_FULL_NAME_ADDED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          user: {
+            ...state.roles.user,
+            full_name: action.payload.full_name,
+          },
+        },
+      };
+
+    case actionTypes.NEW_EMAIL_ADDED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          user: {
+            ...state.roles.user,
+            email: action.payload.email,
+          },
+        },
+      };
+
+    case actionTypes.NEW_ROLE_SELECTED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          user: {
+            ...state.roles.user,
+            role: action.payload.role,
+          },
+        },
+      };
+    case actionTypes.ROLE_FORM_VALIDATED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          user: {
+            ...state.roles.user,
+            isValid: action.payload.isValid,
+          },
+        },
+      };
+
+    case actionTypes.ROLE_FORM_LOADING_CHANGED:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          user: {
+            ...state.roles.user,
+            loading: action.payload.loading,
+          },
+        },
+      };
+    case actionTypes.RESET_NEW_FORM:
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          user: {
+            ...state.roles.user,
+            full_name: "",
+            email: "",
+            role: "Moderator",
+            loading: false,
+            isValid: false,
+          },
         },
       };
 

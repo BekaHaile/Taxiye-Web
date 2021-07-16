@@ -37,7 +37,7 @@ const CardView = styled("div")`
 
 
 const CardContainer = styled("div")`
-  background: #ffffff;
+  background: ${theme.colors.white};;
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;

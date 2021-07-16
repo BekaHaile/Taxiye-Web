@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import {
   getEmployees,
   addApiQuery,
+  changeRoute
 } from "../../../../redux/actions/corporate/employees";
 
 const Title = styled(Text)`
@@ -58,7 +59,9 @@ const Employees = () => {
               loading={loading}
               disabled={loading}
             />
-            <Button disabled={loading} type="primary" icon={<PlusOutlined />}>
+            <Button onClick={() => {
+                store.dispatch(changeRoute("create"));
+              }} disabled={loading} type="primary" icon={<PlusOutlined />}>
               Add New
             </Button>
           </Space>

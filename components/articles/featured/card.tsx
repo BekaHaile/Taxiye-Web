@@ -9,9 +9,8 @@ const Card = styled("div")`
   flex-direction: col;
   align-items: flex-start;
   padding: 0px;
-  baackground: #ffffff;
+  baackground: ${theme.colors.white};
   border-radius: 10px;
-  background: #fff;
   gap:40px;
   
 `;
@@ -83,7 +82,7 @@ const Button = styled("button")`
   line-height: 19px;
   text-align: center;
   color: ${theme.colors.primary};
-  background: #fff;
+  background: ${theme.colors.white};
   padding:5px 20px;
 `;
 

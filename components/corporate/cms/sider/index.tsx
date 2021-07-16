@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -56,30 +57,41 @@ const CompanyName = styled("p")`
 `;
 interface Props {
   setSelected;
+  selected;
 }
 
-const Slider: FunctionComponent<Props> = ({ setSelected }) => {
+const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
   const [collapsed, onCollapse] = useState(false);
+  const full_name = useSelector(
+    (state) => state["corporate_account"]["user"]["full_name"]
+  );
+  const profile = useSelector(
+    (state) => state["corporate_account"]["user"]["profile"]
+  );
+  const company_name = useSelector(
+    (state) => state["corporate_account"]["company"]["name"]
+  );
 
   return (
     <Sider
-      style={{ backgroundColor: "#fff" }}
+      style={{ backgroundColor: `${theme.colors.white}` }}
       collapsed={collapsed}
       onCollapse={onCollapse}
       width={256}
     >
-      <ProfileView className="user-profile">
+      <ProfileView className="user-profile" onClick={()=>setSelected("account-setting")}>
         <Space size={5} align="center" direction="vertical">
-          <Avatar src="" size={64} icon={<UserOutlined />} />
+          <Avatar src={profile} size={64} icon={<UserOutlined />} />
           <Space size={10} direction="vertical">
-            <Name>Nahom Ab</Name>
-            <CompanyName>Corporate Company Name</CompanyName>
+            <Name>{full_name}</Name>
+            <CompanyName>{company_name}</CompanyName>
           </Space>
         </Space>
       </ProfileView>
       <Menu
         onSelect={(item) => setSelected(item.key)}
         defaultSelectedKeys={["home-page"]}
+        selectedKeys={[selected]}
         mode="inline"
       >
         <Menu.Item key="home-page" icon={<HomeOutlined />}>
