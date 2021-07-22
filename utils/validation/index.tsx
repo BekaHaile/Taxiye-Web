@@ -1,0 +1,14 @@
+export function validateInput(input) {
+  return input != "" && input != null;
+}
+export function validatePhone(phone_no) {
+  if (phone_no == "" || phone_no == null) return false;
+  const re = /^[9]{1,}[0-9]{8}$/;
+  return re.test(String(phone_no).toLowerCase());
+}
+export function validateEmail(email) {
+  if (email == "" || email == null) return false;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}

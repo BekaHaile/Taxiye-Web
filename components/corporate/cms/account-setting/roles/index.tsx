@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Row, Col, Card, Typography, Space, Modal } from "antd";
+import {Spin, Button, Drawer } from "antd";
 import TopActions from "./header-actions";
 import Table from "./table";
 import { useState } from "react";
 import Registration from "./registration";
 import { useSelector } from "react-redux";
 import store from "../../../../../redux/store";
-import { resetNewForm, saveNewForm } from "../../../../../redux/actions/corporate/account";
+import {
+  resetNewForm,
+  saveNewForm,
+} from "../../../../../redux/actions/corporate/account";
 
 const Roles = () => {
   const isValid = useSelector(
@@ -22,7 +25,7 @@ const Roles = () => {
     store.dispatch(resetNewForm());
     setVisibility(false);
   }
-  function handleOk() {
+  function handleSubmit() {
     setVisibility(false);
     store.dispatch(saveNewForm());
   }
@@ -31,17 +34,28 @@ const Roles = () => {
     <>
       <TopActions action={() => setVisibility(true)} />
       <Table />
-      <Modal
+      <Drawer
+        width="30%"
         title="Invite People"
         visible={visible}
-        onOk={handleOk}
-        confirmLoading={loading}
-        onCancel={handleCancel}
-        okText="Save"
-        okButtonProps={{ disabled: !isValid }}
+        onClose={handleCancel}
+        footer={
+          <div
+            style={{
+              textAlign: "right",
+            }}
+          >
+            <Button onClick={handleCancel} style={{ marginRight: 8 }}>
+              Cancel
+            </Button>
+            <Button disabled={!isValid} onClick={handleSubmit} type="primary">
+              {loading ? <Spin/> : <span>Submit</span>}
+            </Button>
+          </div>
+        }
       >
         <Registration />
-      </Modal>
+      </Drawer>
     </>
   );
 };

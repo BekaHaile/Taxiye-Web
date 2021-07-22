@@ -56,6 +56,7 @@ const Groups = () => {
           <Button disabled={!isValid} type="primary">Save</Button>
           <Button onClick={() => {
             store.dispatch(resetForm());
+            
             }}>Cancel</Button>
         </Space>
       </MainCard>

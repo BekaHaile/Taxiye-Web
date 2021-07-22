@@ -25,7 +25,7 @@ const CustomSpace = styled(Space)`
   justify-content: space-between;
 `;
 
-const Requests = () => {
+const Requests = ({action}) => {
   const query = useSelector((state) => state["corporate_requests"]["query"]);
   const loading = useSelector((state) => state["corporate_requests"]["loading"]);
 
@@ -53,7 +53,7 @@ const Requests = () => {
               loading={loading}
               disabled={loading}
             />
-            <Button type="primary" icon={<PlusOutlined disabled={loading}/>}>
+            <Button onClick={action} disabled={loading} type="primary" icon={<PlusOutlined />}>
               Add New
             </Button>
           </Space>

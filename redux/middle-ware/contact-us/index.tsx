@@ -1,5 +1,6 @@
 import * as actions from "../../actions/contact-us";
-import { showSuccess, showError, validateEmail } from "../common";
+import * as validationUtils from "../../../utils/validation";
+import { showSuccess, showError } from "../common";
 
 export const contact_us = (store) => (next) => async (action) => {
   next(action);
@@ -24,7 +25,7 @@ function validatInput(data) {
     data["full_name"] != "" &&
     data["email"] != null &&
     data["email"] != "" &&
-    validateEmail(data["email"]) &&
+    validationUtils.validateEmail(data["email"]) &&
     data["subject"] != null &&
     data["subject"] != "" &&
     data["message"] != null &&

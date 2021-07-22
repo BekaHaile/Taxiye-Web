@@ -1,6 +1,7 @@
 import * as actions from "../../actions/corporate";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
+import * as validationUtils from "../../../utils/validation";
+import {showError } from "../common";
 
 export const corporate = (store) => (next) => async (action) => {
   next(action);
@@ -23,7 +24,7 @@ export const corporate = (store) => (next) => async (action) => {
       data["no_of_employees"] != "" &&
       data["no_of_employees"] != null &&
       data["isPhoneValid"] &&
-      validateEmail(data["company_email"]) &&
+      validationUtils.validateEmail(data["company_email"]) &&
       data["agreeToTerms"]
     )
       next(actions.setValidation(true));
@@ -44,7 +45,7 @@ export const corporate = (store) => (next) => async (action) => {
       data["confirmation_password"] != "" &&
       data["confirmation_password"] != null &&
       data["password"] == data["confirmation_password"] &&
-      validateEmail(data["admin_email"]) &&
+      validationUtils.validateEmail(data["admin_email"]) &&
       data["password"].length >= 6
     )
       next(actions.setAdminValidation(true));

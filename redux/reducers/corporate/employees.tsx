@@ -1,7 +1,19 @@
 import * as actionTypes from "../../types/corporate/employees";
 let date = new Date();
+const data = {
+  phone_no: "",
+  code: 251,
+  first_name: "",
+  last_name: "",
+  email: "",
+  group: null,
+};
 const initialState = {
+  default_data: data,
   employees: [],
+  groups: [],
+  new_employees: [],
+  isFormValid: false,
   query: "",
   q: "",
   loading: false,
@@ -26,6 +38,121 @@ const initialState = {
 
 export default function corporateEmployeeReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.EMPLOYEE_FORM_INITIATED:
+      return {
+        ...state,
+        new_employees: [...state.new_employees, action.payload.employee],
+      };
+    case actionTypes.GROUP_FETCHED:
+      return {
+        ...state,
+        groups: action.payload.groups,
+      };
+    case actionTypes.EMPLOYEE_APPENDED:
+      return {
+        ...state,
+        new_employees: state.new_employees.concat(action.payload.new_employees),
+      };
+    case actionTypes.EMPLOYEE_FIRST_NAME_CHANGED:
+      return {
+        ...state,
+        new_employees: [
+          ...state.new_employees.slice(0, action.payload.index),
+          {
+            first_name: action.payload.first_name,
+            last_name: state.new_employees[action.payload.index].last_name,
+            email: state.new_employees[action.payload.index].email,
+            group: state.new_employees[action.payload.index].group,
+            phone_no: state.new_employees[action.payload.index].phone_no,
+            code: state.new_employees[action.payload.index].code,
+          },
+          ...state.new_employees.slice(action.payload.index + 1),
+        ],
+      };
+    case actionTypes.EMPLOYEE_LAST_NAME_CHANGED:
+      return {
+        ...state,
+        new_employees: [
+          ...state.new_employees.slice(0, action.payload.index),
+          {
+            last_name: action.payload.last_name,
+            first_name: state.new_employees[action.payload.index].first_name,
+            group: state.new_employees[action.payload.index].group,
+            email: state.new_employees[action.payload.index].email,
+            phone_no: state.new_employees[action.payload.index].phone_no,
+            code: state.new_employees[action.payload.index].code,
+          },
+          ...state.new_employees.slice(action.payload.index + 1),
+        ],
+      };
+    case actionTypes.EMPLOYEE_EMAIL_CHANGED:
+      return {
+        ...state,
+        new_employees: [
+          ...state.new_employees.slice(0, action.payload.index),
+          {
+            first_name: state.new_employees[action.payload.index].first_name,
+            last_name: state.new_employees[action.payload.index].last_name,
+            group: state.new_employees[action.payload.index].group,
+            phone_no: state.new_employees[action.payload.index].phone_no,
+            code: state.new_employees[action.payload.index].code,
+            email: action.payload.email,
+          },
+          ...state.new_employees.slice(action.payload.index + 1),
+        ],
+      };
+    case actionTypes.EMPLOYEE_PHONE_ADDED:
+      return {
+        ...state,
+        new_employees: [
+          ...state.new_employees.slice(0, action.payload.index),
+          {
+            first_name: state.new_employees[action.payload.index].first_name,
+            last_name: state.new_employees[action.payload.index].last_name,
+            group: state.new_employees[action.payload.index].group,
+            email: state.new_employees[action.payload.index].email,
+            phone_no: action.payload.phone_no,
+            code: action.payload.code,
+          },
+          ...state.new_employees.slice(action.payload.index + 1),
+        ],
+      };
+
+    case actionTypes.EMPLOYEE_GROUP_CHANGED:
+      return {
+        ...state,
+        new_employees: [
+          ...state.new_employees.slice(0, action.payload.index),
+          {
+            first_name: state.new_employees[action.payload.index].first_name,
+            last_name: state.new_employees[action.payload.index].last_name,
+            email: state.new_employees[action.payload.index].email,
+            phone_no: state.new_employees[action.payload.index].phone_no,
+            code: state.new_employees[action.payload.index].code,
+            group: action.payload.group,
+          },
+          ...state.new_employees.slice(action.payload.index + 1),
+        ],
+      };
+    case actionTypes.EMPLOYEE_REMOVED:
+      return {
+        ...state,
+        new_employees: [
+          ...state.new_employees.slice(0, action.payload.index),
+          ...state.new_employees.slice(action.payload.index + 1),
+        ],
+      };
+    case actionTypes.EMPLOYEE_FORM_VALIDATED:
+      return {
+        ...state,
+        isFormValid: action.payload.isValid,
+      };
+    case actionTypes.RESET_EMPLOYEE_REGISTRATION:
+      return {
+        ...state,
+        new_employees: [data],
+      };
+
     case actionTypes.EMPLOYEE_ROUTE_CHANGED:
       return {
         ...state,

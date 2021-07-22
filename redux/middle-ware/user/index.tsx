@@ -1,6 +1,7 @@
 import * as actions from "../../actions/user";
 import axios from "axios";
-import { showError, validateEmail } from "../common";
+import * as validationUtils from "../../../utils/validation";
+import { showError } from "../common";
 
 export const user = (store) => (next) => async (action) => {
   let data = store.getState().user;
@@ -99,7 +100,7 @@ async function validateUser(data, next) {
     data["user"]["gender"] != null &&
     data["user"]["lastName"] != "" &&
     data["agreeToTerms"] &&
-    validateEmail(data["user"]["email"])
+    validationUtils.validateEmail(data["user"]["email"])
   )
     next(actions.setUserIsValid(true));
   else {

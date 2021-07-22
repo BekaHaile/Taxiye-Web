@@ -1,7 +1,7 @@
 import * as actions from "../../actions/corporate/requests";
 import * as actiontypes from "../../types/corporate/requests";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
+import { showError } from "../common";
 
 export const corporate_requests = (store) => (next) => async (action) => {
   next(action);
@@ -11,6 +11,13 @@ export const corporate_requests = (store) => (next) => async (action) => {
     await sleep(3000);
     var requests = fetchGroups(data["query"]);
     next(actions.setRequestsData(requests));
+  } else if (
+    action.type == actiontypes.DEBIT_LIMIT_ADDED ||
+    action.type == actiontypes.USER_LIMIT_ADDED ||
+    action.type == actiontypes.REASON_ADDED
+  ) {
+    var isValid = validateForm(data);
+    next(actions.setValidation(isValid));
   }
 };
 
@@ -39,4 +46,15 @@ function fetchGroups(query) {
     });
   }
   return data;
+}
+
+function validateForm(data) {
+  return (
+    data["debit_limit"] != "" &&
+    data["debit_limit"] != null &&
+    data["max_user_limit"] != "" &&
+    data["max_user_limit"] != null &&
+    data["reason"] != "" &&
+    data["reason"] != null
+  );
 }

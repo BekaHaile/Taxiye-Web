@@ -1,7 +1,9 @@
 import * as actions from "../../actions/corporate/account";
 import * as actiontypes from "../../types/corporate/account";
+import * as validationUtils from "../../../utils/validation";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
+
+import { showError } from "../common";
 
 export const corporate_account = (store) => (next) => async (action) => {
   next(action);
@@ -55,7 +57,7 @@ function validateUserData(data) {
   return (
     data["full_name"] != "" &&
     data["email"] != "" &&
-    validateEmail(data["email"]) &&
+    validationUtils.validateEmail(data["email"]) &&
     data["phone_no"] != "" &&
     data["country_code"] != "" &&
     data["country"] != "" &&
@@ -75,11 +77,11 @@ function validateCompanyData(data) {
     data["address"] != "" &&
     data["max_user_limit"] != "" &&
     data["official_email"] != "" &&
-    validateEmail(data["official_email"]) &&
+    validationUtils.validateEmail(data["official_email"]) &&
     data["full_name"] != "" &&
     data["vat_number"] != "" &&
     data["invoice_email"] != "" &&
-    validateEmail(data["invoice_email"]) &&
+    validationUtils.validateEmail(data["invoice_email"]) &&
     data["phone_no"] != null &&
     data["country_code"] != null &&
     data["country"] != null &&
@@ -91,7 +93,7 @@ function validateRolesData(data) {
   return (
     data["full_name"] != "" &&
     data["email"] != "" &&
-    validateEmail(data["email"]) &&
+    validationUtils.validateEmail(data["email"]) &&
     data["role"] != ""
   );
 }

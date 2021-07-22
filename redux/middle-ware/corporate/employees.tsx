@@ -1,6 +1,7 @@
 import * as actions from "../../actions/corporate/employees";
+import * as typeActions from "../../types/corporate/employees";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
+import * as validationUtils from "../../../utils/validation";
 import { getVehicles } from "./dispatch";
 
 export const corporate_employees = (store) => (next) => async (action) => {
@@ -14,19 +15,36 @@ export const corporate_employees = (store) => (next) => async (action) => {
     next(actions.setSearchLoading(false));
   }
   if (
-    action.type == "EMPLOYEE_SELECTED" ||
-    action.type == "EMPLOYEE_DISPATCH_DESTINATION_SELECTED" ||
-    action.type == "EMPLOYEE_DISPATCH_ORIGIN_SELECTED" ||
-    action.type == "EMPLOYEE_DISPATCH_DATE_ADDED" ||
-    action.type == "EMPLOYEE_DISPATCH_TIME_ADDED"
+    action.type == typeActions.EMPLOYEE_SELECTED ||
+    action.type == typeActions.DESTINATION_SELECTED ||
+    action.type == typeActions.ORIGIN_SELECTED ||
+    action.type == typeActions.DATE_ADDED ||
+    action.type == typeActions.TIME_ADDED
   ) {
     await getVehicles(data, next);
-  } else if (action.type == "GET_EMPLOYEES_INITIATED") {
+  } else if (action.type == typeActions.GET_EMPLOYEES_INITIATED) {
     next(actions.setLoading(true));
     await sleep(3000);
     var employees = setEmployees(data["q"]);
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
+  } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {
+    next(actions.setLoading(true));
+    await sleep(3000);
+    var groups = fetchGroups();
+    next(actions.setGroups(groups));
+    next(actions.setLoading(false));
+  } else if (
+    action.type == typeActions.EMPLOYEE_APPENDED ||
+    action.type == typeActions.EMPLOYEE_PHONE_ADDED ||
+    action.type == typeActions.EMPLOYEE_FIRST_NAME_CHANGED ||
+    action.type == typeActions.EMPLOYEE_EMAIL_CHANGED ||
+    action.type == typeActions.EMPLOYEE_GROUP_CHANGED ||
+    action.type == typeActions.EMPLOYEE_LAST_NAME_CHANGED ||
+    action.type == typeActions.EMPLOYEE_REMOVED
+  ) {
+    var isValid = validateEmployeeForm(data["new_employees"]);
+    next(actions.setFormValidation(isValid));
   }
 };
 
@@ -75,4 +93,39 @@ function setEmployees(query) {
     });
   }
   return data;
+}
+
+function fetchGroups() {
+  const data = [];
+  var ran = Math.floor(Math.random() * 6) + 1;
+  for (let i = 1; i <= ran; i++) {
+    data.push({
+      key: i,
+      title: "Group " + i,
+      balance: "10,000.00 Birr",
+      maximum_rides: 3333,
+      employees: 455,
+      payment: "Manual",
+    });
+  }
+  return data;
+}
+
+function validateEmployeeForm(data) {
+  var isValid = true;
+  for (var i = 0; i < data.length; ++i) {
+    isValid =
+      validationUtils.validatePhone(data[i]["phone_no"]) &&
+      data[i]["code"] != "" &&
+      data[i]["code"] != null &&
+      data[i]["first_name"] != "" &&
+      data[i]["first_name"] != null &&
+      data[i]["last_name"] != "" &&
+      data[i]["last_name"] != null &&
+      validationUtils.validateEmail(data[i]["email"]) &&
+      data[i]["group"] != "" &&
+      data[i]["group"] != null;
+    if (!isValid) break;
+  }
+  return isValid && data.length > 0;
 }

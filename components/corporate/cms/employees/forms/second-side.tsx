@@ -1,68 +1,89 @@
 import React from "react";
 import styled from "styled-components";
-import { Slider, Form, Checkbox } from "antd";
+import { Upload, message } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
+
+import readXlsxFile from "read-excel-file";
+
+const { Dragger } = Upload;
 import VehicleList from "./vehicle-list";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "../../../../../redux/store";
-import { timeRangeChanged, changeSelectedDays } from "../../../../../redux/actions/corporate/group";
+import { appendEmployee } from "../../../../../redux/actions/corporate/employees";
 
-const CheckboxGroup = Checkbox.Group;
-
-const plainOptions = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const step = 15;
 const max = 1440;
-const min = 0;
-const marks = {
-  0: "0:00",
-  1440: "23:59",
-};
 
-function formatter(value) {
-  if (value == max) return "23:59";
-  return `${Math.floor(value / 60)}:${("0" + Math.floor(value % 60)).slice(
-    -2
-  )}`;
-}
-const FormView = () => {
-  const [form] = Form.useForm();
-  const time_range = useSelector(
-    (state) => state["corporate_group"]["time_range"]
-  );
-  const days = useSelector((state) => state["corporate_group"]["days"]);
-  
+const Container = styled("div")`
+  padding: 20px 0px;
+`;
+const InfoContainer = styled("div")`
+  display: flex;
+  justify-content: space-between;
+`;
+const Title = styled("p")``;
+const Help = styled("p")``;
+
+const FormView = ({ setActiveKey }) => {
+  const groups = useSelector((state) => state["corporate_employees"]["groups"]);
 
   return (
     <>
-      <Form layout="vertical" form={form} initialValues={{ remember: true }}>
-        <Form.Item label="Days">
-          <CheckboxGroup options={plainOptions} value={days} onChange={(days)=>{
-            store.dispatch(changeSelectedDays(days));
-          }} />
-        </Form.Item>
-        <Form.Item label="Time Range">
-          <Slider
-            onChange={(val) => {
-              store.dispatch(
-                timeRangeChanged({
-                  start: formatter(val[0]),
-                  end: formatter(val[1]),
-                })
-              );
-            }}
-            min={min}
-            step={step}
-            max={max}
-            marks={marks}
-            tipFormatter={formatter}
-            range={{ draggableTrack: true }}
-            defaultValue={[min, max / 2]}
-          />
-        </Form.Item>
-        <Form.Item label="Vehicle Type">
-          <VehicleList />
-        </Form.Item>
-      </Form>
+      <InfoContainer>
+        <Title>Import list of employees</Title>
+        <Help>How to create and upload file</Help>
+      </InfoContainer>
+      <Container>
+        <Dragger
+          accept=".csv,.xls,.xlsx"
+          maxCount={1}
+          multiple={false}
+          beforeUpload={(file) => {
+            
+            const schema = {
+              "Code": {
+                prop: "code",
+                type: Number,
+              },
+              "Phone Number": {
+                prop: "phone_no",
+                type: String,
+              },
+              "First Name": {
+                prop: "first_name",
+                type: String,
+              },
+              "Last Name": {
+                prop: "last_name",
+                type: String,
+              },
+              Email: {
+                prop: "email",
+                type: String,
+              },
+              Group: {
+                prop: "group",
+                type: String,
+              },
+            };
+            readXlsxFile(file, { schema }).then((data) => {
+              store.dispatch(appendEmployee(data.rows));
+              console.log(data.rows);
+              setActiveKey("1");
+            });
+          }}
+        >
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">
+            Click or drag file to this area to upload
+          </p>
+          <p className="ant-upload-hint">
+            (supported file formats: csv, xls, xlsx)
+          </p>
+        </Dragger>
+      </Container>
     </>
   );
 };

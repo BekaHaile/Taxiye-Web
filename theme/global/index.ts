@@ -471,9 +471,7 @@ p,h1,h2,h3,h4,h5,h6{
 }
 
 
-::-webkit-scrollbar:hover {
-  width: 10px;
-}
+
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -554,6 +552,10 @@ overflow:hidden;
   width: 100%;
 }
 
+
+.antd-country-phone-input .ant-select-selector {
+  border:none !important;
+}
 `;
 
 export default GlobalStyle;

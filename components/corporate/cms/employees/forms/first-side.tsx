@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Table, Tag, Space } from 'antd';
+import { Table, Form, Space, Input, Select } from "antd";
 import theme from "../../../../../theme/main";
 import { useSelector } from "react-redux";
 import store from "../../../../../redux/store";
+import PhoneInput from "../../form/phone-input";
+import * as validationUtils from "../../../../../utils/validation";
 import {
-  addGroupName,
-  addMonthlyBudget,
-  addMonthlyRide,
-  changePaymentMode,
-} from "../../../../../redux/actions/corporate/group";
+  phoneAdded,
+  removeEmployee,
+  changeFirstName,
+  changeLastName,
+  changeEmail,
+  changeGroup,
+} from "../../../../../redux/actions/corporate/employees";
+import { DeleteOutlined } from "@ant-design/icons";
+
+const { Option } = Select;
 
 const CustomSpace = styled(Space)`
   width: 100%;
@@ -33,85 +40,141 @@ const Detail = styled("div")`
   color: ${theme.colors.primaryLabelColor};
   width: 222px;
 `;
-const columns = [
-  {
-    title: 'Phone Number',
-    dataIndex: 'phone_number',
-    key: 'phone_number',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'First Name',
-    dataIndex: 'first_name',
-    key: 'first_name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Last Name',
-    dataIndex: 'last_name',
-    key: 'last_name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Email Address',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
-    title: 'Group',
-    dataIndex: 'group',
-    key: 'group',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
 
-const data = [
-  {
-    key: '1',
-    phone_number: '978686876',
-    first_name: 'John Brown',
-    last_name: 'John Brown',
-    email: 'New York No. 1 Lake Park',
-    group: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  
-];
+
 const FormView = () => {
-  
+  const default_data = useSelector(
+    (state) => state["corporate_employees"]["default_data"]
+  );
 
+  const loading = useSelector(
+    (state) => state["corporate_employees"]["loading"]
+  );
+  const groups = useSelector((state) => state["corporate_employees"]["groups"]);
+  const new_employees = useSelector(
+    (state) => state["corporate_employees"]["new_employees"]
+  );
+
+  const columns = [
+    {
+      title: "Phone Number",
+      dataIndex: "phone_number",
+      key: "phone_number",
+      render: (val, record, index) => {
+        return (
+          <Form.Item validateStatus={validationUtils.validatePhone(record["phone_no"]) ? "" : "error"}>
+            <PhoneInput
+              code={record["code"]}
+              phone_no={record["phone_no"]}
+              action={(data) => {
+                store.dispatch(phoneAdded(data["phone"],data["code"],index));
+              }}
+            />
+          </Form.Item>
+        );
+      },
+    },
+    {
+      title: "First Name",
+      dataIndex: "first_name",
+      key: "first_name",
+      render: (val, record, index) => {
+        return (
+          <Form.Item validateStatus={validationUtils.validateInput(val) ? "" : "error"}>
+            <Input
+              value={val}
+              onChange={(e) => {
+                store.dispatch(changeFirstName(e.target.value, index));
+              }}
+              placeholder="Enter First Name"
+            />
+          </Form.Item>
+        );
+      },
+    },
+    {
+      title: "Last Name",
+      dataIndex: "last_name",
+      key: "last_name",
+      render: (val, record, index) => {
+        return (
+          <Form.Item validateStatus={validationUtils.validateInput(val) ? "" : "error"}>
+            <Input
+              value={val}
+              onChange={(e) => {
+                store.dispatch(changeLastName(e.target.value, index));
+              }}
+              placeholder="Enter Last Name"
+            />
+          </Form.Item>
+        );
+      },
+    },
+    {
+      title: "Email Address",
+      dataIndex: "email",
+      key: "email",
+      render: (val, record, index) => {
+        return (
+          <Form.Item validateStatus={validationUtils.validateEmail(val) ? "" : "error"}>
+            <Input
+              value={val}
+              onChange={(e) => {
+                store.dispatch(changeEmail(e.target.value, index));
+              }}
+              placeholder="Enter Email Address"
+            />
+          </Form.Item>
+        );
+      },
+    },
+    {
+      title: "Group",
+      dataIndex: "group",
+      key: "group",
+      render: (val, record, index) => {
+        return (
+          <Form.Item validateStatus={validationUtils.validateInput(val) ? "" : "error"}>
+            <Select
+              onChange={(value) => {
+                store.dispatch(changeGroup(value, index));
+              }}
+              value={val}
+            >
+              <Option disabled value={null}>
+                Select Group
+              </Option>
+              {groups.map((group, index) => (
+                <Option value={group.title}>{group.title}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+        );
+      },
+    },
+
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record, index) => (
+        <Form.Item>
+          <DeleteOutlined
+            onClick={() => {
+              store.dispatch(removeEmployee(index));
+            }}
+          />
+        </Form.Item>
+      ),
+    },
+  ];
   return (
     <>
-      <Table dataSource={data} columns={columns}/>
+      <Table
+        pagination={false}
+        dataSource={new_employees}
+        loading={loading}
+        columns={columns}
+      />
     </>
   );
 };

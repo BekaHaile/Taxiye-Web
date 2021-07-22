@@ -113,6 +113,87 @@ export const getEmployees = () => ({
   type: actions.GET_EMPLOYEES_INITIATED,
 });
 
+export const initiateEmployeeForm = (employee) => ({
+  type: actions.EMPLOYEE_FORM_INITIATED,
+  payload: {
+    employee: employee,
+  },
+});
+
+export const setGroups = (groups) => ({
+  type: actions.GROUP_FETCHED,
+  payload: {
+    groups: groups,
+  },
+});
+
+export const setFormValidation = (isValid) => ({
+  type: actions.EMPLOYEE_FORM_VALIDATED,
+  payload: {
+    isValid: isValid,
+  },
+});
+
+export const appendEmployee = (new_employees) => ({
+  type: actions.EMPLOYEE_APPENDED,
+  payload: {
+    new_employees: new_employees,
+  },
+});
+
+export const resetRegistration = () => ({
+  type: actions.RESET_EMPLOYEE_REGISTRATION,
+});
+
+
+export const removeEmployee = (index) => ({
+  type: actions.EMPLOYEE_REMOVED,
+  payload: {
+    index: index,
+  },
+});
+
+export const changeFirstName = (first_name, index) => ({
+  type: actions.EMPLOYEE_FIRST_NAME_CHANGED,
+  payload: {
+    index: index,
+    first_name: first_name,
+  },
+});
+
+export const phoneAdded = (phone_no, code, index) => ({
+  type: actions.EMPLOYEE_PHONE_ADDED,
+  payload: {
+    index: index,
+    phone_no: phone_no,
+    code: code
+  },
+});
+
+export const changeLastName = (last_name, index) => ({
+  type: actions.EMPLOYEE_LAST_NAME_CHANGED,
+  payload: {
+    index: index,
+    last_name: last_name,
+  },
+});
+
+export const changeEmail = (email, index) => ({
+  type: actions.EMPLOYEE_EMAIL_CHANGED,
+  payload: {
+    index: index,
+    email: email,
+  },
+});
+
+export const changeGroup = (group, index) => ({
+  type: actions.EMPLOYEE_GROUP_CHANGED,
+  payload: {
+    index: index,
+    group: group,
+  },
+});
+
 export const changeRoute = (route) => {
   return {
     type: actions.EMPLOYEE_ROUTE_CHANGED,

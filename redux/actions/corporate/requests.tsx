@@ -24,6 +24,42 @@ export const setRequestsData = (requests) => {
   };
 };
 
+export const setDebitLimit = (debit_limit) => {
+  return {
+    type: actions.DEBIT_LIMIT_ADDED,
+    payload: {
+      debit_limit: debit_limit,
+    },
+  };
+};
+
+export const setMaximumUser = (max_user_limit) => {
+  return {
+    type: actions.USER_LIMIT_ADDED,
+    payload: {
+      max_user_limit: max_user_limit,
+    },
+  };
+};
+
+export const setAReason = (reason) => {
+  return {
+    type: actions.REASON_ADDED,
+    payload: {
+      reason: reason,
+    },
+  };
+};
+
+export const setValidation = (isValid) => {
+  return {
+    type: actions.FORM_VALIDATED,
+    payload: {
+      isValid: isValid,
+    },
+  };
+};
+
 export const setLoading = (loading) => {
   return {
     type: actions.LOADING_INITIATED,

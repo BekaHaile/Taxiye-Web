@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row, Space, Card, Button, Tabs } from "antd";
 import FirstSide from "./first-side";
 import SecondSide from "./second-side";
 import theme from "../../../../../theme/main";
 import store from "../../../../../redux/store";
-import { changeRoute } from "../../../../../redux/actions/corporate/employees";
+import {
+  changeRoute,
+  appendEmployee,
+  initiateEmployeeForm,
+  resetRegistration
+} from "../../../../../redux/actions/corporate/employees";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+
 const { TabPane } = Tabs;
 
 const MainCard = styled(Card)`
   height: 100%;
 `;
 
-const MainRow = styled("div")`
-  
-`;
+const MainRow = styled("div")``;
 const BackButton = styled("img")`
   height: 30px;
 `;
@@ -29,6 +34,10 @@ const FlexContainer = styled("div")`
   display: flex;
   justify-content: space-between;
 `;
+const CenteredFlexContainer = styled("div")`
+  display: flex;
+  justify-content: center;
+`;
 const Title = styled("p")`
   font-family: Open Sans;
   font-style: normal;
@@ -40,7 +49,16 @@ const Title = styled("p")`
 `;
 
 const Groups = () => {
-  const isValid = useSelector((state) => state["corporate_group"]["isValid"]);
+  const isFormValid = useSelector((state) => state["corporate_employees"]["isFormValid"]);
+  const default_data = useSelector(
+    (state) => state["corporate_employees"]["default_data"]
+  );
+  useEffect(() => {
+    store.dispatch(initiateEmployeeForm(default_data));
+  }, []);
+
+  const [activeKey, setActiveKey] = useState("1");
+
   return (
     <>
       <MainCard>
@@ -54,26 +72,55 @@ const Groups = () => {
           <Title>Add Employees</Title>
         </Container>
         <MainRow>
-          <Tabs defaultActiveKey="1">
+          <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)}>
             <TabPane tab="Add Manually" key="1">
               <FirstSide />
             </TabPane>
             <TabPane tab="Upload File" key="2">
-              <SecondSide />
+              <SecondSide setActiveKey={setActiveKey}/>
             </TabPane>
           </Tabs>
         </MainRow>
-        <FlexContainer>
-          <Space size={16}>
-            <Button disabled={!isValid} type="primary">
-              Send Invites
+        {activeKey == "1" ? (
+          <FlexContainer>
+            <Space size={16}>
+              <Button disabled={!isFormValid} type="primary">
+                Send Invites
+              </Button>
+              <Button onClick={() => {store.dispatch(resetRegistration())}}>Clear</Button>
+            </Space>
+            <Button
+              type="link"
+              onClick={() => {
+                store.dispatch(appendEmployee(default_data));
+              }}
+            >
+              Add More Employees
             </Button>
-            <Button onClick={() => {}}>Clear</Button>
-          </Space>
-          <Button type="link">
-            Add More Employees
-          </Button>
-        </FlexContainer>
+          </FlexContainer>
+        ) : null}
+        {activeKey == "1" ? (
+          <div>
+            <CenteredFlexContainer>
+              <Title>Or</Title>
+              <Button onClick={() => setActiveKey("2")} type="link">
+                Upload File
+              </Button>
+            </CenteredFlexContainer>
+            <CenteredFlexContainer>
+              <Title>(supported file formats: csv, xls, xlsx)</Title>
+            </CenteredFlexContainer>
+          </div>
+        ) : (
+          <div>
+            <CenteredFlexContainer>
+              <Title>Or</Title>
+              <Button onClick={() => setActiveKey("1")} type="link">
+                Add Employees Manually
+              </Button>
+            </CenteredFlexContainer>
+          </div>
+        )}
       </MainCard>
     </>
   );
