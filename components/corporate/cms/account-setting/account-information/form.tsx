@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Input, Button, Space, Form, Avatar } from "antd";
 import { UserOutlined, PlusCircleFilled } from "@ant-design/icons";
-import { PhoneInput } from "../../../../form/input-fields/phone-input";
+import PhoneInput from "../../form/phone-input";
 import store from "../../../../../redux/store";
+import * as validationUtils from "../../../../../utils/validation";
 import {
   changeEmail,
   changeFullName,
@@ -85,17 +86,17 @@ const FormView = () => {
         </Form.Item>
         <Form.Item label="Phone Number">
           <PhoneInput
-            id="phone"
+            placeholder="enter phone number"
+            id="phone_no"
+            code={parseInt(country_code)}
             phone_no={phone_no}
-            country_code={country_code}
-            placeholder="your phone number"
-            action={(isValid, data, phone_no) => {
+            action={(data, a) => {
               store.dispatch(
                 changePhone({
-                  country: `${data.name}`,
-                  phone_no: phone_no,
-                  country_code: `+${data.dialCode}`,
-                  isValid: isValid,
+                  country: `${data["short"]}`,
+                  phone_no: data["phone"],
+                  country_code: `+${data["code"]}`,
+                  isValid: validationUtils.validatePhone(data["phone"]),
                 })
               );
             }}

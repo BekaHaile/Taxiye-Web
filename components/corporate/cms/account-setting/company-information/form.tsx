@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Input, Button, Space, Form } from "antd";
-import { PhoneInput } from "../../../../form/input-fields/phone-input";
+import PhoneInput from "../../form/phone-input";
 import store from "../../../../../redux/store";
+import * as validationUtils from "../../../../../utils/validation";
 import {
   changeAddress,
   changeCompanyName,
@@ -125,17 +126,17 @@ const FormView = () => {
         <Container>
           <Form.Item label="Company Phone Number" style={{ width: "100%" }}>
             <PhoneInput
-              id="phone"
+              placeholder="enter phone number"
+              id="phone_no"
+              code={parseInt(country_code)}
               phone_no={phone_no}
-              country_code={country_code}
-              placeholder="your phone number"
-              action={(isValid, data, phone_no) => {
+              action={(data, a) => {
                 store.dispatch(
                   changeCompanyPhone({
-                    country: `${data.name}`,
-                    phone_no: phone_no,
-                    country_code: `+${data.dialCode}`,
-                    isValid: isValid,
+                    country: `${data["short"]}`,
+                    phone_no: data["phone"],
+                    country_code: `+${data["code"]}`,
+                    isValid: validationUtils.validatePhone(data["phone"]),
                   })
                 );
               }}
@@ -154,7 +155,9 @@ const FormView = () => {
         </Container>
         <Form.Item>
           <Space size={16}>
-            <Button disabled={!isValid} type="primary">Save Changes</Button>
+            <Button disabled={!isValid} type="primary">
+              Save Changes
+            </Button>
             <Button>Cancel</Button>
           </Space>
         </Form.Item>

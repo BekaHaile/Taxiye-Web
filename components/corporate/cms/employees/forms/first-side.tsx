@@ -41,7 +41,6 @@ const Detail = styled("div")`
   width: 222px;
 `;
 
-
 const FormView = () => {
   const default_data = useSelector(
     (state) => state["corporate_employees"]["default_data"]
@@ -62,12 +61,18 @@ const FormView = () => {
       key: "phone_number",
       render: (val, record, index) => {
         return (
-          <Form.Item validateStatus={validationUtils.validatePhone(record["phone_no"]) ? "" : "error"}>
+          <Form.Item
+            validateStatus={
+              validationUtils.validatePhone(record["phone_no"]) ? "" : "error"
+            }
+          >
             <PhoneInput
+              placeholder="enter phone number"
+              id="phone_no"
               code={record["code"]}
               phone_no={record["phone_no"]}
               action={(data) => {
-                store.dispatch(phoneAdded(data["phone"],data["code"],index));
+                store.dispatch(phoneAdded(data["phone"], data["code"], index));
               }}
             />
           </Form.Item>
@@ -80,7 +85,9 @@ const FormView = () => {
       key: "first_name",
       render: (val, record, index) => {
         return (
-          <Form.Item validateStatus={validationUtils.validateInput(val) ? "" : "error"}>
+          <Form.Item
+            validateStatus={validationUtils.validateInput(val) ? "" : "error"}
+          >
             <Input
               value={val}
               onChange={(e) => {
@@ -98,7 +105,9 @@ const FormView = () => {
       key: "last_name",
       render: (val, record, index) => {
         return (
-          <Form.Item validateStatus={validationUtils.validateInput(val) ? "" : "error"}>
+          <Form.Item
+            validateStatus={validationUtils.validateInput(val) ? "" : "error"}
+          >
             <Input
               value={val}
               onChange={(e) => {
@@ -116,7 +125,9 @@ const FormView = () => {
       key: "email",
       render: (val, record, index) => {
         return (
-          <Form.Item validateStatus={validationUtils.validateEmail(val) ? "" : "error"}>
+          <Form.Item
+            validateStatus={validationUtils.validateEmail(val) ? "" : "error"}
+          >
             <Input
               value={val}
               onChange={(e) => {
@@ -134,7 +145,9 @@ const FormView = () => {
       key: "group",
       render: (val, record, index) => {
         return (
-          <Form.Item validateStatus={validationUtils.validateInput(val) ? "" : "error"}>
+          <Form.Item
+            validateStatus={validationUtils.validateInput(val) ? "" : "error"}
+          >
             <Select
               onChange={(value) => {
                 store.dispatch(changeGroup(value, index));

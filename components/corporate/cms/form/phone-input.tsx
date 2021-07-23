@@ -6,10 +6,10 @@ import countries from '../../../../assets/Data/countries.json';
 import 'antd/dist/antd.css';
 import 'antd-country-phone-input/dist/index.css';
 
-const PhoneInput = ({action, code, phone_no}) => {
+const PhoneInput = ({action, code, phone_no, placeholder, id}) => {
   return (
     <ConfigProvider locale={countries}>
-      <CountryPhoneInput value= {{ code: code, phone: phone_no}} style={{height:"33px"}} onChange={action}/>
+      <CountryPhoneInput id={id} placeholder={placeholder} value= {{ code: code, phone: phone_no}} style={{height:"33px"}} onChange={action}/>
     </ConfigProvider>
   );
 };
