@@ -9,7 +9,7 @@ export const corporate_requests = (store) => (next) => async (action) => {
   if (action.type == actiontypes.FETCH_REQUESTS_INITIATED) {
     next(actions.setLoading(true));
     await sleep(3000);
-    var requests = fetchGroups(data["query"]);
+    var requests = await fetchGroups(data["query"]);
     next(actions.setRequestsData(requests));
   } else if (
     action.type == actiontypes.DEBIT_LIMIT_ADDED ||
@@ -27,25 +27,22 @@ async function sleep(ms) {
   });
 }
 
-function fetchGroups(query) {
-  const data = [];
-  var ran = Math.floor(Math.random() * 15);
-  for (let i = 0; i < ran; i++) {
-    data.push({
-      key: i,
-      id: `Edward King`,
-      reason: "El Auto Employees",
-      debit_limit: `782.01 Birr`,
-      maximum_user_limit: 554 - i,
-      status:
-        i % 3 == 0 && i % 2 == 0
-          ? `Approved`
-          : i % 2 == 0
-          ? `Pending`
-          : `Cancelled`,
-    });
+export async function fetchGroups(query) {
+  try {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/limit_update/view_logs`,
+      {
+        params: {
+          token: `${process.env.NEXT_PUBLIC_CORPORATE_TOKEN}`,
+        },
+        timeout: 10000,
+      }
+    );
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+    return [];
   }
-  return data;
 }
 
 function validateForm(data) {

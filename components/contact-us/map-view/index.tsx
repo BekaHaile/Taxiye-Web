@@ -9,6 +9,7 @@ import {
 import { Button } from "../../form/buttons/primary-button";
 import MapViewer from "./map";
 import Infos from "./info";
+import theme from "../../../theme/main";
 
 const MapInfoContainer = styled("div")`
   text-align: center;

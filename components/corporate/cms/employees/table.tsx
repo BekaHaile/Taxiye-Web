@@ -12,17 +12,17 @@ const Link = styled("a")`
 const columns = [
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "user_name",
     sorter: true,
   },
   {
     title: "Group",
-    dataIndex: "group",
+    dataIndex: "user_name",
     sorter: true,
   },
   {
     title: "Monthly Budger Limit",
-    dataIndex: "monthly_budget",
+    dataIndex: "monthly_transaction_limit",
     sorter: true,
   },
   {
@@ -35,21 +35,28 @@ const columns = [
     dataIndex: "status",
     sorter: true,
     render: (val) => {
-      let color = "green";
-      if (val === "Inactive") {
+      let color = "geekblue";
+      let status = "Pending";
+      if (val == 2) {
         color = "volcano";
-      } else if (val === "Pending") {
-        color = "geekblue";
+        status = "Inactive";
+      } else if (val == 1) {
+        color = "green";
+        status = "Active";
       }
-      return <Tag color={color}>{val}</Tag>;
+      return <Tag color={color}>{status}</Tag>;
     },
   },
   {
     title: "Actions",
-    dataIndex: "actions",
-    render: () => (
+    dataIndex: "status",
+    render: (status) => (
       <Space size={16}>
-        <Link>Deactivate</Link>
+        {status == 1 ? (
+          <Link>Deactivate</Link>
+        ) : status == 2 ? (
+          <Link>Activate</Link>
+        ) : null}
         <Link>Edit</Link>
       </Space>
     ),

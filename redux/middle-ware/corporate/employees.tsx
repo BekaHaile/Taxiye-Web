@@ -24,8 +24,7 @@ export const corporate_employees = (store) => (next) => async (action) => {
     await getVehicles(data, next);
   } else if (action.type == typeActions.GET_EMPLOYEES_INITIATED) {
     next(actions.setLoading(true));
-    await sleep(3000);
-    var employees = setEmployees(data["q"]);
+    var employees = await setEmployees(data["q"]);
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {
@@ -79,20 +78,36 @@ async function sleep(ms) {
   });
 }
 
-function setEmployees(query) {
-  const data = [];
-  var ran = Math.floor(Math.random() * 15);
-  for (let i = 0; i < ran; i++) {
-    data.push({
-      key: i,
-      name: `Edward King ${i}`,
-      group: "El Auto Employees",
-      monthly_budget: `782.01 Birr`,
-      monthly_ride_limit: 554 - i,
-      status: `Active`,
-    });
+// function setEmployees(query) {
+//   const data = [];
+//   var ran = Math.floor(Math.random() * 15);
+//   for (let i = 0; i < ran; i++) {
+//     data.push({
+//       key: i,
+//       name: `Edward King ${i}`,
+//       group: "El Auto Employees",
+//       monthly_budget: `782.01 Birr`,
+//       monthly_ride_limit: 554 - i,
+//       status: `Active`,
+//     });
+//   }
+//   return data;
+// }
+
+export async function setEmployees(query) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/user/list`,
+      {
+        token: `${process.env.NEXT_PUBLIC_CORPORATE_TOKEN}`,
+      },
+      { timeout: 10000 }
+    );
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+    return [];
   }
-  return data;
 }
 
 function fetchGroups() {

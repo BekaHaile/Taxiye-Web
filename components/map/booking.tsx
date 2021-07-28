@@ -81,6 +81,7 @@ function Map({
 
   return (
     <GoogleMap
+    
       {...loadingElement}
       {...containerElement}
       {...mapElement}
@@ -91,7 +92,7 @@ function Map({
         <DirectionsRenderer
           key={directions}
           options={{
-            draggable: true,
+            draggable: false,
             suppressMarkers: true,
             polylineOptions: {
               strokeOpacity: 0.9,
@@ -146,8 +147,8 @@ function makeMarker(position, type) {
       icon={{
         url:
           type == "start"
-            ? require("../../assets/icons/origin.svg")
-            : require("../../assets/icons/destination.svg"),
+            ? require("../../assets/icons/pick_up.svg")
+            : require("../../assets/icons/drop_off.svg"),
         scaledSize: new google.maps.Size(30, 30),
       }}
     />

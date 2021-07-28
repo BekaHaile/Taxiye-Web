@@ -13,6 +13,7 @@ import {
 } from "../../elements";
 import colors from "../../../../theme/main/colors";
 import { DefaultInput } from "../../../form/input-fields/primary-input";
+import EnableDispatch from "./enable-dispatch";
 import Link from "next/link";
 // import NeedHelp from "../../terms";
 import { useSelector } from "react-redux";
@@ -23,6 +24,7 @@ import {
   addAdminEmail,
   addPassword,
   addConfirmationPassword,
+  setEnableDispatch
 } from "../../../../redux/actions/corporate";
 import { Loading } from "../../../loading/loading";
 
@@ -57,6 +59,9 @@ const Credential = () => {
   );
   const admin_email = useSelector((state) => state["corporate"]["admin_email"]);
   const password = useSelector((state) => state["corporate"]["password"]);
+  const enableDispatch = useSelector(
+    (state) => state["corporate"]["enable_dispatch"]
+  );
   const confirmation_password = useSelector(
     (state) => state["corporate"]["confirmation_password"]
   );
@@ -134,6 +139,12 @@ const Credential = () => {
                 />
               </InputContainer>
             </CustomFlexContainer>
+            <EnableDispatch
+              checked={enableDispatch}
+              action={(checked) => {
+                store.dispatch(setEnableDispatch(checked));
+              }}
+            />
 
             <CustomButton
               disabled={!isAdminValid}

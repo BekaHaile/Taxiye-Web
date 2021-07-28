@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useState } from 'react';
 import store from '../../../../redux/store';
 import {selectDelivery } from "../../../../redux/actions/booking";
+import theme from '../../../../theme/main';
 
 const Container = styled("div")`
 width: -webkit-fill-available;

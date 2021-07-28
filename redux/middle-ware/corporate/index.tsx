@@ -1,18 +1,19 @@
 import * as actions from "../../actions/corporate";
+import * as actiontypes from "../../types/corporate";
 import axios from "axios";
 import * as validationUtils from "../../../utils/validation";
-import {showError } from "../common";
+import { showError } from "../common";
 
 export const corporate = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate;
 
   if (
-    action.type == "COMPANY_NAME_ADDED" ||
-    action.type == "COMPANY_OFFICIAL_EMAIL_ADDED" ||
-    action.type == "COMPANY_PHONE_NUMBER_ADDED" ||
-    action.type == "NUMBER_OF_EMPLOYEES_ADDED" ||
-    action.type == "CORPORATE_TERMS_CHANGED"
+    action.type == actiontypes.COMPANY_NAME_ADDED ||
+    action.type == actiontypes.COMPANY_OFFICIAL_EMAIL_ADDED ||
+    action.type == actiontypes.COMPANY_PHONE_NUMBER_ADDED ||
+    action.type == actiontypes.NUMBER_OF_EMPLOYEES_ADDED ||
+    action.type == actiontypes.CORPORATE_TERMS_CHANGED
   ) {
     if (
       data["company_name"] != "" &&
@@ -30,10 +31,11 @@ export const corporate = (store) => (next) => async (action) => {
       next(actions.setValidation(true));
     else next(actions.setValidation(false));
   } else if (
-    action.type == "ADMIN_NAME_ADDED" ||
-    action.type == "ADMIN_EMAIL_ADDED" ||
-    action.type == "ADMIN_PASSWORD_ADDED" ||
-    action.type == "ADMIN_CONFIRMATION_PASSWORD_ADDED"
+    action.type == actiontypes.ADMIN_NAME_ADDED ||
+    action.type == actiontypes.ADMIN_EMAIL_ADDED ||
+    action.type == actiontypes.ADMIN_PASSWORD_ADDED ||
+    action.type == actiontypes.ADMIN_CONFIRMATION_PASSWORD_ADDED ||
+    action.type == actiontypes.ENABLE_DISPATCH_CHANGED
   ) {
     if (
       data["admin_full_name"] != "" &&
@@ -50,7 +52,7 @@ export const corporate = (store) => (next) => async (action) => {
     )
       next(actions.setAdminValidation(true));
     else next(actions.setAdminValidation(false));
-  } else if (action.type == "COMPANY_DATA_SUBMIT_INITIATED") {
+  } else if (action.type == actiontypes.COMPANY_DATA_SUBMIT_INITIATED) {
     try {
       next(actions.initiateLoading(true));
       await submitCompanyData({});
@@ -59,7 +61,7 @@ export const corporate = (store) => (next) => async (action) => {
     } catch (e) {
       next(actions.setValidation(false));
     }
-  } else if (action.type == "ADMIN_DATA_SUBMIT_INITIATED") {
+  } else if (action.type == actiontypes.ADMIN_DATA_SUBMIT_INITIATED) {
     try {
       next(actions.initiateLoading(true));
       await submitCompanyAdminData({});
@@ -68,7 +70,7 @@ export const corporate = (store) => (next) => async (action) => {
     } catch (e) {
       next(actions.setValidation(false));
     }
-  } else if (action.type == "CORPORATE_OTP_RESENT") {
+  } else if (action.type == actiontypes.CORPORATE_OTP_RESENT) {
     next(actions.changeOtpStatus({ loading: true, otpSent: false }));
     try {
       let res = await submitPhone({
@@ -86,7 +88,7 @@ export const corporate = (store) => (next) => async (action) => {
       showError(next);
       next(actions.changeOtpStatus({ loading: false, otpSent: false }));
     }
-  } else if (action.type == "CORPORATE_OTP_SUBMITTED") {
+  } else if (action.type == actiontypes.CORPORATE_OTP_SUBMITTED) {
     next(actions.initiateLoading(true));
     try {
       let res = await submitPhone({

@@ -18,6 +18,7 @@ const initialState = {
   admin_email: "",
   password: "",
   confirmation_password: "",
+  enable_dispatch: false,
   isAdminValid: false,
 };
 
@@ -68,6 +69,11 @@ export default function corporateReducer(state = initialState, action) {
       return {
         ...state,
         confirmation_password: action.payload.confirmation_password,
+      };
+    case actionTypes.ENABLE_DISPATCH_CHANGED:
+      return {
+        ...state,
+        enable_dispatch: action.payload.enable_dispatch,
       };
     case actionTypes.ADMIN_VALIDATION_UPDATED:
       return { ...state, isAdminValid: action.payload.isAdminValid };

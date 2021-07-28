@@ -31,7 +31,7 @@ const Detail = styled("div")`
   font-size: 11px;
   line-height: 15px;
   color: ${theme.colors.primaryLabelColor};
-  width: 222px;
+  width: 200px;
 `;
 
 const FormView = () => {

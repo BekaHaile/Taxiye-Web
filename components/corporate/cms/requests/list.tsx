@@ -11,7 +11,7 @@ const Link = styled("a")``;
 const columns = [
   {
     title: "Request Id",
-    dataIndex: "id",
+    dataIndex: "request_id",
     sorter: true,
   },
   {
@@ -21,12 +21,12 @@ const columns = [
   },
   {
     title: "Debit Limit",
-    dataIndex: "debit_limit",
+    dataIndex: "debt_limit",
     sorter: true,
   },
   {
     title: "Maximum User Limit",
-    dataIndex: "maximum_user_limit",
+    dataIndex: "max_user_limit",
     sorter: true,
   },
   {
@@ -34,13 +34,19 @@ const columns = [
     dataIndex: "status",
     sorter: true,
     render: (val) => {
-      let color = "green";
-      if (val === "Cancelled") {
+      let color = "geekblue";
+      let status = "Pending";
+      if (val == 2) {
+        color = "green";
+        status = "Approved";
+      } else if (val == 3) {
         color = "volcano";
-      } else if (val === "Pending") {
-        color = "geekblue";
+        status = "Rejected";
+      } else if (val == 4) {
+        color = "volcano";
+        status = "Cancelled";
       }
-      return <Tag color={color}>{val}</Tag>;
+      return <Tag color={color}>{status}</Tag>;
     },
   },
   {
@@ -48,13 +54,11 @@ const columns = [
     dataIndex: "status",
 
     render: (val) => {
-      
-      if (val === "Cancelled") {
-        return (<Link>Delete</Link>);
-      } else if (val === "Pending") {
-        return (<Link>Cancel</Link>);
+      if (val == 4) {
+        return <Link>Delete</Link>;
+      } else if (val == 1) {
+        return <Link>Cancel</Link>;
       }
-      
     },
   },
 ];

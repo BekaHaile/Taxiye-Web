@@ -126,6 +126,16 @@ export const addPassword = (password) => {
     },
   };
 };
+export const setEnableDispatch = (enable_dispatch) => {
+  return {
+    type: actions.ENABLE_DISPATCH_CHANGED,
+    payload: {
+      enable_dispatch: enable_dispatch,
+    },
+  };
+};
+
+
 
 export const addConfirmationPassword = (confirmation_password) => {
   return {

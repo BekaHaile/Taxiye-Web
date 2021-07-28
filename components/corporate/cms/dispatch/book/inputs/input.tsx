@@ -20,6 +20,7 @@ const Container = styled("div")`
   max-height: 300px;
   z-index: 30;
   overflow-y: auto;
+  max-height:150px;
 `;
 const MainContainer = styled("div")`
   position: relative;

@@ -21,6 +21,7 @@ const Container = styled("div")`
   max-height: 300px;
   z-index: 30;
   overflow-y: auto;
+  max-height:150px;
 `;
 const MainContainer = styled("div")`
   position: relative;
@@ -90,9 +91,10 @@ const PrimaryDropDown: FunctionComponent<InputProps> = ({
   return (
     <>
       <LabelText>{label}</LabelText>
-      <LoadingContainer>{loading ? <Loader /> : null}</LoadingContainer>
+      
 
       <MainContainer>
+      <LoadingContainer>{loading ? <Loader /> : null}</LoadingContainer>
         <MainDropDown
           id={id}
           placeholder={placeholder}
