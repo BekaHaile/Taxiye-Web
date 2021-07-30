@@ -7,6 +7,7 @@ import { getVehicles } from "./dispatch";
 export const corporate_employees = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_employees;
+  let corporate_data = store.getState().corporate;
   if (action.type == "QUERY_ADDED") {
     next(actions.setSearchLoading(true));
     var res = await getEmployees(data["employee_name"]);
@@ -24,7 +25,7 @@ export const corporate_employees = (store) => (next) => async (action) => {
     await getVehicles(data, next);
   } else if (action.type == typeActions.GET_EMPLOYEES_INITIATED) {
     next(actions.setLoading(true));
-    var employees = await setEmployees(data["q"]);
+    var employees = await setEmployees(data["q"], corporate_data);
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {
@@ -94,12 +95,12 @@ async function sleep(ms) {
 //   return data;
 // }
 
-export async function setEmployees(query) {
+export async function setEmployees(query,  corporate_data) {
   try {
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/user/list`,
       {
-        token: `${process.env.NEXT_PUBLIC_CORPORATE_TOKEN}`,
+        token: `${corporate_data["corporate_detail"]["token"]}`,
       },
       { timeout: 10000 }
     );

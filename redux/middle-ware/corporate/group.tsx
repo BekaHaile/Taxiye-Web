@@ -1,7 +1,6 @@
 import * as actions from "../../actions/corporate/group";
 import * as actiontypes from "../../types/corporate/group";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
 
 // const groups = [
 //   {

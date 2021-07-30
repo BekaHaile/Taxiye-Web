@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../../../../../theme/main";
+
 import {
   Button,
   Input,
@@ -51,6 +52,7 @@ const Rides = ({ type }) => {
 
   const date = useSelector((state) => state["corporate_rides"]["date"]);
   const city = useSelector((state) => state["corporate_rides"]["city"]);
+  const cities = useSelector((state) => state["corporate_rides"]["cities"]);
   const query = useSelector((state) => state["corporate_rides"]["query"]);
   const loading = useSelector((state) => state["corporate_rides"]["loading"]);
   return (
@@ -69,23 +71,25 @@ const Rides = ({ type }) => {
               value={date}
               disabled={loading}
               onChange={(e) => {
-                if (e != null) store.dispatch(dateChanged(e));
-                else store.dispatch(dateChanged(e));
+                store.dispatch(dateChanged(e));
               }}
             />
             <Select
               value={city}
               disabled={loading}
               onChange={(val) => {
+                console.log(val);
                 store.dispatch(cityChanged(val));
               }}
-              defaultValue=""
             >
-              <Option disabled value="">
-                Select City
+              <Option disabled key={-1} value={-1}>
+                Select city
               </Option>
-              <Option value="Addis Ababa">Addis Ababa</Option>
-              <Option value="Adama">Adama</Option>
+              {cities.map((city, index) => (
+                <Option key={index} value={city.city_id}>
+                  {city.city_name}
+                </Option>
+              ))}
             </Select>
 
             <Search

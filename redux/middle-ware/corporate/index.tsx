@@ -107,6 +107,28 @@ export const corporate = (store) => (next) => async (action) => {
       showError(next);
       next(actions.initiateLoading(false));
     }
+  } else if (
+    action.type == actiontypes.ADDED_LOGIN_EMAIL ||
+    action.type == actiontypes.KEEP_ME_SIGN_IN_CHANGED ||
+    action.type == actiontypes.ADDED_LOGIN_PASSWORD
+  ) {
+    var valiation = validateLoginInput(data);
+    next(actions.changeLoginValidation(valiation));
+  } else if (action.type == actiontypes.INITIATED_LOGIN_TO_CORPORATE) {
+    next(actions.initiateLoading(true));
+    var res = await login(
+      data["login_email"],
+      data["login_password"],
+      data["keepMeSignedIn"],
+      next
+    );
+    next(actions.setLogin(res));
+    next(actions.initiateLoading(false));
+  }
+   else if (action.type == actiontypes.LOG_OUT_INITIATED) {
+    next(actions.logout());
+  } else if (action.type == actiontypes.LOGGED_OUT) {
+    localStorage.removeItem("corporate_detail");
   }
 };
 
@@ -155,6 +177,56 @@ async function submitPhone(data) {
   } catch (e) {
     return null;
   }
+}
+
+export async function login(email, password, keepMeSignedIn, next) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/v1/acl/operator/login`,
+      { email, password },
+      {
+        timeout: 10000,
+      }
+    );
+    if (res.status == 200) {
+      if (keepMeSignedIn)
+        localStorage.setItem("corporate_detail", JSON.stringify(res.data));
+      return res.data;
+    }
+    return;
+  } catch (e) {
+    console.log(e);
+    showError(next);
+    return;
+  }
+}
+
+export async function getUserInfo(corporate_data, next) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/corporate/info`,
+      {
+        timeout: 10000,
+      }
+    );
+    if (res.status == 200) {
+      localStorage.setItem("corporate_user_detail", JSON.stringify(res.data));
+      return res.data;
+    }
+    return;
+  } catch (e) {
+    console.log(e);
+    showError(next);
+    return;
+  }
+}
+
+function validateLoginInput(data) {
+  return (
+    validationUtils.validateInput(data["login_password"]) &&
+    validationUtils.validateEmail(data["login_email"]) &&
+    data["login_password"].length >= 6
+  );
 }
 
 async function sleep(ms) {

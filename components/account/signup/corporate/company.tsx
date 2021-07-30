@@ -31,7 +31,7 @@ import {
 import { Loading } from "../../../loading/loading";
 import TermsConsent from "../../terms";
 
-const LinkWithLine = styled(Link)`
+const LinkWithLine = styled("a")`
 color: ${theme.colors.primary};
 padding-left:5px;
 }
@@ -60,7 +60,7 @@ transform: translate(0%, -50%);
 `;
 const TermsConsentContainer = styled("div")``;
 
-const Company = () => {
+const Company = ({goToLogin}) => {
   const company_name = useSelector(
     (state) => state["corporate"]["company_name"]
   );
@@ -89,7 +89,7 @@ const Company = () => {
             <Title>Company Sign up</Title>
             <CustomHeaderFlexContainer>
               <CustomSubTitle>Already have an account?</CustomSubTitle>
-              <LinkWithLine href="/">Sign in</LinkWithLine>
+              <LinkWithLine onClick={goToLogin}>Sign in</LinkWithLine>
             </CustomHeaderFlexContainer>
           </HeaderContainer>
           <ContentContainer>

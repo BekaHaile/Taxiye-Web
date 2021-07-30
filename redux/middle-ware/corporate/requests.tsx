@@ -6,10 +6,11 @@ import { showError } from "../common";
 export const corporate_requests = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_requests;
+  let corporate_data = store.getState().corporate;
   if (action.type == actiontypes.FETCH_REQUESTS_INITIATED) {
     next(actions.setLoading(true));
     await sleep(3000);
-    var requests = await fetchGroups(data["query"]);
+    var requests = await fetchGroups(data["query"], corporate_data);
     next(actions.setRequestsData(requests));
   } else if (
     action.type == actiontypes.DEBIT_LIMIT_ADDED ||
@@ -27,13 +28,13 @@ async function sleep(ms) {
   });
 }
 
-export async function fetchGroups(query) {
+export async function fetchGroups(query, corporate_data) {
   try {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/limit_update/view_logs`,
       {
         params: {
-          token: `${process.env.NEXT_PUBLIC_CORPORATE_TOKEN}`,
+          token: `${corporate_data["corporate_detail"]["token"]}`,
         },
         timeout: 10000,
       }

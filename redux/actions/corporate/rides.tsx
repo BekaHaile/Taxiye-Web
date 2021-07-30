@@ -52,15 +52,28 @@ export const setLoading = (loading) => {
 };
 
 export const setSelectedType = (type) => {
-    return {
-      type: actions.TYPE_CHANGED,
-      payload: {
-        type: type,
-      },
-    };
+  return {
+    type: actions.TYPE_CHANGED,
+    payload: {
+      type: type,
+    },
   };
+};
 
+export const initiateCityFetch = () => {
+  return {
+    type: actions.CITY_FETCH_INITIATED,
+  };
+};
 
+export const setCitiesList = (cities) => {
+  return {
+    type: actions.FETCH_CITIES_FINISHED,
+    payload: {
+      cities: cities,
+    },
+  };
+};
 
 export const reset = () => {
   return {

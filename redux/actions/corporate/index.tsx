@@ -135,8 +135,6 @@ export const setEnableDispatch = (enable_dispatch) => {
   };
 };
 
-
-
 export const addConfirmationPassword = (confirmation_password) => {
   return {
     type: actions.ADMIN_CONFIRMATION_PASSWORD_ADDED,
@@ -168,3 +166,67 @@ export const setTermsAgreement = (agreeToTerms) => {
     },
   };
 };
+
+export const login = () => {
+  return {
+    type: actions.INITIATED_LOGIN_TO_CORPORATE,
+  };
+};
+
+export const addLoginEmail = (login_email) => {
+  return {
+    type: actions.ADDED_LOGIN_EMAIL,
+    payload: {
+      login_email: login_email,
+    },
+  };
+};
+
+export const addLoginPassword = (login_password) => {
+  return {
+    type: actions.ADDED_LOGIN_PASSWORD,
+    payload: {
+      login_password: login_password,
+    },
+  };
+};
+
+export const changeLoginValidation = (canLogin) => {
+  return {
+    type: actions.CORPORATE_LOGIN_VALIDATED,
+    payload: {
+      canLogin: canLogin,
+    },
+  };
+};
+
+export const setKeepMeSignedIn = (keepMeSignedIn) => {
+  return {
+    type: actions.KEEP_ME_SIGN_IN_CHANGED,
+    payload: {
+      keepMeSignedIn: keepMeSignedIn,
+    },
+  };
+};
+
+export const setLogin = (corporate_detail) => {
+  return {
+    type: actions.LOGGED_IN,
+    payload: {
+      corporate_detail: corporate_detail,
+    },
+  };
+};
+
+export const initiateLogout = () => {
+  return {
+    type: actions.LOG_OUT_INITIATED,
+  };
+};
+
+export const logout = () => {
+  return {
+    type: actions.LOGGED_OUT,
+  };
+};
+

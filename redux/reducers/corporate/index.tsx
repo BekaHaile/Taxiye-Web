@@ -1,5 +1,9 @@
 import * as actionTypes from "../../types/corporate";
+const ISSERVER = typeof window === "undefined";
 const initialState = {
+  corporate_detail: !ISSERVER
+    ? JSON.parse(localStorage.getItem("corporate_detail"))
+    : null,
   company_name: "",
   company_email: "",
   phone_no: "",
@@ -20,6 +24,10 @@ const initialState = {
   confirmation_password: "",
   enable_dispatch: false,
   isAdminValid: false,
+  login_email: "",
+  login_password: "",
+  canLogin: false,
+  keepMeSignedIn: false,
 };
 
 export default function corporateReducer(state = initialState, action) {
@@ -79,6 +87,20 @@ export default function corporateReducer(state = initialState, action) {
       return { ...state, isAdminValid: action.payload.isAdminValid };
     case actionTypes.CORPORATE_TERMS_CHANGED:
       return { ...state, agreeToTerms: action.payload.agreeToTerms };
+
+    case actionTypes.ADDED_LOGIN_EMAIL:
+      return { ...state, login_email: action.payload.login_email };
+    case actionTypes.ADDED_LOGIN_PASSWORD:
+      return { ...state, login_password: action.payload.login_password };
+    case actionTypes.CORPORATE_LOGIN_VALIDATED:
+      return { ...state, canLogin: action.payload.canLogin };
+    case actionTypes.KEEP_ME_SIGN_IN_CHANGED:
+      return { ...state, keepMeSignedIn: action.payload.keepMeSignedIn };
+    case actionTypes.LOGGED_IN:
+      return { ...state, corporate_detail: action.payload.corporate_detail };
+
+      case actionTypes.LOGGED_OUT:
+        return { ...state, corporate_detail: null };
 
     default:
       return state;

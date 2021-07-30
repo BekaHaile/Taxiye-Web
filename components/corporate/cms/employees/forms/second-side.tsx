@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Upload, message } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import { Upload, Drawer } from "antd";
+import { InboxOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import theme from "../../../../../theme/main";
+import HelpDesk from "./upload-help";
 
 import readXlsxFile from "read-excel-file";
 
@@ -12,8 +14,6 @@ import { useSelector } from "react-redux";
 import store from "../../../../../redux/store";
 import { appendEmployee } from "../../../../../redux/actions/corporate/employees";
 
-const max = 1440;
-
 const Container = styled("div")`
   padding: 20px 0px;
 `;
@@ -22,16 +22,20 @@ const InfoContainer = styled("div")`
   justify-content: space-between;
 `;
 const Title = styled("p")``;
-const Help = styled("p")``;
+const Help = styled("p")`
+color:${theme.colors.primary};
+cursor:pointer;
+`;
 
 const FormView = ({ setActiveKey }) => {
   const groups = useSelector((state) => state["corporate_employees"]["groups"]);
+  const [showHelp, setShowHelp] = useState(false);
 
   return (
     <>
       <InfoContainer>
         <Title>Import list of employees</Title>
-        <Help>How to create and upload file</Help>
+        <Help onClick={()=>setShowHelp(!showHelp)}>How to create and upload file <InfoCircleOutlined /></Help>
       </InfoContainer>
       <Container>
         <Dragger
@@ -84,6 +88,16 @@ const FormView = ({ setActiveKey }) => {
           </p>
         </Dragger>
       </Container>
+      <Drawer
+        width="40%"
+        title="How to create and upload file"
+        visible={showHelp}
+        onClose={()=>setShowHelp(false)}
+        
+      >
+        <HelpDesk/>
+        
+      </Drawer>
     </>
   );
 };

@@ -1,10 +1,12 @@
 import * as actionTypes from "../../types/corporate/rides";
+import moment from "moment";
 const initialState = {
   rides: [],
   loading: [],
   query: "",
-  date: null,
-  city: "",
+  date: moment(),
+  cities: [],
+  city: -1,
   type: "",
 };
 
@@ -50,6 +52,13 @@ export default function corporateRidesReducer(state = initialState, action) {
         rides: action.payload.rides,
         loading: false,
       };
+
+    case actionTypes.FETCH_CITIES_FINISHED:
+      return {
+        ...state,
+        cities: action.payload.cities
+      };
+
     case actionTypes.RESET:
       return {
         ...state,
@@ -57,7 +66,7 @@ export default function corporateRidesReducer(state = initialState, action) {
         loading: [],
         query: "",
         date: null,
-        city: "",
+        city: null,
       };
 
     default:

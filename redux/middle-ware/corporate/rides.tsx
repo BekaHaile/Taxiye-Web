@@ -1,11 +1,16 @@
 import * as actions from "../../actions/corporate/rides";
 import * as actiontypes from "../../types/corporate/rides";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
+
+const request_status = {
+  "on-going": 1,
+  completed: 2,
+};
 
 export const corporate_rides = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_rides;
+  let corporate_data = store.getState().corporate;
   if (
     action.type == actiontypes.FETCH_RIDES_INITIATED ||
     action.type == actiontypes.DATE_CHANGED ||
@@ -13,47 +18,67 @@ export const corporate_rides = (store) => (next) => async (action) => {
     action.type == actiontypes.TYPE_CHANGED
   ) {
     next(actions.setLoading(true));
-    await sleep(3000);
-    var rides = fetchRides(data);
+    var rides = await fetchRides(data, corporate_data);
     next(actions.setRides(rides));
   } else if (action.type == actiontypes.RESET) {
     next(actions.setLoading(true));
-    await sleep(3000);
-    var rides = fetchRides(data);
+    var rides = await fetchRides(data, corporate_data);
     next(actions.setRides(rides));
+  } else if (action.type == actiontypes.CITY_FETCH_INITIATED) {
+    next(actions.setLoading(true));
+    var cities = await fetchCities(corporate_data);
+    next(actions.cityChanged(cities[0].city_id));
+    next(actions.setCitiesList(cities));
+    
+    next(actions.setLoading(false));
   }
+
 };
 
-async function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+export async function fetchRides(data, corporate_data) {
+  try {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_TAXIYE_RIDES_HOST}/get_ride_details`,
+      {
+        params: {
+          token: `${corporate_data["corporate_detail"]["token"]}`,
+          business_id: `${corporate_data["corporate_detail"]["business_details"]["business_id"]}`,
+          status: request_status[`${data["type"]}`],
+          city_id: data["city"],
+          start_date: getValidDate(data["date"]),
+        },
+        timeout: 10000,
+      }
+    );
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 }
 
-function fetchRides(data) {
-  const res = [];
-  var ran = Math.floor(Math.random() * 15);
-  for (let i = 0; i < ran; i++) {
-    if(data["type"]=="on-going")
-    res.push({
-      key: i,
-      name: `Edward King ${i}`,
-      group: "El Auto Employees",
-      request_time: `2020-02-06 12:10 AM`,
-      pick_up_location: "Sarbet, Addis Ababa",
-      drop_off_location: `Alemayehu Building`,
-      status: "Active",
-    });
-    else
-    res.push({
-      key: i,
-      name: `Edward King ${i}`,
-      group: "El Auto Employees",
-      request_time: `2020-02-06 12:10 AM`,
-      pick_up_location: "Sarbet, Addis Ababa",
-      drop_off_location: `Alemayehu Building`,
-      amount: 554 - i,
-    });
+export async function fetchCities(corporate_data) {
+  try {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_TAXIYE_RIDES_HOST}/get_city_info_operator_wise`,
+      {
+        params: {
+          token: `${corporate_data["corporate_detail"]["token"]}`,
+        },
+        timeout: 10000,
+      }
+    );
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+    return [];
   }
-  return res;
+}
+
+function getValidDate(date) {
+  return date
+    .toISOString()
+    .replace("Z", " ")
+    .replace("T", " ")
+    .substring(0, 19);
 }

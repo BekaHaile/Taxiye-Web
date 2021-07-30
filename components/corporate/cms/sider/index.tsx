@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Layout, Menu, Avatar, Typography, Space } from "antd";
+import { Layout, Menu, Avatar, Typography, Space, Button } from "antd";
 import theme from "../../../../theme/main";
 const { Text } = Typography;
 import {
@@ -17,6 +17,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
+import {initiateLogout} from "../../../../redux/actions/corporate";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -118,9 +120,9 @@ const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
           <Menu.Item key="account-setting" icon={<SettingOutlined />}>
             Account Settings
           </Menu.Item>
-          <Menu.Item onClick={()=>alert("ya")} key="9" icon={<LogoutOutlined />}>
+          <Button onClick={()=>store.dispatch(initiateLogout())} type="link" icon={<LogoutOutlined />}>
             Log out
-          </Menu.Item>
+          </Button>
           <Link href="/">
             <Logo src={require("../../../../assets/images/logo/logo2.svg")} />
           </Link>

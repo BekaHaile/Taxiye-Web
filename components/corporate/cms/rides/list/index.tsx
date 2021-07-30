@@ -14,7 +14,7 @@ import { useState } from "react";
 var onGoingColumn = [
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "user_name",
     sorter: true,
     filters: [
       {
@@ -29,7 +29,7 @@ var onGoingColumn = [
   },
   {
     title: "Group",
-    dataIndex: "group",
+    dataIndex: "sub_region_id",
     sorter: true,
     filters: [
       {
@@ -44,17 +44,17 @@ var onGoingColumn = [
   },
   {
     title: "Request Time",
-    dataIndex: "request_time",
+    dataIndex: "request_made_on",
     sorter: true,
   },
   {
     title: "Pick up Location",
-    dataIndex: "pick_up_location",
+    dataIndex: "pickup_location_address",
     sorter: true,
   },
   {
     title: "Drop off Location",
-    dataIndex: "drop_off_location",
+    dataIndex: "drop_location_address",
     sorter: true,
   },
   {
@@ -63,12 +63,9 @@ var onGoingColumn = [
     sorter: true,
     render: (val) => {
       let color = "green";
-      if (val === "Inactive") {
-        color = "volcano";
-      } else if (val === "Pending") {
-        color = "geekblue";
-      }
-      return <Tag color={color}>{val}</Tag>;
+      let status = "On going";
+      
+      return <Tag color={color}>{status}</Tag>;
     },
   },
 ];
@@ -76,7 +73,7 @@ var onGoingColumn = [
 var completedColumn = [
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "user_name",
     sorter: true,
     filters: [
       {
@@ -91,7 +88,7 @@ var completedColumn = [
   },
   {
     title: "Group",
-    dataIndex: "group",
+    dataIndex: "sub_region_id",
     sorter: true,
     filters: [
       {
@@ -106,17 +103,17 @@ var completedColumn = [
   },
   {
     title: "Request Time",
-    dataIndex: "request_time",
+    dataIndex: "request_made_on",
     sorter: true,
   },
   {
     title: "Pick up Location",
-    dataIndex: "pick_up_location",
+    dataIndex: "pickup_location_address",
     sorter: true,
   },
   {
     title: "Drop off Location",
-    dataIndex: "drop_off_location",
+    dataIndex: "drop_location_address",
     sorter: true,
   },
   {

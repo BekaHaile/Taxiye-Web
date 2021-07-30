@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../../../../theme/main";
+import { useSelector } from "react-redux";
 import { Typography, Space } from "antd";
 const { Text } = Typography;
 
@@ -21,10 +22,13 @@ const SubTitle = styled(Text)`
 `;
 
 const ToolBar = () => {
+  const full_name = useSelector(
+    (state) => state["corporate_account"]["user"]["full_name"]
+  );
   return (
     <>
       <Space size={5} direction="vertical">
-        <Title>Welcome, Nahom Ab</Title>
+        <Title>Welcome, {full_name}</Title>
         <SubTitle>Here are some recent highlights of your company.</SubTitle>
       </Space>
     </>

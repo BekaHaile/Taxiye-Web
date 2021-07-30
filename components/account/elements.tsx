@@ -90,7 +90,6 @@ padding: 32px 0px 40px 0px;
 const HeaderContainer = styled("div")`
 padding-bottom:60px;
 width:450px;
-
 `;
 
 const ContentContainer = styled("div")`

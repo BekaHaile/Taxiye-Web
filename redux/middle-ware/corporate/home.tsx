@@ -1,7 +1,6 @@
 import * as actions from "../../actions/corporate/home";
 import * as actiontypes from "../../types/corporate/home";
 import axios from "axios";
-import { validateEmail, showError } from "../common";
 
 const overview = {
   employees: "455",
