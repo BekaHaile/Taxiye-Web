@@ -36,6 +36,16 @@ export const changeImage = (image) => {
   };
 };
 
+
+export const validateAndChangePhone = (phone_no) => {
+  return {
+    type: actions.PHONE_NUMBER_BEFORE_VALIDATION_ADDED,
+    payload: {
+      phone_no: phone_no,
+    },
+  };
+};
+
 export const changePhone = ({ phone_no, country, country_code, isValid }) => {
   return {
     type: actions.PHONE_NUMBER_ADDED,

@@ -202,3 +202,18 @@ export const changeRoute = (route) => {
     },
   };
 };
+
+export const toggleEmployeeStatus = (selected_user) => {
+  return {
+    type: actions.TOGGLE_USER_STATUS_INITIATED,
+    payload: {
+      selected_user: selected_user,
+    },
+  };
+};
+
+export const toggleEmployeeStatusFinished = () => {
+  return {
+    type: actions.TOGGLE_USER_STATUS_FINISHED,
+  };
+};

@@ -1,9 +1,13 @@
 export function validateInput(input) {
   return input != "" && input != null;
 }
-export function validatePhone(phone_no) {
+export function validatePhone(phone_no, country_code) {
   if (phone_no == "" || phone_no == null) return false;
-  const re = /^[9]{1,}[0-9]{8}$/;
+  var re;
+  if (country_code == "+251") re = /^[9]{1,}[0-9]{8}$/;
+  else if (country_code == "+252") re = /^[9]{1,}[0-9]{8}$/;
+  else if (country_code == "+253") re = /^[9]{1,}[0-9]{8}$/;
+  else return false;
   return re.test(String(phone_no).toLowerCase());
 }
 export function validateEmail(email) {

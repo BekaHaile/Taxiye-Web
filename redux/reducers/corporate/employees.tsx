@@ -9,6 +9,7 @@ const data = {
   group: null,
 };
 const initialState = {
+  selected_user: null,
   default_data: data,
   employees: [],
   groups: [],
@@ -202,6 +203,18 @@ export default function corporateEmployeeReducer(state = initialState, action) {
       return {
         ...state,
         selected_vehicle: action.payload.selected_vehicle,
+      };
+
+    case actionTypes.TOGGLE_USER_STATUS_INITIATED:
+      return {
+        ...state,
+        selected_user: action.payload.selected_user,
+      };
+
+    case actionTypes.TOGGLE_USER_STATUS_FINISHED:
+      return {
+        ...state,
+        selected_user: null,
       };
 
     default:

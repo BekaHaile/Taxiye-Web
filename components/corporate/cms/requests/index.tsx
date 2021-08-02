@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Col, Spin, Drawer, Button } from "antd";
 import TopActions from "./header-actions";
 import Table from "./list";
 import Registration from "./registration";
 import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
+import { initiateRequestSaving } from "../../../../redux/actions/corporate/requests";
 
 const Requests = () => {
   const [visible, setVisibility] = useState(false);
@@ -19,12 +21,12 @@ const Requests = () => {
     setVisibility(false);
   }
   function handleSubmit() {
+    store.dispatch(initiateRequestSaving());
     setVisibility(false);
-    // store.dispatch(saveNewForm());
   }
   return (
     <>
-      <TopActions action={()=>setVisibility(true)} />
+      <TopActions action={() => setVisibility(true)} />
       <Table />
       <Drawer
         width="30%"
@@ -41,7 +43,7 @@ const Requests = () => {
               Cancel
             </Button>
             <Button disabled={!isValid} onClick={handleSubmit} type="primary">
-               <span>Submit</span>
+              <span>Submit</span>
             </Button>
           </div>
         }

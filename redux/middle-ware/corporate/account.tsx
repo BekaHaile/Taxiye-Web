@@ -1,11 +1,17 @@
 import * as actions from "../../actions/corporate/account";
 import * as actiontypes from "../../types/corporate/account";
 import * as validationUtils from "../../../utils/validation";
+import * as parserUtils from "../../../utils/parser";
 import axios from "axios";
 
 import { showError } from "../common";
 
 export const corporate_account = (store) => (next) => async (action) => {
+  if (action.type == actiontypes.PHONE_NUMBER_BEFORE_VALIDATION_ADDED) {
+    var parsedPhone = parserUtils.parsePhoneNumber(action.payload.phone_no);
+    next(actions.changePhone(parsedPhone));
+    return;
+  }
   next(action);
   let data = store.getState().corporate_account;
 
@@ -42,7 +48,6 @@ export const corporate_account = (store) => (next) => async (action) => {
     let isValid = validateRolesData(data["roles"]["user"]);
     next(actions.setFormValidation(isValid));
   } else if (action.type == actiontypes.SAVE_NEW_FORM_INITIATED) {
-   
   }
 };
 
@@ -50,7 +55,6 @@ async function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-
 }
 
 function validateUserData(data) {

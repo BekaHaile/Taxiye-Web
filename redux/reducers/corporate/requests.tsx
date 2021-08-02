@@ -6,6 +6,7 @@ const initialState = {
   debit_limit: "",
   max_user_limit: 1,
   reason: "",
+  request_id: null,
   isLoading: false,
   isValid: false,
 };
@@ -51,6 +52,20 @@ export default function corporateRequestsReducer(state = initialState, action) {
       return {
         ...state,
         loading: action.payload.loading,
+      };
+
+    case actionTypes.FORM_DATA_SUBMITTED:
+      return {
+        ...state,
+        debit_limit: "",
+        max_user_limit: 1,
+        reason: "",
+        request_id: null,
+      };
+    case actionTypes.CANCEL_REQUEST_INITIATED:
+      return {
+        ...state,
+        request_id: action.payload.request_id,
       };
 
     default:

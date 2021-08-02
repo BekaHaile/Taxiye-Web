@@ -4,9 +4,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
-import { fetchRequests } from "../../../../redux/actions/corporate/requests";
-
-const Link = styled("a")``;
+import {
+  fetchRequests,
+  initiateCancelRequest,
+} from "../../../../redux/actions/corporate/requests";
 
 const columns = [
   {
@@ -53,11 +54,20 @@ const columns = [
     title: "Actions",
     dataIndex: "status",
 
-    render: (val) => {
+    render: (val, data) => {
       if (val == 4) {
-        return <Link>Delete</Link>;
+        return <Button type="link">Delete</Button>;
       } else if (val == 1) {
-        return <Link>Cancel</Link>;
+        return (
+          <Button
+            onClick={() => {
+              store.dispatch(initiateCancelRequest(data["request_id"]));
+            }}
+            type="link"
+          >
+            Cancel
+          </Button>
+        );
       }
     },
   },

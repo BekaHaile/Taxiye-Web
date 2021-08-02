@@ -4,9 +4,14 @@ import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../../../theme/main";
 import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
+import { toggleEmployeeStatus } from "../../../../redux/actions/corporate/employees";
 
-const Link = styled("a")`
-  color: ${theme.colors.primary};
+
+const CenteredContainer = styled("div")`
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
 `;
 
 const columns = [
@@ -50,15 +55,25 @@ const columns = [
   {
     title: "Actions",
     dataIndex: "status",
-    render: (status) => (
-      <Space size={16}>
+    render: (status, data) => (
+      <CenteredContainer >
         {status == 1 ? (
-          <Link>Deactivate</Link>
+          <Button
+            onClick={() => store.dispatch(toggleEmployeeStatus(data))}
+            type="link"
+          >
+            Deactivate
+          </Button>
         ) : status == 2 ? (
-          <Link>Activate</Link>
+          <Button
+            onClick={() => store.dispatch(toggleEmployeeStatus(data))}
+            type="link"
+          >
+            Activate
+          </Button>
         ) : null}
-        <Link>Edit</Link>
-      </Space>
+        <Button type="link">Edit</Button>
+      </CenteredContainer>
     ),
   },
 ];

@@ -68,3 +68,31 @@ export const setLoading = (loading) => {
     },
   };
 };
+
+export const initiateRequestSaving = () => {
+  return {
+    type: actions.INITIATE_FORM_SUBMISSION,
+  };
+};
+
+export const initiateCancelRequest = (request_id) => {
+  return {
+    type: actions.CANCEL_REQUEST_INITIATED,
+    payload: {
+      request_id: request_id,
+    },
+  };
+};
+
+export const initiateDeleteRequest = () => {
+  return {
+    type: actions.INITIATE_FORM_SUBMISSION,
+  };
+};
+
+export const finishRequestSubmission = () => {
+  return {
+    type: actions.FORM_DATA_SUBMITTED,
+    payload: {},
+  };
+};

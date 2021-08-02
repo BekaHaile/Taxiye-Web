@@ -25,7 +25,7 @@ export const corporate_employees = (store) => (next) => async (action) => {
     await getVehicles(data, next);
   } else if (action.type == typeActions.GET_EMPLOYEES_INITIATED) {
     next(actions.setLoading(true));
-    var employees = await setEmployees(data["q"], corporate_data);
+    var employees = await getEmployeesList(data["q"], corporate_data);
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {
@@ -45,6 +45,12 @@ export const corporate_employees = (store) => (next) => async (action) => {
   ) {
     var isValid = validateEmployeeForm(data["new_employees"]);
     next(actions.setFormValidation(isValid));
+  } else if (action.type == typeActions.TOGGLE_USER_STATUS_INITIATED) {
+    next(actions.setLoading(true));
+    await toggleEmployeeStatus(data, corporate_data, next);
+    var employees = await getEmployeesList(data["q"], corporate_data);
+    next(actions.addFetchedEmployees(employees));
+    next(actions.setLoading(false));
   }
 };
 
@@ -95,12 +101,30 @@ async function sleep(ms) {
 //   return data;
 // }
 
-export async function setEmployees(query,  corporate_data) {
+export async function getEmployeesList(query, corporate_data) {
   try {
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/user/list`,
       {
         token: `${corporate_data["corporate_detail"]["token"]}`,
+      },
+      { timeout: 10000 }
+    );
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+}
+
+export async function toggleEmployeeStatus(data, corporate_data, next) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/toggle_corporate_user_status`,
+      {
+        token: `${corporate_data["corporate_detail"]["token"]}`,
+        user_id: data["selected_user"]["user_id"],
+        is_active: data["selected_user"]["is_active"] == 1 ? 2 : 1,
       },
       { timeout: 10000 }
     );
@@ -131,7 +155,7 @@ function validateEmployeeForm(data) {
   var isValid = true;
   for (var i = 0; i < data.length; ++i) {
     isValid =
-      validationUtils.validatePhone(data[i]["phone_no"]) &&
+      validationUtils.validatePhone(data[i]["phone_no"], `+${data[i]["code"]}`) &&
       data[i]["code"] != "" &&
       data[i]["code"] != null &&
       data[i]["first_name"] != "" &&

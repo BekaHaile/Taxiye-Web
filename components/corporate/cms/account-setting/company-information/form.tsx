@@ -136,7 +136,7 @@ const FormView = () => {
                     country: `${data["short"]}`,
                     phone_no: data["phone"],
                     country_code: `+${data["code"]}`,
-                    isValid: validationUtils.validatePhone(data["phone"]),
+                    isValid: validationUtils.validatePhone(data["phone"], `+${data["code"]}`),
                   })
                 );
               }}

@@ -209,11 +209,12 @@ export const setKeepMeSignedIn = (keepMeSignedIn) => {
   };
 };
 
-export const setLogin = (corporate_detail) => {
+export const setLogin = (corporate_detail, company_detail) => {
   return {
     type: actions.LOGGED_IN,
     payload: {
       corporate_detail: corporate_detail,
+      company_detail: company_detail
     },
   };
 };

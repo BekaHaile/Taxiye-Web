@@ -63,7 +63,7 @@ const FormView = () => {
         return (
           <Form.Item
             validateStatus={
-              validationUtils.validatePhone(record["phone_no"]) ? "" : "error"
+              validationUtils.validatePhone(record["phone_no"], `+${record["code"]}`) ? "" : "error"
             }
           >
             <PhoneInput

@@ -122,10 +122,10 @@ export const corporate = (store) => (next) => async (action) => {
       data["keepMeSignedIn"],
       next
     );
-    next(actions.setLogin(res));
+    var infoRes = await getUserInfo(res, next);
+    next(actions.setLogin(res, infoRes));
     next(actions.initiateLoading(false));
-  }
-   else if (action.type == actiontypes.LOG_OUT_INITIATED) {
+  } else if (action.type == actiontypes.LOG_OUT_INITIATED) {
     next(actions.logout());
   } else if (action.type == actiontypes.LOGGED_OUT) {
     localStorage.removeItem("corporate_detail");
@@ -201,17 +201,20 @@ export async function login(email, password, keepMeSignedIn, next) {
   }
 }
 
-export async function getUserInfo(corporate_data, next) {
+export async function getUserInfo(data, next) {
   try {
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/corporate/info`,
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info`,
+      {
+        token: `${data["token"]}`,
+      },
       {
         timeout: 10000,
       }
     );
     if (res.status == 200) {
-      localStorage.setItem("corporate_user_detail", JSON.stringify(res.data));
-      return res.data;
+      localStorage.setItem("company_detail", JSON.stringify(res.data.data));
+      return res.data.data;
     }
     return;
   } catch (e) {

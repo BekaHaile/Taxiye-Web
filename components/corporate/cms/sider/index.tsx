@@ -18,7 +18,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
-import {initiateLogout} from "../../../../redux/actions/corporate";
+import { initiateLogout } from "../../../../redux/actions/corporate";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -26,8 +26,7 @@ const { SubMenu } = Menu;
 const ProfileView = styled.div`
   height: 150px;
   text-align: center;
-  padding:20px;
-
+  padding: 20px;
 `;
 const BottomMenu = styled(Menu)`
   position: absolute;
@@ -76,12 +75,21 @@ const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
 
   return (
     <Sider
-      style={{ backgroundColor: `${theme.colors.white}` }}
+      style={{
+        overflow: "auto",
+        height: "100vh",
+        position: "fixed",
+        left:0,
+        backgroundColor: `${theme.colors.white}`,
+      }}
       collapsed={collapsed}
       onCollapse={onCollapse}
       width={256}
     >
-      <ProfileView className="user-profile" onClick={()=>setSelected("account-setting")}>
+      <ProfileView
+        className="user-profile"
+        onClick={() => setSelected("account-setting")}
+      >
         <Space size={5} align="center" direction="vertical">
           <Avatar src={profile} size={64} icon={<UserOutlined />} />
           <Space size={10} direction="vertical">
@@ -120,7 +128,11 @@ const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
           <Menu.Item key="account-setting" icon={<SettingOutlined />}>
             Account Settings
           </Menu.Item>
-          <Button onClick={()=>store.dispatch(initiateLogout())} type="link" icon={<LogoutOutlined />}>
+          <Button
+            onClick={() => store.dispatch(initiateLogout())}
+            type="link"
+            icon={<LogoutOutlined />}
+          >
             Log out
           </Button>
           <Link href="/">
