@@ -23,11 +23,9 @@ font-size:16px;
   linear-gradient(to left, #ccc 100%, rgba(255, 255, 255, 0) 0%),
   linear-gradient(to left, #ccc 100%, rgba(255, 255, 255, 0) 0%),
   linear-gradient(to left, #ccc 100%, rgba(255, 255, 255, 0) 0%),
-  linear-gradient(to left, #ccc 100%, rgba(255, 255, 255, 0) 0%),
-  linear-gradient(to left, #ccc 100%, rgba(255, 255, 255, 0) 0%);
-  background-size: 20px 2px, 20px 2px,20px 2px,20px 2px,20px 2px,20px 2px;
+  background-size: 20px 2px, 20px 2px,20px 2px,20px 2pxx;
     background-repeat:no-repeat;
-    background-position:20px center, 50px center,80px center, 110px center, 140px center, 170px center;
+    background-position:20px center, 50px center,80px center, 110px center;
 `;
 const LabelText = styled("label")`
   font-weight: normal;
@@ -54,7 +52,7 @@ const DefaultOtpInput: FunctionComponent<InputProps> = ({
     return (
         <>
             <LabelText>{label}</LabelText>
-            <Input defaultValue={value} onChange={(e)=>onChange(e.target.value)} type="tel" maxLength={6} placeholder={placeholder} id={id} />
+            <Input defaultValue={value} onChange={(e)=>onChange(e.target.value)} type="tel" maxLength={4} placeholder={placeholder} id={id} />
         </>
     );
 };

@@ -51,7 +51,7 @@ export default function userReducer(state = initialState, action) {
         case actionTypes.OTP_SUBMITTED:
             return { ...state };
         case actionTypes.OTP_ADDED:
-            return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 6 };
+            return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 4 };
         case actionTypes.LOADING_UPDATED:
             return { ...state, loading: action.payload.loading };
         case actionTypes.KEEP_ME_SIGNED_IN_CHANGED:

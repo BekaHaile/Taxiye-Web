@@ -7,7 +7,7 @@ export const PHONE_ADDED = "USER_PHONE_ADDED";
 export const OTP_ADDED = "OTP_ADDED";
 
 export const OTP_SENT = "OTP_SENT";
-export const OTP_SUBMITTED = "OTP_SUBMITTED";
+export const OTP_SUBMITTED = "USER_OTP_SUBMITTED";
 
 export const FIRST_NAME_ADDED = "FIRST_NAME_ADDED";
 export const LAST_NAME_ADDED = "LAST_NAME_ADDED";

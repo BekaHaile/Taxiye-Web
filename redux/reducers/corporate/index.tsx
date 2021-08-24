@@ -108,7 +108,7 @@ export default function corporateReducer(state = initialState, action) {
       };
 
     case actionTypes.LOGGED_OUT:
-      return { ...state, corporate_detail: null, company_detail: null };
+      return { ...state, corporate_detail: null, company_detail: null, loading:false };
 
     default:
       return state;

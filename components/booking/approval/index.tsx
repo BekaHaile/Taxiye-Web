@@ -179,7 +179,7 @@ const Approve = () => {
             </ContentContainer>
           )}
           <ContentContainer>
-            {type == "on-demand" ? (
+            {type == "on_demand" ? (
               <OnDemandBookingInfo title="Trip Detail" />
             ) : type == "rental" ? (
               <RentalBookingInfo title="Rental Detail" />

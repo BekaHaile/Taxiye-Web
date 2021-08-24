@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import theme from "../../theme/main";
+import store from "../../redux/store";
+import {changeVisibiity} from "../../redux/actions/user/sider";
 
 const HeaderWrapper = styled("div")`
   display: flex;
@@ -46,15 +48,18 @@ const LeftLogo = styled(Logo)`
 const Text = styled("div")`
   margin: auto;
 `;
+const MenuView = styled("div")`
+  margin: auto;
+`;
 
 const TabHeader = () => {
   return (
     <>
       <HeaderWrapper>
         <FlexContianer>
-          <Link href="/">
+          <MenuView onClick={()=>store.dispatch(changeVisibiity())}>
             <LeftLogo src={require("../../assets/icons/menu.svg")} />
-          </Link>
+          </MenuView>
 
           <Link href="/">
             <Logo src={require("../../assets/icons/home.svg")} />

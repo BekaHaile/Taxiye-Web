@@ -65,7 +65,13 @@ const Message = styled(Text)`
   text-align: center;
 `;
 
-const Image = styled("img")``;
+const Image = styled("img")`
+width:60px;
+height:50px;
+`;
+const ImageIcon = styled("img")`
+
+`;
 
 const VehicleList = () => {
   const loading = useSelector(
@@ -76,6 +82,7 @@ const VehicleList = () => {
   );
   const vehicleList = useSelector((state) => state["booking"]["vehicles"]);
   const isValid = useSelector((state) => state["booking"]["isValid"]);
+  const currency = useSelector((state) => state["booking"]["currency"]);
   const [isSelected, setSelected] = useState(0);
 
   return (
@@ -106,22 +113,22 @@ const VehicleList = () => {
               </style>
               <CarFlexContainer>
                 <Image
-                  src={require("../../assets/images/cars/vehicles/economy.svg")}
+                  src={vehicle.images.ride_now_normal_2x}
                 />
                 <NormalContainer>
                   <Text>{vehicle.region_name}</Text>
                   <CustomFlexContainer>
-                    <Image src={require("../../assets/icons/avatar.svg")} />
-                    <Text>4</Text>
+                    <ImageIcon src={require("../../assets/icons/avatar.svg")} />
+                    <Text>{vehicle.max_people}</Text>
                   </CustomFlexContainer>
                 </NormalContainer>
               </CarFlexContainer>
 
               <FlexContainer>
-                <PriceText>122 Birr</PriceText>
+                <PriceText>122 {currency}</PriceText>
               </FlexContainer>
               <FlexContainer>
-                <Image src={require("../../assets/icons/right-arrow.svg")} />
+                <ImageIcon src={require("../../assets/icons/right-arrow.svg")} />
               </FlexContainer>
             </CardContainer>
           ))}

@@ -1,7 +1,8 @@
 import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
+import * as actionTypes from "../../types/booking/index";
 import { showSuccess, showInfo, showError } from "../common";
-import { fetchPaymentMethods, fetchListOfVehicles } from "./common";
+import { fetchPaymentMethods, fetchListOfVehicles, fetchFare, cancelRide, requestDriver } from "./common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -21,7 +22,7 @@ export const booking = (store) => (next) => async (action) => {
     action.type == "JOURNEY_TIME_CHANGED" ||
     action.type == "BOOKING_TYPE_CHANGED"
   ) {
-    if (data["type"] == "on-demand") {
+    if (data["type"] == "on_demand") {
       await getOnDemandVehicleInfo(data, next);
     } else if (data["type"] == "rental") {
       await getRentalVehicleInfo(data, next);
@@ -47,10 +48,12 @@ export const booking = (store) => (next) => async (action) => {
     try {
       next(actions.loadingAvailbleVehicles(true));
 
-      var res = await fetchListOfVehicles(data["vehicle"], data["city"]);
+      var res = fetchListOfVehicles(data["drivers"], data["vehicle"]);
+      console.log(res);
       next(actions.loadingAvailbleVehicles(false));
       if (res != null) {
         if (res.length <= 0) {
+          next(actions.addAvailableVehicles([]));
           return;
         }
         next(actions.addAvailableVehicles(res));
@@ -58,7 +61,8 @@ export const booking = (store) => (next) => async (action) => {
           next(navigationActions.goTo("info"));
         } else if (data["userData"]) next(navigationActions.goTo("confirm"));
         else {
-          next(navigationActions.goTo("login"));
+          //next(navigationActions.goTo("login"));
+          next(navigationActions.goTo("confirm"));
           next(actions.setStep(1));
         }
       }
@@ -74,32 +78,36 @@ export const booking = (store) => (next) => async (action) => {
     }
   } else if (action.type == "DELIVERY_IMAGES_UPLOADED") {
     await uploadFile(data, next);
-  } else if (action.type == "OTP_SUBMITTED") {
-    data["userData"]
-      ? next(navigationActions.goTo("confirm"))
-      : next(navigationActions.goTo("login"));
-  } else if (action.type == "REQUEST_CONFIRMED") {
+  } else if (action.type == actionTypes.FETCH_FARE_ESTIMATE_INITIATED) {
+    try {
+      next(actions.setFareEstimateLoading(true));
+      var estimate = await fetchFare(data);
+      next(actions.setFareEstimate(estimate));
+      next(actions.setFareEstimateLoading(false));
+    } catch (e) {
+      next(actions.setFareEstimateLoading(false));
+    }
+  }
+  // else if (action.type == "OTP_SUBMITTED") {
+  //   data["userData"]
+  //     ? next(navigationActions.goTo("confirm"))
+  //     : next(navigationActions.goTo("login"));
+  // }
+  else if (action.type == "REQUEST_CONFIRMED") {
     next(navigationActions.goTo("approve"));
     await sleep(3000);
+    var res = await requestDriver(data);
     next(
-      actions.assignDriver({
-        profile: "https://homepages.cae.wisc.edu/~ece533/images/baboon.png",
-        firstName: "Girma",
-        lastName: "Tefera",
-        plateNumber: "AB12345",
-        vehicleName: "Taxiye-Sedan",
-        rating: 4.5,
-        phoneNumber: "+251911399622",
-        arrivingIn: "2 Mins",
-      })
+      actions.assignDriver(res)
     );
   } else if (action.type == "HOUSE_NUMBER_ADDED") {
     if (data["house_number"] != null && data["house_number"] != "")
       next(actions.setIsAddressValid(true));
     else next(actions.setIsAddressValid(false));
   } else if (action.type == "TERMINATION_REASON_ADDED") {
-    next(navigationActions.goTo(""));
+    var res = await cancelRide(data);
     showSuccess(next);
+    next(navigationActions.goTo(""));
   } else if (action.type == "FETCH_PAYMENT_METHOD_CALLED") {
     next(actions.setPaymentMethodLoading(true));
     let payment_methods = await fetchPaymentMethods();

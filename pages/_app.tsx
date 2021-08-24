@@ -80,6 +80,7 @@ export default function App({ Component, pageProps }) {
     router.pathname.includes("/login") ||
     router.pathname.includes("/signup") ||
     router.pathname.includes("/booking") ||
+    router.pathname.includes("/user") ||
     router.pathname.includes("/cms")
   )
     return withOutHeader(loading, pageProps, Component);

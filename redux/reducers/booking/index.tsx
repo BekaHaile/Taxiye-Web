@@ -3,7 +3,10 @@ let date = new Date();
 const initialState = {
   cities: [],
   payment_methods: [],
-  type: "on-demand",
+  type: "on_demand",
+  currency: "ETB",
+  drivers: [],
+  estimation: null,
   city: "",
   origin: {
     address: null,
@@ -24,7 +27,7 @@ const initialState = {
   fetchVehiclesLoading: false,
   availableVehiclesLoading: false,
   vehicle: null,
-  availableVehicles:[],
+  availableVehicles: [],
   delivery: {
     comment: "",
     images: [],
@@ -39,6 +42,7 @@ const initialState = {
   driver: null,
   driverLoading: false,
   paymentMethodLoading: false,
+  fareEstimateLoading: false,
   cancelRide: false,
   reason: "",
   landmark: "",
@@ -68,17 +72,18 @@ export default function booking(state = initialState, action) {
         ...state,
         vehicles: action.payload.vehicles,
         city: action.payload.city,
-        availableVehicles:[]
+        currency: action.payload.currency,
+        drivers: action.payload.drivers,
+        availableVehicles: [],
       };
     case actionTypes.VEHICLES_LOADING:
       return { ...state, fetchVehiclesLoading: action.payload.loading };
-      case actionTypes.AVAILABLE_VEHICLES_LOADING:
-        return { ...state, availableVehiclesLoading: action.payload.loading };
+    case actionTypes.AVAILABLE_VEHICLES_LOADING:
+      return { ...state, availableVehiclesLoading: action.payload.loading };
     case actionTypes.VEHICLE_SELECTED:
       return { ...state, vehicle: action.payload.vehicle };
-      case actionTypes.AVAILABLE_VEHICLES_ADDED:
-        return { ...state, availableVehicles: action.payload.availableVehicles };
-      
+    case actionTypes.AVAILABLE_VEHICLES_ADDED:
+      return { ...state, availableVehicles: action.payload.availableVehicles };
 
     case actionTypes.JOURNEY_TYPE_CHANGED:
       return {
@@ -142,6 +147,14 @@ export default function booking(state = initialState, action) {
 
     case actionTypes.CITIES_ADDED:
       return { ...state, cities: action.payload.cities };
+
+    case actionTypes.FARE_ESTIMATE_FETCHED:
+      return { ...state, estimation: action.payload.estimation };
+    case actionTypes.FARE_LOADING_STATE_CHANGED:
+      return {
+        ...state,
+        fareEstimateLoading: action.payload.fareEstimateLoading,
+      };
 
     case actionTypes.PAYMENT_METHOD_CHANGED:
       return { ...state, paymentMethod: action.payload.paymentMethod };

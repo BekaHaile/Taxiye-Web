@@ -79,11 +79,13 @@ export const addCities = (cities) => ({
   },
 });
 
-export const addVehicles = (city, vehicles) => ({
+export const addVehicles = (city,currency,drivers, vehicles) => ({
   type: actions.VEHICLES_ADDED,
   payload: {
     vehicles: vehicles,
     city: city,
+    currency: currency,
+    drivers: drivers
   },
 });
 
@@ -227,6 +229,23 @@ export const setPaymentMethods = (payment_methods) => ({
 });
 export const initiatePaymentMethodCall = () => ({
   type: actions.FETCH_PAYMENT_METHOD_CALLED,
+});
+
+export const getFareEstimate = () => ({
+  type: actions.FETCH_FARE_ESTIMATE_INITIATED,
+});
+export const setFareEstimate = (estimation) => ({
+  type: actions.FARE_ESTIMATE_FETCHED,
+  payload:{
+    estimation:estimation
+  }
+});
+
+export const setFareEstimateLoading = (fareEstimateLoading) => ({
+  type: actions.FARE_LOADING_STATE_CHANGED,
+  payload: {
+    fareEstimateLoading: fareEstimateLoading,
+  },
 });
 
 export const setPaymentMethodLoading = (paymentMethodLoading) => ({

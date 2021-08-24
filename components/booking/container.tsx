@@ -8,7 +8,7 @@ import Delivery from "./delivery/";
 import Meta from "./delivery/meta";
 
 import { useSelector } from "react-redux";
-import { initiatePaymentMethodCall } from "../../redux/actions/booking";
+import { initiatePaymentMethodCall, getFareEstimate } from "../../redux/actions/booking";
 
 import Login from "./login";
 import Approve from "./approval";
@@ -33,7 +33,9 @@ const Container = () => {
   const page = useSelector((state) => state["navigation"]["page"]);
   useEffect(() => {
     if (page == "confirm") {
+      store.dispatch(getFareEstimate());
       store.dispatch(initiatePaymentMethodCall());
+      
     }
   }, [page]);
 

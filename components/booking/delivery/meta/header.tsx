@@ -56,6 +56,7 @@ const Note = () => {
 
     }
     const vehicle = useSelector((state) => state["booking"]["vehicle"]);
+
     return (
         <>
             <Container>
@@ -63,7 +64,7 @@ const Note = () => {
                 <BackButton onClick={() => store.dispatch(goTo(""))} src={require("../../../../assets/icons/back-arrow.svg")} />
 
                 <HorizontalFlex>
-                    <Image src={data.car} />
+                    <Image src={vehicle.images.ride_now_normal_2x} />
                     <VerticalFlex>
                         <Title>{vehicle.region_name}</Title>
                         <HorizontalFlex>

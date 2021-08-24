@@ -110,8 +110,8 @@ function Map({
             onClick={() => setSelectedVehicle(vehicle)}
             key={index}
             position={{
-              lat: vehicle.current_latitude,
-              lng: vehicle.current_longitude,
+              lat: vehicle.latitude,
+              lng: vehicle.longitude,
             }}
             icon={{
               url: require("../../assets/icons/car.png"),
@@ -126,7 +126,7 @@ function Map({
                     <h4>ID:</h4> {vehicle.driver_id}
                   </InnerContainer>
                   <InnerContainer>
-                    <h4>Full Name:</h4> {vehicle.name}
+                    <h4>Full Name:</h4> {vehicle.user_name}
                   </InnerContainer>
                   <InnerContainer>
                     <h4>Phone Number:</h4> {vehicle.phone_no}

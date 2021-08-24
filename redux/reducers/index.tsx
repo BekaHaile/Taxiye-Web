@@ -10,6 +10,7 @@ import corporate_group from "./corporate/group";
 import corporate_rides from "./corporate/rides";
 import corporate_account from "./corporate/account";
 import corporate_requests from "./corporate/requests";
+import user_sider from "./user/sider";
 import driver from "./driver";
 /**
  * Here combine reducers function is called so as to
@@ -29,4 +30,5 @@ export default combineReducers({
   corporate_requests,
   corporate_account,
   driver,
+  user_sider,
 });

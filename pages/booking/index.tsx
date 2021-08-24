@@ -1,9 +1,9 @@
 import React from 'react';
-import Maps from '../../components/booking';
+import BookingService from '../../components/booking';
 
-const map = () => {
-    return <Maps />;
+const Booking = () => {
+    return <BookingService />;
     
 }
 
-export default map;
+export default Booking;

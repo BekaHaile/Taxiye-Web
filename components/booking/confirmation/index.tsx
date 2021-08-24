@@ -57,6 +57,8 @@ border-bottom: none;
 
 const Confirm = (content) => {
     const type = useSelector((state) => state["booking"]["type"]);
+    
+    
     return (
         <>
             <MainContainer>
@@ -71,7 +73,7 @@ const Confirm = (content) => {
                         </ContentContainer> : null
                     }
                     <ContentContainer>
-                        {type == "on-demand" ?
+                        {type == "on_demand" ?
                             <OnDemandBookingInfo /> :
                             type == "rental" ?
                                 <RentalBookingInfo /> :

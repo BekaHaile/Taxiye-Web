@@ -64,9 +64,9 @@ const Tab: FunctionComponent<Props> = ({ contentView }) => {
 
       <TabButtonWrappers>
         <TabButton
-          className={activeTab === "on-demand" ? "active" : null}
+          className={activeTab === "on_demand" ? "active" : null}
           onClick={() => {
-            store.dispatch(changeBookingType("on-demand"));
+            store.dispatch(changeBookingType("on_demand"));
           }}
         >
           On Demand
@@ -98,7 +98,7 @@ const Tab: FunctionComponent<Props> = ({ contentView }) => {
       </TabButtonWrappers>
       <ChildrenContainer>
         {(() => {
-          if (activeTab === "on-demand")
+          if (activeTab === "on_demand")
             return <BookingForm contentView={contentView} />;
           if (activeTab === "rental")
             return <RentalForm contentView={contentView} />;
