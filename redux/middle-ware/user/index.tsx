@@ -88,11 +88,11 @@ async function submitPhone(phone_no, country, country_code) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `http://localhost:2002/v4/customer/generate_login_otp`,
+      `${NEXT_PUBLIC_TAXIYE_HOST}/v4/customer/generate_login_otp`,
       {
         phone_no: phone_no,
         country: country,
-        operator_token: "8fa23305501d87e9b87ecac6a87d381b",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         country_code: country_code,
       },
       { timeout: 10000 }
@@ -107,11 +107,11 @@ async function submitOtp(phone_no, country, country_code, otp) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `http://localhost:2002/v4/customer/verify_otp`,
+      `${NEXT_PUBLIC_TAXIYE_HOST}/v4/customer/verify_otp`,
       {
         phone_no: phone_no,
         country: country,
-        operator_token: "8fa23305501d87e9b87ecac6a87d381b",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         country_code: country_code,
         login_type: "0",
         login_otp: otp,

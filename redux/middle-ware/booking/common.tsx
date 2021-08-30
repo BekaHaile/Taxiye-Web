@@ -4,7 +4,7 @@ export async function fetchVehicles(data) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `http://localhost:2002/v2/customer/find_a_driver`,
+      `${NEXT_PUBLIC_TAXIYE_HOST}/v2/customer/find_a_driver`,
       {
         access_token:
           "e06c12e1a576b9571567213327c93fa83768efa73d532514e800d3184e119999",
@@ -14,7 +14,7 @@ export async function fetchVehicles(data) {
         op_drop_longitude: data["destination"]["location"]["lat"],
         show_all: 0,
         show_region_specific_fare: 1,
-        operator_token: "8fa23305501d87e9b87ecac6a87d381b",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         ride_type: 1,
       },
       { timeout: 20000 }
@@ -26,13 +26,40 @@ export async function fetchVehicles(data) {
   }
 }
 
+export async function loadVehicleTypes(data, next, actions) {
+  let res = await fetchVehicles(data);
+  console.log(res);
+  console.log(res.drivers);
+  var regions = res.regions;
+  var drivers = res.drivers;
+  var supportedServices = res.services.find((service) => {
+    return service.type === data["type"];
+  });
+  var supportedRides = supportedServices.supported_ride_type;
+  var supportedServices = res.services.find((service) => {
+    return service.type === data["type"];
+  });
+  var selectedRegions = regions.filter((region) => {
+    return supportedRides.indexOf(region.ride_type) !== -1;
+  });
+  next(
+    actions.addVehicles(
+      res.city_id ? res.city_id : "",
+      res.currency,
+      drivers,
+      Array.from(selectedRegions)
+    )
+  );
+  next(actions.validateInput(true));
+}
+
 export async function fetchFare(data) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `http://localhost:2002/get_fare_estimate`,
+      `${NEXT_PUBLIC_TAXIYE_HOST}/get_fare_estimate`,
       {
-        operator_token: "8fa23305501d87e9b87ecac6a87d381b",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         ride_distance: data["vehicle"]["distance"],
         region_id: data["vehicle"]["region_id"],
         vehicle_type: data["vehicle"]["vehicle_type"],
@@ -55,11 +82,11 @@ export async function fetchFare(data) {
 
 export async function requestDriver(data) {
   try {
-    const { NEXT_PUBLIC_TAXIYE_CORPORATE_HOST } = process.env;
+    const { NEXT_PUBLIC_TAXIYE_CORPORATE_HOST, NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `http://localhost:2002/request_ride`,
+      `${NEXT_PUBLIC_TAXIYE_HOST}/request_ride`,
       {
-        operator_token: "8fa23305501d87e9b87ecac6a87d381b",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         app_version: "6007",
         current_longitude: data["origin"]["location"]["lng"],
         login_type: "0",
@@ -88,7 +115,7 @@ export async function requestDriver(data) {
         master_coupon: "0",
         multiple_destinations: "[]",
       },
-      
+
       { timeout: 100000 }
     );
     return data["drivers"][0];
@@ -102,12 +129,12 @@ export async function cancelRide(data) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `http://localhost:2002/cancel_ride_by_customer`,
+      `${NEXT_PUBLIC_TAXIYE_HOST}/cancel_ride_by_customer`,
       {
         access_token:
           "b29abb7bd81c973838d2df62ee64c4ee6e79e684bab367823125f09200f766e3",
         reasons: "Driver+denied+duty",
-        operator_token: "8fa23305501d87e9b87ecac6a87d381b",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         login_type: 0,
         device_type: 0,
         addn_reason: data["reason"],

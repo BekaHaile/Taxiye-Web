@@ -103,7 +103,9 @@ function withHeader(loading, pageProps, Component) {
               name="viewport"
               content="width=device-width, initial-scale=1.0"
             />
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNebshVW6XSdv4X2Nxm3FGIt3qbA7UKU&libraries=places"></script>
+            <script
+              src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
+            ></script>
           </Head>
           <GlobalStyle />
           {loading ? (
@@ -111,6 +113,7 @@ function withHeader(loading, pageProps, Component) {
           ) : (
             <>
               <Header />
+
               <div>
                 <div
                   onClick={() => toggleFloatingButton(false)}
@@ -147,7 +150,9 @@ function withOutHeader(loading, pageProps, Component) {
             href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
             rel="stylesheet"
           />
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNebshVW6XSdv4X2Nxm3FGIt3qbA7UKU&libraries=places"></script>
+          <script
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
+          ></script>
         </Head>
         <GlobalStyle />
         {loading ? (

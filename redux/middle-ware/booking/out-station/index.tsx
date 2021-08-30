@@ -1,5 +1,5 @@
 import * as actions from "../../../actions/booking";
-import { fetchVehicles } from "../common";
+import { loadVehicleTypes } from "../common";
 import { showError } from "../../common";
 
 export async function getOutStationVehicleInfo(data, next) {
@@ -14,16 +14,7 @@ export async function getOutStationVehicleInfo(data, next) {
   ) {
     next(actions.loadVehicles(true));
     try {
-      let res = await fetchVehicles(data["origin"].location);
-      if (res) {
-        next(
-          actions.addVehicles(
-            res.city ? res.city : "",
-            Array.from(res.vehicles)
-          )
-        );
-        next(actions.validateInput(true));
-      }
+      await loadVehicleTypes(data, next, actions);
     } catch (e) {
       showError(next);
       next(actions.loadVehicles(false));
