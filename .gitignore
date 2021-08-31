@@ -1,7 +1,8 @@
 // .gitnignore
 # next.js build output
 .next
-
+.vscode
+.env
 # dotenv environment variables file (build for Zeit Now)
 
 
