@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-
-const Input = styled('input')`
+import theme from "../../../theme/main";
+const Input = styled("input")`
 width: 100%;
-padding: 12px 20px;
+padding: 8px 20px;
 margin-bottom: 40px;
 display: inline-block;
 border: 2px solid #ccc;
@@ -13,14 +13,16 @@ margin-top:10px;
 && {
   :focus {
     outline: none;
-    border: 2px solid #A02167;
+    border: 2px solid ${theme.colors.primary};
   }
 `;
+
 const LabelText = styled("label")`
+  font-family: Open Sans;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 type InputProps = {
@@ -30,7 +32,6 @@ type InputProps = {
   type?: string;
   onChange?;
   value?;
-
 };
 
 const DefaultInput: FunctionComponent<InputProps> = ({
@@ -39,14 +40,20 @@ const DefaultInput: FunctionComponent<InputProps> = ({
   placeholder,
   type,
   value,
-  onChange
+  onChange,
 }) => {
   return (
     <>
-      <LabelText>{label}</LabelText>
-      <Input onChange={onChange} value={value} type={type} placeholder={placeholder} id={id} />
+      {label && <LabelText>{label}</LabelText>}
+      <Input
+        onChange={onChange}
+        value={value}
+        type={type}
+        placeholder={placeholder}
+        id={id}
+      />
     </>
   );
 };
 
-export { DefaultInput, Input }
+export { DefaultInput, Input };

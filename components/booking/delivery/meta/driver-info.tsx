@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Rating from "../../../form/rating";
+import theme from '../../../../theme/main';
 
 const Title = styled("div")`
 font-family: Open Sans;
@@ -9,7 +10,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 18px;
 line-height: 25px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 const MainTitle = styled(Title)`
 padding-bottom:20px;
@@ -20,7 +21,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 20px;
 line-height: 27px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const Text = styled("div")`
@@ -29,7 +30,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 16px;
-color: #979797;
+color: ${theme.colors.secondaryTextColor};
 `;
 
 const SubTitle = styled("div")`
@@ -38,7 +39,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 justify-content: center;
 
 `;

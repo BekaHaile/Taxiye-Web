@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import colors from "../../theme/main/colors";
+import theme from "../../theme/main";
 import {FlexContainer} from "./elements";
 
 const LinkWithLine = styled("a")`
-color:${colors.primary};
+color:${theme.colors.primary};
 padding-left:5px;
 font-family: Open Sans;
 font-style: normal;
@@ -12,7 +12,7 @@ font-weight: normal;
 font-size: 12px;
 line-height: 16px;
 text-decoration-line: underline;
-color: #A02167;
+color:${theme.colors.primary};
 }
 `;
 const Label = styled("label")`
@@ -21,7 +21,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 16px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 }
 `;
 const Container = styled(FlexContainer)`

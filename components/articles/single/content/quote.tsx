@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
+import theme from '../../../../theme/main';
 
 const Container = styled("div")`
 width: 705px;
 margin:auto;
-border-top: 1px solid #A02167;
-border-bottom: 1px solid #A02167;
+border-top: 1px solid ${theme.colors.primary};
+border-bottom: 1px solid ${theme.colors.primary};
 margin-top:30px;
 `;
 
@@ -14,7 +15,7 @@ font-family: Open Sans;
 font-style: normal;
 font-weight: normal;
 font-size: 28px;
-color: #2A2A2A;
+color: ${theme.colors.quoteTextColor};
 padding:28px 0px;
 `;
 

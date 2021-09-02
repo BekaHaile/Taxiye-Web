@@ -31,7 +31,7 @@ const BlockContainer = styled("div")`
   flex-wrap: wrap;
   justify-content: center;
   row-gap:60px;
-  
+  max-width:1200px;
 
 `;
 
@@ -62,7 +62,7 @@ const SafteyCenter = ({ title, subTitle, contents }) => {
         <BlockContainer>
           {contents.map((content, index) => (
             <Block  key={index}>
-              <Image src={`http://localhost:1337${content.thumbnail.url}`} />
+              <Image src={`${process.env.NEXT_PUBLIC_HOST}${content.thumbnail.url}`} />
               <div>
                 <BlockTitle>{content.title}</BlockTitle>
                 <SafetyText>

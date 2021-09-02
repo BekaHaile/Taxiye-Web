@@ -1,12 +1,22 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+import theme from "../main";
+import "antd/dist/antd.css";
 
-import colors from '../main/colors';
+import colors from "../main/colors";
 
 const GlobalStyle = createGlobalStyle`
 body, html {
   height: 100%;
   margin: 0 !important;
-  
+  color:${theme.colors.primaryTextColor}; 
+}
+h1, h2, h3, h4, h5, h6 {
+  color:${theme.colors.primaryTextColor}; 
+}
+a{
+  &:hover {
+    color: ${theme.colors.primary};
+  }
 }
 .pickers{
   width: -webkit-fill-available !important;
@@ -18,29 +28,30 @@ body, html {
   border-bottom: 1px solid #666 !important;
 }
 .MuiInput-underline:after {
-  border-bottom: 1px solid #A02167 !important;
+  border-bottom: 1px solid ${theme.colors.primary} !important;
 }
 .MuiInput-underline:hover {
-  border-bottom: 1px solid #A02167 !important;
+  border-bottom: 1px solid ${theme.colors.primary} !important;
 }
 .MuiPickersCalendarHeader-transitionContainer {
   order:-1;
   text-align:left !important;
 }
+/*
 .MuiTypography-root {
   text-align:left !important;
-}
+}*/
 .MuiPickersCalendar-week {
   justify-content: space-between;
 }
 .MuiSvgIcon-root {
-  /*fill: #A02167 !important;*/
+  /*fill: ${theme.colors.primary} !important;*/
 }
 .MuiIconButton-root {
 padding:12px 0px !important;
 }
 .MuiPickersCalendarHeader-dayLabel {
-color:#444444 !important;
+color:${theme.colors.primaryTextColor} !important;
 }
 .MuiPickersCalendar-transitionContainer {
   padding: 0px 20px;
@@ -54,9 +65,9 @@ color:#444444 !important;
 }
 
 .MuiPickersDay-daySelected {
-  color: #fff;
+  color: ${theme.colors.white};;
   font-weight: 500;
-  background-color: #A02167 !important;
+  background-color: ${theme.colors.primary} !important;
 }
 
 .MuiPickersCalendarHeader-switchHeader{
@@ -71,7 +82,7 @@ color:#444444 !important;
 }
 
 .MuiStepIcon-root.MuiStepIcon-active {
-  color: #A02167 !important;
+  color: ${theme.colors.primary} !important;
 }
 .MuiStepLabel-root {
   margin-left: -70px !important;
@@ -120,6 +131,9 @@ color:#444444 !important;
 }
 
 .intl-tel-input {
+  margin-top: 10px; 
+}
+.intl.intl-tel-input {
   margin-top: 10px; 
 }
 .intl-tel-input.allow-dropdown input[type=tel]:focus {
@@ -187,7 +201,7 @@ div:nth-of-type(even).rec-carousel-item-visible {
 
 .react-tel-input .flag-dropdown {
  border-right:none;
- background-color:#fff;
+ background-color:${theme.colors.white};;
  -webkit-border-radius: 3px 0 0 3px;
 border-radius: 5px 0 0 5px;
 }
@@ -279,17 +293,17 @@ p,h1,h2,h3,h4,h5,h6{
 
 .slick-prev:before,
 .slick-next:before {
-  color: #A02167;
+  color: ${theme.colors.primary}
 }
 
 .slick-dots li.slick-active button:before {
   opacity: .75;
-  color: #A02167;
+  color: ${theme.colors.primary}
 }
 .slick-dots li button:before {
 
   opacity: .25;
-  color: #A02167;
+  color: ${theme.colors.primary}
 
   font-size: x-small;
 
@@ -300,7 +314,7 @@ p,h1,h2,h3,h4,h5,h6{
     width: 100%;
     margin:0px;
     padding:0px;
-    background: #FFFFFF;
+    background: ${theme.colors.white};;
     font-family: 'Open Sans', sans-serif;
   }
   a, button, img {
@@ -310,7 +324,7 @@ p,h1,h2,h3,h4,h5,h6{
     border: none;
     width: 0;
     height: 0;
-    color: #A02167 !important;
+    color: ${theme.colors.primary} !important;
     background: transparent;
   }
 
@@ -321,7 +335,7 @@ p,h1,h2,h3,h4,h5,h6{
   }
 
   .rec-dot.rec-dot_active {
-    background-color: #A02167 !important;
+    background-color: ${theme.colors.primary} !important;
     width: 7px;
     height: 7px;
     box-shadow: none;
@@ -331,7 +345,7 @@ p,h1,h2,h3,h4,h5,h6{
     width: 7px !important;
     height: 7px !important;
     box-shadow: none !important;
-    background-color: #979797 !important;
+    background-color: ${theme.colors.secondaryTextColor} !important;
   }
 
   #floating-button{	
@@ -340,7 +354,7 @@ p,h1,h2,h3,h4,h5,h6{
 	height:50px;
 	bottom:30px;
 	right:30px;
-	background-color:#A02167;
+	background-color:${theme.colors.primary};
 	border-radius:50px;
 	text-align:center;
   z-index:100;
@@ -360,14 +374,14 @@ p,h1,h2,h3,h4,h5,h6{
     padding: 5px 20px;
     bottom:100px;
     right:30px;
-    background-color:#A02167;
+    background-color:${theme.colors.primary};
     font-family: Open Sans;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 19px;
     text-align: center;
-    color: #FFFFFF;
+    color: ${theme.colors.white};;
     border-radius:20px;
     text-align:center;
     z-index:100;
@@ -394,8 +408,10 @@ p,h1,h2,h3,h4,h5,h6{
       height: 0;
       margin: 8px;
       box-sizing: border-box;
-      border: 32px solid #A02167;
-      border-color: #A02167 transparent #A02167 transparent;
+      border: 32px solid ${theme.colors.primary};
+      border-color: ${theme.colors.primary} transparent ${
+  theme.colors.primary
+} transparent;
       animation: lds-hourglass 1.2s infinite;
     }
     @keyframes lds-hourglass {
@@ -422,12 +438,12 @@ p,h1,h2,h3,h4,h5,h6{
      
     }
     .MuiListItem-root.Mui-selected {
-      background-color: #A02167 !important;
+      background-color: ${theme.colors.primary} !important;
       border-radius:5px;
       color:white;
   }
   .activeCard{
-    border: 2px solid #A02167 !important;
+    border: 2px solid ${theme.colors.primary} !important;
 
   }
 
@@ -447,7 +463,7 @@ p,h1,h2,h3,h4,h5,h6{
   }
 
   .MuiRating-root {
-    color: #A02167 !important;
+    color: ${theme.colors.primary} !important;
   }
 
 .MuiRating-iconEmpty {
@@ -455,9 +471,7 @@ p,h1,h2,h3,h4,h5,h6{
 }
 
 
-::-webkit-scrollbar:hover {
-  width: 10px;
-}
+
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -469,17 +483,22 @@ p,h1,h2,h3,h4,h5,h6{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background: ${theme.colors.primary}; 
   border-radius: 5px;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height:3px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: ${theme.colors.primary};
+  opacity:0.2; 
 }
 
 select{
-  outline-color: #A02167;
+  outline-color: ${theme.colors.primary}
   
 }
 .defaultDropDown {
@@ -489,7 +508,7 @@ select{
 .defaultDropDown:after {
   content: url(${require("../../assets/icons/drop-down-icon.svg")});
   
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 
   right: 20px;
   top: 22px;
@@ -503,7 +522,40 @@ select{
     appearance: none !important;
   }
 
-`;
+  .ant-tabs-top > .ant-tabs-nav {
+    margin: 0px 0 40px 0 !important;
+}
 
+#map_info_container{
+  position: absolute;
+  right: -500px;
+  opacity: 0;
+overflow:hidden;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#map_info_container.active{
+  opacity: 1;
+  right: 0;
+}
+
+.group_radio .ant-radio{
+  margin:auto !important;
+}
+
+.bottom_menu_items{
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+
+.antd-country-phone-input .ant-select-selector {
+  border:none !important;
+}
+`;
 
 export default GlobalStyle;

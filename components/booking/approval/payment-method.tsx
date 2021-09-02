@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import theme from '../../../theme/main';
 
 const Contianer = styled("div")`
 display:flex;
@@ -13,7 +14,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 const SubTitle = styled("div")`
 font-family: Open Sans;
@@ -21,7 +22,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 `;
 
 const PaymentMethod = ({ paymentMethod }) => {

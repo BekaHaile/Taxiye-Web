@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
     select: {
         color:"black",
-        backgroundColor:"#fff",
+        backgroundColor:"${theme.colors.white};",
         '&:hover': {
             cursor: 'pointer',
 
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ControlledOpenSelect({ value, action, items }) {
+export default function OpenSelect({ value, action, items }) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -50,8 +49,6 @@ export default function ControlledOpenSelect({ value, action, items }) {
                             return <MenuItem className={classes.select} key={key} value={item}>{item}</MenuItem>
                         })
                     }
-
-
                 </Select>
             </FormControl>
         </>

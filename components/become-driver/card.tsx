@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../theme/main';
 
 
 const Card = styled('div')`
@@ -8,7 +9,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 0px 20px;
-background: #FFFFFF;
+background: ${theme.colors.white};
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 border-radius: 10px;
 flex: none;
@@ -33,7 +34,7 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 margin: 20px 0px;
 text-align: center;
 `;
@@ -44,7 +45,7 @@ font-weight: normal;
 font-size: 16px;
 line-height: 22px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 margin: 20px 0px;
 `;
 

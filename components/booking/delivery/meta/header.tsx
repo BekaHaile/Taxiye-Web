@@ -3,6 +3,7 @@ import styled from "styled-components";
 import store from "../../../../redux/store";
 import { useSelector } from "react-redux";
 import { goTo } from "../../../../redux/actions/navigation";
+import theme from '../../../../theme/main';
 
 
 const Title = styled("div")`
@@ -19,7 +20,7 @@ font-weight: 400;
 font-size: 12px;
 padding-top:5px;
 line-height: 16px;
-color: #979797;
+color: ${theme.colors.secondaryTextColor};
 `;
 const Container = styled("div")`
 display:flex;
@@ -55,6 +56,7 @@ const Note = () => {
 
     }
     const vehicle = useSelector((state) => state["booking"]["vehicle"]);
+
     return (
         <>
             <Container>
@@ -62,7 +64,7 @@ const Note = () => {
                 <BackButton onClick={() => store.dispatch(goTo(""))} src={require("../../../../assets/icons/back-arrow.svg")} />
 
                 <HorizontalFlex>
-                    <Image src={data.car} />
+                    <Image src={vehicle.images.ride_now_normal_2x} />
                     <VerticalFlex>
                         <Title>{vehicle.region_name}</Title>
                         <HorizontalFlex>

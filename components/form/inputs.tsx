@@ -3,16 +3,13 @@ import styled from "styled-components";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css';
 import Link from "next/link";
-
-
-
-
+import theme from "../../theme/main";
 
 const LabelText = styled("label")`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 
@@ -23,7 +20,7 @@ const Input = styled("input")`
   ::placeholder {
     font-size: 14px;
     line-height: 19px;
-    color: #979797;
+    color: ${theme.colors.secondaryTextColor};
     font-weight: normal;
   }
   display: flex;
@@ -34,7 +31,7 @@ const Input = styled("input")`
   && {
     :focus {
       outline: none;
-      border-bottom: 1px solid #A02167;
+      border-bottom: 1px solid ${theme.colors.primary};
     }
 `;
 
@@ -49,7 +46,7 @@ box-sizing: border-box;
 && {
   :focus {
     outline: none;
-    border: 1px solid #A02167;
+    border: 1px solid ${theme.colors.primary};
   }
 `;
 

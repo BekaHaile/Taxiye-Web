@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import theme from "../../theme/main";
 
 const Button = styled("button")`
-  background: #A02167;
+  background: ${theme.colors.primary};
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 10px;
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #ffffff;
+  color: ${theme.colors.white};;
   border-color: transparent;
   font-family: Open Sans;
   font-style: normal;
@@ -22,7 +23,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
 `;
 
 const Input = styled("input")`
@@ -31,7 +32,7 @@ const Input = styled("input")`
   ::placeholder {
     font-size: 14px;
     line-height: 19px;
-    color: #979797;
+    color: ${theme.colors.secondaryTextColor};
     font-weight: normal;
   }
   display: flex;
@@ -42,20 +43,19 @@ const Input = styled("input")`
   && {
     :focus {
       outline: none;
-      border-bottom: 1px solid #A02167;
+      border-bottom: 1px solid ${theme.colors.primary};
     }
 `;
 
 const FormGroup = styled("div")`
   display: flex;
-  gap:15px;
+  gap: 15px;
   padding: 10px 0px;
   width: -webkit-fill-available;
-  
 `;
 
 const Icon = styled("img")`
-  height:fit-content;
+  height: fit-content;
   margin-top: 6px;
 `;
 
@@ -71,7 +71,7 @@ const InlineForm = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap:50px;
+  gap: 50px;
   && {
     input {
     }
@@ -79,12 +79,12 @@ const InlineForm = styled("div")`
 `;
 
 const InputSeparator = styled("div")`
-display: flex;
-align-self: flex-end;
+  display: flex;
+  align-self: flex-end;
 `;
 
-const InputWrapper = styled('div')`
-width: -webkit-fill-available;
+const InputWrapper = styled("div")`
+  width: -webkit-fill-available;
 `;
 
 type InputProps = {
@@ -100,15 +100,12 @@ const Inputs: FunctionComponent<InputProps> = ({
   label,
   icon,
   placeholder,
-  ref
+  ref,
 }) => {
   return (
     <FormGroup>
-      {icon !== undefined ? (
-        <Icon src={icon} />
-      ) : null}
+      {icon !== undefined ? <Icon src={icon} /> : null}
       <InputWrapper>
-
         <LabelText htmlFor={id}> {label} </LabelText>
 
         <Input
@@ -118,10 +115,20 @@ const Inputs: FunctionComponent<InputProps> = ({
           autoComplete="off"
           ref={ref}
         />
-
       </InputWrapper>
     </FormGroup>
   );
 };
 
-export { Form,InputWrapper, InlineForm, Button, Inputs, InputSeparator, Input, FormGroup, Icon, LabelText };
+export {
+  Form,
+  InputWrapper,
+  InlineForm,
+  Button,
+  Inputs,
+  InputSeparator,
+  Input,
+  FormGroup,
+  Icon,
+  LabelText,
+};

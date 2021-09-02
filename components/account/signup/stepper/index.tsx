@@ -9,25 +9,27 @@ import PhoneVerification from "../driver/phone-verification";
 import VehicleType from "../driver/vehicle-type/";
 import Documents from "../driver/documents/";
 import LastPage from "../driver/finish";
-
+import { useSelector } from "react-redux";
+import { changeStep, changeSubStep } from "../../../../redux/actions/driver";
+import store from "../../../../redux/store";
 
 const StepperContainer = styled("div")`
-width:760px;
-margin:auto;
+  width: 760px;
+  margin: auto;
 `;
 const BackButton = styled("img")`
-padding-bottom:10px;
+  padding-bottom: 10px;
 `;
 const steps = [
   "Driver Information",
   "Phone Verification",
   "Vehicle Type",
-  "Documents"
+  "Documents",
 ];
 
-export default function HorizontalLinearStepper({ setShow, setFinishRegistration }) {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [activeSubStep, setActiveSubStep] = React.useState(0);
+export default function HorizontalLinearStepper() {
+  const activeStep = useSelector((state) => state["driver"]["step"]);
+  const activeSubStep = useSelector((state) => state["driver"]["subStep"]);
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => {
@@ -45,31 +47,27 @@ export default function HorizontalLinearStepper({ setShow, setFinishRegistration
       newSkipped.delete(activeStep);
     }
     if (activeSubStep < 3 && activeStep == 3) {
-      setActiveSubStep((activeSubStep) => activeSubStep + 1);
+      store.dispatch(changeSubStep(activeSubStep + 1));
       return;
     }
-    if (activeSubStep == 3 && activeStep == 3) {
-      setFinishRegistration(true);
-      
-    }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    store.dispatch(changeStep(activeStep + 1));
     setSkipped(newSkipped);
   };
 
-
   const handleBack = () => {
     if (activeSubStep > 0 && activeStep == 3) {
-      setActiveSubStep((activeSubStep) => activeSubStep - 1);
+      store.dispatch(changeSubStep(activeSubStep - 1));
       return;
     }
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (activeStep == 2) store.dispatch(changeStep(0));
+    else store.dispatch(changeStep(activeStep - 1));
   };
 
   const goTo = (step) => {
     if (activeStep != steps.length && step < activeStep)
-      setActiveStep((prevActiveStep) => step);
+      store.dispatch(changeStep(activeStep));
   };
-
 
   return (
     <StepperContainer>
@@ -86,22 +84,30 @@ export default function HorizontalLinearStepper({ setShow, setFinishRegistration
             );
           })}
         </Stepper>
-        {activeStep != 0 && activeStep != steps.length ?
-          <BackButton onClick={handleBack} src={require("../../../../assets/icons/back-arrow.svg")} /> :
-          null}
+        {activeStep != 0 && activeStep != steps.length ? (
+          <BackButton
+            onClick={handleBack}
+            src={require("../../../../assets/icons/back-arrow.svg")}
+          />
+        ) : null}
       </div>
-      <div>{
-        activeStep === steps.length ? <LastPage /> :
-          activeStep == 0 ?
-            <Information activeStep={activeStep} steps={steps} handleNext={handleNext} /> :
-            activeStep == 1 ?
-              <PhoneVerification setShow={setShow} handleNext={handleNext} handleBack={handleBack} /> :
-              activeStep == 2 ?
-                <VehicleType handleNext={handleNext} handleBack={handleBack} /> :
-                <Documents handleNext={handleNext} activeSubStep={activeSubStep} />
-      }
+      <div>
+        {activeStep === steps.length ? (
+          <LastPage />
+        ) : activeStep == 0 ? (
+          <Information
+            activeStep={activeStep}
+            steps={steps}
+            handleNext={handleNext}
+          />
+        ) : activeStep == 1 ? (
+          <PhoneVerification handleNext={handleNext} handleBack={handleBack} />
+        ) : activeStep == 2 ? (
+          <VehicleType handleNext={handleNext} handleBack={handleBack} />
+        ) : (
+          <Documents handleNext={handleNext} activeSubStep={activeSubStep} />
+        )}
       </div>
     </StepperContainer>
-
   );
 }

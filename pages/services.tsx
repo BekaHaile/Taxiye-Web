@@ -6,7 +6,7 @@ import client from "../backend-client";
 import DefaultErrorPage from 'next/error';
 
 const query = gql`
-# Write your query or mutation here
+# This is query
 query {
   servicePage {
     hero{

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import DateView from "../../form/Date";
+import theme from "../../../theme/main";
 
 const Card = styled("div")`
   display: flex;
@@ -9,10 +10,10 @@ const Card = styled("div")`
   align-items: flex-start;
   padding: 0px;
   margin: 10px 33px;
-  baackground: #ffffff;
+  baackground: ${theme.colors.white};;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  background: #fff;
+  background: ${theme.colors.white};;
   width:340px;
 `;
 
@@ -44,7 +45,7 @@ const AuthorText = styled("span")`
   font-weight: normal;
   font-size: 12px;
   line-height: 150%;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
   margin-left: 5px;
 `;
 
@@ -59,7 +60,7 @@ const ArticleTitle = styled("h1")`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding: 0px 0px 10px 0px;
 `;
 
@@ -68,20 +69,20 @@ const ArticleText = styled("p")`
   font-weight: normal;
   font-size: 14px;
   line-height: 150%;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding-bottom:20px;
 `;
 
 const Button = styled("button")`
-  border: 1px solid #A02167;
+  border: 1px solid ${theme.colors.primary};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #A02167;
-  background: #fff;
+  color: ${theme.colors.primary};
+  background: ${theme.colors.white};;
   padding:5px 20px;
 `;
 

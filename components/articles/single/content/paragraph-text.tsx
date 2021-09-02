@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import theme from '../../../../theme/main';
 
 
 const ArticleParagraphText = styled("p")`
@@ -9,7 +10,7 @@ font-weight: normal;
 font-size: 16px;
 line-height: 22px;
 text-transform: lowercase;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-top:30px;
 `;
 

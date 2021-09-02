@@ -36,8 +36,8 @@ export default function SnackBar() {
 
             <Snackbar
                 anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
+                    vertical: 'top',
+                    horizontal: 'center',
                 }}
                 open={message.show} autoHideDuration={5000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={message.type}>

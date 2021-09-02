@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import DateView from "../../../form/Date";
+import theme from "../../../../theme/main";
 
 const Card = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  baackground: #ffffff;
-  background: #fff;
+  baackground: ${theme.colors.white};
   margin-top:34px;
  
 `;
@@ -38,7 +38,7 @@ const AuthorText = styled("span")`
   font-weight: normal;
   font-size: 12px;
   line-height: 150%;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
   margin-left: 5px;
 `;
 
@@ -53,21 +53,21 @@ const ArticleTitle = styled("h1")`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color: #444444;
+  color:${theme.colors.primaryTextColor};;
   padding: 0px 0px 10px 0px;
 `;
 
 
 const Button = styled("button")`
-  border: 1px solid #A02167;
+  border: 1px solid ${theme.colors.primary};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: #A02167;
-  background: #fff;
+  color: ${theme.colors.primary};
+  background: ${theme.colors.white};
   padding:5px 20px;
 `;
 

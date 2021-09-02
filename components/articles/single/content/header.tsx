@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import DateView from "../../../form/Date";
+import theme from '../../../../theme/main';
 
 const Image = styled("img")`
  
@@ -19,7 +20,7 @@ const AuthorText = styled("span")`
   font-weight: normal;
   font-size: 12px;
   line-height: 150%;
-  color: #979797;
+  color: ${theme.colors.secondaryTextColor};
   margin-left: 5px;
 `;
 
@@ -35,7 +36,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 32px;
 line-height: 30px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-bottom:30px;
 `;
 

@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import styled from 'styled-components';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import theme from '../../theme/main';
 
 const Container = styled("div")`
 justify-content:center;

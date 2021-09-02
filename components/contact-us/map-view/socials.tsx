@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import theme from "../../../theme/main";
 
 
 const BottomLinkWrapper = styled("div")`
@@ -20,7 +20,7 @@ font-weight: 600;
 font-size: 14px;
 line-height: 150%;
 text-transform: uppercase;
-color: #979797;
+color: ${theme.colors.secondaryTextColor};
 
 padding-bottom: 10px;
 `;

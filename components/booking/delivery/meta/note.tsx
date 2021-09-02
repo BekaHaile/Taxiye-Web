@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { addNote } from "../../../../redux/actions/booking";
 import store from "../../../../redux/store";
+import theme from '../../../../theme/main';
 
 const Title = styled("div")`
 font-family: Open Sans;
@@ -10,7 +11,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-top:10px;
 `;
 const InputArea = styled('textarea')`
@@ -24,7 +25,7 @@ margin-top:10px;
 && {
   :focus {
     outline: none;
-    border: 2px solid #A02167;
+    border: 2px solid ${theme.colors.primary};
   }
 `;
 const Note = () => {

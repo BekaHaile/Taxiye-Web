@@ -6,56 +6,73 @@ import {
   SectionTitle,
   CenteredText,
   SectionHeaderContainer,
-  SectionContentContainer
+  SectionContentContainer,
 } from "../section";
 
 const ServiceTitle = styled(SectionTitle)`
   margin: 0px 0px;
-  text-align:left;
+  text-align: left;
+  @media (max-width: 1269px) {
+    text-align: center;
+  }
 `;
 
 const RightServiceTitle = styled(ServiceTitle)`
-text-align: right;
-width: 100%;
+  text-align: right;
+  width: 100%;
+  @media (max-width: 1269px) {
+    text-align: center;
+  }
 `;
 
 const FlexRow = styled("div")`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Description = styled("p")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 16px;
-line-height: 22px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
   margin: 0px 0px;
-  width:500px;
+  width: 500px;
   flex: 1;
-  text-align:left;
+  text-align: left;
+  @media (max-width: 1269px) {
+    text-align: center;
+  }
 `;
 
 const RightDescription = styled(Description)`
   text-align: right;
-
+  @media (max-width: 1269px) {
+    text-align: center;
+  }
 `;
 const RightContainer = styled("div")`
-  
-  margin-left:100px;
-  
+  margin-left: 100px;
+  @media (max-width: 1269px) {
+    margin-left: 0;
+  }
 `;
 
 const LeftContainer = styled("div")`
-  
-  margin-right:100px;
-  
+  margin-right: 100px;
+  @media (max-width: 1269px) {
+    margin-right: 0;
+  }
 `;
 
-const Image = styled('img')`
-max-width: 550px;
-flex: 1;
+const Image = styled("img")`
+  max-width: 550px;
+  flex: 1;
+  @media (max-width: 1269px) {
+    order:-1;
+  }
 `;
 
 const Services = ({ data }) => {
@@ -63,52 +80,55 @@ const Services = ({ data }) => {
   return (
     <>
       {services.map((service, index) => (
-
-        <div id={service.id}  key={index}>
-          {index % 2 == 0 ?
+        <div id={service.id} key={index}>
+          {index % 2 == 0 ? (
             <DefaultSection>
-              {index == 0 ?
+              {index == 0 ? (
                 <SectionHeaderContainer>
-                  <SectionTitle>{data.servicePage.serviceSectionTitle}</SectionTitle>
+                  <SectionTitle>
+                    {data.servicePage.serviceSectionTitle}
+                  </SectionTitle>
                   <CenteredText>
                     {data.servicePage.serviceSectionSubTitle}
                   </CenteredText>
-                </SectionHeaderContainer> :
-                null}
+                </SectionHeaderContainer>
+              ) : null}
               <SectionContentContainer>
                 <FlexRow>
-                  <Image src={require("../../assets/images/services/taxi.svg")} />
+                  <Image
+                    src={require("../../assets/images/services/taxi.svg")}
+                  />
                   <RightContainer>
                     <RightServiceTitle>{service.name}</RightServiceTitle>
 
-                    
-                      {service.longDescription.map((description, index) => (
-                        <RightDescription  key={index}>{description.content}</RightDescription>
-                      ))}
-
-                    
+                    {service.longDescription.map((description, index) => (
+                      <RightDescription key={index}>
+                        {description.content}
+                      </RightDescription>
+                    ))}
                   </RightContainer>
                 </FlexRow>
               </SectionContentContainer>
             </DefaultSection>
-            :
+          ) : (
             <GraySection>
-
-
               <FlexRow>
                 <LeftContainer>
                   <ServiceTitle>{service.name}</ServiceTitle>
-                  
-                    {service.longDescription.map((description, index) => (
-                     <Description  key={index}> {description.content} </Description>
-                    ))}
-                  
-                </LeftContainer>
-                <Image src={require("../../assets/images/services/delivery.svg")} />
-              </FlexRow>
 
+                  {service.longDescription.map((description, index) => (
+                    <Description key={index}>
+                      {" "}
+                      {description.content}{" "}
+                    </Description>
+                  ))}
+                </LeftContainer>
+                <Image
+                  src={require("../../assets/images/services/delivery.svg")}
+                />
+              </FlexRow>
             </GraySection>
-          }
+          )}
         </div>
       ))}
     </>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../../theme/main';
 
 const Card = styled('div')`
 
@@ -28,7 +29,7 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 text-align: center;
 `;
 
@@ -38,7 +39,7 @@ font-weight: normal;
 font-size: 14px;
 line-height: 22px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-top:10px;
 `;
 

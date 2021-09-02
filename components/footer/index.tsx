@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import theme from "../../theme/main";
 
 const FooterHeader = styled("h4")`
   font-weight: 600;
@@ -9,22 +10,22 @@ const FooterHeader = styled("h4")`
   margin: 20px 0px;
 `;
 
-const Image = styled("img")`
-  margin-right:25px;
-`;
+const Image = styled("img")``;
+const LinkComponent = styled("a")``;
+
 const LastImage = styled("img")`
-  margin-right:0px;
+  margin-right: 0px;
 `;
 
 const FooterLink = styled.a`
   font-style: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #444444;
+  color: ${theme.colors.primaryTextColor};
   margin: 10px 0px;
   && {
     :hover {
-      color: #A02167;
+      color: ${theme.colors.primary};
     }
   }
 `;
@@ -35,7 +36,6 @@ const FooterContent = styled("div")`
   justify-content: flex-end;
   align-items: flex-start;
   padding: 0px;
-  margin-left: 130px;
 `;
 
 const FooterBottomLink = styled(FooterLink)`
@@ -44,7 +44,7 @@ const FooterBottomLink = styled(FooterLink)`
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin:0px;
+  margin: 0px;
   margin-right: 40px;
 `;
 
@@ -56,73 +56,80 @@ const FooterBottomLinkWrapper = styled("div")`
   display: flex;
   justify-content: space-around;
   align-self: flex-end;
-  padding-bottom:20px;
-  padding-left:0px; 
+  padding-bottom: 20px;
+  padding-left: 0px;
 `;
 
 const FooterInfo = styled("div")`
-display: flex;
-
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const SocialLinkWrapper = styled(FooterBottomLinkWrapper)`
-  padding-bottom:0px;
+  padding-bottom: 0px;
 `;
 
 const Grid = styled("div")`
   display: flex;
   flex-direction: row;
-  padding-bottom:20px;
+  padding-bottom: 20px;
   margin-left: auto;
-  
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const Footer = styled("div")`
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: ${theme.colors.footerColor};
 `;
 
-const FooterImage = styled('img')`
-  width:450px;
-  height:430px;
+const FooterImage = styled("img")`
+  /*width:450px;
+  height:430px;*/
+  @media (max-width: 768px) {
+    margin: auto;
+  }
 `;
 
 const LinkWrapper = styled("div")`
   display: flex;
   flex-direction: column;
-  margin-right:150px;
 `;
 const LinkEndWrapper = styled(LinkWrapper)`
- 
-  margin-right:0px;
+  margin-right: 0px;
 `;
-
 
 const FlexRow = styled("div")`
   display: flex;
   justify-content: space-between;
-  padding:60px 60px 0px 60px;
-
+  padding: 60px 60px 0px 60px;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    padding: 0px;
+    padding-top: 60px;
+  }
 `;
 
 const FlexEnd = styled("div")`
   display: flex;
   align-items: flex-end;
   padding-bottom: 20px;
-  width: 60%;
   justify-content: space-around;
   align-self: flex-end;
+  flex-wrap: wrap;
+  gap: 30px;
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const FooterSection = () => {
   return (
     <Footer>
       <FlexRow>
-        <FooterImage
-          src={require("../../assets/images/footer-image.svg")}
-          
-        />
+        <FooterImage src={require("../../assets/images/footer-image.svg")} />
         <FooterContent>
           <Grid>
             <LinkWrapper>
@@ -184,36 +191,31 @@ const FooterSection = () => {
             </LinkEndWrapper>
           </Grid>
           <FlexEnd>
-            <Image
-              src={require("../../assets/images/app_store.png")}
-              width="170px"
-              height="51px"
-            />
-            <Image
-              src={require("../../assets/images/play_store.png")}
-              width="170px"
-              height="51px"
-            />
+            <LinkComponent href="https://itunes.apple.com/us/app/taxiye-passenger/id1455202776?mt=8">
+              <Image
+                src={require("../../assets/images/app_store.png")}
+                width="170px"
+                height="51px"
+              />
+            </LinkComponent>
+            <LinkComponent href="https://play.google.com/store/apps/details?id=com.taxiye">
+              <Image
+                src={require("../../assets/images/play_store.png")}
+                width="170px"
+                height="51px"
+              />
+            </LinkComponent>
           </FlexEnd>
           <FooterBottomLinkWrapper>
             <FooterInfo>
-            <FooterBottomLink>Terms & Conditions</FooterBottomLink>
-            <FooterBottomLink>Privacy Policy</FooterBottomLink>
-            <FooterBottomLink>{`© ${new Date().getFullYear()} Elnet Technologies plc.`}</FooterBottomLink>
+              <FooterBottomLink>Terms & Conditions</FooterBottomLink>
+              <FooterBottomLink>Privacy Policy</FooterBottomLink>
+              <FooterBottomLink>{`© ${new Date().getFullYear()} Elnet Technologies plc.`}</FooterBottomLink>
             </FooterInfo>
             <SocialLinkWrapper>
-              <Image
-                src={require("../../assets/icons/facebook.svg")}
-                
-              />
-              <Image
-                src={require("../../assets/icons/twitter.svg")}
-                
-              />
-              <LastImage
-                src={require("../../assets/icons/instagram.svg")}
-                
-              />
+              <Image src={require("../../assets/icons/facebook.svg")} />
+              <Image src={require("../../assets/icons/twitter.svg")} />
+              <LastImage src={require("../../assets/icons/instagram.svg")} />
             </SocialLinkWrapper>
           </FooterBottomLinkWrapper>
         </FooterContent>

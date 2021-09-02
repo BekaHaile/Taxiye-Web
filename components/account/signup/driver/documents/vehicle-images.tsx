@@ -1,49 +1,88 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import {SubTitle} from "../../../elements";
 import FileSelector from "./file-selector";
+import styled from "styled-components";
+import { Progress } from "antd";
+import Modal from "../../../../modal/secondary";
+import store from "../../../../../redux/store";
+import {
+  addVehicleFrontPicture,
+  deleteVehicleFrontPicture,
+  addVehicleBackPicture,
+  deleteVehicleBackPicture,
+} from "../../../../../redux/actions/driver";
+import Preview from "./preview";
+import {
+  BackButton,
+  Container,
+  CustomHeaderContainer,
+  FixedCustomButton,
+  FixedCustomButtonWithSpace,
+  InfoText,
+  ModalContentContainer,
+  ModalTitle,
+} from "./modal-content";
+import { useSelector } from "react-redux";
 
 const MainContainer = styled("div")`
-display:flex;
-margin-top:20px;
-margin-bottom:60px;
+  margin-top: 20px;
+  margin-bottom: 60px;
 `;
 
-const Container = styled("div")`
-
-margin-right:30px;
+const FlexContainer = styled("div")`
+  display: flex;
+  gap: 40px;
 `;
-
-const SubTitleWithSpace = styled(SubTitle)`
-
-padding-bottom:10px;
-`;
-
-
-
 
 const Document = () => {
-    const [imageUrlFront, setImageFront] = useState("");
-    const [imageUrlSide, setImageSide] = useState("");
-    return (
-        <>
-            <MainContainer>
-                <Container>
-                    <SubTitleWithSpace>Front view</SubTitleWithSpace>
-                    <FileSelector setImage={setImageFront} imageUrl={imageUrlFront} />
-                </Container>
-                <Container>
-                    <SubTitleWithSpace>Side view</SubTitleWithSpace>
-                    <FileSelector setImage={setImageSide} imageUrl={imageUrlSide} />
-                </Container>
-            </MainContainer>
-        </>
-    );
-}
+  const progress = useSelector((state) => state["driver"]["progress"]);
+  const uploading = useSelector((state) => state["driver"]["uploading"]);
+  const driverLicensePicture = useSelector(
+    (state) => state["driver"]["driverLicensePicture"]
+  );
+  const vehicleFrontViewPicture = useSelector(
+    (state) => state["driver"]["vehicleFrontViewPicture"]
+  );
+  const vehicleBackViewPicture = useSelector(
+    (state) => state["driver"]["vehicleBackViewPicture"]
+  );
 
-
-
-
+  return (
+    <>
+      <FlexContainer>
+        <MainContainer>
+          {vehicleFrontViewPicture != null ? (
+            <Preview
+              image={vehicleFrontViewPicture}
+              deleteAction={() => store.dispatch(deleteVehicleFrontPicture())}
+            />
+          ) : (
+            <FileSelector
+              action={(image) => {
+                store.dispatch(addVehicleFrontPicture(image));
+              }}
+            />
+          )}
+        </MainContainer>
+        <MainContainer>
+          {vehicleBackViewPicture != null ? (
+            <Preview
+              image={vehicleBackViewPicture}
+              deleteAction={() => store.dispatch(deleteVehicleBackPicture())}
+            />
+          ) : (
+            <FileSelector
+              action={(image) => {
+                store.dispatch(addVehicleBackPicture(image));
+              }}
+            />
+          )}
+        </MainContainer>
+      </FlexContainer>
+      <Modal onClose={() => console.log("cancel")} show={uploading}>
+        <Progress type="circle" percent={progress} />
+      </Modal>
+    </>
+  );
+};
 
 export default Document;
-

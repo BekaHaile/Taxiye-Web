@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { removeDeliveryItemImages } from "../../../redux/actions/booking";
 import store from "../../../redux/store";
+import theme from '../../../theme/main';
 
 const FlexContainer = styled("div")`
 display:flex;
@@ -24,7 +25,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 19px;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 padding-bottom:20px;
 `;
 const CloseButton = styled("div")`
@@ -37,8 +38,8 @@ display: inline-block;
 text-align:center;
 right:-5px;
 top:-5px;
-background: #A02167;
-color:#fff;
+background: ${theme.colors.primary};
+color:${theme.colors.white};
 font-weight:bold;
 font-size:8px;
 

@@ -13,13 +13,14 @@ import DeliveryBookingInfo from "../info/delivery-booking-info";
 import { confirmRequest } from "../../../redux/actions/booking";
 import store from "../../../redux/store";
 import { useSelector } from 'react-redux';
+import theme from '../../../theme/main';
 
 const Container = styled("div")`
 width: -webkit-fill-available;
 overflow-y:scroll;
 `;
 const HeaderContainer = styled("div")`
-background: #FFFFFF;
+background: ${theme.colors.white};
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 `;
 
@@ -41,7 +42,7 @@ const CustomButton = styled(Button)`
     
 `;
 const MainContainer = styled("div")`
-background: #ffffff;
+background: ${theme.colors.white};
 border-radius: 5px;
 display:flex;
 flex-direction:column;
@@ -56,6 +57,8 @@ border-bottom: none;
 
 const Confirm = (content) => {
     const type = useSelector((state) => state["booking"]["type"]);
+    
+    
     return (
         <>
             <MainContainer>
@@ -70,7 +73,7 @@ const Confirm = (content) => {
                         </ContentContainer> : null
                     }
                     <ContentContainer>
-                        {type == "on-demand" ?
+                        {type == "on_demand" ?
                             <OnDemandBookingInfo /> :
                             type == "rental" ?
                                 <RentalBookingInfo /> :

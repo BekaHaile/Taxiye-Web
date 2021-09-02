@@ -68,7 +68,7 @@ export default function articles({ articlePage, article, populars, error }) {
     background: articlePage.hero.background,
     title: `${article.headerTitle}`,
     subTitle: "",
-    text: `${article.headeeTitle}`,
+    text: `${article.headerTitle}`,
   };
 
   const searchingComponent = <SecondaryInputs

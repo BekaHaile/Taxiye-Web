@@ -1,10 +1,16 @@
 import * as actionTypes from "../../types/user";
+/*
+// The state of user data is declared here
+// It will be usable based on the action fired
+// State will be changed based on the actions specified
+// 
+*/
 const initialState = {
-    phone_no: "",
+    phone_no: "", 
     country_code: "+251",
     country: "",
-    isValid: false,
-    loading: false,
+    isValid: false, // A flag that changes after inputs are validated
+    loading: false, // A loading status checker on event calls
     otpSent: false,
     keepMeSignedIn: false,
     step: 1,
@@ -28,6 +34,8 @@ export default function userReducer(state = initialState, action) {
             return { ...state, user: { ...state.user, firstName: action.payload.firstName } };
         case actionTypes.LAST_NAME_ADDED:
             return { ...state, user: { ...state.user, lastName: action.payload.lastName } };
+            case actionTypes.GENDER_CHANGED:
+                return { ...state, user: { ...state.user, gender: action.payload.gender } };
         case actionTypes.EMAIL_ADDED:
             return { ...state, user: { ...state.user, email: action.payload.email } };
         case actionTypes.PHONE_ADDED:
@@ -43,7 +51,7 @@ export default function userReducer(state = initialState, action) {
         case actionTypes.OTP_SUBMITTED:
             return { ...state };
         case actionTypes.OTP_ADDED:
-            return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 6 };
+            return { ...state, otp: action.payload.otp, isOtpValid: action.payload.otp.length == 4 };
         case actionTypes.LOADING_UPDATED:
             return { ...state, loading: action.payload.loading };
         case actionTypes.KEEP_ME_SIGNED_IN_CHANGED:

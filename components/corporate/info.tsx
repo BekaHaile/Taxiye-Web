@@ -7,6 +7,9 @@ const BlockWrapper = styled("div")`
 display: flex;
 align-items: flex-start;
 margin: 0px 0px;
+flex-wrap:wrap;
+justify-content:center;
+gap:40px;
 `;
 
 const CorporateText = styled(BlockContent)`
@@ -18,7 +21,6 @@ const Block = styled("div")`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-right: 40px;
 `;
 const LastBlock = styled(Block)`
 
@@ -32,7 +34,7 @@ const CorporateInfoSection = ({ backgroundImage, title, subTitle, contents }) =>
     height:375px;
     background-image:url(${url});
     background-repeat: no-repeat;
-    background-size: 635px 375px;
+    background-size: 100% 100%;
     background-position: center; 
     margin:auto;
     margin-top:20px;

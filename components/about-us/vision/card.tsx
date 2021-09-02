@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import theme from '../../../theme/main';
 const Card = styled('div')`
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 35px 20px;
-background: #FFFFFF;
+background: ${theme.colors.white};
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);
 border-radius: 10px;
 
@@ -18,6 +18,7 @@ const CardWrapper = styled('div')`
 display: flex;
 justify-content: space-around;
 gap:50px;
+flex-wrap:wrap;
 `;
 const CenteredCard = styled(Card)`
 box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);
@@ -30,7 +31,7 @@ font-weight: 600;
 font-size: 20px;
 line-height: 27px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};
 padding-bottom: 20px;
 text-align: center;
 `;
@@ -41,7 +42,7 @@ font-weight: normal;
 font-size: 16px;
 line-height: 22px;
 text-align: center;
-color: #444444;
+color:${theme.colors.primaryTextColor};;
 width: 250px;
 `;
 

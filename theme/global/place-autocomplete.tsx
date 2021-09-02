@@ -1,9 +1,10 @@
 import css from 'styled-jsx/css'
+import theme from '../main';
 
 export default css.global`
 .map-autocomplete-dropdown{
     border-radius: 5px;
-    background-color:#fff;
+    background-color:${theme.colors.white};;
     filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.25));
     position:absolute;
     z-index:100;
@@ -18,8 +19,12 @@ export default css.global`
 }
 .suggestion-item.active{
     border-radius: 5px;
-    
-    background-color:#A02167;
-    color:white;
+    background-color:${theme.colors.primary};
+    color:white !important;
+}
+.suggestion-item:hover{
+    border-radius: 5px;
+    background-color:${theme.colors.primary};
+    color:white !important;
 }
 `

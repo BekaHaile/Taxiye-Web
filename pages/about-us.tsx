@@ -1,111 +1,108 @@
-import React from 'react';
-import AboutUsContent from '../components/about-us';
+import React from "react";
+import AboutUsContent from "../components/about-us";
 import Banner from "../components/hero";
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 import client from "../backend-client";
-import DefaultErrorPage from 'next/error';
+import DefaultErrorPage from "next/error";
 
 const query = gql`
-query{
-  aboutUsPage{
-    id
-    hero{
+  query {
+    aboutUsPage {
+      id
+      hero {
+        title
+        subTitle
+        background {
+          url
+        }
+      }
+
+      aboutUsSectionTitle
+      aboutUsSectionDescription {
+        content
+      }
+      aboutUsSectionPrimaryImage {
+        url
+      }
+      aboutUsSectionSecondaryImage {
+        url
+      }
+      whyUsSectionTitle
+      whyUsSectionSubTitle
+      whyAsMainImage {
+        url
+      }
+      ourPartnersSectionTitle
+      ourPartnersSectionSubTitle
+      ourPartnersSectionDescription
+      ourTeamSectionTitle
+      ourTeamSectionSubTitle
+    }
+
+    ourValueStatements {
+      id
       title
-      subTitle
-      background{
+      description
+      thumbnail {
         url
       }
     }
-    
-    aboutUsSectionTitle
-    aboutUsSectionDescription{
-      content
+
+    whyTaxiyes {
+      id
+      title
+      description
     }
-    aboutUsSectionPrimaryImage{
-      url
+
+    ourPartners {
+      id
+      description
+      thumbnail {
+        url
+      }
     }
-    aboutUsSectionSecondaryImage{
-      url
+
+    ourTeams {
+      id
+      name
+      title
+      profile {
+        url
+      }
     }
-    whyUsSectionTitle
-    whyUsSectionSubTitle
-    whyAsMainImage{
-      url
-    }
-    ourPartnersSectionTitle
-    ourPartnersSectionSubTitle
-    ourPartnersSectionDescription
-    ourTeamSectionTitle
-    ourTeamSectionSubTitle
-  }
-  
-  ourValueStatements{
-    id
-    title
-    description
-    thumbnail{
-      url
-    }
-  }
-  
-  whyTaxiyes{
-    id
-    title
-    description
-  }
-  
-  ourPartners{
-    id
-    description
-    thumbnail{
-      url
+    ourTeamGroups {
+      id
+      team
+      description
+      image {
+        url
+      }
     }
   }
-  
-  ourTeams{
-    id
-    name
-    title
-    profile{
-      url
-    }
-  }
-  ourTeamGroups{
-    id
-    team
-    description
-    image{
-      url
-    }
-  }
-  
-  
-}
-`
+`;
 
 export async function getServerSideProps() {
-  try{
+  try {
     const { data, error } = await client.query({
-      query: query
+      query: query,
     });
     return {
-       props: {
-        data: data
+      props: {
+        data: data,
       },
     };
   } catch (e) {
-    return {props:{error:true}};
+    return { props: { error: true } };
   }
 }
-const aboutus = ({data, error}) => {
-    if (error)
-    return <DefaultErrorPage statusCode={404} />
-    return (
-        <>
-            <Banner hero={data.aboutUsPage.hero} children={null}/>
-            <AboutUsContent data={data}/>
-        </>
-    )
-}
+const aboutus = ({ data, error }) => {
+  if (error) return <DefaultErrorPage statusCode={404} />;
+  return (
+    <>
+      <Banner hero={data.aboutUsPage.hero} children={null} />
+      <AboutUsContent data={data} />
+    </>
+  );
+};
 
 export default aboutus;
