@@ -98,7 +98,7 @@ const signup = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
     <>
-      <Banner hero={data.becomeADriverPage.hero} children={children} />
+      <Banner hero={data.becomeADriverPage.hero} children={children} key="become-driver"/>
       <Signup data={data} />
     </>
   )

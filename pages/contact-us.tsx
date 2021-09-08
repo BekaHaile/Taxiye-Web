@@ -72,7 +72,7 @@ const Contactus = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
     <>
-      <Banner hero={data.contactUsPage.hero} children={null}/>
+      <Banner hero={data.contactUsPage.hero} children={null} key="contact-us"/>
       <ContactUsContent
       socialMedias={data.socialMedias}
       officeTitle={data.contactUsPage.officesSectionTitle}

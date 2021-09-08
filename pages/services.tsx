@@ -59,7 +59,7 @@ const Services = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
   <>
-  <Banner hero={data.servicePage.hero} children={null}/>
+  <Banner hero={data.servicePage.hero} children={null} key="services"/>
   <ServicesSection data={data}/>
   </>
   )

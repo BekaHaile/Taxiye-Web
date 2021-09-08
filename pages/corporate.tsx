@@ -100,7 +100,7 @@ const corporate = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
     <>
-      <Banner hero={data.corporatePage.hero} children={children} />
+      <Banner hero={data.corporatePage.hero} children={children} key="corporate"/>
       <CorporateContent data={data} />;
     </>
   )

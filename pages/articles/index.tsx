@@ -120,7 +120,7 @@ export default function articles({ articlePage, featured, unfeatured, articles, 
 
   return (
     <>
-      <Banner hero={articlePage.hero} children={children} />
+      <Banner hero={articlePage.hero} children={children} key="article"/>
       <Container id="content-viewer">
         {
           searchText != "" ?
