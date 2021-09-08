@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Link from "next/link";
 import theme from "../../theme/main";
 import store from "../../redux/store";
-import {changeVisibiity} from "../../redux/actions/user/sider";
+import { changeVisibiity } from "../../redux/actions/user/sider";
+import { logoutUser } from "../../redux/actions/user/index";
+import { useSelector } from "react-redux";
 
 const HeaderWrapper = styled("div")`
   display: flex;
@@ -27,7 +29,7 @@ const NavLink = styled.a`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   &&.active {
     height: 32px;
     border: 1px solid ${theme.colors.primary};
@@ -53,11 +55,13 @@ const MenuView = styled("div")`
 `;
 
 const TabHeader = () => {
+  const access_token = useSelector((state) => state["user"]["access_token"]);
+  const user_data = useSelector((state) => state["user"]["user_data"]);
   return (
     <>
       <HeaderWrapper>
         <FlexContianer>
-          <MenuView onClick={()=>store.dispatch(changeVisibiity())}>
+          <MenuView onClick={() => store.dispatch(changeVisibiity())}>
             <LeftLogo src={require("../../assets/icons/menu.svg")} />
           </MenuView>
 
@@ -68,12 +72,22 @@ const TabHeader = () => {
         <Link href="/">
           <BigLogo src={require("../../assets/images/logo/logo.svg")} />
         </Link>
-        <Link href="/login">
-          <SecondaryNavLink>
-            <Avatar src={require("../../assets/icons/user/avatar.svg")} />
-            <Text>Login</Text>
-          </SecondaryNavLink>
-        </Link>
+        {user_data && access_token ? (
+          <div onClick={() => {
+            store.dispatch(logoutUser());}}>
+            <SecondaryNavLink>
+              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+              <Text>Logout</Text>
+            </SecondaryNavLink>
+          </div>
+        ) : (
+          <Link href="/login">
+            <SecondaryNavLink>
+              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+              <Text>Login</Text>
+            </SecondaryNavLink>
+          </Link>
+        )}
       </HeaderWrapper>
     </>
   );

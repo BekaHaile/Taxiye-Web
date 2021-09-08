@@ -2,7 +2,7 @@ import * as actions from "../../../actions/booking";
 import { loadVehicleTypes } from "../common";
 import { showError } from "../../common";
 
-export async function getRentalVehicleInfo(data, next) {
+export async function getRentalVehicleInfo(data, next, access_token) {
   if (
     data["origin"].location !== null &&
     data["package"] !== null &&
@@ -12,7 +12,7 @@ export async function getRentalVehicleInfo(data, next) {
     next(actions.loadVehicles(true));
     try {
      
-      await loadVehicleTypes(data, next, actions);
+      await loadVehicleTypes(data, next, actions, access_token);
     } catch (e) {
       showError(next);
       next(actions.loadVehicles(false));

@@ -9,11 +9,11 @@ const initialState = {
   estimation: null,
   city: "",
   origin: {
-    address: null,
+    address: "",
     location: null,
   },
   destination: {
-    address: null,
+    address: "",
     location: null,
   },
   date: date,
@@ -48,6 +48,9 @@ const initialState = {
   landmark: "",
   house_number: "",
   isAddressValid: false,
+  cancelRequestLoading: false,
+  request_info: null,
+  message: "",
 };
 
 export default function booking(state = initialState, action) {
@@ -170,6 +173,19 @@ export default function booking(state = initialState, action) {
 
     case actionTypes.REQUEST_CANCELED:
       return { ...state, cancelRide: true };
+    case actionTypes.RIDE_STARTED:
+      return { ...state, message: action.payload.message };
+    case actionTypes.RIDE_STATUS_CHANGED:
+      return { ...state, message: action.payload.message };
+
+    case actionTypes.REQUEST_LOADING_CHANGED:
+      return {
+        ...state,
+        cancelRequestLoading: action.payload.cancelRequestLoading,
+      };
+    case actionTypes.REQUEST_MADE:
+      return { ...state, request_info: action.payload.request_info };
+
     case actionTypes.TERMINATION_REASON_ADDED:
       return { ...state, reason: action.payload.reason, cancelRide: false };
 
@@ -182,6 +198,8 @@ export default function booking(state = initialState, action) {
       return { ...state, landmark: action.payload.landmark };
     case actionTypes.VALIDATED_ADDRESS:
       return { ...state, isAddressValid: action.payload.isAddressValid };
+    case actionTypes.RESET_STATE:
+      return { ...initialState };
 
     default:
       return state;

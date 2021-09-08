@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, FormGroup, Icon, LabelText, InputWrapper } from "./inputs";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -12,9 +12,9 @@ const searchOptions = { componentRestrictions: { country: ["et"] } };
 const LoadingContainer = styled("div")`
   position: absolute;
   right: -20px;
-  top:50%;
-  width:50px;
-  height:50px;
+  top: 50%;
+  width: 50px;
+  height: 50px;
 `;
 
 const Container = styled("div")`
@@ -27,9 +27,10 @@ export default function LocationInput({
   placeholder,
   id,
   icon,
-  action
+  action,
 }) {
   const [add, setAddress] = useState(address);
+
   const active = require("../../assets/icons/location-white.svg");
   const inactive = require("../../assets/icons/location.svg");
   const handleSelect = (address) => {
@@ -39,6 +40,12 @@ export default function LocationInput({
       .then((latLng) => action(latLng, address))
       .catch((error) => console.error("Error", error));
   };
+
+  useEffect(() => {
+    if (address === "") {
+      setAddress("");
+    }
+  }, [address]);
   return (
     <>
       <FormGroup>
@@ -68,11 +75,7 @@ export default function LocationInput({
                   })}
                   type="search"
                 />
-                <LoadingContainer>
-                  {loading && (
-                      <Loader />
-                  )}
-                </LoadingContainer>
+                <LoadingContainer>{loading && <Loader />}</LoadingContainer>
                 <div
                   className={
                     suggestions.length > 0 ? "map-autocomplete-dropdown" : ""

@@ -12,6 +12,8 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import SnackBar from "../components/modal/snackbar";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import {theme} from "../theme/main/material_theme";
 
 const queryClient = new QueryClient();
 
@@ -83,8 +85,8 @@ export default function App({ Component, pageProps }) {
     router.pathname.includes("/user") ||
     router.pathname.includes("/cms")
   )
-    return withOutHeader(loading, pageProps, Component);
-  return withHeader(loading, pageProps, Component);
+    return  <MuiThemeProvider theme={theme}>{withOutHeader(loading, pageProps, Component)}</MuiThemeProvider>
+  return <MuiThemeProvider theme={theme}>{withHeader(loading, pageProps, Component)}</MuiThemeProvider>
 }
 
 function withHeader(loading, pageProps, Component) {

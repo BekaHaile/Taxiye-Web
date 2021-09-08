@@ -5,6 +5,11 @@ import "antd/dist/antd.css";
 import colors from "../main/colors";
 
 const GlobalStyle = createGlobalStyle`
+::selection {
+  color: ${theme.colors.primaryTextColor} !important;
+  background: ${theme.colors.primaryTextColor} !important;
+}
+
 body, html {
   height: 100%;
   margin: 0 !important;

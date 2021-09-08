@@ -2,7 +2,14 @@ import * as actions from "../../actions/booking";
 import * as navigationActions from "../../actions/navigation";
 import * as actionTypes from "../../types/booking/index";
 import { showSuccess, showInfo, showError } from "../common";
-import { fetchPaymentMethods, fetchListOfVehicles, fetchFare, cancelRide, requestDriver } from "./common";
+import {
+  fetchPaymentMethods,
+  fetchListOfVehicles,
+  fetchFare,
+  cancelRide,
+  cancelRideRequest,
+  requestDriver,
+} from "./common";
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -10,6 +17,7 @@ import { getDeliveryVehicleInfo, uploadFile } from "./delivery";
 export const booking = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().booking;
+  let userState = store.getState().user;
 
   if (
     action.type == "DESTINATION_SELECTED" ||
@@ -23,13 +31,13 @@ export const booking = (store) => (next) => async (action) => {
     action.type == "BOOKING_TYPE_CHANGED"
   ) {
     if (data["type"] == "on_demand") {
-      await getOnDemandVehicleInfo(data, next);
+      await getOnDemandVehicleInfo(data, next, userState["access_token"]);
     } else if (data["type"] == "rental") {
-      await getRentalVehicleInfo(data, next);
+      await getRentalVehicleInfo(data, next, userState["access_token"]);
     } else if (data["type"] == "out-station") {
-      await getOutStationVehicleInfo(data, next);
+      await getOutStationVehicleInfo(data, next, userState["access_token"]);
     } else if (data["type"] == "delivery") {
-      await getDeliveryVehicleInfo(data, next);
+      await getDeliveryVehicleInfo(data, next, userState["access_token"]);
     }
   } else if (action.type == "VEHICLE_SELECTED") {
     if (data["type"] == "delivery") {
@@ -39,7 +47,7 @@ export const booking = (store) => (next) => async (action) => {
       ) {
         showInfo(
           next,
-          "Please tell us what you need to be deliverd!",
+          "Please tell us what you need, to be deliverd!",
           "warning"
         );
         return;
@@ -49,7 +57,6 @@ export const booking = (store) => (next) => async (action) => {
       next(actions.loadingAvailbleVehicles(true));
 
       var res = fetchListOfVehicles(data["drivers"], data["vehicle"]);
-      console.log(res);
       next(actions.loadingAvailbleVehicles(false));
       if (res != null) {
         if (res.length <= 0) {
@@ -59,10 +66,11 @@ export const booking = (store) => (next) => async (action) => {
         next(actions.addAvailableVehicles(res));
         if (data["type"] == "delivery") {
           next(navigationActions.goTo("info"));
-        } else if (data["userData"]) next(navigationActions.goTo("confirm"));
-        else {
-          //next(navigationActions.goTo("login"));
+        } else if (userState["user_data"] && userState["access_token"])
           next(navigationActions.goTo("confirm"));
+        else {
+          next(navigationActions.goTo("login"));
+          //next(navigationActions.goTo("confirm"));
           next(actions.setStep(1));
         }
       }
@@ -71,7 +79,7 @@ export const booking = (store) => (next) => async (action) => {
       next(actions.loadingAvailbleVehicles(false));
     }
   } else if (action.type == "DELIVERY_SELECTED") {
-    if (data["userData"]) next(navigationActions.goTo("confirm"));
+    if (userState["userData"]) next(navigationActions.goTo("confirm"));
     else {
       next(navigationActions.goTo("login"));
       next(actions.setStep(1));
@@ -81,13 +89,24 @@ export const booking = (store) => (next) => async (action) => {
   } else if (action.type == actionTypes.FETCH_FARE_ESTIMATE_INITIATED) {
     try {
       next(actions.setFareEstimateLoading(true));
-      var estimate = await fetchFare(data);
+      var estimate = await fetchFare(data, userState["access_token"]);
       next(actions.setFareEstimate(estimate));
       next(actions.setFareEstimateLoading(false));
     } catch (e) {
       next(actions.setFareEstimateLoading(false));
     }
+  } else if (action.type == actionTypes.RIDE_STARTED) {
+    showInfo(next, data.message, "info");
+    next(navigationActions.goTo(""));
+    next(actions.resetState());
+  } else if (action.type == actionTypes.RIDE_ARRIVED) {
+    showInfo(next, data.message, "info");
+  } else if (action.type == actionTypes.RIDE_STATUS_CHANGED) {
+    showInfo(next, data.message, "info");
+    next(navigationActions.goTo(""));
+    next(actions.resetState());
   }
+
   // else if (action.type == "OTP_SUBMITTED") {
   //   data["userData"]
   //     ? next(navigationActions.goTo("confirm"))
@@ -95,19 +114,28 @@ export const booking = (store) => (next) => async (action) => {
   // }
   else if (action.type == "REQUEST_CONFIRMED") {
     next(navigationActions.goTo("approve"));
-    await sleep(3000);
-    var res = await requestDriver(data);
-    next(
-      actions.assignDriver(res)
-    );
+    var res = await requestDriver(data, userState["access_token"]);
+    next(actions.setRequestInfo(res));
   } else if (action.type == "HOUSE_NUMBER_ADDED") {
     if (data["house_number"] != null && data["house_number"] != "")
       next(actions.setIsAddressValid(true));
     else next(actions.setIsAddressValid(false));
   } else if (action.type == "TERMINATION_REASON_ADDED") {
-    var res = await cancelRide(data);
+    var res = await cancelRide(data, userState["access_token"]);
     showSuccess(next);
     next(navigationActions.goTo(""));
+  } else if (action.type == "REQUEST_CANCEL_INITIATED") {
+    next(actions.setRequestLoading(true));
+    var res = await cancelRideRequest(data, userState["access_token"]);
+
+    if (res.flag != 112) {
+      showError(next);
+      return;
+    }
+    next(navigationActions.goTo(""));
+    showSuccess(next);
+    next(actions.setRequestLoading(false));
+    next(actions.resetState());
   } else if (action.type == "FETCH_PAYMENT_METHOD_CALLED") {
     next(actions.setPaymentMethodLoading(true));
     let payment_methods = await fetchPaymentMethods();
