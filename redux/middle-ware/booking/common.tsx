@@ -1,13 +1,15 @@
 import axios from "axios";
 
-export async function fetchVehicles(data) {
+export async function fetchVehicles(data, access_token) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
       `${NEXT_PUBLIC_TAXIYE_HOST}/v2/customer/find_a_driver`,
       {
         access_token:
-          "e06c12e1a576b9571567213327c93fa83768efa73d532514e800d3184e119999",
+          access_token !== ""
+            ? access_token
+            : "e06c12e1a576b9571567213327c93fa83768efa73d532514e800d3184e119999",
         latitude: data["origin"]["location"]["lat"],
         longitude: data["origin"]["location"]["lng"],
         op_drop_latitude: data["destination"]["location"]["lat"],
@@ -26,8 +28,8 @@ export async function fetchVehicles(data) {
   }
 }
 
-export async function loadVehicleTypes(data, next, actions) {
-  let res = await fetchVehicles(data);
+export async function loadVehicleTypes(data, next, actions, access_token) {
+  let res = await fetchVehicles(data, access_token);
   console.log(res);
   console.log(res.drivers);
   var regions = res.regions;
@@ -53,7 +55,7 @@ export async function loadVehicleTypes(data, next, actions) {
   next(actions.validateInput(true));
 }
 
-export async function fetchFare(data) {
+export async function fetchFare(data, access_token) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
@@ -63,13 +65,19 @@ export async function fetchFare(data) {
         ride_distance: data["vehicle"]["distance"],
         region_id: data["vehicle"]["region_id"],
         vehicle_type: data["vehicle"]["vehicle_type"],
-        access_token:
-          "e06c12e1a576b9571567213327c93fa83768efa73d532514e800d3184e119999",
+        access_token: access_token,
         start_longitude: data["origin"]["location"]["lng"],
         start_latitude: data["origin"]["location"]["lat"],
         drop_latitude: data["destination"]["location"]["lat"],
         ride_time: data["time"],
         drop_longitude: data["destination"]["location"]["lng"],
+        app_version: "6007",
+        login_type: "0",
+        is_pooled: "0",
+        device_type: "0",
+        locale: "en",
+        ride_type: "0",
+        customer_package_name: "com.taxiye",
       },
       { timeout: 10000 }
     );
@@ -80,11 +88,10 @@ export async function fetchFare(data) {
   }
 }
 
-export async function requestDriver(data) {
+export async function requestDriver(data, access_token) {
   try {
-    const { NEXT_PUBLIC_TAXIYE_CORPORATE_HOST, NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
-      `${NEXT_PUBLIC_TAXIYE_HOST}/request_ride`,
+      `${process.env.NEXT_PUBLIC_TAXIYE_HOST}/request_ride`,
       {
         operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         app_version: "6007",
@@ -107,8 +114,7 @@ export async function requestDriver(data) {
         is_bluetooth_tracker: "0",
         vehicle_type: data["vehicle"]["vehicle_type"],
         op_drop_latitude: data["destination"]["location"]["lat"],
-        access_token:
-          "e06c12e1a576b9571567213327c93fa83768efa73d532514e800d3184e119999",
+        access_token: access_token,
         customer_package_name: "com.taxiye",
         customer_fare_factor: "1.0",
         current_latitude: data["origin"]["location"]["lat"],
@@ -118,26 +124,50 @@ export async function requestDriver(data) {
 
       { timeout: 100000 }
     );
-    return data["drivers"][0];
+    return res.data;
   } catch (e) {
     throw e;
     return null;
   }
 }
 
-export async function cancelRide(data) {
+export async function cancelRide(data, access_token) {
   try {
     const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
     const res = await axios.post(
       `${NEXT_PUBLIC_TAXIYE_HOST}/cancel_ride_by_customer`,
       {
-        access_token:
-          "b29abb7bd81c973838d2df62ee64c4ee6e79e684bab367823125f09200f766e3",
+        access_token: access_token,
         reasons: "Driver+denied+duty",
         operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         login_type: 0,
         device_type: 0,
         addn_reason: data["reason"],
+        locale: "en",
+      },
+      { timeout: 10000 }
+    );
+    return res.data;
+  } catch (e) {
+    throw e;
+    return null;
+  }
+}
+
+export async function cancelRideRequest(data, access_token) {
+  console.log(data["request_info"]);
+  try {
+    const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
+    const res = await axios.post(
+      `${NEXT_PUBLIC_TAXIYE_HOST}/cancel_the_request`,
+      {
+        access_token:access_token,
+        customer_package_name: "com.taxiye",
+        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
+        app_version: "6007",
+        login_type: "0",
+        session_id: data["request_info"]["session_id"],
+        device_type: "0",
         locale: "en",
       },
       { timeout: 10000 }

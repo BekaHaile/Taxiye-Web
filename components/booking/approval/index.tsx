@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import theme from "../../../theme/main";
+import { useRouter } from "next/router";
 import {
   Button,
   SecondaryButton,
@@ -11,7 +12,7 @@ import RentalBookingInfo from "../info/rental-booking-info";
 import OutStationBookingInfo from "../info/outstation-booking-info";
 import DeliveryBookingInfo from "../info/delivery-booking-info";
 import DriverInfo from "./driver-info";
-import Loading from "./loading";
+import LoadingGif from "./loading";
 import PaymentMethod from "./payment-method";
 import { useSelector } from "react-redux";
 import Modal from "../../modal/secondary";
@@ -20,7 +21,18 @@ import store from "../../../redux/store";
 import {
   submitTerminatioReason,
   cancelRequest,
+  cancelBookingRequestOnLoad,
 } from "../../../redux/actions/booking";
+
+import { app } from "../../../firebase/config";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import {
+  assignDriver,
+  rideStarted,
+  rideNotFound,
+} from "../../../redux/actions/booking/index";
+
+import { PrimaryLoading } from "../../loading/loading";
 
 const Container = styled("div")`
   width: -webkit-fill-available;
@@ -151,7 +163,8 @@ const Text = styled.p<{ color?: string }>`
   font-weight: 600;
   font-size: 14px;
   line-height: 19px;
-  color: ${(props) => (props.color ? props.color : `${theme.colors.primaryTextColor}`)};
+  color: ${(props) =>
+    props.color ? props.color : `${theme.colors.primaryTextColor}`};
   align-self: center;
 `;
 
@@ -164,13 +177,36 @@ const Approve = () => {
     (state) => state["booking"]["paymentMethod"]
   );
   const cancelRide = useSelector((state) => state["booking"]["cancelRide"]);
+  const cancelRequestLoading = useSelector(
+    (state) => state["booking"]["cancelRequestLoading"]
+  );
   const [exitModal, setExitModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
+  const router = useRouter();
 
   const type = useSelector((state) => state["booking"]["type"]);
 
+  useEffect(() => {
+    const messaging = getMessaging(app);
+
+    onMessage(messaging, (payload) => {
+      let recievedMessage = JSON.parse(payload.data.message);
+      console.log(recievedMessage);
+      if (recievedMessage.flag === 5) {
+        store.dispatch(assignDriver(recievedMessage));
+      } else if (recievedMessage.flag === 3) {
+        router.push("/");
+        store.dispatch(rideStarted(recievedMessage.message));
+      } else if (recievedMessage.flag === 8 || recievedMessage.flag === 7) {
+        store.dispatch(rideNotFound(recievedMessage.message));
+      }
+    });
+  });
+
   return (
     <>
+      {cancelRequestLoading ? <PrimaryLoading /> : null}
+
       <MainContainer>
         <Container>
           {!driverLoading && (
@@ -190,7 +226,7 @@ const Approve = () => {
             ) : null}
           </ContentContainer>
           {driverLoading ? (
-            <Loading />
+            <LoadingGif />
           ) : (
             <PaymentMethod paymentMethod={paymentMethod} />
           )}
@@ -234,6 +270,7 @@ function ExitModalView(exitModal, setExitModal) {
         <ModalButtonContainer>
           <SecondaryButton
             onClick={() => {
+              store.dispatch(cancelBookingRequestOnLoad());
               setExitModal(false);
             }}
           >

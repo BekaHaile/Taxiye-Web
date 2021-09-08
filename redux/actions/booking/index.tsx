@@ -79,17 +79,17 @@ export const addCities = (cities) => ({
   },
 });
 
-export const addVehicles = (city,currency,drivers, vehicles) => ({
+export const addVehicles = (city, currency, drivers, vehicles) => ({
   type: actions.VEHICLES_ADDED,
   payload: {
     vehicles: vehicles,
     city: city,
     currency: currency,
-    drivers: drivers
+    drivers: drivers,
   },
 });
 
-export const addAvailableVehicles = ( availableVehicles) => ({
+export const addAvailableVehicles = (availableVehicles) => ({
   type: actions.AVAILABLE_VEHICLES_ADDED,
   payload: {
     availableVehicles: availableVehicles,
@@ -109,7 +109,6 @@ export const loadingAvailbleVehicles = (loading) => ({
     loading: loading,
   },
 });
-
 
 export const changePayemntMethod = (paymentMethod) => ({
   type: actions.PAYMENT_METHOD_CHANGED,
@@ -150,8 +149,47 @@ export const assignDriver = (driver) => ({
   },
 });
 
+export const rideStarted = (message) => ({
+  type: actions.RIDE_STARTED,
+  payload:{
+    message
+  }
+});
+
+export const rideNotFound = (message) => ({
+  type: actions.RIDE_STATUS_CHANGED,
+  payload:{
+    message
+  }
+});
+
 export const cancelRequest = () => ({
   type: actions.REQUEST_CANCELED,
+});
+
+export const resetState = () => ({
+  type: actions.RESET_STATE,
+});
+
+export const setRequestInfo = (request_info) => ({
+  type: actions.REQUEST_MADE,
+  payload: {
+    request_info: request_info,
+  },
+});
+
+export const cancelBookingRequestOnLoad = () => ({
+  type: actions.REQUEST_CANCEL_INITIATED,
+});
+export const cancelBookingRequestFinished = () => ({
+  type: actions.REQUEST_CANCEL_FINISHED,
+});
+
+export const setRequestLoading = (cancelRequestLoading) => ({
+  type: actions.REQUEST_LOADING_CHANGED,
+  payload: {
+    cancelRequestLoading: cancelRequestLoading,
+  },
 });
 
 export const submitTerminatioReason = (reason) => ({
@@ -236,9 +274,9 @@ export const getFareEstimate = () => ({
 });
 export const setFareEstimate = (estimation) => ({
   type: actions.FARE_ESTIMATE_FETCHED,
-  payload:{
-    estimation:estimation
-  }
+  payload: {
+    estimation: estimation,
+  },
 });
 
 export const setFareEstimateLoading = (fareEstimateLoading) => ({

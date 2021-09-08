@@ -70,11 +70,11 @@ const DriverInfo = () => {
 
     return (
         <>
-            <MainTitle>Arriving in {driver.bearing}</MainTitle>
+            <MainTitle>Arriving in {driver.arriving_in}</MainTitle>
             <Container>
                 <Container>
                     <VerticalContainer>
-                        <ProfileImage src={driver.driver_image} />
+                        <ProfileImage src={driver.user_image} />
                     </VerticalContainer>
                     <VerticalContainer>
                         <Title>{`${driver.user_name}`}</Title>
@@ -86,7 +86,7 @@ const DriverInfo = () => {
                 </Container>
                 <VerticalContainer>
                     <SubTitle>{driver.vehicle_name?driver.vehicle_name:""}</SubTitle>
-                    <Title>{driver.vehicle_no}</Title>
+                    <Title>{driver.driver_car_no}</Title>
                 </VerticalContainer>
 
             </Container>

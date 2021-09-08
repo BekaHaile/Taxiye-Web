@@ -56,6 +56,21 @@ export const login = ({ otp }) => {
   };
 };
 
+export const loginVerified = (user_data) => {
+  return {
+    type: actions.USER_LOG_IN_VERIFIED,
+    payload: {
+      user_data: user_data,
+    },
+  };
+};
+
+export const logoutUser = () => {
+  return {
+    type: actions.USER_LOGGED_OUT,
+  };
+};
+
 /*
 // The purpose below is to change loading state,
 // Note the fact that we only push the payload
@@ -244,6 +259,24 @@ export const setTermsAgreement = (agreeToTerms) => {
     type: actions.TERMS_CHANGED,
     payload: {
       agreeToTerms: agreeToTerms,
+    },
+  };
+};
+
+export const setDeviceToken = (device_token) => {
+  return {
+    type: actions.DEVICE_TOKEN_ADDED,
+    payload: {
+      device_token: device_token,
+    },
+  };
+};
+
+export const setAccessToken = (access_token) => {
+  return {
+    type: actions.ACCESS_TOKEN_GENERATED,
+    payload: {
+      access_token: access_token,
     },
   };
 };

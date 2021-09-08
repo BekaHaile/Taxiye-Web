@@ -2,13 +2,6 @@ import * as actions from "../../actions/corporate/home";
 import * as actiontypes from "../../types/corporate/home";
 import axios from "axios";
 
-const overview = {
-  employees: "455",
-  rides: "44",
-  bills: "45, 600 Birr",
-  balance: "45, 600 Birr",
-};
-
 const recentRides = [
   {
     key: "1",
@@ -78,10 +71,11 @@ const recentRides = [
 export const corporate_home = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_home;
+  let corporate_data = store.getState().corporate;
   if (action.type == actiontypes.COMPANY_OVERVIEW_PULL_IN_INITIATED) {
     next(actions.setCompanyOverViewLoading(true));
-    await sleep(3000);
-    next(actions.setOverviewData(overview));
+    var res = await fetchOverview(corporate_data);
+    next(actions.setOverviewData(res));
   } else if (action.type == actiontypes.RECENT_RIDES_PULL_IN_INITIATED) {
     next(actions.setRecentRidesLoading(true));
 
@@ -94,4 +88,22 @@ async function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
+}
+
+export async function fetchOverview(corporate_data) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info`,
+      {
+        token: `${corporate_data["corporate_detail"]["token"]}`,
+      },
+      {
+        timeout: 10000,
+      }
+    );
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 }
