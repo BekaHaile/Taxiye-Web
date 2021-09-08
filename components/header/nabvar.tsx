@@ -5,6 +5,9 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import theme from "../../theme/main";
+import { logoutUser } from "../../redux/actions/user/index";
+import { useSelector } from "react-redux";
+import store from "../../redux/store";
 
 const NavWrapper = styled("div")`
   display: flex;
@@ -17,11 +20,8 @@ const NavWrapper = styled("div")`
   filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.25));
 `;
 const Avatar = styled("img")`
-  
-  margin-right:5px;
+  margin-right: 5px;
 `;
-
-
 
 const Button = styled("button")`
   background: #f8b219;
@@ -35,7 +35,7 @@ const Button = styled("button")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   padding: 5px 20px;
 `;
 
@@ -50,7 +50,7 @@ const NavLink = styled.a`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   padding: 5px 20px;
   &&.active {
     height: 32px;
@@ -60,13 +60,14 @@ const NavLink = styled.a`
   }
   &:hover {
     color: ${theme.colors.primary};
-   
   }
 `;
 const SecondaryNavLink = styled(NavLink)`
- display:flex;
+  display: flex;
 `;
 const NavBar = () => {
+  const access_token = useSelector((state) => state["user"]["access_token"]);
+  const user_data = useSelector((state) => state["user"]["user_data"]);
   const router = useRouter();
   return (
     <NavWrapper>
@@ -79,17 +80,20 @@ const NavBar = () => {
       </Link>
       <Nav>
         <Link key="2" href="/become-driver">
-          {router.pathname === "/become-driver" ? 
-          <NavLink className="active">Become a driver </NavLink>:
-          <Button> {"Become a driver"} </Button> }
-         
-          </Link>
+          {router.pathname === "/become-driver" ? (
+            <NavLink className="active">Become a driver </NavLink>
+          ) : (
+            <Button> {"Become a driver"} </Button>
+          )}
+        </Link>
         <Link key="3" href="/services">
-          <NavLink className={router.pathname === "/services" ? "active" : null}>
+          <NavLink
+            className={router.pathname === "/services" ? "active" : null}
+          >
             Services
           </NavLink>
         </Link>
-        <Link  key="4" href="/corporate">
+        <Link key="4" href="/corporate">
           <NavLink
             className={router.pathname === "/corporate" ? "active" : null}
           >
@@ -97,29 +101,51 @@ const NavBar = () => {
             Corporate
           </NavLink>
         </Link>
-        <Link  key="5" href="/articles">
+        <Link key="5" href="/articles">
           <NavLink
-            className={router.pathname === "/articles" || router.pathname.includes("/articles/") ? "active" : null}
+            className={
+              router.pathname === "/articles" ||
+              router.pathname.includes("/articles/")
+                ? "active"
+                : null
+            }
           >
             Articles
           </NavLink>
         </Link>
-        <Link  key="6" href="/contact-us">
-          <NavLink className={router.pathname === "/contact-us" ? "active" : null}>
+        <Link key="6" href="/contact-us">
+          <NavLink
+            className={router.pathname === "/contact-us" ? "active" : null}
+          >
             Contact us
           </NavLink>
         </Link>
-        <Link  key="7" href="/about-us">
-          <NavLink className={router.pathname === "/about-us" ? "active" : null}>
+        <Link key="7" href="/about-us">
+          <NavLink
+            className={router.pathname === "/about-us" ? "active" : null}
+          >
             About us{" "}
           </NavLink>
         </Link>
-        <Link  key="8" href="/login">
-          <SecondaryNavLink>
-            <Avatar src={require("../../assets/icons/user/avatar.svg")}/>
-            <div>Login</div>
-          </SecondaryNavLink>
-        </Link>
+        {user_data && access_token ? (
+          <div
+            onClick={() => {
+              store.dispatch(logoutUser());
+            }}
+          >
+            <SecondaryNavLink>
+              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+              <div>Logout</div>
+            </SecondaryNavLink>
+          </div>
+        ) : (
+          <Link key="8" href="/login">
+            <SecondaryNavLink>
+              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+              <div>Login</div>
+            </SecondaryNavLink>
+          </Link>
+        )}
       </Nav>
     </NavWrapper>
   );
