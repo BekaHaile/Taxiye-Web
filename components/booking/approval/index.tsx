@@ -30,6 +30,7 @@ import {
   assignDriver,
   rideStarted,
   rideNotFound,
+  rideArrived
 } from "../../../redux/actions/booking/index";
 
 import { PrimaryLoading } from "../../loading/loading";
@@ -199,7 +200,10 @@ const Approve = () => {
         store.dispatch(rideStarted(recievedMessage.message));
       } else if (recievedMessage.flag === 8 || recievedMessage.flag === 7) {
         store.dispatch(rideNotFound(recievedMessage.message));
+      }else if (recievedMessage.flag === 72) {
+        store.dispatch(rideArrived(recievedMessage.message));
       }
+      
     });
   });
 

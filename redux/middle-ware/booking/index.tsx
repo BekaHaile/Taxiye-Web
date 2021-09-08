@@ -99,6 +99,8 @@ export const booking = (store) => (next) => async (action) => {
     showInfo(next, data.message, "info");
     next(navigationActions.goTo(""));
     next(actions.resetState());
+  } else if (action.type == actionTypes.RIDE_ARRIVED) {
+    showInfo(next, data.message, "info");
   } else if (action.type == actionTypes.RIDE_STATUS_CHANGED) {
     showInfo(next, data.message, "info");
     next(navigationActions.goTo(""));

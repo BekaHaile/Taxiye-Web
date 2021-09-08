@@ -8,6 +8,7 @@ export const OTP_ADDED = "OTP_ADDED";
 
 export const OTP_SENT = "OTP_SENT";
 export const OTP_SUBMITTED = "USER_OTP_SUBMITTED";
+export const INITIATE_USER_LOG_OUT = "INITIATE_USER_LOG_OUT";
 
 export const USER_LOG_IN_VERIFIED = "USER_LOG_IN_VERIFIED";
 

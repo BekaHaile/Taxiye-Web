@@ -80,9 +80,10 @@ export const user = (store) => (next) => async (action) => {
       showError(next);
       next(actions.setLoading(false));
     }
-  } else if(action.type == actionTypes.USER_LOGGED_OUT) {
+  } else if(action.type == actionTypes.INITIATE_USER_LOG_OUT) {
     localStorage.removeItem("user_data");
     localStorage.removeItem("access_token");
+    next(actions.commitUserLogout());
   }
   else {
     next(action);

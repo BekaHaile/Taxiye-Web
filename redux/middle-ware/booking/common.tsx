@@ -188,8 +188,7 @@ export function fetchListOfVehicles(drivers, params) {
 
 export async function fetchPaymentMethods() {
   try {
-    await sleep(300);
-    return [{ name: "Cash" }];
+    return [{ name: "Cash", value:1 }];
   } catch (e) {
     throw e;
     return null;

@@ -156,6 +156,13 @@ export const rideStarted = (message) => ({
   }
 });
 
+export const rideArrived = (message) => ({
+  type: actions.RIDE_ARRIVED,
+  payload:{
+    message
+  }
+});
+
 export const rideNotFound = (message) => ({
   type: actions.RIDE_STATUS_CHANGED,
   payload:{

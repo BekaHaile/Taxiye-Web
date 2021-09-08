@@ -4,6 +4,7 @@ import Link from "next/link";
 import theme from "../../theme/main";
 import store from "../../redux/store";
 import { changeVisibiity } from "../../redux/actions/user/sider";
+import { logoutUser } from "../../redux/actions/user/index";
 import { useSelector } from "react-redux";
 
 const HeaderWrapper = styled("div")`
@@ -72,7 +73,13 @@ const TabHeader = () => {
           <BigLogo src={require("../../assets/images/logo/logo.svg")} />
         </Link>
         {user_data && access_token ? (
-          <div></div>
+          <div onClick={() => {
+            store.dispatch(logoutUser());}}>
+            <SecondaryNavLink>
+              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+              <Text>Logout</Text>
+            </SecondaryNavLink>
+          </div>
         ) : (
           <Link href="/login">
             <SecondaryNavLink>

@@ -67,9 +67,17 @@ export const loginVerified = (user_data) => {
 
 export const logoutUser = () => {
   return {
+    type: actions.INITIATE_USER_LOG_OUT,
+  };
+};
+
+export const commitUserLogout = () => {
+  return {
     type: actions.USER_LOGGED_OUT,
   };
 };
+
+
 
 /*
 // The purpose below is to change loading state,
