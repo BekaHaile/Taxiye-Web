@@ -70,7 +70,7 @@ const DriverInfo = () => {
 
     return (
         <>
-            <MainTitle>Arriving in {driver.arriving_in}</MainTitle>
+            <MainTitle>Driver is on his way!</MainTitle>
             <Container>
                 <Container>
                     <VerticalContainer>
