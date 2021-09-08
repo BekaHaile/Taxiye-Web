@@ -101,6 +101,8 @@ export const booking = (store) => (next) => async (action) => {
     next(actions.resetState());
   } else if (action.type == actionTypes.RIDE_ARRIVED) {
     showInfo(next, data.message, "info");
+  }else if (action.type == actionTypes.DRIVER_ASSIGNED) {
+    showInfo(next, data.driver.message, "info");
   } else if (action.type == actionTypes.RIDE_STATUS_CHANGED) {
     showInfo(next, data.message, "info");
     next(navigationActions.goTo(""));

@@ -152,14 +152,14 @@ export const assignDriver = (driver) => ({
 export const rideStarted = (message) => ({
   type: actions.RIDE_STARTED,
   payload:{
-    message
+    message: message
   }
 });
 
 export const rideArrived = (message) => ({
   type: actions.RIDE_ARRIVED,
   payload:{
-    message
+    message :message
   }
 });
 

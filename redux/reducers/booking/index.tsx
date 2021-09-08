@@ -173,8 +173,11 @@ export default function booking(state = initialState, action) {
 
     case actionTypes.REQUEST_CANCELED:
       return { ...state, cancelRide: true };
+    case actionTypes.RIDE_ARRIVED:
+      return { ...state, message: action.payload.message };
     case actionTypes.RIDE_STARTED:
       return { ...state, message: action.payload.message };
+
     case actionTypes.RIDE_STATUS_CHANGED:
       return { ...state, message: action.payload.message };
 
