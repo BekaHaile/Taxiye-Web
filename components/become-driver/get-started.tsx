@@ -39,9 +39,9 @@ const SignUp = ({ title }) => {
           <CustomSectionTitle>{title}</CustomSectionTitle>
         </SectionHeaderContainer>
         <SectionContentContainer>
-          <Link href="/signup/driver">
+          {/* <Link href="/signup/driver"> */}
           <SloganButton>Get Started</SloganButton>
-          </Link>
+          {/* </Link> */}
         </SectionContentContainer>
       </GraySection>
     </>

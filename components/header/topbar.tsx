@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import theme from "../../theme/main";
+import { ShareSocial } from "react-share-social";
+import Modal from "../modal/secondary";
 
 const Container = styled("div")`
   background: ${theme.colors.topHeaderColor};
@@ -22,48 +24,62 @@ const FormattedLinks = styled.a`
   text-decoration: none;
   padding: 5px;
   &:after {
-    margin-left:10px;
-    content:"";
+    margin-left: 10px;
+    content: "";
     border: 1px solid #ababab;
-   
   }
   &:hover {
     color: ${theme.colors.primary};
   }
 `;
 
-
 const CornerLink = styled(FormattedLinks)`
-&:after{
-  border: none;
-}
-
+  &:after {
+    border: none;
+  }
 `;
 
 const TopBar = () => {
+  const [show, setShow] = useState(false);
+  const [siteUrl, setSiteUrl] = useState("");
+  useEffect(() => {
+    let urlLInk = window.location.href;
+    setSiteUrl(urlLInk);
+  }, []);
   return (
     <Container>
-      <Link href="#">
+      <div
+        onClick={() => {
+          const element = document.querySelector("#download-app-links");
+          const topPos =
+            element.getBoundingClientRect().top + window.pageYOffset;
+
+          window.scrollTo({
+            top: topPos, // scroll so that the element is at the top of the view
+            behavior: "smooth", // smooth scroll
+          });
+        }}
+      >
         <FormattedLinks>Download App </FormattedLinks>
-      </Link>
-      <Link href="#">
+      </div>
+      <a href="https://elsabi.net/" target="_blank">
         <FormattedLinks>EI Sabi</FormattedLinks>
-      </Link>
-      <Link href="#">
-        <FormattedLinks>EI Foundation</FormattedLinks>
-      </Link>
-      <Link href="#">
+      </a>
+      <div onClick={() => setShow(true)}>
         <FormattedLinks>Share</FormattedLinks>
-      </Link>
-      <Link href="#">
-        <FormattedLinks>Offers</FormattedLinks>
-      </Link>
-      <Link href="#">
+      </div>
+      <Link href="support">
         <FormattedLinks>Support</FormattedLinks>
       </Link>
       <Link href="#">
         <CornerLink>Call Us On 6055</CornerLink>
       </Link>
+      <Modal onClose={() => setShow(false)} show={show}>
+        <ShareSocial
+          url={siteUrl}
+          socialTypes={["facebook", "twitter", "reddit", "linkedin", "email"]}
+        />
+      </Modal>
     </Container>
   );
 };

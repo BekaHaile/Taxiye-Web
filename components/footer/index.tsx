@@ -190,7 +190,7 @@ const FooterSection = () => {
               </Link>
             </LinkEndWrapper>
           </Grid>
-          <FlexEnd>
+          <FlexEnd id="download-app-links">
             <LinkComponent href="https://itunes.apple.com/us/app/taxiye-passenger/id1455202776?mt=8">
               <Image
                 src={require("../../assets/images/app_store.png")}

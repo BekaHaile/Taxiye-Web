@@ -1,6 +1,6 @@
 import * as actions from "../../types/contact-us";
 
-/*
+/**
 // The function is called when full name field is
 // Changed, whenever it is called it takes full_name
 // As an argument and pass that argument to reducer
@@ -16,7 +16,7 @@ export const addFullName = (full_name) => {
   };
 };
 
-/*
+/**
 // The function is called when email field is
 // Changed, whenever it is called it takes email value
 // As an argument and pass that argument to reducer
@@ -33,7 +33,7 @@ export const addEmail = (email) => {
   };
 };
 
-/*
+/**
 // The function is called when subject field is
 // Changed, whenever it is called it takes subject value
 // As an argument and pass that argument to reducer
@@ -50,7 +50,7 @@ export const addSubject = (subject) => {
   };
 };
 
-/*
+/**
 // The function is called when message field is
 // Changed, whenever it is called it takes message value
 // As an argument and pass that argument to reducer
@@ -67,7 +67,7 @@ export const addMessage = (message) => {
   };
 };
 
-/*
+/**
 // This function is responsible to change validation status
 // Will be called from the middleware
 // If fields specified abover meet the requirement
@@ -83,7 +83,7 @@ export const setValidation = (isValid) => {
   };
 };
 
-/*
+/**
 // This function is called when input is verified
 // And The user clicks on submit button
 // It only fires an action that will be consumed by
@@ -97,7 +97,7 @@ export const submitForm = () => {
   };
 };
 
-/*
+/**
 // Resets current state to initial state
 */
 
