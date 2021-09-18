@@ -9,7 +9,7 @@ export async function fetchVehicles(data, access_token) {
         access_token:
           access_token !== ""
             ? access_token
-            : "e06c12e1a576b9571567213327c93fa83768efa73d532514e800d3184e119999",
+            : `${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
         latitude: data["origin"]["location"]["lat"],
         longitude: data["origin"]["location"]["lng"],
         op_drop_latitude: data["destination"]["location"]["lat"],
