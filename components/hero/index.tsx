@@ -11,7 +11,6 @@ align-items: center;
 text-align: center;
 align-self: center;
 margin:auto;
-
 `;
 
 const Slogan = styled("h1")`
@@ -69,8 +68,6 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
 
   const HeroWrapper = styled("div")`
     display: flex;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-      url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
     height: 75vh;
@@ -89,7 +86,14 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
 
   return (
     <>
-      <HeroWrapper>
+      <HeroWrapper 
+      style={{background: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(${backgroundUrl})`,
+      display: `flex`,
+      backgroundRepeat: `no-repeat`,
+      backgroundSize: `cover`,
+      height: `75vh`,
+      width: `auto`}}
+      key={queryText} id={queryText}>
         <Container>
           <SlogganWrapper>
             <Breadcrump>
