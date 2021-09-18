@@ -34,6 +34,7 @@ export async function loadVehicleTypes(data, next, actions, access_token) {
   console.log(res.drivers);
   var regions = res.regions;
   var drivers = res.drivers;
+  var fares = res.fare_structure;
   var supportedServices = res.services.find((service) => {
     return service.type === data["type"];
   });
@@ -44,12 +45,19 @@ export async function loadVehicleTypes(data, next, actions, access_token) {
   var selectedRegions = regions.filter((region) => {
     return supportedRides.indexOf(region.ride_type) !== -1;
   });
+  var vehicleLists = selectedRegions.map((element)=>{
+    var found = fares.findIndex((item)=> item.vehicle_type==element.vehicle_type );
+    if(found !== -1)
+    return {...element, ...fares[found]};
+    return element;
+  });
+  console.log(vehicleLists);
   next(
     actions.addVehicles(
       res.city_id ? res.city_id : "",
       res.currency,
       drivers,
-      Array.from(selectedRegions)
+      Array.from(vehicleLists)
     )
   );
   next(actions.validateInput(true));

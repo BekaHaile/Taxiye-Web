@@ -106,26 +106,26 @@ const VehicleList = () => {
                 setSelected(index);
               }}
               id={isSelected == index ? "vehicleSelected" : null}
-              key={vehicle.name}
+              key={vehicle?.name}
             >
               <style jsx global>
                 {styles}
               </style>
               <CarFlexContainer>
                 <Image
-                  src={vehicle.images.ride_now_normal_2x}
+                  src={vehicle?.images.ride_now_normal}
                 />
                 <NormalContainer>
-                  <Text>{vehicle.region_name}</Text>
+                  <Text>{vehicle?.region_name}</Text>
                   <CustomFlexContainer>
                     <ImageIcon src={require("../../assets/icons/avatar.svg")} />
-                    <Text>{vehicle.max_people}</Text>
+                    <Text>{vehicle?.max_people}</Text>
                   </CustomFlexContainer>
                 </NormalContainer>
               </CarFlexContainer>
 
               <FlexContainer>
-                <PriceText>122 {currency}</PriceText>
+                <PriceText>{vehicle?.display_base_fare}</PriceText>
               </FlexContainer>
               <FlexContainer>
                 <ImageIcon src={require("../../assets/icons/right-arrow.svg")} />

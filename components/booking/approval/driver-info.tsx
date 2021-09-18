@@ -74,19 +74,19 @@ const DriverInfo = () => {
             <Container>
                 <Container>
                     <VerticalContainer>
-                        <ProfileImage src={driver.user_image} />
+                        <ProfileImage src={driver?.user_image} />
                     </VerticalContainer>
                     <VerticalContainer>
-                        <Title>{`${driver.user_name}`}</Title>
-                        <SubTitle>{driver.phone_no}</SubTitle>
+                        <Title>{`${driver?.user_name}`}</Title>
+                        <SubTitle>{driver?.phone_no}</SubTitle>
                         <SubTitle>
-                        <Rating rate={driver.rating}/>
+                        <Rating rate={driver?.rating}/>
                         </SubTitle>
                     </VerticalContainer>
                 </Container>
                 <VerticalContainer>
-                    <SubTitle>{driver.vehicle_name?driver.vehicle_name:""}</SubTitle>
-                    <Title>{driver.driver_car_no}</Title>
+                    <SubTitle>{driver?.vehicle_name?driver?.vehicle_name:""}</SubTitle>
+                    <Title>{driver?.driver_car_no}</Title>
                 </VerticalContainer>
 
             </Container>

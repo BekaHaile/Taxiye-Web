@@ -82,10 +82,14 @@ const Note = () => {
                     : ""}
                 </Text>
                 <Text>
+                  {vehicle.display_base_fare}
+                </Text>
+                
+                {/* <Text>
                   {estimation
                     ? estimation.fare?`~ ${estimation.fare} ${estimation.currency}`:"Fare Unknown"
                     : ""}{" "}
-                </Text>
+                </Text> */}
               </HorizontalFlex>
             )}
           </VerticalFlex>
