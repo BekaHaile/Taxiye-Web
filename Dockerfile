@@ -1,20 +1,20 @@
+
+# base image
 FROM node:14
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# create & set working directory
+RUN mkdir -p /usr/src/web_app
+WORKDIR /usr/src/web_app
 
-# Installing dependencies
-COPY package*.json ./
+ENV NODE_ENV=production
+
+# copy source files
+COPY . /usr/src/web_app
+
+# install dependencies
 RUN npm install
 
-# Copying source files
-COPY . .
-
-# Building app
+# start app
 RUN npm run build
 EXPOSE 3000
-
-# Running the app
-CMD ["npm", "start"]
-
+CMD npm run start
