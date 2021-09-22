@@ -91,17 +91,17 @@ const WeAreContent = ({ title, description, primaryImage, secondaryImage }) => {
                 <LeftServiceTitle>{title}</LeftServiceTitle>
 
                 {description.map((text, index) => (
-                  <LeftDescription key={index}>{text.content}</LeftDescription>
+                  <LeftDescription key={index}>{text?.content}</LeftDescription>
                 ))}
               </div>
             </Container>
 
             <ImageContainer>
               <PrimaryImage
-                src={`${process.env.NEXT_PUBLIC_HOST}${primaryImage.url}`}
+                src={`${process.env.NEXT_PUBLIC_HOST}${primaryImage?.url}`}
               />
               <SecondaryImage
-                src={`${process.env.NEXT_PUBLIC_HOST}${secondaryImage.url}`}
+                src={`${process.env.NEXT_PUBLIC_HOST}${secondaryImage?.url}`}
               />
             </ImageContainer>
           </FlexRow>

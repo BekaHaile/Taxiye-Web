@@ -50,7 +50,7 @@ const Support = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
   <>
-  <Banner hero={data.supportPage.hero} children={null} key="Support"/>
+  <Banner hero={data?.supportPage?.hero} children={null} key="Support"/>
   <SupportSection data={data.supports}/>
   </>
   )

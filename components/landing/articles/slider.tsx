@@ -4,7 +4,13 @@ import Slider from "../../slider";
 const settings = {
   itemsToShow: 3,
   itemPadding: [25, 0],
-  transitionMs: 700
+  transitionMs: 700,
+  // breakPoints : [
+  //   { width: 1, itemsToShow: 1 },
+  //   { width: 550, itemsToShow: 1},
+  //   { width: 768, itemsToShow: 2},
+  //   { width: 850, itemsToShow: 3 },
+  // ]
 }
 
 const ArticleSlider = ({ articles }) => {

@@ -98,7 +98,7 @@ const ArticleCard = ({ article }) => {
     <Card>
       <ImageContainer>
         <CardImage
-          src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`}
+          src={`${process.env.NEXT_PUBLIC_HOST}${article?.thumbnail?.url}`}
         />
       </ImageContainer>
       <CardBody>

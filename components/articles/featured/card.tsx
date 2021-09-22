@@ -94,11 +94,11 @@ const ArticleCard = ({ article }) => {
   return (
     <Card>
       <ImageContainer>
-        <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.mainMedia.url}`} />
+        <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article?.mainMedia?.url}`} />
       </ImageContainer>
       <CardBody>
         <TextWrapper>
-          <ArticleTitle>{article.headerTitle}</ArticleTitle>
+          <ArticleTitle>{article?.headerTitle}</ArticleTitle>
           <ArticleInfoWrapper>
             <Info>
               <Image
@@ -106,7 +106,7 @@ const ArticleCard = ({ article }) => {
               />
               {
                 article.user &&
-              <AuthorText>{article.user.firstname} {article.user.lastname.charAt(0)+`.`}</AuthorText>
+              <AuthorText>{article?.user?.firstname} {article?.user?.lastname.charAt(0)+`.`}</AuthorText>
               }
               </Info>
             <Info>
@@ -114,14 +114,14 @@ const ArticleCard = ({ article }) => {
                 src={require("../../../assets/icons/user/clock.svg")}
               />
               <AuthorText>
-                <DateView format="MMMM D, YYYY" date={article.published_at}/>
+                <DateView format="MMMM D, YYYY" date={article?.published_at}/>
                 </AuthorText>
             </Info>
           </ArticleInfoWrapper>
 
-          <ArticleText>{article.headerLongSubtitle}</ArticleText>
+          <ArticleText>{article?.headerLongSubtitle}</ArticleText>
         </TextWrapper>
-        <Link href={`/articles/${article.id}`}><Button>Read More</Button></Link>
+        <Link href={`/articles/${article?.id}`}><Button>Read More</Button></Link>
       </CardBody>
     </Card>
   );
