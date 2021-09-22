@@ -83,13 +83,13 @@ const Services = ({services, title, subTitle}: ServiceProps) => {
         <ServiceWrapper key={index}>
           <Image
             
-            src={`${process.env.NEXT_PUBLIC_HOST}${service.thumbnail.url}`}
+            src={`${process.env.NEXT_PUBLIC_HOST}${service?.thumbnail.url}`}
           />
-          <ServiceTitle>{service.name}</ServiceTitle>
+          <ServiceTitle>{service?.name}</ServiceTitle>
           <ServiceText>
-            {service.shortDescription.content}
+            {service?.shortDescription.content}
           </ServiceText>
-          <Link href={`/services#${service.id}`}>
+          <Link href={`/services#${service?.id}`}>
           <Button>Load More</Button>
           </Link>
         </ServiceWrapper>

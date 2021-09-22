@@ -73,10 +73,10 @@ const SloganButton = styled("button")`
   text-align: center;
 `;
 
-// const children = <Link href="/signup/driver">
-//   <SloganButton>Get started</SloganButton>
-// </Link>
-const children = <SloganButton>Get started</SloganButton>;
+const children = <Link href="/signup/driver">
+  <SloganButton>Get started</SloganButton>
+</Link>
+// const children = <SloganButton>Get started</SloganButton>;
 export async function getServerSideProps() {
   try {
     const { data, error } = await client.query({

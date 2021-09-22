@@ -60,17 +60,17 @@ const TestimonyCard = ({ testimony }) => {
       <HeaderContainer className="testimony-header">
         <Avatar
           className="testimony-image"
-          src={`${process.env.NEXT_PUBLIC_HOST}${testimony.profileImage.url}`}
+          src={`${process.env.NEXT_PUBLIC_HOST}${testimony?.profileImage?.url}`}
         />
         <div>
-          <CardTitle className="testimony-name">{testimony.fullName}</CardTitle>
+          <CardTitle className="testimony-name">{testimony?.fullName}</CardTitle>
           <CardSubTitle className="testimony-position">
-            {testimony.position}
+            {testimony?.position}
           </CardSubTitle>
         </div>
       </HeaderContainer>
-      <CardText className="testimony-text">{testimony.testimony}</CardText>
-      <Rating key={testimony.id} rate={testimony.rating} />
+      <CardText className="testimony-text">{testimony?.testimony}</CardText>
+      <Rating key={testimony?.id} rate={testimony?.rating} />
     </Card>
   );
 };
