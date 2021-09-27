@@ -5,12 +5,12 @@ import ArticleSlider from "./slider";
 import { GraySection } from "../../section";
 
 
-const FeaturedContent = ({ articles }) => {
+const FeaturedContent = ({ articles, title }) => {
   return (
     <>
       <GraySection>
         <SecondaryBlock>
-          <Title>All Articles</Title>
+          <Title>{title}</Title>
         </SecondaryBlock>
         <ArticleSlider unfeatured={articles}></ArticleSlider>
 

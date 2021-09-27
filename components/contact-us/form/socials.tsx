@@ -7,7 +7,9 @@ import theme from "../../../theme/main";
 const BottomLinkWrapper = styled("div")`
   display: flex;
   align-self: flex-end;
- 
+  @media (max-width: 768px) {
+    justify-content:center;
+  }
 `;
 const SocialLinkWrapper = styled(BottomLinkWrapper)`
  
@@ -21,8 +23,8 @@ font-size: 14px;
 line-height: 150%;
 text-transform: uppercase;
 color: ${theme.colors.secondaryTextColor};
-
 padding-bottom: 8px;
+
 `;
 const Image = styled("img")`
 padding-right:10px;

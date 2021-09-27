@@ -10,11 +10,18 @@ const Card = styled("div")`
   align-items: flex-start;
   padding: 0px;
   margin: 10px 33px;
-  baackground: ${theme.colors.white};;
+  baackground: ${theme.colors.white};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  background: ${theme.colors.white};;
-  width:340px;
+  background: ${theme.colors.white};
+  width: 340px;
+  @media (max-width: 340px) {
+    width: 100%;
+    margin: 10px;
+  }
+  @media (max-width: 500px) {
+    margin: 10px;
+  }
 `;
 
 const CardImage = styled("img")`
@@ -22,7 +29,6 @@ const CardImage = styled("img")`
   margin: 0;
   height: 230px;
   width: 100%;
-
 `;
 
 const CardBody = styled("div")`
@@ -30,15 +36,15 @@ const CardBody = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
+  @media (max-width: 500px) {
+    padding: 0px;
+  }
 `;
 
-const Image = styled("img")`
- 
-`;
-
+const Image = styled("img")``;
 
 const Info = styled("div")`
-  padding-right:10px;
+  padding-right: 10px;
 `;
 
 const AuthorText = styled("span")`
@@ -52,7 +58,6 @@ const AuthorText = styled("span")`
 const ArticleInfoWrapper = styled("div")`
   display: flex;
   padding-bottom: 10px;
-  
 `;
 
 const ArticleTitle = styled("h1")`
@@ -60,7 +65,7 @@ const ArticleTitle = styled("h1")`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   padding: 0px 0px 10px 0px;
 `;
 
@@ -69,8 +74,8 @@ const ArticleText = styled("p")`
   font-weight: normal;
   font-size: 14px;
   line-height: 150%;
-  color:${theme.colors.primaryTextColor};;
-  padding-bottom:20px;
+  color: ${theme.colors.primaryTextColor};
+  padding-bottom: 20px;
 `;
 
 const Button = styled("button")`
@@ -82,46 +87,44 @@ const Button = styled("button")`
   line-height: 19px;
   text-align: center;
   color: ${theme.colors.primary};
-  background: ${theme.colors.white};;
-  padding:5px 20px;
+  background: ${theme.colors.white};
+  padding: 5px 20px;
 `;
 
 const TextWrapper = styled("div")`
   width: 300px;
+  @media (max-width: 300px) {
+    width: 100%;
+  }
 `;
 
-const FlexCard = styled(Card)`
-
-`;
+const FlexCard = styled(Card)``;
 
 const CenteredCard = styled(Card)`
   margin: 0px 40px;
 `;
 
-
 const ArticleCard = ({ article }) => {
   return (
     <Card>
-      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`} />
+      <CardImage
+        src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`}
+      />
       <CardBody>
         <TextWrapper>
-
           <ArticleInfoWrapper>
             <Info>
-              <Image
-                src={require("../../../assets/icons/user/vector.svg")}
-              />
-              {
-                article.user &&
-                <AuthorText>{article.user.firstname} {article.user.lastname.charAt(0) + `.`}</AuthorText>
-              }
+              <Image src={require("../../../assets/icons/user/vector.svg")} />
+              {article.user && (
+                <AuthorText>
+                  {article.user.firstname}{" "}
+                  {article.user.lastname.charAt(0) + `.`}
+                </AuthorText>
+              )}
             </Info>
             <Info>
-              <Image
-                src={require("../../../assets/icons/user/clock.svg")}
-              />
+              <Image src={require("../../../assets/icons/user/clock.svg")} />
               <AuthorText>
-
                 <DateView format="MMMM D, YYYY" date={article.published_at} />
               </AuthorText>
             </Info>

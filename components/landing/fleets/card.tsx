@@ -10,6 +10,10 @@ const Card = styled("div")`
   border-radius: 10px;
   text-align: center;
   margin:10px;
+  @media (max-width: 768px) {
+    padding: 50px 0px;
+    margin:0px;
+  }
 `;
 
 const CardTitle = styled("h3")`
@@ -25,6 +29,9 @@ const CardText = styled("p")`
   color:${theme.colors.primaryTextColor};;
   width: 280px;
   padding:0;
+  @media (max-width: 280px) {
+    width: 100%;
+  }
 `;
 
 const Price = styled("p")`

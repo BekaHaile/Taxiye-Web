@@ -30,6 +30,15 @@ export const goFuture = () => {
   };
 };
 
+export const menuSelected = (isMenuActive) => {
+  return {
+    type: actions.MENU_SELECTION_CHANGED,
+    payload: {
+      isMenuActive: isMenuActive,
+    },
+  };
+};
+
 /*
 // Called whenever there is a service that needs to enable/show
 // Snackbar. This function takes show status, message and type as an

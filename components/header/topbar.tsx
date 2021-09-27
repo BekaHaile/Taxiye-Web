@@ -14,7 +14,14 @@ const Container = styled("div")`
   align-items: center;
   margin: 0;
   padding: 0px 60px;
+  flex-wrap:wrap;
+  @media (max-width: 768px) {
+    height: auto;
+    justify-content: start;
+    padding: 0px 20px;
+  }
 `;
+
 
 const FormattedLinks = styled.a`
   font-size: 13px;

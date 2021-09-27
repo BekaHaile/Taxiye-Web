@@ -199,6 +199,9 @@ const SecondaryInput = styled('input')`
   padding: 12px 20px 12px 50px;
   border-radius:50px;
   outline:none;
+  @media (max-width: 768px) {
+    width:100%;
+  }
 `;
 const SecondaryInputWithShadow = styled(SecondaryInput)`
 box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.161);

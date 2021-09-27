@@ -25,6 +25,9 @@ const Container = styled("div")`
 const SearchContainer = styled("div")`
     width:400px;
     margin:auto;
+    @media (max-width: 768px) {
+      width:100%;
+    }
 `;
 const NoContent = styled("div")`
 font-family: Open Sans;
@@ -125,7 +128,7 @@ export default function articles({ articlePage, featured, unfeatured, articles, 
         {
           searchText != "" ?
 
-            <Articles articles={searchedData} />
+            <Articles title="All Articles" articles={searchedData} />
             :
             <ArticlesContent featured={featured} unfeatured={loadedItems} />
 

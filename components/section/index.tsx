@@ -7,6 +7,9 @@ const Section = styled("section")`
   flex-direction: column;
   align-items: center;
   padding: 60px 60px;
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+  }
 `;
 
 const DefaultSection = styled(Section)`
@@ -14,6 +17,9 @@ const DefaultSection = styled(Section)`
 `;
 const SecondarySection = styled(DefaultSection)`
   padding: 60px 60px;
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+  }
 `;
 
 const GraySection = styled(Section)`
@@ -46,6 +52,9 @@ const CenteredText = styled("p")`
   text-align: center;
   color: ${theme.colors.primaryTextColor};
   max-width: 800px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export {

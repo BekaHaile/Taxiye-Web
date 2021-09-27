@@ -10,17 +10,27 @@ import { useSelector } from "react-redux";
 import store from "../../redux/store";
 
 const NavWrapper = styled("div")`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 50px 0px 60px;
-  height: 65px;
-  background: ${theme.colors.headerColor};
-  filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.25));
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px 0px 60px;
+    height: 65px;
+    background: ${theme.colors.headerColor};
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.25));
+  }
+  @media (max-width: 768px) {
+    width: fit-content;
+    margin: auto;
+    padding-top: 20px;
+  }
 `;
 const Avatar = styled("img")`
   margin-right: 5px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Button = styled("button")`
@@ -37,17 +47,31 @@ const Button = styled("button")`
   text-align: center;
   color: ${theme.colors.primaryTextColor};
   padding: 5px 20px;
+
+  @media (max-width: 1000px) {
+    font-size:1vw;
+  }
+  @media (max-width: 768px) {
+    margin: 0px;
+    font-size: 14px;
+  }
 `;
+
 
 const Nav = styled("nav")`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    gap: 10px;
+    margin: 0px 20px;
+    flex-wrap:wrap;
+  }
 `;
 
 const NavLink = styled.a`
   font-weight: 600;
-  font-size: 14px;
   line-height: 19px;
   text-align: center;
   color: ${theme.colors.primaryTextColor};
@@ -61,6 +85,12 @@ const NavLink = styled.a`
   &:hover {
     color: ${theme.colors.primary};
   }
+  @media (max-width: 1000px) {
+    font-size:1vw;
+  }
+  @media (max-width: 768px) {
+    font-size:14px;
+  }
 `;
 const SecondaryNavLink = styled(NavLink)`
   display: flex;
@@ -71,13 +101,15 @@ const NavBar = () => {
   const router = useRouter();
   return (
     <NavWrapper>
-      <Link key="1" href="/">
-        <Image
-          width="97px"
-          height="auto"
-          src={require("../../assets/images/logo/logo.svg")}
-        />
-      </Link>
+      <div className="desktop-view">
+        <Link key="1" href="/">
+          <Image
+            width="97px"
+            height="auto"
+            src={require("../../assets/images/logo/logo.svg")}
+          />
+        </Link>
+      </div>
       <Nav>
         <Link key="2" href="/become-driver">
           {router.pathname === "/become-driver" ? (

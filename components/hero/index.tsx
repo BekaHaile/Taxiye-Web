@@ -18,6 +18,11 @@ const Slogan = styled("h1")`
   font-size: 36px;
   line-height: 49px;
   color: ${theme.colors.heroTitleColor};
+  @media (max-width: 768px) {
+    font-size: 5vw;
+    margin:10px;
+    line-height: normal;
+  }
 `;
 
 const CenteredSlogan = styled(Slogan)`
@@ -32,6 +37,10 @@ const Description = styled("p")`
   text-align: center;
   color: ${theme.colors.heroSubTitleColor};
   padding-bottom: 30px;
+  @media (max-width: 768px) {
+    font-size: 3vw;
+    margin:10px;
+  }
 `;
 
 const Breadcrump = styled("h2")`
@@ -72,11 +81,20 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     background-size: cover;
     height: 75vh;
     width: auto;
+    @media (max-width: 768px) {
+      background-repeat: no-repeat !important;
+      background-size: 100% 100% !important;
+      height: 75vh !important;
+      width: auto !important;
+    }
   `;
 
   const Container = styled("div")`
     padding-top: 95px;
     margin: auto;
+    @media (max-width: 768px) {
+      padding-top: 60px;
+    }
   `;
 
   let routes = router.asPath.split("/");
@@ -86,14 +104,18 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
 
   return (
     <>
-      <HeroWrapper 
-      style={{background: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(${backgroundUrl})`,
-      display: `flex`,
-      backgroundRepeat: `no-repeat`,
-      backgroundSize: `cover`,
-      height: `75vh`,
-      width: `auto`}}
-      key={queryText} id={queryText}>
+      <HeroWrapper
+        style={{
+          background: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(${backgroundUrl})`,
+          display: `flex`,
+          height: `75vh`,
+          width: `auto`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
+        }}
+        key={queryText}
+        id={queryText}
+      >
         <Container>
           <SlogganWrapper>
             <Breadcrump>

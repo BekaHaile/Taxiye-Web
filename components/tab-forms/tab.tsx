@@ -11,12 +11,16 @@ import { changeBookingType } from "../../redux/actions/booking";
 import theme from "../../theme/main";
 
 const TabContainer = styled("div")`
-  background: ${theme.colors.white};;
+  background: ${theme.colors.white};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   height: -webkit-fill-available;
   max-width: 490px;
+  @media (max-width: 490px) {
+    width: 100%;
+    margin:10px;
+  }
 `;
 
 const TabWrapper = styled("div")`
@@ -40,13 +44,16 @@ const TabButtonWrappers = styled("div")`
 const TabButton = styled.a`
   font-weight: normal;
   font-size: 14px;
+  @media (max-width: 768px) {
+    font-size: 1.5vw;
+  }
   line-height: 29px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   text-decoration: none;
   padding: 0px 20px;
   &&.active {
-    color: ${theme.colors.white};;
-    text-align:center;
+    color: ${theme.colors.white};
+    text-align: center;
     background: ${theme.colors.primary};
     border-radius: 50px;
     text-align: center;

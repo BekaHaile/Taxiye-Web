@@ -6,14 +6,17 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "nprogress/nprogress.css";
 import GlobalStyle from "../theme/global/index";
 import Loading from "../components/loading/";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { Provider } from "react-redux";
 import store from "../redux/store";
+import { menuSelected } from "../redux/actions/navigation";
 import SnackBar from "../components/modal/snackbar";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import {theme} from "../theme/main/material_theme";
+import { theme } from "../theme/main/material_theme";
+import NProgress from "nprogress";
 
 const queryClient = new QueryClient();
 
@@ -30,9 +33,18 @@ function toggleFloatingButton(value) {
     document.getElementById("text-on-floating-button").className = "";
   }
 }
+NProgress.configure({
+  minimum: 0.3,
+  showSpinner: false,
+  easing: "ease",
+  speed: 200,
+  trickleRate: 0.02,
+  trickleSpeed: 800,
+});
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+
   const [loading, setLoading] = React.useState(false);
   // This react hook listens for route changes
   // And until routing finishes it's event
@@ -40,10 +52,13 @@ export default function App({ Component, pageProps }) {
   // When routing finishes
   React.useEffect(() => {
     const start = () => {
-      setLoading(true);
+      store.dispatch(menuSelected(false));
+      // setLoading(true);
+      NProgress.start();
     };
     const end = () => {
-      setLoading(false);
+      // setLoading(false);
+      NProgress.done();
     };
     router.events.on("routeChangeStart", start);
     router.events.on("routeChangeComplete", end);
@@ -70,8 +85,10 @@ export default function App({ Component, pageProps }) {
             document.getElementById("text-on-floating-button").className =
               "hidden";
         } else {
-          if (document.getElementById("floating-button"))
+          if (document.getElementById("floating-button")) {
             document.getElementById("floating-button").className = "";
+            store.dispatch(menuSelected(false));
+          }
         }
       },
       false
@@ -85,8 +102,16 @@ export default function App({ Component, pageProps }) {
     router.pathname.includes("/user") ||
     router.pathname.includes("/cms")
   )
-    return  <MuiThemeProvider theme={theme}>{withOutHeader(loading, pageProps, Component)}</MuiThemeProvider>
-  return <MuiThemeProvider theme={theme}>{withHeader(loading, pageProps, Component)}</MuiThemeProvider>
+    return (
+      <MuiThemeProvider theme={theme}>
+        {withOutHeader(loading, pageProps, Component)}
+      </MuiThemeProvider>
+    );
+  return (
+    <MuiThemeProvider theme={theme}>
+      {withHeader(loading, pageProps, Component)}
+    </MuiThemeProvider>
+  );
 }
 
 function withHeader(loading, pageProps, Component) {

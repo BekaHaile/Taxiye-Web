@@ -11,8 +11,8 @@ const Card = styled("div")`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   background: ${theme.colors.white};
-  @media (max-width: 768px) {
-    margin: 0 20px;
+  @media (max-width: 500px) {
+    margin: 0 0px;
   }
 `;
 
@@ -21,7 +21,7 @@ const CardImage = styled("img")`
   margin: 0;
   width: 340px;
   height: 230px;
-  @media (max-width: 768px) {
+  @media (max-width: 500px) {
     width: 100%;
     height: 100%;
   }
@@ -86,11 +86,18 @@ const Button = styled("button")`
 
 const TextWrapper = styled("div")`
   width: 300px;
+  @media (max-width: 300px) {
+    text-align:center;
+    width:100%;
+  }
 `;
 
 const ImageContainer = styled("div")`
   height: 230px;
   width: 340px;
+  @media (max-width: 500px) {
+    width:100%;
+  }
 `;
 
 const ArticleCard = ({ article }) => {

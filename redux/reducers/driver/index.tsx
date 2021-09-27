@@ -20,6 +20,10 @@ const initialState = {
   otp: "",
   isOtpValid: false,
   vehicleType: null,
+  driver_data: null,
+  signup_detail: null,
+  access_token: "",
+  required_documents: null,
 
   vehicles: [
     {
@@ -107,7 +111,7 @@ export default function driverReducer(state = initialState, action) {
       return {
         ...state,
         otp: action.payload.otp,
-        isOtpValid: action.payload.otp.length == 6,
+        isOtpValid: action.payload.otp.length == 4,
       };
     case actionTypes.LOADING_UPDATED:
       return { ...state, loading: action.payload.loading };
@@ -123,6 +127,24 @@ export default function driverReducer(state = initialState, action) {
 
     case actionTypes.DRIVER_FORM_SUBMITTED:
       return { ...state, formStatus: action.payload.status, loading: false };
+    case actionTypes.DRIVER_DATA_ADDED:
+      return {
+        ...state,
+        driver_data: action.payload.driver_data,
+        access_token: action.payload.access_token,
+      };
+    case actionTypes.GET_DRIVER_SIGNUP_DETAILS_FINISHED:
+      return {
+        ...state,
+        signup_detail: action.payload.signup_detail,
+        vehicles: action.payload.vehicles,
+      };
+
+    case actionTypes.REQUIRED_DOCUMENT_FETCHED:
+      return {
+        ...state,
+        required_documents: action.payload.required_documents,
+      };
 
     case actionTypes.PROGRESS_CHANGED:
       return { ...state, progress: action.payload.progress };

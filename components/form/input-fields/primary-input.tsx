@@ -15,6 +15,9 @@ margin-top:10px;
     outline: none;
     border: 2px solid ${theme.colors.primary};
   }
+  @media (max-width: 768px) {
+    width:100%;
+  }
 `;
 
 const LabelText = styled("label")`
@@ -22,7 +25,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 
 type InputProps = {

@@ -23,7 +23,7 @@
     "**/*.ts",
     "**/*.tsx",
     "components/loading"
-  ],
+, "components/corporate/expense-tracker.jsx", "components/landing/testimony/rating.jsx"  ],
   "exclude": [
     "node_modules"
   ]

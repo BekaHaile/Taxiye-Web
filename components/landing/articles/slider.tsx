@@ -1,6 +1,14 @@
 import React from "react";
 import Card from "./card";
 import Slider from "../../slider";
+import styled from "styled-components";
+
+const Container = styled("div")`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+`;
+
 const settings = {
   itemsToShow: 3,
   itemPadding: [25, 0],
@@ -11,19 +19,27 @@ const settings = {
   //   { width: 768, itemsToShow: 2},
   //   { width: 850, itemsToShow: 3 },
   // ]
-}
+};
 
 const ArticleSlider = ({ articles }) => {
-
   return (
-    <Slider
-      content=
-      {articles.map((article) => (
-        <Card key={article.id} article={article} />
-      ))}
-
-      settings={settings}
-    />
+    <>
+      <div className="mobile-view">
+        <Container>
+          {articles.map((article) => (
+            <Card key={article.id} article={article} />
+          ))}
+        </Container>
+      </div>
+      <div className="desktop-view">
+        <Slider
+          content={articles.map((article) => (
+            <Card key={article.id} article={article} />
+          ))}
+          settings={settings}
+        />
+      </div>
+    </>
   );
 };
 

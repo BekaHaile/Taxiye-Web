@@ -1,16 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import Rating from "./rating";
+import Rating from "../../form/rating";
 import theme from "../../../theme/main";
 
+const RatingContainer = styled("div")`
+  margin: auto;
+  display: block;
+  text-align: center;
+  width:100%;
+`;
 const Card = styled("div")`
   width: fit-content;
   align-items: center;
-  background: ${theme.colors.white};;
+  background: ${theme.colors.white};
   box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   padding: 15px 40px;
-  z-index: 1;
+  margin: 20px;
+  height: 400px;
 `;
 
 const Avatar = styled("img")`
@@ -38,15 +45,23 @@ const CardSubTitle = styled("h5")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 
 const CardText = styled("p")`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color:${theme.colors.primaryTextColor};;
-  width: 400px;
+  color: ${theme.colors.primaryTextColor};
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 20px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const HeaderContainer = styled("div")`
   width: fit-content;
@@ -63,14 +78,18 @@ const TestimonyCard = ({ testimony }) => {
           src={`${process.env.NEXT_PUBLIC_HOST}${testimony?.profileImage?.url}`}
         />
         <div>
-          <CardTitle className="testimony-name">{testimony?.fullName}</CardTitle>
+          <CardTitle className="testimony-name">
+            {testimony?.fullName}
+          </CardTitle>
           <CardSubTitle className="testimony-position">
             {testimony?.position}
           </CardSubTitle>
         </div>
       </HeaderContainer>
       <CardText className="testimony-text">{testimony?.testimony}</CardText>
-      <Rating key={testimony?.id} rate={testimony?.rating} />
+      <RatingContainer>
+        <Rating key={testimony?.id} rate={testimony?.rating} />
+      </RatingContainer>
     </Card>
   );
 };

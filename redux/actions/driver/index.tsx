@@ -39,7 +39,6 @@ export const addPhone = ({ phone_no, country, country_code, isValid }) => {
   };
 };
 
-
 export const changeTerm = (agreeToTerms) => {
   return {
     type: actions.TERMS_CHANGED,
@@ -54,7 +53,6 @@ export const submitPhone = () => {
     type: actions.PHONE_SUBMITTED,
   };
 };
-
 
 export const validateFirstForm = (isFirstFormValid) => {
   return {
@@ -105,11 +103,46 @@ export const setLoading = (loading) => {
   };
 };
 
+export const initiateLoadDriverDetail = () => {
+  return {
+    type: actions.INITIATE_GET_DRIVER_SIGNUP_DETAILS,
+  };
+};
+
+export const setDriverSignDetail = (signup_detail, vehicles) => {
+  return {
+    type: actions.GET_DRIVER_SIGNUP_DETAILS_FINISHED,
+    payload: {
+      signup_detail: signup_detail,
+      vehicles: vehicles,
+    },
+  };
+};
+
 export const changeVehicle = (vehicleType) => {
   return {
     type: actions.VEHICLE_CHANGED,
     payload: {
       vehicleType: vehicleType,
+    },
+  };
+};
+
+export const setDriverData = (driver_data, access_token) => {
+  return {
+    type: actions.DRIVER_DATA_ADDED,
+    payload: {
+      driver_data: driver_data,
+      access_token: access_token,
+    },
+  };
+};
+
+export const setRequiredDocuments = (required_documents) => {
+  return {
+    type: actions.REQUIRED_DOCUMENT_FETCHED,
+    payload: {
+      required_documents: required_documents,
     },
   };
 };

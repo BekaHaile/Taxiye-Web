@@ -29,21 +29,27 @@ const FlexRow = styled("div")`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
+  flex-direction:row;
+  @media (max-width: 768px) {
+    flex-wrap:wrap;
+  }
 `;
 
 const Description = styled("p")`
+  max-width:500px;
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
   margin: 0px 0px;
-  width: 500px;
   flex: 1;
   text-align: left;
   @media (max-width: 1269px) {
     text-align: center;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `;
 
@@ -68,10 +74,13 @@ const LeftContainer = styled("div")`
 `;
 
 const Image = styled("img")`
-  max-width: 550px;
   flex: 1;
+  width: 50%;
   @media (max-width: 1269px) {
     order:-1;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `;
 

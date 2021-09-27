@@ -37,16 +37,25 @@ const ContentWrapper = styled("div")`
 
 const Container = styled("div")`
   width: 250px;
+  @media (max-width: 250px) {
+    width: 100%;
+  }
 `;
 
 const Text = styled(BlockContent)`
   width: 250px;
   text-align: left;
+  @media (max-width: 250px) {
+    width: 100%;
+  }
 `;
 
 const RightText = styled(Text)`
   width: 250px;
   text-align: right;
+  @media (max-width: 250px) {
+    width: 100%;
+  }
 `;
 
 const Block = styled("div")`
@@ -54,6 +63,10 @@ const Block = styled("div")`
   align-items: center;
   padding: 0px 0px;
   margin: 30px 0px;
+  @media (max-width: 768px) {
+    padding: 0px;
+    margin: 0px;
+  }
 `;
 
 const Numbering = styled("p")`
@@ -66,7 +79,11 @@ const Numbering = styled("p")`
   color: #d5d5d5;
   margin: 0px 20px;
   @media (max-width: 768px) {
-    order:-1;
+    order: -1;
+    margin:0px;
+  }
+  @media (max-width: 500px) {
+    display:none;
   }
 `;
 

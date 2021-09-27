@@ -99,7 +99,7 @@ export default function index({ data, error }) {
   return (
     <>
       <Banner hero={data.homePage.hero} />
-      <LandingContent data={data} />;
+      <LandingContent data={data} />
     </>
   );
 }

@@ -14,6 +14,9 @@ gap:40px;
 
 const CorporateText = styled(BlockContent)`
 width: 230px;
+@media (max-width: 768px) {
+  width:100%;
+}
 `;
 
 const Block = styled("div")`
@@ -38,6 +41,9 @@ const CorporateInfoSection = ({ backgroundImage, title, subTitle, contents }) =>
     background-position: center; 
     margin:auto;
     margin-top:20px;
+    @media (max-width: 768px) {
+      width:100%;
+    }
 `;
 
   return (

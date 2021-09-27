@@ -45,7 +45,9 @@ const FooterBottomLink = styled(FooterLink)`
   order: 0;
   flex-grow: 0;
   margin: 0px;
-  margin-right: 40px;
+  @media (max-width: 600px) {
+    font-size: 3vw;
+  }
 `;
 
 const FooterEndBottomLink = styled(FooterBottomLink)`
@@ -54,19 +56,23 @@ const FooterEndBottomLink = styled(FooterBottomLink)`
 
 const FooterBottomLinkWrapper = styled("div")`
   display: flex;
+  flex-wrap:wrap;
   justify-content: space-around;
   align-self: flex-end;
   padding-bottom: 20px;
   padding-left: 0px;
+  gap:10px;
 `;
 
 const FooterInfo = styled("div")`
   display: flex;
   flex-wrap: wrap;
+  gap:20px;
 `;
 
 const SocialLinkWrapper = styled(FooterBottomLinkWrapper)`
   padding-bottom: 0px;
+  gap:10px;
 `;
 
 const Grid = styled("div")`
@@ -76,12 +82,16 @@ const Grid = styled("div")`
   margin-left: auto;
   justify-content: space-between;
   width: 100%;
+  flex-wrap:wrap;
 `;
 
 const Footer = styled("div")`
   display: flex;
   flex-direction: column;
   background: ${theme.colors.footerColor};
+  @media (max-width: 768px) {
+    margin:20px;
+  }
 `;
 
 const FooterImage = styled("img")`
@@ -89,6 +99,7 @@ const FooterImage = styled("img")`
   height:430px;*/
   @media (max-width: 768px) {
     margin: auto;
+    width:100%;
   }
 `;
 
@@ -104,10 +115,11 @@ const FlexRow = styled("div")`
   display: flex;
   justify-content: space-between;
   padding: 60px 60px 0px 60px;
-  flex-wrap: wrap;
+  gap:20px;
   @media (max-width: 768px) {
     padding: 0px;
     padding-top: 60px;
+    flex-wrap: wrap;
   }
 `;
 

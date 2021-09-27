@@ -25,7 +25,9 @@ color: ${theme.colors.secondaryTextColor};
     outline: none;
     border: 2px solid ${theme.colors.primary};
   }
-
+  @media (max-width: 768px) {
+    width:100%;
+  }
 
 `;
 const AnotherTextArea = styled(TextArea)`

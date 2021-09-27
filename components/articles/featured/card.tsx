@@ -12,7 +12,6 @@ const Card = styled("div")`
   baackground: ${theme.colors.white};
   border-radius: 10px;
   gap:40px;
-  
 `;
 
 const CardImage = styled("img")`
@@ -22,8 +21,10 @@ const CardImage = styled("img")`
 `;
 
 const ImageContainer = styled("div")`
-  width:660px;
-  /*height:410px;*/
+  width:100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const CardBody = styled("div")`
@@ -88,6 +89,9 @@ const Button = styled("button")`
 
 const TextWrapper = styled("div")`
   width: 300px;
+  @media (max-width: 300px) {
+    width: 100%;
+  }
 `;
 
 const ArticleCard = ({ article }) => {

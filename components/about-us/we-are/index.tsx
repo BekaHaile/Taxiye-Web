@@ -30,6 +30,9 @@ const FlexRow = styled("div")`
 const Container = styled("div")`
   align-items: center;
   padding-right: 60px;
+  @media (max-width: 768px) {
+    padding-right: 0px;
+  }
 `;
 
 const Description = styled("p")`
@@ -74,6 +77,9 @@ const ImageContainer = styled("div")`
   width: 601px;
   height: 557px;
   position: relative;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const CustomSectionContentContainer = styled(SectionContentContainer)`

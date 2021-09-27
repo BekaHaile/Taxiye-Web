@@ -24,7 +24,12 @@ const CardContainer = styled("div")`
 `;
 
 const MainCardTitle = styled(CardTitle)`
-  max-width: 400px;
+  width: 400px;
+  
+  @media (max-width: 400px) {
+    width: 100%;
+    text-align:center;
+  }
 `;
 
 const PartnersContent = ({ title, subTitle, description, contents }) => {

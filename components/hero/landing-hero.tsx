@@ -13,6 +13,9 @@ const Slogan = styled("h1")`
 
 const HomeSlogan = styled(Slogan)`
   margin-bottom: 45px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 const HomeContainer = styled("div")`
@@ -39,6 +42,12 @@ const Hero = ({ hero }) => {
     background-size: cover;
     height: 100vh;
     width: 100%;
+    @media (max-width: 768px) {
+      background-repeat: no-repeat !important;
+      background-size: 100% 100vh!important;
+      height: 100vh !important;
+      width: auto !important;
+    }
   `;
 
   return (
@@ -47,7 +56,9 @@ const Hero = ({ hero }) => {
         <div>
           <HomeContainer>
             <HomeSlogan>{slogan}</HomeSlogan>
+            <div className="desktop-view">
             <TabbedForms />
+            </div>
           </HomeContainer>
         </div>
       </HomeHero>

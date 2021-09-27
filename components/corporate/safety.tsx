@@ -15,13 +15,21 @@ const ContentWrapper = styled("div")`
 const SafetyText = styled(BlockContent)`
 width: 310px;
 text-align: left;
+@media (max-width: 310px) {
+  width: 100%;
+  text-align: center;
+}
 `;
 
 const Block = styled("div")`
   display: flex;
   align-items: center;
   padding: 0px 75px;
-  
+  flex-wrap:wrap;
+  @media (max-width: 768px) {
+    justify-content:center;
+    padding: 0px;
+  }
 `;
 
 const BlockContainer = styled("div")`

@@ -1,14 +1,18 @@
-import * as React from "react"
+import * as React from "react";
+import styled from "styled-components";
 
-function Device({url}) {
-    return (
+const Image = styled("img")`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+function Device({ url }) {
+  return (
     <>
-        <img src={`${process.env.NEXT_PUBLIC_HOST}${url}`}/>
+      <Image src={`${process.env.NEXT_PUBLIC_HOST}${url}`} />
     </>
-        )
-    }
-    
-    
-    
+  );
+}
 
-export default Device
+export default Device;

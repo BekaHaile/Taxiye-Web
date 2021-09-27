@@ -12,6 +12,11 @@ const InlineForm = styled("div")`
       width: inherit;
     }
   }
+  @media (max-width: 768px) {
+    flex-wrap:wrap;
+    width:100%;
+    gap:20px;
+  }
 `;
 
 export {InlineForm}

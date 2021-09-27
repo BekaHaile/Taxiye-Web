@@ -557,10 +557,56 @@ overflow:hidden;
   width: 100%;
 }
 
+#nprogress .bar{
+  background-color:${theme.colors.primary};
+}
+
 
 .antd-country-phone-input .ant-select-selector {
   border:none !important;
 }
+
+
+.desktop-article-view{
+  display:block;
+  @media (max-width: 768px) {
+    display:none;
+  }
+}
+.mobile-article-view{
+  display:none;
+  @media (max-width: 768px) {
+    display:block;
+  }
+}
+
+
+.desktop-view{
+  display:block;
+  @media (max-width: 768px) {
+    display:none;
+  }
+}
+.mobile-view{
+  display:none;
+  @media (max-width: 768px) {
+    display:block;
+  }
+}
+
+
+.first-bar.active{
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+.second-bar.active{
+  opacity: 0;
+}
+.third-bar.active{
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
 `;
 
 export default GlobalStyle;

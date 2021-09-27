@@ -11,6 +11,9 @@ import styled from "styled-components";
 
 const Container = styled("div")`
   width: 1300px;
+  @media (max-width: 1300px) {
+    width: 100%;
+  }
 `;
 
 const FleetSection = ({ title, subTitle, fleets }) => {

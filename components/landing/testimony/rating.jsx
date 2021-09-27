@@ -20,7 +20,6 @@ const Ratings = ({ rate }) => {
 
   return <RatingWrapper className="testimony-rating"> {
     rates.map((rate, index) =>
-
       <Image
         key={index}
         width="22.56319236755371px"
