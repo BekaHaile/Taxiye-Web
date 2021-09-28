@@ -81,6 +81,7 @@ const Image = styled("img")`
   }
   @media (max-width: 500px) {
     width: 100%;
+    margin: 30px 0px;
   }
 `;
 
