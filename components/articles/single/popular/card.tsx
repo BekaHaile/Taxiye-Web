@@ -16,6 +16,9 @@ const Card = styled("div")`
 const CardImage = styled("img")`
   margin: 0;
   width: 350px;
+  @media (max-width: 350px) {
+    width: 100%;
+  }
 `;
 
 const CardBody = styled("div")`
@@ -73,6 +76,9 @@ const Button = styled("button")`
 
 const TextWrapper = styled("div")`
   width: 300px;
+  @media (max-width: 350px) {
+    width: 100%;
+  }
 `;
 
 

@@ -15,6 +15,7 @@ const HomeSlogan = styled(Slogan)`
   margin-bottom: 45px;
   @media (max-width: 768px) {
     text-align: center;
+    font-size: 7vw;
   }
 `;
 
@@ -40,12 +41,12 @@ const Hero = ({ hero }) => {
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 55vh;
     width: 100%;
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
-      background-size: 100% 100vh!important;
-      height: 100vh !important;
+      background-size: 100% 55vh !important;
+      height: 55vh !important;
       width: auto !important;
     }
   `;

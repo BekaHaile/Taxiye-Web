@@ -1,50 +1,50 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import Card from "./card";
 
-
 const Container = styled("div")`
-min-width: 350px;
+  min-width: 350px;
+  @media (max-width: 350px) {
+    min-width: 100%;
+  }
 `;
 const Title = styled("div")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 27px;
-margin-top:60px;
-color: #000000;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  margin-top: 60px;
+  color: #000000;
 `;
 const NoContent = styled("div")`
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 27px;
-margin-top:60px;
-color: #000000;
-text-align:center;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  margin-top: 60px;
+  color: #000000;
+  text-align: center;
 `;
 
 const Search = ({ articles, SearchingComponent }) => {
-    return (
-        <>
-            <Container>
-                {SearchingComponent}
-                <Title>Popular Posts</Title>
+  return (
+    <>
+      <Container>
+        {SearchingComponent}
+        <Title>Popular Posts</Title>
 
-                {
-                    Array.isArray(articles) && !articles.length ?
-                        <NoContent>No content</NoContent> :
-                        articles.map((article) => (
-
-                            <Card key={article.date} article={article} />
-
-                        ))}
-
-            </Container>
-        </>
-    );
-}
+        {Array.isArray(articles) && !articles.length ? (
+          <NoContent>No content</NoContent>
+        ) : (
+          articles.map((article) => (
+            <Card key={article.date} article={article} />
+          ))
+        )}
+      </Container>
+    </>
+  );
+};
 
 export default Search;

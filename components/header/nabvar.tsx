@@ -22,7 +22,6 @@ const NavWrapper = styled("div")`
   }
   @media (max-width: 768px) {
     width: fit-content;
-    margin: auto;
     padding-top: 20px;
   }
 `;
@@ -49,24 +48,24 @@ const Button = styled("button")`
   padding: 5px 20px;
 
   @media (max-width: 1000px) {
-    font-size:1vw;
+    font-size: 1vw;
   }
   @media (max-width: 768px) {
     margin: 0px;
     font-size: 14px;
+    text-align: left;
   }
 `;
-
 
 const Nav = styled("nav")`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   @media (max-width: 768px) {
-    flex-direction: row;
-    gap: 10px;
+    flex-direction: column;
+    gap: 20px;
     margin: 0px 20px;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
   }
 `;
 
@@ -86,10 +85,11 @@ const NavLink = styled.a`
     color: ${theme.colors.primary};
   }
   @media (max-width: 1000px) {
-    font-size:1vw;
+    font-size: 1vw;
   }
   @media (max-width: 768px) {
-    font-size:14px;
+    font-size: 20px;
+    text-align: left;
   }
 `;
 const SecondaryNavLink = styled(NavLink)`
@@ -111,13 +111,24 @@ const NavBar = () => {
         </Link>
       </div>
       <Nav>
-        <Link key="2" href="/become-driver">
-          {router.pathname === "/become-driver" ? (
-            <NavLink className="active">Become a driver </NavLink>
-          ) : (
-            <Button> {"Become a driver"} </Button>
-          )}
-        </Link>
+        <div className="mobile-view">
+          <Link key="2" href="/become-driver">
+            <NavLink
+              className={router.pathname === "/become-driver" ? "active" : null}
+            >
+              Become a driver
+            </NavLink>
+          </Link>
+        </div>
+        <div className="desktop-view">
+          <Link key="2" href="/become-driver">
+            {router.pathname === "/become-driver" ? (
+              <NavLink className="active">Become a driver </NavLink>
+            ) : (
+              <Button> {"Become a driver"} </Button>
+            )}
+          </Link>
+        </div>
         <Link key="3" href="/services">
           <NavLink
             className={router.pathname === "/services" ? "active" : null}

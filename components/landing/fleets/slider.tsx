@@ -9,6 +9,7 @@ const Container = styled("div")`
   gap: 20px;
   justify-content: center;
   margin-top:20px;
+  width:100%;
 `;
 
 const settings = {

@@ -7,12 +7,14 @@ import Media from "./media";
 
 const Container = styled("div")`
   flex: 1;
-  
 `;
 
 const InnerContainer = styled("div")`
   max-width: 836px;
-  margin:auto;
+  margin: auto;
+  @media (max-width: 768px) {
+    width:auto;
+  }
 `;
 
 const Article = ({ article }) => {
@@ -38,7 +40,6 @@ const Article = ({ article }) => {
               <Quote key={index} quote={body.content} />
             ) : (
               <ParagraphText key={index} paragraph={body.content} />
-            
             )
           )}
         </InnerContainer>

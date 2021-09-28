@@ -28,6 +28,10 @@ const Slogan = styled("h1")`
 const CenteredSlogan = styled(Slogan)`
   text-align: center;
   padding-bottom: 10px;
+  @media (max-width: 400px) {
+    font-size: 5vw;
+    
+  }
 `;
 
 const Description = styled("p")`
@@ -60,6 +64,9 @@ const Breadcrump = styled("h2")`
   &::firstline {
     text-transform: uppercase;
   }
+  @media (max-width: 400px) {
+    font-size: 5vw;
+  }
 `;
 
 interface Props {
@@ -79,12 +86,12 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     display: flex;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 75vh;
+    height: 50vh;
     width: auto;
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
       background-size: 100% 100% !important;
-      height: 75vh !important;
+      height: 50vh !important;
       width: auto !important;
     }
   `;

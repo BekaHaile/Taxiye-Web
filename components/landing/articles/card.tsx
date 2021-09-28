@@ -15,12 +15,16 @@ const Card = styled("div")`
   border-radius: 10px;
   background: ${theme.colors.white};
   width: 340px;
+  @media (max-width: 768px) {
+    margin:0px;
+  }
   @media (max-width: 340px) {
     width: 100%;
     margin: 10px;
   }
   @media (max-width: 500px) {
     margin: 10px;
+    padding: 10px;
   }
 `;
 

@@ -8,7 +8,7 @@ const Section = styled("section")`
   align-items: center;
   padding: 60px 60px;
   @media (max-width: 768px) {
-    padding: 10px 10px;
+    padding: 40px 15px;
   }
 `;
 
@@ -30,6 +30,9 @@ const SectionHeaderContainer = styled("div")``;
 
 const SectionContentContainer = styled("div")`
   padding-top: 60px;
+  @media (max-width: 768px) {
+    padding-top: 15px;
+  }
 `;
 
 const SectionTitle = styled("h1")`

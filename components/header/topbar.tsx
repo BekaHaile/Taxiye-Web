@@ -38,6 +38,9 @@ const FormattedLinks = styled.a`
   &:hover {
     color: ${theme.colors.primary};
   }
+  @media (max-width: 500px) {
+    font-size: 2vw;
+  }
 `;
 
 const CornerLink = styled(FormattedLinks)`

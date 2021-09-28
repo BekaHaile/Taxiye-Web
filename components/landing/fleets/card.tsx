@@ -13,6 +13,7 @@ const Card = styled("div")`
   @media (max-width: 768px) {
     padding: 50px 0px;
     margin: 0px;
+    width:100%;
   }
 `;
 
@@ -31,6 +32,10 @@ const CardText = styled("p")`
   padding: 0;
   @media (max-width: 280px) {
     width: 100%;
+    margin:auto;
+  }
+  @media (max-width: 768px) {
+    margin:auto;
   }
 `;
 

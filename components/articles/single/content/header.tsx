@@ -9,6 +9,10 @@ const Image = styled("img")`
 
 const MainImage = styled("img")`
  height:410px;
+ @media (max-width: 768px) {
+    width:100%;
+    height:auto;
+  }
 `;
 
 
