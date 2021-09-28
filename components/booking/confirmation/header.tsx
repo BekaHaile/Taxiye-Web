@@ -69,20 +69,20 @@ const Note = () => {
         />
 
         <HorizontalFlex>
-          <Image src={vehicle.images.ride_now_normal_3x} />
+          <Image src={vehicle?.images?.ride_now_normal} />
           <VerticalFlex>
-            <Title>{vehicle.region_name}</Title>
+            <Title>{vehicle?.region_name}</Title>
             {loading ? (
               <Loader />
             ) : (
               <HorizontalFlex>
                 <Text>
                   {estimation
-                    ? `${estimation.ride_distance} ${estimation.ride_distance_unit}`
+                    ? `${estimation?.ride_distance} ${estimation?.ride_distance_unit}`
                     : ""}
                 </Text>
                 <Text>
-                  {vehicle.display_base_fare}
+                  {vehicle?.display_base_fare}
                 </Text>
                 
                 {/* <Text>

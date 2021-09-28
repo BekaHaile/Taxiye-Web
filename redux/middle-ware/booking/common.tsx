@@ -38,17 +38,21 @@ export async function loadVehicleTypes(data, next, actions, access_token) {
   var supportedServices = res.services.find((service) => {
     return service.type === data["type"];
   });
-  var supportedRides = supportedServices.supported_ride_type;
+  var supportedRides = supportedServices?.supported_ride_type;
   var supportedServices = res.services.find((service) => {
     return service.type === data["type"];
   });
-  var selectedRegions = regions.filter((region) => {
-    return supportedRides.indexOf(region.ride_type) !== -1;
-  });
-  var vehicleLists = selectedRegions.map((element)=>{
-    var found = fares.findIndex((item)=> item.vehicle_type==element.vehicle_type );
-    if(found !== -1)
-    return {...element, ...fares[found]};
+  var selectedRegions;
+  if (supportedRides)
+    selectedRegions = regions.filter((region) => {
+      return supportedRides.indexOf(region.ride_type) !== -1;
+    });
+  else selectedRegions = regions;
+  var vehicleLists = selectedRegions.map((element) => {
+    var found = fares.findIndex(
+      (item) => item.vehicle_type == element.vehicle_type
+    );
+    if (found !== -1) return { ...element, ...fares[found] };
     return element;
   });
   console.log(vehicleLists);
@@ -169,7 +173,7 @@ export async function cancelRideRequest(data, access_token) {
     const res = await axios.post(
       `${NEXT_PUBLIC_TAXIYE_HOST}/cancel_the_request`,
       {
-        access_token:access_token,
+        access_token: access_token,
         customer_package_name: "com.taxiye",
         operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
         app_version: "6007",
@@ -196,7 +200,7 @@ export function fetchListOfVehicles(drivers, params) {
 
 export async function fetchPaymentMethods() {
   try {
-    return [{ name: "Cash", value:1 }];
+    return [{ name: "Cash", value: 1 }];
   } catch (e) {
     throw e;
     return null;
