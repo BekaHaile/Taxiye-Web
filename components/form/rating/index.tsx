@@ -18,10 +18,11 @@ const labels = {
 
 const useStyles = makeStyles({
   root: {
-    width: 200,
+    maxWidth: 200,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    overflow: "overlay",
   },
 });
 

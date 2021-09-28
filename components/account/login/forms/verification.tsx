@@ -19,7 +19,7 @@ const VerificationInputForm = ({changeOtp, phone_number, action, setShow, goBack
         <>
             <HeaderContainer>
                 <Title>Verify your Phone Number</Title>
-                <SubTitle>Verify your number by typing the 6 digit code we sent via text.</SubTitle>
+                <SubTitle>Verify your number by typing the 4 digit code we sent via text.</SubTitle>
             </HeaderContainer>
             <ContentContainer>
                 <InputContainer>

@@ -118,7 +118,7 @@ const PhoneVerification = ({ handleNext, handleBack }) => {
             <Title>Verify your Phone Number</Title>
             <CustomSubTitle>
               Verify your number you submitted on the previous step by typing
-              the 6 digit code we sent via text.
+              the 4 digit code we sent via text.
             </CustomSubTitle>
           </CustomHeaderContainer>
           <ContentContainer>

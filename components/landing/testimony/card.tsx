@@ -7,8 +7,21 @@ const RatingContainer = styled("div")`
   margin: auto;
   display: block;
   text-align: center;
-  width:100%;
+  width: fit-content;
+  @media (max-width: 300px) {
+    display: none;
+  }
 `;
+const RatingTextContainer = styled("div")`
+  display: none;
+  @media (max-width: 300px) {
+    display: block;
+    text-align:center;
+    font-size:4vh;
+    color:${theme.colors.primary}
+  }
+`;
+
 const Card = styled("div")`
   width: fit-content;
   align-items: center;
@@ -18,6 +31,10 @@ const Card = styled("div")`
   padding: 15px 40px;
   margin: 20px;
   height: 400px;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0px;
+  }
 `;
 
 const Avatar = styled("img")`
@@ -31,6 +48,9 @@ const Avatar = styled("img")`
   padding-bottom: 10px;
   display: block;
   justify-content: center;
+  @media (max-width: 150px) {
+    width: 100%;
+  }
 `;
 
 const CardTitle = styled("h3")`
@@ -90,6 +110,7 @@ const TestimonyCard = ({ testimony }) => {
       <RatingContainer>
         <Rating key={testimony?.id} rate={testimony?.rating} />
       </RatingContainer>
+      <RatingTextContainer>{testimony?.rating}</RatingTextContainer>
     </Card>
   );
 };

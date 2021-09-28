@@ -90,9 +90,9 @@ const Services = ({ services, title, subTitle }: ServiceProps) => {
       </SectionHeaderContainer>
       <SectionContentContainer>
         <ServicesWrapper>
-          <div className="mobile-view">
+          {/* <div className="mobile-view">
             <TabbedForms />
-          </div>
+          </div> */}
           {services.map((service, index) => (
             <ServiceWrapper key={index}>
               <Image
