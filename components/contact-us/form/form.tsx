@@ -18,14 +18,15 @@ import {
 const CustomDefaultTextArea = styled(DefaultTextArea)`
   height: 200px;
   @media (max-width: 768px) {
-    width:auto;
+    width: auto;
   }
 `;
 const Container = styled("div")`
   width: min-content;
   gap: 40px;
   @media (max-width: 768px) {
-    width:100%;
+    width: 100%;
+
   }
 `;
 const ButtonContainer = styled("div")`
@@ -33,8 +34,11 @@ const ButtonContainer = styled("div")`
 `;
 const DefaultInputContainer = styled("div")`
   width: 330px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   @media (max-width: 330px) {
-    width:100%;
+    width: 100%;
   }
 `;
 

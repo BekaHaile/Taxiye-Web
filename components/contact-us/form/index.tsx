@@ -21,6 +21,7 @@ const InfosContainer = styled("div")`
     padding-right: 0px;
     text-align:center;
     margin-bottom:20px;
+    width:100%;
   }
 `;
 

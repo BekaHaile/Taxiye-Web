@@ -13,6 +13,10 @@ const ServiceTitle = styled(SectionTitle)`
 
 const LeftServiceTitle = styled(ServiceTitle)`
   text-align: Left;
+  @media (max-width: 768px) {
+    padding: 0px 20px;
+    padding-bottom:20px;
+  }
 `;
 
 const FlexRow = styled("div")`
@@ -50,6 +54,10 @@ const Description = styled("p")`
 const LeftDescription = styled(Description)`
   text-align: Left;
   padding-bottom: 20px;
+  @media (max-width: 768px) {
+    padding:0px 20px;
+    padding-bottom: 20px;
+  }
 `;
 
 const SecondaryImage = styled("img")`

@@ -26,9 +26,15 @@ const CardContainer = styled("div")`
 const MainCardTitle = styled(CardTitle)`
   width: 400px;
   
+  @media (max-width: 768px) {
+    padding:0px 20px;
+    margin-bottom:20px;
+    font-size:7vw;
+  }
   @media (max-width: 400px) {
     width: 100%;
     text-align:center;
+    
   }
 `;
 

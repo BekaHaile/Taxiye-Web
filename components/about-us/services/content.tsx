@@ -12,6 +12,9 @@ const BlockTitle = styled("h3")`
 `;
 const RightBlockTitle = styled(BlockTitle)`
   text-align: right;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const BlockContent = styled("p")`
@@ -37,6 +40,9 @@ const ContentWrapper = styled("div")`
 
 const Container = styled("div")`
   width: 250px;
+  @media (max-width: 768px) {
+    margin: 10px 0px;
+  }
   @media (max-width: 250px) {
     width: 100%;
   }
@@ -53,8 +59,12 @@ const Text = styled(BlockContent)`
 const RightText = styled(Text)`
   width: 250px;
   text-align: right;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
   @media (max-width: 250px) {
     width: 100%;
+    text-align: left;
   }
 `;
 
@@ -80,10 +90,10 @@ const Numbering = styled("p")`
   margin: 0px 20px;
   @media (max-width: 768px) {
     order: -1;
-    margin:0px;
+    margin: 0px;
   }
   @media (max-width: 500px) {
-    display:none;
+    display: none;
   }
 `;
 

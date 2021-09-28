@@ -91,7 +91,7 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
       background-size: 100% 100% !important;
-      height: 50vh !important;
+      height: 40vh !important;
       width: auto !important;
     }
   `;
