@@ -31,7 +31,13 @@ export async function fetchVehicles(data, access_token) {
 export async function loadVehicleTypes(data, next, actions, access_token) {
   let res = await fetchVehicles(data, access_token);
   console.log(res);
+  if (res?.flag == 101) {
+    throw res;
+  } else if (res?.error) {
+    throw res;
+  }
   console.log(res.drivers);
+
   var regions = res.regions;
   var drivers = res.drivers;
   var fares = res.fare_structure;
