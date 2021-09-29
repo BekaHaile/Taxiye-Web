@@ -44,6 +44,7 @@ const Description = styled("p")`
   @media (max-width: 768px) {
     font-size: 3vw;
     margin:10px;
+    padding-bottom: 0px;
   }
 `;
 
@@ -91,8 +92,10 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
       background-size: 100% 100% !important;
-      height: 40vh !important;
+      height: auto !important;
       width: auto !important;
+      min-height: 40vh;
+      padding-bottom: 10px;
     }
   `;
 

@@ -16,6 +16,7 @@ const HomeSlogan = styled(Slogan)`
   @media (max-width: 768px) {
     text-align: center;
     font-size: 7vw;
+    margin-bottom: 0px;
   }
 `;
 

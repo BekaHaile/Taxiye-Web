@@ -27,6 +27,10 @@ export const driver = (store) => (next) => async (action) => {
         os_version: 11,
         device_type: 0,
         country_code: `${data["country_code"]}`,
+        device_rooted: 1,
+        device_name: "Taxiye Web",
+        device_token: "",
+        unique_device_id: "",
       });
       if (res) {
         if (res.flag === 143) {
