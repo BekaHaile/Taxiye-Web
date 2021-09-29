@@ -45,8 +45,8 @@ const Hero = ({ hero }) => {
     width: 100%;
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
-      background-size: 100% 55vh !important;
-      height: 55vh !important;
+      background-size: 100% 100% !important;
+      height: 40vh !important;
       width: auto !important;
     }
   `;
