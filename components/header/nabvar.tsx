@@ -88,7 +88,8 @@ const NavLink = styled.a`
     font-size: 1vw;
   }
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: normal;
     text-align: left;
   }
 `;
