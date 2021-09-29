@@ -4,6 +4,7 @@ import styles from "../../theme/global/vehicle-selection";
 import { useSelector } from "react-redux";
 import { PrimaryLoading } from "../loading/loading";
 import { selectVehicle } from "../../redux/actions/booking";
+import { showMessage } from "../../redux/actions/navigation";
 import theme from "../../theme/main";
 
 import store from "../../redux/store";
@@ -66,12 +67,10 @@ const Message = styled(Text)`
 `;
 
 const Image = styled("img")`
-width:60px;
-height:50px;
+  width: 60px;
+  height: 50px;
 `;
-const ImageIcon = styled("img")`
-
-`;
+const ImageIcon = styled("img")``;
 
 const VehicleList = () => {
   const loading = useSelector(
@@ -84,6 +83,32 @@ const VehicleList = () => {
   const isValid = useSelector((state) => state["booking"]["isValid"]);
   const currency = useSelector((state) => state["booking"]["currency"]);
   const [isSelected, setSelected] = useState(0);
+
+  function selectVehicleOption(vehicle) {
+    if (Notification.permission === "granted") {
+      store.dispatch(selectVehicle(vehicle));
+    } else {
+      store.dispatch(
+        showMessage(
+          true,
+          "You need to give permission before booking",
+          "warning"
+        )
+      );
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          store.dispatch(selectVehicle(vehicle));
+        } else {
+          showMessage(
+            true,
+            "Unable to get permission to notify.",
+            "error"
+          );
+          console.log("Unable to get permission to notify.");
+        }
+      });
+    }
+  }
 
   return (
     <>
@@ -99,7 +124,7 @@ const VehicleList = () => {
           {vehicleList.map((vehicle, index) => (
             <CardContainer
               onClick={() => {
-                store.dispatch(selectVehicle(vehicle));
+                selectVehicleOption(vehicle);
               }}
               className={isValid ? "" : "disabled"}
               onMouseOver={() => {
@@ -112,9 +137,7 @@ const VehicleList = () => {
                 {styles}
               </style>
               <CarFlexContainer>
-                <Image
-                  src={vehicle?.images.ride_now_normal}
-                />
+                <Image src={vehicle?.images.ride_now_normal} />
                 <NormalContainer>
                   <Text>{vehicle?.region_name}</Text>
                   <CustomFlexContainer>
@@ -128,7 +151,9 @@ const VehicleList = () => {
                 <PriceText>{vehicle?.display_base_fare}</PriceText>
               </FlexContainer>
               <FlexContainer>
-                <ImageIcon src={require("../../assets/icons/right-arrow.svg")} />
+                <ImageIcon
+                  src={require("../../assets/icons/right-arrow.svg")}
+                />
               </FlexContainer>
             </CardContainer>
           ))}
