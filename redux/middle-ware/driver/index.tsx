@@ -65,27 +65,51 @@ export const driver = (store) => (next) => async (action) => {
         login_otp: `${data["otp"]}`,
       });
       if (res) {
-        if (res.flag === 407) {
-          
-          next(actions.setDriverData(res.login, res?.login?.access_token));
-          next(actions.initiateLoadDriverDetail());
+        if (res.flag === 407 || res.flag === 701) {
+          let access_token =
+            res.flag === 701 ? res?.access_token : res?.login?.access_token;
+          next(actions.setDriverData(res.login, access_token));
+          next(actions.changeOtpStatus({ loading: false, otpSent: true }));
+          next(actions.setLoading(true));
           try {
-            let docRes = await fetchRequiredDocuments({
-              access_token: `${res?.login?.access_token}`,
-              login_documents: 3,
+            let res = await getDriverSignupDetails({
+              access_token: `${access_token}`,
               operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
               app_version: 6010,
               login_type: 1,
-              branding_image: 0,
               device_type: 0,
-              task_type: 1,
-              locale: "en",
             });
-            next(actions.setRequiredDocuments(docRes.data));
-          } catch (e) {}
-          next(actions.changeStep(data["step"] + 1));
-          next(actions.changeOtpStatus({ loading: false, otpSent: true }));
+            if (res) {
+              if (res.flag === 143) {
+                var vehicles = res?.vehicle_types;
+                vehicles.shift();
+                next(actions.setDriverSignDetail(res, vehicles));
+                try {
+                  let docRes = await fetchRequiredDocuments({
+                    access_token: `${access_token}`,
+                    login_documents: 3,
+                    operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
+                    app_version: 6010,
+                    login_type: 1,
+                    branding_image: 0,
+                    device_type: 0,
+                    task_type: 1,
+                    locale: "en",
+                  });
+                  next(actions.setRequiredDocuments(docRes.data));
+                  next(actions.changeStep(data["step"] + 1));
+                } catch (e) {}
+              } else {
+                showError(next);
+              }
+            }
+            next(actions.setLoading(false));
+          } catch (e) {
+            showError(next);
+            next(actions.setLoading(false));
+          }
         } else {
+          next(actions.changeStep(data["step"] - 1));
           next(actions.changeOtpStatus({ loading: false, otpSent: false }));
         }
       }
@@ -115,28 +139,6 @@ export const driver = (store) => (next) => async (action) => {
     } catch (e) {
       showError(next);
       next(actions.changeOtpStatus({ loading: false, otpSent: false }));
-    }
-  } else if (action.type == actionTypes.INITIATE_GET_DRIVER_SIGNUP_DETAILS) {
-    next(actions.setLoading(true));
-    try {
-      let res = await getDriverSignupDetails({
-        access_token: `${data["access_token"]}`,
-        operator_token: `${process.env.NEXT_PUBLIC_APP_KEY}`,
-        app_version: 6010,
-        login_type: 1,
-        device_type: 0,
-      });
-      if (res) {
-        if (res.flag === 143) {
-          next(actions.setDriverSignDetail(res, res.vehicle_types));
-        } else {
-          showError(next);
-        }
-      }
-      next(actions.setLoading(false));
-    } catch (e) {
-      showError(next);
-      next(actions.setLoading(false));
     }
   } else if (action.type == actionTypes.INITIATE_SUBMIT_DRIVER_FORM) {
     next(actions.setLoading(true));

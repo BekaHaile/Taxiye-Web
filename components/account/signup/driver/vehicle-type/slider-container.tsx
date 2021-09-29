@@ -5,7 +5,7 @@ import styles from "../../../../../theme/global/slider";
 import Slider from "../../../../slider/";
 import theme from "../../../../../theme/main";
 import store from "../../../../../redux/store";
-import {changeVehicle} from "../../../../../redux/actions/driver";
+import { changeVehicle } from "../../../../../redux/actions/driver";
 import { useSelector } from "react-redux";
 
 const Card = styled("div")`
@@ -38,7 +38,6 @@ const Title = styled("p")`
   color: ${theme.colors.primaryTextColor}; ;
 `;
 
-
 const settings = {
   itemsToShow: 3,
   itemPadding: [25, 0],
@@ -46,8 +45,8 @@ const settings = {
 };
 
 const SliderContainer = () => {
-  const selectedCar = useSelector((state)=>state["driver"]["vehicleType"]);
-  const vehicles = useSelector((state)=>state["driver"]["vehicles"]);
+  const selectedCar = useSelector((state) => state["driver"]["vehicleType"]);
+  const vehicles = useSelector((state) => state["driver"]["vehicles"]);
   return (
     <>
       <Slider
@@ -62,8 +61,8 @@ const SliderContainer = () => {
               {styles}
             </style>
             <CenteredElement>
-              <Image src={vehicle.image} />
-              <Title>{vehicle.name}</Title>
+              <Image src={require("../../../../../assets/images/cars/sedan.svg")} />
+              <Title>{vehicle.vehicle_name}</Title>
             </CenteredElement>
           </Card>
         ))}
