@@ -54,6 +54,7 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
     "swiper": "^6.3.5",
+    "typescript": "^4.1.2",
     "url-loader": "^4.1.1",
     "world_countries_lists": "^2.2.0"
   },
