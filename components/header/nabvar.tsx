@@ -64,7 +64,7 @@ const Nav = styled("nav")`
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 20px;
-    margin: 0px 20px;
+    margin: 0px 5px;
     flex-wrap: wrap;
   }
 `;
@@ -171,6 +171,7 @@ const NavBar = () => {
             About us{" "}
           </NavLink>
         </Link>
+
         {user_data && access_token ? (
           <div
             onClick={() => {
@@ -190,6 +191,21 @@ const NavBar = () => {
             </SecondaryNavLink>
           </Link>
         )}
+        <div
+          className="mobile-view"
+          onClick={() => {
+            const element = document.querySelector("#download-app-links");
+            const topPos =
+              element.getBoundingClientRect().top + window.pageYOffset;
+
+            window.scrollTo({
+              top: topPos, // scroll so that the element is at the top of the view
+              behavior: "smooth", // smooth scroll
+            });
+          }}
+        >
+          <NavLink>Download App</NavLink>
+        </div>
       </Nav>
     </NavWrapper>
   );

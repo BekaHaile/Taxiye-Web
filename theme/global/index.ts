@@ -371,6 +371,9 @@ p,h1,h2,h3,h4,h5,h6{
   #floating-button.hidden {
     opacity: 0;
     transition: opacity 0.5s ease-out;
+    @media (max-width: 768px) {
+      opacity: 1;
+    }
   }
 
   #text-on-floating-button{	
@@ -596,8 +599,8 @@ overflow:hidden;
 
 
 .first-bar.active{
-  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-  transform: rotate(-45deg) translate(-9px, 6px);
+  -webkit-transform: rotate(-45deg) translate(-4px, 3px);
+  transform: rotate(-45deg) translate(-4px, 3px);
 }
 .second-bar.active{
   opacity: 0;

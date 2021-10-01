@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import theme from "../../theme/main";
+import Link from "next/link";
 
 const SlogganWrapper = styled("div")`
 display; flex;
@@ -20,7 +21,7 @@ const Slogan = styled("h1")`
   color: ${theme.colors.heroTitleColor};
   @media (max-width: 768px) {
     font-size: 5vw;
-    margin:10px;
+    margin: 10px;
     line-height: normal;
   }
 `;
@@ -30,7 +31,6 @@ const CenteredSlogan = styled(Slogan)`
   padding-bottom: 10px;
   @media (max-width: 400px) {
     font-size: 5vw;
-    
   }
 `;
 
@@ -43,7 +43,7 @@ const Description = styled("p")`
   padding-bottom: 30px;
   @media (max-width: 768px) {
     font-size: 3vw;
-    margin:10px;
+    margin: 10px;
     padding-bottom: 0px;
   }
 `;
@@ -107,6 +107,17 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     }
   `;
 
+  const NavLink = styled.a`
+    font-weight: 600;
+    line-height: 19px;
+    text-align: center;
+    color: ${theme.colors.primary};
+
+    &:hover {
+      color: ${theme.colors.secondary};
+    }
+  `;
+
   let routes = router.asPath.split("/");
   routes.shift();
 
@@ -121,7 +132,7 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
           height: `75vh`,
           width: `auto`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
         key={queryText}
         id={queryText}
@@ -129,11 +140,21 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
         <Container>
           <SlogganWrapper>
             <Breadcrump>
-              {`Home / 
-                  ${
-                    navigatedLink.charAt(0).toUpperCase() +
-                    navigatedLink.slice(1)
-                  }
+              {
+                <Link href="/">
+                  <NavLink>Home</NavLink>
+                </Link>
+              }
+              {` / `}
+              {
+                <Link href={`/${navigatedLink}`}>
+                  <NavLink>
+                    {navigatedLink.charAt(0).toUpperCase() +
+                      navigatedLink.slice(1)}
+                  </NavLink>
+                </Link>
+              }
+              {`
                   ${
                     queryText != ""
                       ? ` / 

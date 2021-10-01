@@ -14,14 +14,13 @@ const Container = styled("div")`
   align-items: center;
   margin: 0;
   padding: 0px 60px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     height: auto;
     justify-content: start;
     padding: 0px 20px;
   }
 `;
-
 
 const FormattedLinks = styled.a`
   font-size: 13px;
@@ -39,7 +38,7 @@ const FormattedLinks = styled.a`
     color: ${theme.colors.primary};
   }
   @media (max-width: 500px) {
-    font-size: 2vw;
+    font-size: 3vw;
   }
 `;
 
@@ -70,20 +69,32 @@ const TopBar = () => {
           });
         }}
       >
-        <FormattedLinks>Download App </FormattedLinks>
+        <FormattedLinks className="desktop-view">Download App </FormattedLinks>
       </div>
-      <a href="https://elsabi.net/" target="_blank">
-        <FormattedLinks>EI Sabi</FormattedLinks>
-      </a>
-      <div onClick={() => setShow(true)}>
-        <FormattedLinks>Share</FormattedLinks>
+
+      <FormattedLinks href="https://elsabi.net/" target="_blank">
+        EL Sabi
+      </FormattedLinks>
+
+      <FormattedLinks href="https://eltnt.com/" target="_blank">
+        EL Tnt
+      </FormattedLinks>
+
+      <FormattedLinks onClick={() => setShow(true)}>Share</FormattedLinks>
+
+      <CornerLink className="mobile-view">
+        <Link href="support">
+          <CornerLink>Support</CornerLink>
+        </Link>
+      </CornerLink>
+      <div className="desktop-view">
+        <Link href="support">
+          <FormattedLinks>Support</FormattedLinks>
+        </Link>
       </div>
-      <Link href="support">
-        <FormattedLinks>Support</FormattedLinks>
-      </Link>
-      <Link href="#">
-        <CornerLink>Call Us On 6055</CornerLink>
-      </Link>
+      <div>
+        <CornerLink className="desktop-view">Call Us On 6055</CornerLink>
+      </div>
       <Modal onClose={() => setShow(false)} show={show}>
         <ShareSocial
           url={siteUrl}

@@ -18,7 +18,8 @@ const Header = styled("div")`
   width: 100%;
   height: 60px;
   position: fixed;
-  z-index:100;
+
+  z-index: 100;
 `;
 
 const Menus = styled("a")``;
@@ -27,16 +28,24 @@ const MenuItemContainer = styled("div")`
   background-color: ${theme.colors.white};
   height: 300px;
   height: 100%;
-  width: 0;
+  width: auto;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   left: 0;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.4s;
   margin-top: 60px;
 `;
 
+const MenuItemMainContainer = styled("div")`
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: 0.4s;
+`;
 const HeaderLogo = styled("div")`
   box-sizing: border-box;
   font-size: 25px;
@@ -56,16 +65,20 @@ const RightHeader = styled("div")`
   box-sizing: border-box;
   display: flex;
   gap: 20px;
+  height: 100%;
 `;
 const MenuIconContainer = styled("div")`
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
+  margin: auto;
+  gap: 5px;
+  margin-right:5px;
 `;
 const Bar = styled("div")`
-  width: 35px;
-  height: 5px;
+  width: 30px;
+  height: 3px;
   background-color: ${theme.colors.primary};
-  margin: 6px 0;
   transition: 0.4s;
 `;
 const FirstBar = styled(Bar)``;
@@ -89,7 +102,7 @@ const MobileHeader = ({ className }) => {
           </HeaderLogo>
           <RightHeader>
             <MenuIconContainer
-              onClick={() => {  
+              onClick={() => {
                 store.dispatch(menuSelected(!active));
               }}
             >
@@ -105,8 +118,18 @@ const MobileHeader = ({ className }) => {
             </MenuIconContainer>
           </RightHeader>
         </Header>
+        <MenuItemMainContainer
+          style={{
+            backgroundColor: active ? "rgba(33, 33, 33, 0.2)" : "transparent",
+          }}
+          onClick={() => {
+            store.dispatch(menuSelected(false));
+          }}
+        ></MenuItemMainContainer>
         <MenuItemContainer
-          style={{ width: active ? "100%" : "0px" }}
+          style={{
+            transform: active ? "translate(0px)" : "translate(-100%)",
+          }}
           className={className}
         >
           <TopBar />

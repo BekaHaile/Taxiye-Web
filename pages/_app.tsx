@@ -16,11 +16,17 @@ import { menuSelected } from "../redux/actions/navigation";
 import SnackBar from "../components/modal/snackbar";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { theme } from "../theme/main/material_theme";
+import themeColor from "../theme/main";
 import NProgress from "nprogress";
 
 const queryClient = new QueryClient();
 
-const FloatingButton = styled("div")``;
+const FloatingButton = styled("div")`
+  z-index: 3;
+`;
+const CallLink = styled("a")`
+  color: ${themeColor.colors.white};
+`;
 
 const IconImage = styled("img")`
   margin-top: 14px;
@@ -148,7 +154,7 @@ function withHeader(loading, pageProps, Component) {
                   id="text-on-floating-button"
                   className="hidden"
                 >
-                  Call Us On 6055
+                  <CallLink href="tel:6055">Call Us On 6055</CallLink>
                 </div>
                 <FloatingButton
                   onClick={() => toggleFloatingButton(true)}
