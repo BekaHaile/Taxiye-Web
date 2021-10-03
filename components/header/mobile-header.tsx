@@ -39,12 +39,14 @@ const MenuItemContainer = styled("div")`
 `;
 
 const MenuItemMainContainer = styled("div")`
+  display: none;
   background-color: transparent;
   width: 100%;
   height: 100%;
   position: fixed;
   z-index: 1;
   transition: 0.4s;
+  
 `;
 const HeaderLogo = styled("div")`
   box-sizing: border-box;
@@ -73,7 +75,7 @@ const MenuIconContainer = styled("div")`
   cursor: pointer;
   margin: auto;
   gap: 5px;
-  margin-right:5px;
+  margin-right: 5px;
 `;
 const Bar = styled("div")`
   width: 30px;
@@ -121,6 +123,7 @@ const MobileHeader = ({ className }) => {
         <MenuItemMainContainer
           style={{
             backgroundColor: active ? "rgba(33, 33, 33, 0.2)" : "transparent",
+            display:  active ? "block": "none",
           }}
           onClick={() => {
             store.dispatch(menuSelected(false));
