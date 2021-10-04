@@ -14,7 +14,9 @@ const CardContainer = styled("div")`
   flex-direction: row;
   justify-content: center;
   margin: 30px 0px;
-  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const SubTitle = styled("p")`
