@@ -10,7 +10,7 @@ const Card = styled("div")`
   align-items: flex-start;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  height:430px;
+  height:480px;
   background: ${theme.colors.white};
   @media (max-width: 500px) {
     margin: 0 0px;
@@ -105,8 +105,8 @@ const TextWrapper = styled("div")`
 `;
 
 const ImageContainer = styled("div")`
-  height: 230px;
   width: 340px;
+  min-height:230px;
   overflow:hidden;
   @media (max-width: 500px) {
     width: 100%;
