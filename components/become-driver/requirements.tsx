@@ -19,7 +19,7 @@ const CardContainer = styled("div")`
   }
 `;
 
-const SubTitle = styled("p")`
+const SubTitle = styled("div")`
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;

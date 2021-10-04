@@ -35,7 +35,7 @@ const FlexRow = styled("div")`
   }
 `;
 
-const Description = styled("p")`
+const Description = styled("div")`
   max-width: 500px;
   font-family: Open Sans;
   font-style: normal;
