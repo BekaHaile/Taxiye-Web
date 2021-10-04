@@ -28,14 +28,14 @@ const ArticleSlider = ({ articles }) => {
       <div className="mobile-view">
         <Container>
           {articles.map((article) => (
-            <Card key={article.id} article={article} />
+            <Card key={article?.id} article={article} />
           ))}
         </Container>
       </div>
       <div className="desktop-view">
         <Slider
           content={articles.map((article) => (
-            <Card key={article.id} article={article} />
+            <Card key={article?.id} article={article} />
           ))}
           settings={settings}
         />
