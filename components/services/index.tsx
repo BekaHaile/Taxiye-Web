@@ -29,14 +29,14 @@ const FlexRow = styled("div")`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction:row;
+  flex-direction: row;
   @media (max-width: 768px) {
-    flex-wrap:wrap;
+    flex-wrap: wrap;
   }
 `;
 
 const Description = styled("p")`
-  max-width:500px;
+  max-width: 500px;
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
@@ -77,7 +77,7 @@ const Image = styled("img")`
   flex: 1;
   width: 50%;
   @media (max-width: 1269px) {
-    order:-1;
+    order: -1;
   }
   @media (max-width: 500px) {
     width: 100%;
@@ -112,9 +112,12 @@ const Services = ({ data }) => {
                     <RightServiceTitle>{service.name}</RightServiceTitle>
 
                     {service.longDescription.map((description, index) => (
-                      <RightDescription key={index}>
-                        {description.content}
-                      </RightDescription>
+                      <RightDescription
+                        key={index}
+                        dangerouslySetInnerHTML={{
+                          __html: description.content,
+                        }}
+                      />
                     ))}
                   </RightContainer>
                 </FlexRow>
@@ -127,10 +130,12 @@ const Services = ({ data }) => {
                   <ServiceTitle>{service.name}</ServiceTitle>
 
                   {service.longDescription.map((description, index) => (
-                    <Description key={index}>
-                      {" "}
-                      {description.content}{" "}
-                    </Description>
+                    <Description
+                      key={index}
+                      dangerouslySetInnerHTML={{
+                        __html: description.content,
+                      }}
+                    />
                   ))}
                 </LeftContainer>
                 <Image

@@ -81,7 +81,11 @@ const Requirements = ({ title, subTitle, contents, mainImage }) => {
                   <ElementContainer>
                     <StringContainer>
                       <Title>{content.title}</Title>
-                      <SubTitle>{content.description}</SubTitle>
+                      <SubTitle
+                        dangerouslySetInnerHTML={{
+                          __html: content.description,
+                        }}
+                      />
                     </StringContainer>
                   </ElementContainer>
                 </CardContainer>
