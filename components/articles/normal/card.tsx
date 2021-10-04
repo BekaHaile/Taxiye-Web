@@ -10,6 +10,7 @@ const Card = styled("div")`
   align-items: flex-start;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  height:430px;
   background: ${theme.colors.white};
   @media (max-width: 500px) {
     margin: 0 0px;
@@ -20,10 +21,10 @@ const CardImage = styled("img")`
   border-radius: 10px 10px 0px 0px;
   margin: 0;
   width: 340px;
-  height: 230px;
+  height: auto;
+  min-height: 230px;
   @media (max-width: 500px) {
     width: 100%;
-    height: 100%;
   }
 `;
 
@@ -32,6 +33,8 @@ const CardBody = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
+  height:100%;
+  justify-content:space-between;
 `;
 
 const Image = styled("img")``;
@@ -59,7 +62,12 @@ const ArticleTitle = styled("h1")`
   font-size: 20px;
   line-height: 30px;
   color: ${theme.colors.primaryTextColor};
-  padding: 0px 0px 10px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom:10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const ArticleText = styled("p")`
@@ -68,7 +76,11 @@ const ArticleText = styled("p")`
   font-size: 14px;
   line-height: 150%;
   color: ${theme.colors.primaryTextColor};
-  padding-bottom: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 const Button = styled("button")`
@@ -87,16 +99,17 @@ const Button = styled("button")`
 const TextWrapper = styled("div")`
   width: 300px;
   @media (max-width: 300px) {
-    text-align:center;
-    width:100%;
+    text-align: center;
+    width: 100%;
   }
 `;
 
 const ImageContainer = styled("div")`
   height: 230px;
   width: 340px;
+  overflow:hidden;
   @media (max-width: 500px) {
-    width:100%;
+    width: 100%;
   }
 `;
 
