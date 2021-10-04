@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import WrappedMap from "../map/booking";
 import Container from "./container";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 import store from "../../redux/store";
 import { setDeviceToken } from "../../redux/actions/user/index";
@@ -9,6 +10,20 @@ import { assignDriver } from "../../redux/actions/booking/index";
 
 import { app } from "../../firebase/config";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
+
+const ContainerWrapper = styled("div")`
+  z-index: 10000;
+  width: 100wh;
+  height: 100vh;
+
+`;
+
+const Contents = styled("div")`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+`;
 
 const Mapview = () => {
   const origin = useSelector((state) => state["booking"]["origin"]);
@@ -21,12 +36,12 @@ const Mapview = () => {
     const messaging = getMessaging(app);
     askPermission(messaging);
     getMessageData(messaging);
-    
   });
 
   function getMessageData(messaging) {
     getToken(messaging, {
-      vapidKey: "BP1VvyzC_0jdVQ3VX6lkGGNmxxySsSn3rluLMvgAUlCLjmXWeuXbdS7JgbpdGxgSvhq6DWqd5RvBUPGh_G52jcA",
+      vapidKey:
+        "BP1VvyzC_0jdVQ3VX6lkGGNmxxySsSn3rluLMvgAUlCLjmXWeuXbdS7JgbpdGxgSvhq6DWqd5RvBUPGh_G52jcA",
     })
       .then((currentToken) => {
         if (currentToken) {
@@ -60,17 +75,19 @@ const Mapview = () => {
 
   return (
     <>
-      <div style={{ zIndex: 10000, width: "100wh", height: "100vh" }}>
-        <WrappedMap
-          listOfVehicles={listOfVehicles}
-          originAction={origin.location}
-          directionAction={destination.location}
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "100%" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
-        />
-      </div>
-      <Container />
+      <Contents>
+        <ContainerWrapper>
+          <WrappedMap
+            listOfVehicles={listOfVehicles}
+            originAction={origin.location}
+            directionAction={destination.location}
+            loadingElement={<div style={{ height: "100%" }} />}
+            containerElement={<div style={{ height: "100%" }} />}
+            mapElement={<div style={{ height: "100%" }} />}
+          />
+        </ContainerWrapper>
+        <Container />
+      </Contents>
     </>
   );
 };

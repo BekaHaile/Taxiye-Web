@@ -21,6 +21,11 @@ const ContainerWrapper = styled("div")`
   margin: 20px;
   height: -webkit-fill-available;
   width: 500px;
+  @media (max-width: 768px) {
+    position: relative;
+    width: auto;
+    margin: 0px;
+  }
 `;
 
 const ChildrenContainer = styled("div")`

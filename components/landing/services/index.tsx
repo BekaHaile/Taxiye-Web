@@ -83,31 +83,33 @@ interface ServiceProps {
 
 const Services = ({ services, title, subTitle }: ServiceProps) => {
   return (
-    <DefaultSection>
-      <SectionHeaderContainer>
-        <SectionTitle>{title}</SectionTitle>
-        <CenteredText>{subTitle}</CenteredText>
-      </SectionHeaderContainer>
-      <SectionContentContainer>
-        <ServicesWrapper>
-          {/* <div className="mobile-view">
-            <TabbedForms />
-          </div> */}
-          {services.map((service, index) => (
-            <ServiceWrapper key={index}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_HOST}${service?.thumbnail.url}`}
-              />
-              <ServiceTitle>{service?.name}</ServiceTitle>
-              <ServiceText>{service?.shortDescription.content}</ServiceText>
-              <Link href={`/services#${service?.id}`}>
-                <Button>Load More</Button>
-              </Link>
-            </ServiceWrapper>
-          ))}
-        </ServicesWrapper>
-      </SectionContentContainer>
-    </DefaultSection>
+    <>
+      <div className="mobile-view">
+        <TabbedForms />
+      </div>
+      <DefaultSection>
+        <SectionHeaderContainer>
+          <SectionTitle>{title}</SectionTitle>
+          <CenteredText>{subTitle}</CenteredText>
+        </SectionHeaderContainer>
+        <SectionContentContainer>
+          <ServicesWrapper>
+            {services.map((service, index) => (
+              <ServiceWrapper key={index}>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_HOST}${service?.thumbnail.url}`}
+                />
+                <ServiceTitle>{service?.name}</ServiceTitle>
+                <ServiceText>{service?.shortDescription.content}</ServiceText>
+                <Link href={`/services#${service?.id}`}>
+                  <Button>Load More</Button>
+                </Link>
+              </ServiceWrapper>
+            ))}
+          </ServicesWrapper>
+        </SectionContentContainer>
+      </DefaultSection>
+    </>
   );
 };
 

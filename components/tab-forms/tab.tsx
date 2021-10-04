@@ -17,9 +17,12 @@ const TabContainer = styled("div")`
   flex-direction: column;
   height: -webkit-fill-available;
   max-width: 490px;
+  
+  @media (max-width: 768px) {
+    margin: 10px auto;
+  }
   @media (max-width: 490px) {
     width: 100%;
-    margin:10px;
   }
 `;
 
@@ -39,14 +42,15 @@ const TabButtonWrappers = styled("div")`
   padding: 10px 20px;
   justify-content: space-between;
   text-align: center;
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+  }
 `;
 
 const TabButton = styled.a`
   font-weight: normal;
   font-size: 14px;
-  @media (max-width: 768px) {
-    font-size: 1.5vw;
-  }
+ 
   line-height: 29px;
   color: ${theme.colors.primaryTextColor};
   text-decoration: none;
@@ -57,6 +61,11 @@ const TabButton = styled.a`
     background: ${theme.colors.primary};
     border-radius: 50px;
     text-align: center;
+  }
+  @media (max-width: 768px) {
+    font-size: 2vw;
+    line-height: 4vw;
+    padding: 0px;
   }
 `;
 

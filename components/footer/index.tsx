@@ -11,6 +11,14 @@ const FooterHeader = styled("h4")`
 `;
 
 const Image = styled("img")``;
+const DownloadImage = styled("img")`
+  width: 170px;
+  height: 51px;
+  @media (max-width: 300px) {
+    width:100%;
+    height:auto;
+  }
+`;
 const LinkComponent = styled("a")``;
 
 const LastImage = styled("img")`
@@ -56,23 +64,23 @@ const FooterEndBottomLink = styled(FooterBottomLink)`
 
 const FooterBottomLinkWrapper = styled("div")`
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-self: flex-end;
   padding-bottom: 20px;
   padding-left: 0px;
-  gap:10px;
+  gap: 10px;
 `;
 
 const FooterInfo = styled("div")`
   display: flex;
   flex-wrap: wrap;
-  gap:20px;
+  gap: 20px;
 `;
 
 const SocialLinkWrapper = styled(FooterBottomLinkWrapper)`
   padding-bottom: 0px;
-  gap:10px;
+  gap: 10px;
 `;
 
 const Grid = styled("div")`
@@ -82,7 +90,7 @@ const Grid = styled("div")`
   margin-left: auto;
   justify-content: space-between;
   width: 100%;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 `;
 
 const Footer = styled("div")`
@@ -90,7 +98,7 @@ const Footer = styled("div")`
   flex-direction: column;
   background: ${theme.colors.footerColor};
   @media (max-width: 768px) {
-    margin:20px;
+    margin: 20px;
   }
 `;
 
@@ -99,7 +107,7 @@ const FooterImage = styled("img")`
   height:430px;*/
   @media (max-width: 768px) {
     margin: auto;
-    width:100%;
+    width: 100%;
   }
 `;
 
@@ -115,7 +123,7 @@ const FlexRow = styled("div")`
   display: flex;
   justify-content: space-between;
   padding: 60px 60px 0px 60px;
-  gap:20px;
+  gap: 20px;
   @media (max-width: 768px) {
     padding: 0px;
     padding-top: 60px;
@@ -204,17 +212,13 @@ const FooterSection = () => {
           </Grid>
           <FlexEnd id="download-app-links">
             <LinkComponent href="https://itunes.apple.com/us/app/taxiye-passenger/id1455202776?mt=8">
-              <Image
+              <DownloadImage
                 src={require("../../assets/images/app_store.png")}
-                width="170px"
-                height="51px"
               />
             </LinkComponent>
             <LinkComponent href="https://play.google.com/store/apps/details?id=com.taxiye">
-              <Image
+              <DownloadImage
                 src={require("../../assets/images/play_store.png")}
-                width="170px"
-                height="51px"
               />
             </LinkComponent>
           </FlexEnd>
