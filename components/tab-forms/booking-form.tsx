@@ -90,6 +90,10 @@ const BookForm = ({ contentView }) => {
             </FormGroup>
 
             <FormGroup>
+              <Icon
+                className="mobile-view"
+                src={require("../../assets/icons/user/clock.svg")}
+              />
               <InputWrapper>
                 <LabelText htmlFor="datepicker"> Time? </LabelText>
                 <TimePicker

@@ -10,7 +10,7 @@ const Button = styled("button")`
   font-size: 14px;
   line-height: 19px;
   text-align: center;
-  color: ${theme.colors.white};;
+  color: ${theme.colors.white};
   border-color: transparent;
   font-family: Open Sans;
   font-style: normal;
@@ -23,7 +23,7 @@ const LabelText = styled("label")`
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor}; ;
 `;
 
 const Input = styled("input")`
@@ -44,6 +44,9 @@ const Input = styled("input")`
     :focus {
       outline: none;
       border-bottom: 1px solid ${theme.colors.primary};
+    }
+    @media (max-width: 490px) {
+      width: 100%;
     }
 `;
 
@@ -75,6 +78,10 @@ const InlineForm = styled("div")`
   && {
     input {
     }
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 10px;
   }
 `;
 

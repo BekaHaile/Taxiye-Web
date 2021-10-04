@@ -47,8 +47,9 @@ const Hero = ({ hero }) => {
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
       background-size: 100% 100% !important;
-      height: 40vh !important;
+      height: 70vw !important;
       width: auto !important;
+      min-height:40vh;
     }
   `;
 

@@ -92,10 +92,10 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
       background-size: 100% 100% !important;
-      height: auto !important;
+      height: 70vw !important;
       width: auto !important;
-      min-height: 40vh;
       padding-bottom: 10px;
+      min-height:40vh;
     }
   `;
 
