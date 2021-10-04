@@ -65,7 +65,7 @@ const TabButton = styled.a`
   @media (max-width: 768px) {
     font-size: 2vw;
     line-height: 4vw;
-    padding: 0px;
+    padding: 2px;
   }
 `;
 
