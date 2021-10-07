@@ -7,8 +7,8 @@ import DefaultErrorPage from 'next/error';
 
 const query = gql`
 # This is query
-query {
-  servicePage {
+query PageLayout($locale: String!) {
+  servicePage (locale: $locale){
     hero{
       title
       subTitle
@@ -20,7 +20,7 @@ query {
     serviceSectionSubTitle
     
   }
-  services(sort: "created_at" ){
+  services(locale: $locale, sort: "created_at" ){
     id
     name
     shortDescription{
@@ -37,10 +37,12 @@ query {
   
 }
 `
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try{
     const { data, error } = await client.query({
-      query: query
+      query: query,
+      variables:{locale: locale}
     });
     return {
        props: {
@@ -59,7 +61,7 @@ const Services = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
   <>
-  <Banner hero={data.servicePage.hero} children={null} key="services"/>
+  <Banner hero={data?.servicePage?.hero} children={null} key="services"/>
   <ServicesSection data={data}/>
   </>
   )

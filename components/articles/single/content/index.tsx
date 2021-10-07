@@ -22,10 +22,10 @@ const Article = ({ article }) => {
   const articleHeader = {
     title: article.headerTitle,
     mainMedia: {
-      url: article.mainMedia.url,
+      url: article?.mainMedia?.url,
     },
-    published_at: article.published_at,
-    user: article.user,
+    published_at: article?.published_at,
+    user: article?.user,
   };
 
   return (
@@ -33,13 +33,13 @@ const Article = ({ article }) => {
       <Container>
         <InnerContainer>
           <Header header={articleHeader} />
-          {articleBody.map((body, index) =>
+          {articleBody?.map((body, index) =>
             body.__component === "text.media" ? (
               <Media key={index} media={body} />
             ) : body.__component === "text.quote" ? (
-              <Quote key={index} quote={body.content} />
+              <Quote key={index} quote={body?.content} />
             ) : (
-              <ParagraphText key={index} paragraph={body.content} />
+              <ParagraphText key={index} paragraph={body?.content} />
             )
           )}
         </InnerContainer>

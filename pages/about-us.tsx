@@ -6,8 +6,8 @@ import client from "../backend-client";
 import DefaultErrorPage from "next/error";
 
 const query = gql`
-  query {
-    aboutUsPage {
+  query PageLayout($locale: String!) {
+    aboutUsPage (locale: $locale){
       id
       hero {
         title
@@ -39,7 +39,7 @@ const query = gql`
       ourTeamSectionSubTitle
     }
 
-    ourValueStatements {
+    ourValueStatements(locale: $locale) {
       id
       title
       description
@@ -48,13 +48,13 @@ const query = gql`
       }
     }
 
-    whyTaxiyes {
+    whyTaxiyes(locale: $locale) {
       id
       title
       description
     }
 
-    ourPartners {
+    ourPartners(locale: $locale) {
       id
       description
       thumbnail {
@@ -62,7 +62,7 @@ const query = gql`
       }
     }
 
-    ourTeams {
+    ourTeams(locale: $locale) {
       id
       name
       title
@@ -70,7 +70,7 @@ const query = gql`
         url
       }
     }
-    ourTeamGroups {
+    ourTeamGroups(locale: $locale) {
       id
       team
       description
@@ -81,10 +81,12 @@ const query = gql`
   }
 `;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try {
     const { data, error } = await client.query({
       query: query,
+      variables:{locale: locale}
     });
     return {
       props: {
@@ -99,7 +101,7 @@ const aboutus = ({ data, error }) => {
   if (error) return <DefaultErrorPage statusCode={404} />;
   return (
     <>
-      <Banner hero={data.aboutUsPage.hero} children={null} />
+      <Banner hero={data?.aboutUsPage?.hero} children={null} />
       <AboutUsContent data={data} />
     </>
   );

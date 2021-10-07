@@ -29,19 +29,20 @@ const getSearch = async (key) => {
 }
 
 export async function getServerSideProps(context) {
+  
   try {
     const { id } = context.query;
     const { NEXT_PUBLIC_HOST } = process.env;
     const resArticlePage = await fetch(`${NEXT_PUBLIC_HOST}/article-page`);
     const articlePageData = await resArticlePage.json();
-    const articleRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/${id}`);
+    const articleRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/?article_id=${id}`);
     const articlesData = await articleRes.json();
     const popularRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/?featured=true`);
     const popularArticlesData = await popularRes.json();
     return {
       props: {
         articlePage: articlePageData,
-        article: articlesData,
+        article: articlesData[0],
         populars: popularArticlesData
       },
     };

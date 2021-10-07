@@ -148,7 +148,7 @@ const ArticleCard = ({ article }) => {
           <ArticleTitle>{article.headerTitle}</ArticleTitle>
           <ArticleText>{article.headerSubTitle}</ArticleText>
         </TextWrapper>
-        <Link href={`/articles/` + article.id}>
+        <Link href={`/articles/` + article?.article_id}>
           <Button>Read More</Button>
         </Link>
       </CardBody>

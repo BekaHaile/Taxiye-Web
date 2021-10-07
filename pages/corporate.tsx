@@ -10,8 +10,8 @@ import DefaultErrorPage from "next/error";
 import theme from "../theme/main";
 
 const query = gql`
-  query {
-    corporatePage {
+  query PageLayout($locale: String!) {
+    corporatePage(locale: $locale) {
       hero {
         title
         subTitle
@@ -31,25 +31,25 @@ const query = gql`
       expenseSectionSubTitle
       expenseTrackerSectionTitle
     }
-    corporateInfos {
+    corporateInfos(locale: $locale) {
       title
       subTitle
     }
-    corporateSafeties {
-      title
-      subTitle
-      thumbnail {
-        url
-      }
-    }
-    corporateArchitectures {
+    corporateSafeties(locale: $locale) {
       title
       subTitle
       thumbnail {
         url
       }
     }
-    corporateExprenses {
+    corporateArchitectures(locale: $locale) {
+      title
+      subTitle
+      thumbnail {
+        url
+      }
+    }
+    corporateExprenses(locale: $locale) {
       title
       subTitle
       thumbnail {
@@ -83,10 +83,12 @@ const SloganButton = styled("button")`
 
 const children = <SloganButton>Sign up for your company</SloganButton>;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try {
     const { data, error } = await client.query({
       query: query,
+      variables:{locale: locale}
     });
     return {
       props: {
@@ -103,7 +105,7 @@ const corporate = ({ data, error }) => {
   return (
     <>
       <Banner
-        hero={data.corporatePage.hero}
+        hero={data?.corporatePage?.hero}
         children={children}
         key="corporate"
       />

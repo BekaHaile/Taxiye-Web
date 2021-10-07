@@ -32,8 +32,8 @@ const HomeContainer = styled("div")`
 
 const Hero = ({ hero }) => {
   const router = useRouter();
-  let slogan = hero.title;
-  let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero.background.url}`;
+  let slogan = hero?.title;
+  let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero?.background?.url}`;
   const HomeHero = styled("section")`
     display: flex;
     flex-direction: column;

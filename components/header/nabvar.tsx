@@ -96,6 +96,16 @@ const NavLink = styled.a`
 const SecondaryNavLink = styled(NavLink)`
   display: flex;
 `;
+
+const LangLogo = styled("img")`
+  width: 20px;
+  height: 20px;
+`;
+
+const LangLinks = styled("a")`
+  color: black;
+`;
+
 const NavBar = () => {
   const access_token = useSelector((state) => state["user"]["access_token"]);
   const user_data = useSelector((state) => state["user"]["user_data"]);
@@ -205,6 +215,34 @@ const NavBar = () => {
           }}
         >
           <NavLink>Download App</NavLink>
+        </div>
+        <div className="lang-dropdown">
+          <SecondaryNavLink>
+            <Avatar src={require("../../assets/icons/globe-icon.svg")} />
+            {router.locale}
+          </SecondaryNavLink>
+          <div className="lang-dropdown-content">
+            <Link href={router.asPath} locale="en">
+              <LangLinks className={router.locale == "en" ? "active" : null}>
+                English
+              </LangLinks>
+            </Link>
+            <Link href={router.asPath} locale="am">
+              <LangLinks className={router.locale == "am" ? "active" : null}>
+                አማርኛ
+              </LangLinks>
+            </Link>
+            <Link href={router.asPath} locale="om">
+              <LangLinks className={router.locale == "om" ? "active" : null}>
+                Oromo
+              </LangLinks>
+            </Link>
+            <Link href={router.asPath} locale="sw">
+              <LangLinks className={router.locale == "sw" ? "active" : null}>
+                Swahili
+              </LangLinks>
+            </Link>
+          </div>
         </div>
       </Nav>
     </NavWrapper>

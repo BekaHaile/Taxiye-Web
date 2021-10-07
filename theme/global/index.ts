@@ -610,6 +610,34 @@ overflow:hidden;
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
+
+
+<style>
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  color: ${theme.colors.primary}
+}
+
+.lang-dropdown:hover .lang-dropdown-content {
+  display: flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.lang-dropdown:hover .lang-dropdown-content .active {
+  color: ${theme.colors.primary}
+}
 `;
 
 export default GlobalStyle;

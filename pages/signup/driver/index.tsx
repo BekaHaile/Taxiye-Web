@@ -5,8 +5,8 @@ import client from "../../../backend-client";
 import DefaultErrorPage from 'next/error';
 
 const query = gql`
-query{
-  driverSignUpPage{
+query PageLayout($locale: String!) {
+  driverSignUpPage(locale: $locale){
       hero{
         title
         background{
@@ -16,10 +16,12 @@ query{
     }
   }
 `
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try{
     const { data, error } = await client.query({
-      query: query
+      query: query,
+      variables:{locale: locale}
     });
     return {
        props: {

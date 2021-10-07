@@ -77,11 +77,11 @@ interface Props {
 
 const Hero: FunctionComponent<Props> = ({ hero, children }) => {
   const router = useRouter();
-  let slogan = hero.title;
-  let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero.background.url}`;
-  let description = hero.subTitle;
+  let slogan = hero?.title;
+  let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero?.background?.url}`;
+  let description = hero?.subTitle;
   let queryText = "";
-  if (hero.text != null) queryText = hero.text;
+  if (hero.text != null) queryText = hero?.text;
 
   const HeroWrapper = styled("div")`
     display: flex;

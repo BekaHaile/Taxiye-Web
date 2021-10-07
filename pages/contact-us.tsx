@@ -6,8 +6,8 @@ import client from "../backend-client";
 import DefaultErrorPage from 'next/error';
 
 const query = gql`
-query{
-  contactUsPage{
+query PageLayout($locale: String!) {
+  contactUsPage(locale: $locale){
    
     hero{
       title
@@ -22,7 +22,7 @@ query{
     officesSectionSubTitle
   }
 
-  socialMedias{
+  socialMedias(locale: $locale){
     id
     name
     logo{
@@ -30,7 +30,7 @@ query{
     }
     link
   }
-  addresses{
+  addresses(locale: $locale){
     id
     name
     lat
@@ -52,10 +52,12 @@ query{
   }
 }
 `
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try{
     const { data, error } = await client.query({
-      query: query
+      query: query,
+      variables:{locale: locale}
     });
     return {
        props: {
@@ -72,14 +74,14 @@ const Contactus = ({data, error}) => {
   return <DefaultErrorPage statusCode={404} />
   return (
     <>
-      <Banner hero={data.contactUsPage.hero} children={null} key="contact-us"/>
+      <Banner hero={data?.contactUsPage?.hero} children={null} key="contact-us"/>
       <ContactUsContent
-      socialMedias={data.socialMedias}
-      officeTitle={data.contactUsPage.officesSectionTitle}
-      officeSubTitle={data.contactUsPage.officesSectionSubTitle}
-      contactUsTitle={data.contactUsPage.contactUsSectionTitle}
-      contactUsSubTitle={data.contactUsPage.contactUsSectionSubTitle} 
-      addresses={data.addresses}/>
+      socialMedias={data?.socialMedias}
+      officeTitle={data?.contactUsPage?.officesSectionTitle}
+      officeSubTitle={data?.contactUsPage?.officesSectionSubTitle}
+      contactUsTitle={data?.contactUsPage?.contactUsSectionTitle}
+      contactUsSubTitle={data?.contactUsPage?.contactUsSectionSubTitle} 
+      addresses={data?.addresses}/>
     </>
   )
 

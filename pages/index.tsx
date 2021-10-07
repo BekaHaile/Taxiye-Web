@@ -8,8 +8,8 @@ import DefaultErrorPage from "next/error";
 
 const query = gql`
   # This is query
-  query {
-    homePage {
+  query PageLayout($locale: String!) {
+    homePage (locale: $locale) {
       hero {
         title
         subTitle
@@ -26,7 +26,7 @@ const query = gql`
       articleSectionTitle
       articleSectionSubTitle
     }
-    services(sort: "created_at") {
+    services(locale: $locale, sort: "created_at") {
       id
       name
       shortDescription {
@@ -40,9 +40,10 @@ const query = gql`
       }
     }
 
-    articles(sort: "created_at", where: { featured: true }) {
+    articles(locale: $locale, sort: "created_at", where: { featured: true }) {
       id
       published_at
+      article_id
       user {
         firstname
         lastname
@@ -54,7 +55,7 @@ const query = gql`
         url
       }
     }
-    testimonies(sort: "created_at") {
+    testimonies(locale: $locale, sort: "created_at") {
       id
       profileImage {
         url
@@ -64,7 +65,7 @@ const query = gql`
       testimony
       rating
     }
-    fleets(sort: "created_at") {
+    fleets(locale: $locale, sort: "created_at") {
       id
       name
       description
@@ -76,10 +77,13 @@ const query = gql`
   }
 `;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+  const {locale} = context;
   try {
     const { data, error } = await client.query({
       query: query,
+      variables:{locale: locale}
     });
 
     return {
@@ -98,7 +102,7 @@ export default function index({ data, error }) {
 
   return (
     <>
-      <Banner hero={data.homePage.hero} />
+      <Banner hero={data?.homePage?.hero} />
       <LandingContent data={data} />
     </>
   );

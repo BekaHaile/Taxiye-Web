@@ -9,8 +9,8 @@ import DefaultErrorPage from "next/error";
 import theme from "../theme/main";
 
 const query = gql`
-  query {
-    becomeADriverPage {
+  query PageLayout($locale: String!) {
+    becomeADriverPage(locale: $locale) {
       hero {
         title
         subTitle
@@ -29,7 +29,7 @@ const query = gql`
       safetySectionSubTitle
       getStartedSectionTitle
     }
-    driverWorkFreedoms {
+    driverWorkFreedoms(locale: $locale) {
       id
       title
       description
@@ -37,7 +37,7 @@ const query = gql`
         url
       }
     }
-    driverRequirments {
+    driverRequirments(locale: $locale) {
       id
       title
       description
@@ -45,7 +45,7 @@ const query = gql`
         url
       }
     }
-    driverSafeties {
+    driverSafeties(locale: $locale) {
       id
       title
       subTitle
@@ -77,10 +77,12 @@ const SloganButton = styled("button")`
 //   <SloganButton>Get started</SloganButton>
 // </Link>
 const children = <SloganButton>Get started</SloganButton>;
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try {
     const { data, error } = await client.query({
       query: query,
+      variables:{locale: locale}
     });
     return {
       props: {
@@ -97,7 +99,7 @@ const signup = ({ data, error }) => {
   return (
     <>
       <Banner
-        hero={data.becomeADriverPage.hero}
+        hero={data?.becomeADriverPage?.hero}
         children={children}
         key="become-driver"
       />

@@ -111,7 +111,7 @@ const PopularArticleCard = ({ article }) => {
           </ArticleInfoWrapper>
           <ArticleTitle>{article.headerTitle}</ArticleTitle>
         </TextWrapper>
-        <Link href={`/articles/${article.id}`}>
+        <Link href={`/articles/${article?.artilce_id}`}>
           <Button>Read More</Button>
         </Link>
 
