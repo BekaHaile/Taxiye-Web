@@ -8,6 +8,7 @@ import Articles from "../../components/articles/normal/";
 import Loading from "../../components/loading/";
 import { useQuery } from "react-query";
 import { Button } from "../../components/form/buttons/primary-button";
+import { useRouter } from 'next/router';
 
 const CustomButton = styled(Button)`
   padding: 5px 20px;
@@ -39,14 +40,15 @@ color: #000000;
 text-align:center;
 `;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   try {
     const { NEXT_PUBLIC_HOST } = process.env;
-    const resArticlePage = await fetch(`${NEXT_PUBLIC_HOST}/article-page`);
+    const resArticlePage = await fetch(`${NEXT_PUBLIC_HOST}/article-page/?_locale=${locale}`);
     const articlePageData = await resArticlePage.json();
-    const featuredRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/?featured=true`);
+    const featuredRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/?featured=true&_locale=${locale}`);
     const featuredArticlesData = await featuredRes.json();
-    const unfeaturedRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/?featured=false&_limit=${9}`);
+    const unfeaturedRes = await fetch(`${NEXT_PUBLIC_HOST}/articles/?featured=false&_limit=${9}&_locale=${locale}`);
     const unfeaturedArticlesData = await unfeaturedRes.json();
     return {
       props: {
@@ -68,21 +70,23 @@ export async function getServerSideProps() {
 const getSearch = async (key) => {
   const { NEXT_PUBLIC_HOST } = process.env;
   const q = key.queryKey[1].content;
+  const locale = key.queryKey[1].locale;
   if (q) {
-    const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?headerTitle_contains=${q}`);
+    const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?headerTitle_contains=${q}&_locale=${locale}`);
     return res.json();
   }
-  const res = await fetch(`${NEXT_PUBLIC_HOST}/articles`);
+  const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?_locale=${locale}`);
   return res.json();
 }
 const getMore = async (key) => {
   const { NEXT_PUBLIC_HOST } = process.env;
   const q = key.queryKey[1].content;
+  const locale = key.queryKey[1].locale;
   if (q) {
-    const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?featured=false&_limit=${q}`);
+    const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?featured=false&_limit=${q}&_locale=${locale}`);
     return res.json();
   }
-  const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?featured=false&_limit=9`);
+  const res = await fetch(`${NEXT_PUBLIC_HOST}/articles?featured=false&_limit=9&_locale=${locale}`);
   return res.json();
 }
 
@@ -90,8 +94,10 @@ export default function articles({ articlePage, featured, unfeatured, articles, 
   const [searchText, setSearching] = useState("");
   const [itemsToBeLoaded, setItemsToLoad] = useState(9);
 
-  const { data: searchedData, status: searchStatus } = useQuery(['articles', { content: searchText }], getSearch, { initialData: articles });
-  const { data: loadedItems, status: loadedItemsStatus } = useQuery(['articles', { content: itemsToBeLoaded }], getMore, { initialData: unfeatured });
+  const router = useRouter();
+
+  const { data: searchedData, status: searchStatus } = useQuery(['articles', { content: searchText, locale:router?.locale }], getSearch, { initialData: articles });
+  const { data: loadedItems, status: loadedItemsStatus } = useQuery(['articles', { content: itemsToBeLoaded, locale:router?.locale }], getMore, { initialData: unfeatured });
 
 
   const children = <SearchContainer>
