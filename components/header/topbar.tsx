@@ -4,7 +4,28 @@ import styled from "styled-components";
 import theme from "../../theme/main";
 import { ShareSocial } from "react-share-social";
 import Modal from "../modal/secondary";
+import id from "date-fns/esm/locale/id/index.js";
 
+const FormattedLinks = styled.a`
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: #ababab;
+  text-decoration: none;
+  padding: 5px;
+  &:after {
+    margin-left: 10px;
+    content: "";
+    border: 1px solid #ababab;
+  }
+  &:hover {
+    color: ${theme.colors.primary};
+  }
+
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
+`;
 const Container = styled("div")`
   background: ${theme.colors.topHeaderColor};
   height: 30px;
@@ -22,33 +43,13 @@ const Container = styled("div")`
   }
 `;
 
-const FormattedLinks = styled.a`
-  font-size: 13px;
-  line-height: 18px;
-  text-align: center;
-  color: #ababab;
-  text-decoration: none;
-  padding: 5px;
-  &:after {
-    margin-left: 10px;
-    content: "";
-    border: 1px solid #ababab;
-  }
-  &:hover {
-    color: ${theme.colors.primary};
-  }
-  @media (max-width: 500px) {
-    font-size: 3vw;
-  }
-`;
-
 const CornerLink = styled(FormattedLinks)`
   &:after {
     border: none;
   }
 `;
 
-const TopBar = () => {
+const TopBar = ({ menus }) => {
   const [show, setShow] = useState(false);
   const [siteUrl, setSiteUrl] = useState("");
   useEffect(() => {
@@ -57,50 +58,56 @@ const TopBar = () => {
   }, []);
   return (
     <Container>
-      <div
-        onClick={() => {
-          const element = document.querySelector("#download-app-links");
-          const topPos =
-            element.getBoundingClientRect().top + window.pageYOffset;
+      {menus?.map((menu, index) => {
+        if (menu?.key === "downloadapp")
+          return (
+            <div
+              onClick={() => {
+                const element = document.querySelector("#download-app-links");
+                const topPos =
+                  element.getBoundingClientRect().top + window.pageYOffset;
 
-          window.scrollTo({
-            top: topPos, // scroll so that the element is at the top of the view
-            behavior: "smooth", // smooth scroll
-          });
-        }}
-      >
-        <FormattedLinks className="desktop-view">Download App </FormattedLinks>
-      </div>
-
-      <FormattedLinks href="https://elsabi.net/" target="_blank">
-        EL Sabi
-      </FormattedLinks>
-
-      <FormattedLinks href="https://eltnt.com/" target="_blank">
-        EL Tnt
-      </FormattedLinks>
-
-      <FormattedLinks onClick={() => setShow(true)}>Share</FormattedLinks>
-
-      <CornerLink className="mobile-view">
-        <Link href="support">
-          <CornerLink>Support</CornerLink>
-        </Link>
-      </CornerLink>
-      <div className="desktop-view">
-        <Link href="support">
-          <FormattedLinks>Support</FormattedLinks>
-        </Link>
-      </div>
-      <div>
-        <CornerLink className="desktop-view">Call Us On 6055</CornerLink>
-      </div>
-      <Modal onClose={() => setShow(false)} show={show}>
-        <ShareSocial
-          url={siteUrl}
-          socialTypes={["facebook", "twitter", "reddit", "linkedin", "email"]}
-        />
-      </Modal>
+                window.scrollTo({
+                  top: topPos, // scroll so that the element is at the top of the view
+                  behavior: "smooth", // smooth scroll
+                });
+              }}
+            >
+              <FormattedLinks className="desktop-view">
+                Download App{" "}
+              </FormattedLinks>
+            </div>
+          );
+        else if (menu?.key === "share")
+          return (
+            <FormattedLinks onClick={() => setShow(true)}>Share</FormattedLinks>
+          );
+        else if (menu?.key === "support")
+          return (
+            <>
+              <FormattedLinks className="mobile-view">
+                <Link href="support">
+                  <FormattedLinks>Support</FormattedLinks>
+                </Link>
+              </FormattedLinks>
+              <div className="desktop-view">
+                <Link href="support">
+                  <FormattedLinks>Support</FormattedLinks>
+                </Link>
+              </div>
+            </>
+          );
+        return (
+          <FormattedLinks
+            key={index}
+            href={menu?.link}
+            target={menu?.link != "/" ? "_blank" : ""}
+          >
+            {menu?.text}
+          </FormattedLinks>
+        );
+      })}
+      <CornerLink className="desktop-view">Call Us On 6055</CornerLink>
     </Container>
   );
 };

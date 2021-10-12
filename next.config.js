@@ -18,7 +18,7 @@ module.exports = withImages(
     },
 
     i18n: {
-      locales: ["en", "am", "om", "sw"],
+      locales: ["en"],
       defaultLocale: "en",
     },
 

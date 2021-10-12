@@ -30,7 +30,7 @@ import {
   assignDriver,
   rideStarted,
   rideNotFound,
-  rideArrived
+  rideArrived,
 } from "../../../redux/actions/booking/index";
 
 import { PrimaryLoading } from "../../loading/loading";
@@ -188,23 +188,24 @@ const Approve = () => {
   const type = useSelector((state) => state["booking"]["type"]);
 
   useEffect(() => {
-    const messaging = getMessaging(app);
+    try {
+      const messaging = getMessaging(app);
 
-    onMessage(messaging, (payload) => {
-      let recievedMessage = JSON.parse(payload.data.message);
-      console.log(recievedMessage);
-      if (recievedMessage.flag === 5) {
-        store.dispatch(assignDriver(recievedMessage));
-      } else if (recievedMessage.flag === 3) {
-        router.push("/");
-        store.dispatch(rideStarted(recievedMessage.message));
-      } else if (recievedMessage.flag === 8 || recievedMessage.flag === 7) {
-        store.dispatch(rideNotFound(recievedMessage.message));
-      }else if (recievedMessage.flag === 72) {
-        store.dispatch(rideArrived(recievedMessage.message));
-      }
-      
-    });
+      onMessage(messaging, (payload) => {
+        let recievedMessage = JSON.parse(payload.data.message);
+        console.log(recievedMessage);
+        if (recievedMessage.flag === 5) {
+          store.dispatch(assignDriver(recievedMessage));
+        } else if (recievedMessage.flag === 3) {
+          router.push("/");
+          store.dispatch(rideStarted(recievedMessage.message));
+        } else if (recievedMessage.flag === 8 || recievedMessage.flag === 7) {
+          store.dispatch(rideNotFound(recievedMessage.message));
+        } else if (recievedMessage.flag === 72) {
+          store.dispatch(rideArrived(recievedMessage.message));
+        }
+      });
+    } catch (e) {}
   });
 
   return (

@@ -146,7 +146,7 @@ function withHeader(loading, pageProps, Component) {
             <Loading />
           ) : (
             <>
-              <Header />
+              <Header {...pageProps}/>
 
               <div>
                 <div

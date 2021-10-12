@@ -8,6 +8,22 @@ import DefaultErrorPage from "next/error";
 const query = gql`
   # This is query
   query PageLayout($locale: String!) {
+    headerContent(locale: $locale) {
+      link
+      logo {
+        url
+      }
+    }
+    topHeaderMenus(locale: $locale) {
+      text
+      link
+      key
+    }
+    headerMenus(locale: $locale) {
+      text
+      link
+      key
+    }
     supportPage(locale: $locale) {
       hero {
         title

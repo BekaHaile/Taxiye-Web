@@ -5,11 +5,26 @@ import { gql } from "@apollo/client";
 import client from "../backend-client";
 import DefaultErrorPage from "next/error";
 
-
 const query = gql`
   # This is query
   query PageLayout($locale: String!) {
-    homePage (locale: $locale) {
+    headerContent(locale: $locale) {
+      link
+      logo {
+        url
+      }
+    }
+    topHeaderMenus(locale: $locale) {
+      text
+      link
+      key
+    }
+    headerMenus(locale: $locale) {
+      text
+      link
+      key
+    }
+    homePage(locale: $locale) {
       hero {
         title
         subTitle
@@ -78,12 +93,12 @@ const query = gql`
 `;
 
 export async function getServerSideProps(context) {
-
-  const {locale} = context;
+  const { locale } = context;
+  // console.log(context);
   try {
     const { data, error } = await client.query({
       query: query,
-      variables:{locale: locale}
+      variables: { locale: locale ? locale : "en" },
     });
 
     return {
@@ -97,7 +112,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function index({ data, error }) {
-
   if (error) return <DefaultErrorPage statusCode={404} />;
 
   return (

@@ -6,6 +6,22 @@ import DefaultErrorPage from 'next/error';
 
 const query = gql`
 query PageLayout($locale: String!) {
+    headerContent(locale: $locale) {
+      link
+      logo {
+        url
+      }
+    }
+    topHeaderMenus(locale: $locale) {
+      text
+      link
+      key
+    }
+    headerMenus(locale: $locale) {
+      text
+      link
+      key
+    }
   driverSignUpPage(locale: $locale){
       hero{
         title

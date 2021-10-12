@@ -4,36 +4,34 @@ import TopBar from "./topbar";
 import NavBar from "./nabvar";
 import MobileHeader from "./mobile-header";
 
-
 const HeaderWrapper = styled("div")`
   height: auto;
   position: fixed;
-  width:100%;
+  width: 100%;
   z-index: 1;
   @media (max-width: 768px) {
-    display:none;
+    display: none;
   }
 `;
 
 const MobileHeaderWrapper = styled(MobileHeader)`
   height: auto;
   position: fixed;
-  width:100%;
+  width: 100%;
   z-index: 1;
   @media (max-width: 768px) {
-    display:block;
+    display: block;
   }
 `;
 
-const Header = () => {
-  
+const Header = (props) => {
   return (
     <>
-    <HeaderWrapper className="desktop-view">
-      <TopBar />
-      <NavBar />
-    </HeaderWrapper>
-    <MobileHeader className="mobile-view"></MobileHeader>
+      <HeaderWrapper className="desktop-view">
+        <TopBar menus={props?.data?.topHeaderMenus} />
+        <NavBar />
+      </HeaderWrapper>
+      <MobileHeader menus={props?.data} className="mobile-view"></MobileHeader>
     </>
   );
 };

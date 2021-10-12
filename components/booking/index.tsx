@@ -15,7 +15,6 @@ const ContainerWrapper = styled("div")`
   z-index: 10000;
   width: 100wh;
   height: 100vh;
-
 `;
 
 const Contents = styled("div")`
@@ -33,9 +32,11 @@ const Mapview = () => {
   );
 
   useEffect(() => {
-    const messaging = getMessaging(app);
-    askPermission(messaging);
-    getMessageData(messaging);
+    try {
+      const messaging = getMessaging(app);
+      askPermission(messaging);
+      getMessageData(messaging);
+    } catch (e) {}
   });
 
   function getMessageData(messaging) {

@@ -87,7 +87,7 @@ const FirstBar = styled(Bar)``;
 const SecondBar = styled(Bar)``;
 const ThirdBar = styled(Bar)``;
 
-const MobileHeader = ({ className }) => {
+const MobileHeader = ({ className, menus }) => {
   const active = useSelector((state) => state["navigation"]["isMenuActive"]);
   return (
     <>
@@ -135,7 +135,7 @@ const MobileHeader = ({ className }) => {
           }}
           className={className}
         >
-          <TopBar />
+          <TopBar menus={menus?.topHeaderMenus} />
           <NavBar />
         </MenuItemContainer>
       </div>

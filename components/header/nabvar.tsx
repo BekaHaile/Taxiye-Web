@@ -227,21 +227,6 @@ const NavBar = () => {
                 English
               </LangLinks>
             </Link>
-            <Link href={router.asPath} locale="am">
-              <LangLinks className={router.locale == "am" ? "active" : null}>
-                አማርኛ
-              </LangLinks>
-            </Link>
-            <Link href={router.asPath} locale="om">
-              <LangLinks className={router.locale == "om" ? "active" : null}>
-                Oromo
-              </LangLinks>
-            </Link>
-            <Link href={router.asPath} locale="sw">
-              <LangLinks className={router.locale == "sw" ? "active" : null}>
-                Swahili
-              </LangLinks>
-            </Link>
           </div>
         </div>
       </Nav>

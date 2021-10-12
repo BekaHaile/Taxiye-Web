@@ -11,6 +11,22 @@ import theme from "../theme/main";
 
 const query = gql`
   query PageLayout($locale: String!) {
+    headerContent(locale: $locale) {
+      link
+      logo {
+        url
+      }
+    }
+    topHeaderMenus(locale: $locale) {
+      text
+      link
+      key
+    }
+    headerMenus(locale: $locale) {
+      text
+      link
+      key
+    }
     corporatePage(locale: $locale) {
       hero {
         title

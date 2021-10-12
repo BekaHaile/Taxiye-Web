@@ -6,6 +6,7 @@ import { PrimaryLoading } from "../loading/loading";
 import { selectVehicle } from "../../redux/actions/booking";
 import { showMessage } from "../../redux/actions/navigation";
 import theme from "../../theme/main";
+import { getBrowserNotificationMessage } from "../../utils/checker";
 
 import store from "../../redux/store";
 
@@ -88,22 +89,13 @@ const VehicleList = () => {
     if (Notification.permission === "granted") {
       store.dispatch(selectVehicle(vehicle));
     } else {
-      store.dispatch(
-        showMessage(
-          true,
-          "You need to give permission before booking",
-          "warning"
-        )
-      );
+      let browseNotificationMessage = getBrowserNotificationMessage();
+      store.dispatch(showMessage(true, browseNotificationMessage, "warning"));
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
           store.dispatch(selectVehicle(vehicle));
         } else {
-          showMessage(
-            true,
-            "Unable to get permission to notify.",
-            "error"
-          );
+          showMessage(true, "Unable to get permission to notify.", "error");
           console.log("Unable to get permission to notify.");
         }
       });
