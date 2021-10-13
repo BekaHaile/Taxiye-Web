@@ -73,9 +73,7 @@ const TopBar = ({ menus }) => {
                 });
               }}
             >
-              <FormattedLinks className="desktop-view">
-                Download App{" "}
-              </FormattedLinks>
+              <FormattedLinks className="desktop-view"></FormattedLinks>
             </div>
           );
         else if (menu?.key === "share")
@@ -97,6 +95,10 @@ const TopBar = ({ menus }) => {
               </div>
             </>
           );
+        else if (menu?.key === "callus")
+          return (
+            <CornerLink className="desktop-view">Call Us On 6055</CornerLink>
+          );
         return (
           <FormattedLinks
             key={index}
@@ -107,7 +109,6 @@ const TopBar = ({ menus }) => {
           </FormattedLinks>
         );
       })}
-      <CornerLink className="desktop-view">Call Us On 6055</CornerLink>
     </Container>
   );
 };

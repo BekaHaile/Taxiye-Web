@@ -21,6 +21,9 @@ module.exports = withImages(
       locales: ["en"],
       defaultLocale: "en",
     },
+    typescript: {
+      ignoreBuildErrors: true,
+    },
 
     // ONLY for Next.js 10, if you use Next.js 11, delete this block
     future: {

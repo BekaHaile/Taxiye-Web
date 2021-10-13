@@ -8,6 +8,7 @@ import theme from "../../theme/main";
 import { logoutUser } from "../../redux/actions/user/index";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
+import LanguageMenu from "./language-menu";
 
 const NavWrapper = styled("div")`
   @media (min-width: 768px) {
@@ -216,19 +217,7 @@ const NavBar = () => {
         >
           <NavLink>Download App</NavLink>
         </div>
-        <div className="lang-dropdown">
-          <SecondaryNavLink>
-            <Avatar src={require("../../assets/icons/globe-icon.svg")} />
-            {router.locale}
-          </SecondaryNavLink>
-          <div className="lang-dropdown-content">
-            <Link href={router.asPath} locale="en">
-              <LangLinks className={router.locale == "en" ? "active" : null}>
-                English
-              </LangLinks>
-            </Link>
-          </div>
-        </div>
+        <LanguageMenu />
       </Nav>
     </NavWrapper>
   );
