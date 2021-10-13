@@ -17,8 +17,6 @@ const Header = styled("div")`
   box-sizing: border-box;
   width: 100%;
   height: 60px;
-  position: fixed;
-
   z-index: 100;
 `;
 

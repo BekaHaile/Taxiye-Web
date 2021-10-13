@@ -56,60 +56,73 @@ const TopBar = ({ menus }) => {
     let urlLInk = window.location.href;
     setSiteUrl(urlLInk);
   }, []);
-  return (
-    <Container>
-      {menus?.map((menu, index) => {
-        if (menu?.key === "downloadapp")
-          return (
-            <div
-              onClick={() => {
-                const element = document.querySelector("#download-app-links");
-                const topPos =
-                  element.getBoundingClientRect().top + window.pageYOffset;
 
-                window.scrollTo({
-                  top: topPos, // scroll so that the element is at the top of the view
-                  behavior: "smooth", // smooth scroll
-                });
-              }}
-            >
-              <FormattedLinks className="desktop-view"></FormattedLinks>
-            </div>
-          );
-        else if (menu?.key === "share")
-          return (
-            <FormattedLinks onClick={() => setShow(true)}>Share</FormattedLinks>
-          );
-        else if (menu?.key === "support")
-          return (
-            <>
-              <FormattedLinks className="mobile-view">
-                <Link href="support">
-                  <FormattedLinks>Support</FormattedLinks>
-                </Link>
-              </FormattedLinks>
-              <div className="desktop-view">
-                <Link href="support">
-                  <FormattedLinks>Support</FormattedLinks>
-                </Link>
+  return (
+    <>
+      <Container>
+        {menus?.map((menu, index) => {
+          if (menu?.key === "downloadapp")
+            return (
+              <div
+                onClick={() => {
+                  const element = document.querySelector("#download-app-links");
+                  const topPos =
+                    element.getBoundingClientRect().top + window.pageYOffset;
+
+                  window.scrollTo({
+                    top: topPos, // scroll so that the element is at the top of the view
+                    behavior: "smooth", // smooth scroll
+                  });
+                }}
+              >
+                <FormattedLinks className="desktop-view">
+                  {menu?.text}
+                </FormattedLinks>
               </div>
-            </>
-          );
-        else if (menu?.key === "callus")
+            );
+          else if (menu?.key === "share")
+            return (
+              <FormattedLinks onClick={() => setShow(true)}>
+                {menu?.text}
+              </FormattedLinks>
+            );
+          else if (menu?.key === "support")
+            return (
+              <>
+                <div className="mobile-view">
+                  <Link href="support">
+                    <FormattedLinks>{menu?.text}</FormattedLinks>
+                  </Link>
+                </div>
+                <div className="desktop-view">
+                  <Link href="support">
+                    <FormattedLinks>{menu?.text}</FormattedLinks>
+                  </Link>
+                </div>
+              </>
+            );
+          else if (index === menus?.length - 1)
+            return (
+              <CornerLink className="desktop-view">{menu?.text}</CornerLink>
+            );
           return (
-            <CornerLink className="desktop-view">Call Us On 6055</CornerLink>
+            <FormattedLinks
+              key={index}
+              href={menu?.link}
+              target={menu?.link != "/" ? "_blank" : ""}
+            >
+              {menu?.text}
+            </FormattedLinks>
           );
-        return (
-          <FormattedLinks
-            key={index}
-            href={menu?.link}
-            target={menu?.link != "/" ? "_blank" : ""}
-          >
-            {menu?.text}
-          </FormattedLinks>
-        );
-      })}
-    </Container>
+        })}
+      </Container>
+      <Modal onClose={() => setShow(false)} show={show}>
+        <ShareSocial
+          url={siteUrl}
+          socialTypes={["facebook", "twitter", "reddit", "linkedin", "email"]}
+        />
+      </Modal>
+    </>
   );
 };
 

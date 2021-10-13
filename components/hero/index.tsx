@@ -87,7 +87,7 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
     display: flex;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 75vh;
+    height: 70vh;
     width: auto;
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;
@@ -129,7 +129,7 @@ const Hero: FunctionComponent<Props> = ({ hero, children }) => {
         style={{
           background: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(${backgroundUrl})`,
           display: `flex`,
-          height: `75vh`,
+          height: `70vh`,
           width: `auto`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",

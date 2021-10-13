@@ -23,7 +23,7 @@ const HomeSlogan = styled(Slogan)`
 const HomeContainer = styled("div")`
   display: inline-block;
   padding-left: 60px;
-  margin-top: 95px;
+  /*margin-top: 95px;*/
   @media (max-width: 768px) {
     padding-left: 0px;
     margin-top: 0px;
@@ -42,7 +42,7 @@ const Hero = ({ hero }) => {
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: calc(100vh - 90px);
     width: 100%;
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;

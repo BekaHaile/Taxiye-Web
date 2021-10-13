@@ -6,7 +6,7 @@ import MobileHeader from "./mobile-header";
 
 const HeaderWrapper = styled("div")`
   height: auto;
-  position: fixed;
+  /*position: fixed;*/
   width: 100%;
   z-index: 1;
   @media (max-width: 768px) {
@@ -16,7 +16,7 @@ const HeaderWrapper = styled("div")`
 
 const MobileHeaderWrapper = styled(MobileHeader)`
   height: auto;
-  position: fixed;
+  /*position: fixed;*/
   width: 100%;
   z-index: 1;
   @media (max-width: 768px) {
