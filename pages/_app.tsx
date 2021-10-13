@@ -166,7 +166,7 @@ function withHeader(loading, pageProps, Component) {
               </div>
               <Component {...pageProps} />
               <SnackBar />
-              <Footer />
+              <Footer {...pageProps} />
             </>
           )}
         </QueryClientProvider>

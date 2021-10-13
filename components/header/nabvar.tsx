@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import theme from "../../theme/main";
 import { logoutUser } from "../../redux/actions/user/index";
@@ -31,6 +30,10 @@ const Avatar = styled("img")`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+const Image = styled("img")`
+  width: 97px;
+  height: auto;
 `;
 
 const Button = styled("button")`
@@ -98,125 +101,88 @@ const SecondaryNavLink = styled(NavLink)`
   display: flex;
 `;
 
-const LangLogo = styled("img")`
-  width: 20px;
-  height: 20px;
-`;
-
-const LangLinks = styled("a")`
-  color: black;
-`;
-
-const NavBar = () => {
+const NavBar = ({ headerMenus, headerContent }) => {
   const access_token = useSelector((state) => state["user"]["access_token"]);
   const user_data = useSelector((state) => state["user"]["user_data"]);
   const router = useRouter();
   return (
     <NavWrapper>
       <div className="desktop-view">
-        <Link key="1" href="/">
+        <Link key="1" href={headerContent?.link}>
           <Image
-            width="97px"
-            height="auto"
-            src={require("../../assets/images/logo/logo.svg")}
+            src={`${process.env.NEXT_PUBLIC_HOST}${headerContent?.logo?.url}`}
           />
         </Link>
       </div>
       <Nav>
-        <div className="mobile-view">
-          <Link key="2" href="/become-driver">
-            <NavLink
-              className={router.pathname === "/become-driver" ? "active" : null}
-            >
-              Become a driver
-            </NavLink>
-          </Link>
-        </div>
-        <div className="desktop-view">
-          <Link key="2" href="/become-driver">
-            {router.pathname === "/become-driver" ? (
-              <NavLink className="active">Become a driver </NavLink>
+        {headerMenus?.map((menu, key) => {
+          if (menu?.key === "becomedriver")
+            return (
+              <Link key="2" href="/become-driver">
+                {router.pathname === "/become-driver" ? (
+                  <NavLink className="active"> {menu?.text} </NavLink>
+                ) : (
+                  <Button> {menu?.text}</Button>
+                )}
+              </Link>
+            );
+          else if (menu?.key === "login") {
+            let text = menu?.text?.split("/");
+            return user_data && access_token ? (
+              <div
+                onClick={() => {
+                  store.dispatch(logoutUser());
+                }}
+              >
+                <SecondaryNavLink>
+                  <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+                  <div>{text[1]}</div>
+                </SecondaryNavLink>
+              </div>
             ) : (
-              <Button> {"Become a driver"} </Button>
-            )}
-          </Link>
-        </div>
-        <Link key="3" href="/services">
-          <NavLink
-            className={router.pathname === "/services" ? "active" : null}
-          >
-            Services
-          </NavLink>
-        </Link>
-        <Link key="4" href="/corporate">
-          <NavLink
-            className={router.pathname === "/corporate" ? "active" : null}
-          >
-            {" "}
-            Corporate
-          </NavLink>
-        </Link>
-        <Link key="5" href="/articles">
-          <NavLink
-            className={
-              router.pathname === "/articles" ||
-              router.pathname.includes("/articles/")
-                ? "active"
-                : null
-            }
-          >
-            Articles
-          </NavLink>
-        </Link>
-        <Link key="6" href="/contact-us">
-          <NavLink
-            className={router.pathname === "/contact-us" ? "active" : null}
-          >
-            Contact us
-          </NavLink>
-        </Link>
-        <Link key="7" href="/about-us">
-          <NavLink
-            className={router.pathname === "/about-us" ? "active" : null}
-          >
-            About us{" "}
-          </NavLink>
-        </Link>
+              <Link key="8" href="/login">
+                <SecondaryNavLink>
+                  <Avatar src={require("../../assets/icons/user/avatar.svg")} />
+                  <div>{text[0]}</div>
+                </SecondaryNavLink>
+              </Link>
+            );
+          } else if (menu?.key === "downloadapp")
+            return (
+              <div
+                className="mobile-view"
+                onClick={() => {
+                  const element = document.querySelector("#download-app-links");
+                  const topPos =
+                    element.getBoundingClientRect().top + window.pageYOffset;
 
-        {user_data && access_token ? (
-          <div
-            onClick={() => {
-              store.dispatch(logoutUser());
-            }}
-          >
-            <SecondaryNavLink>
-              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
-              <div>Logout</div>
-            </SecondaryNavLink>
-          </div>
-        ) : (
-          <Link key="8" href="/login">
-            <SecondaryNavLink>
-              <Avatar src={require("../../assets/icons/user/avatar.svg")} />
-              <div>Login</div>
-            </SecondaryNavLink>
-          </Link>
-        )}
-        <div
-          className="mobile-view"
-          onClick={() => {
-            const element = document.querySelector("#download-app-links");
-            const topPos =
-              element.getBoundingClientRect().top + window.pageYOffset;
+                  window.scrollTo({
+                    top: topPos, // scroll so that the element is at the top of the view
+                    behavior: "smooth", // smooth scroll
+                  });
+                }}
+              >
+                <NavLink>Download App</NavLink>
+              </div>
+            );
 
-            window.scrollTo({
-              top: topPos, // scroll so that the element is at the top of the view
-              behavior: "smooth", // smooth scroll
-            });
-          }}
-        >
-          <NavLink>Download App</NavLink>
-        </div>
+          return (
+            <Link key="5" href={menu?.link}>
+              <NavLink
+                key={key}
+                className={
+                  router.pathname === `${menu?.link}` ||
+                  router.pathname.includes(`${menu?.link}/`)
+                    ? "active"
+                    : null
+                }
+              >
+                {menu?.text}
+              </NavLink>
+            </Link>
+          );
+        })}
+
         <LanguageMenu />
       </Nav>
     </NavWrapper>

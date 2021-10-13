@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import Image from "next/image";
 import theme from "../../theme/main";
 import NavBar from "./nabvar";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
 import { menuSelected } from "../../redux/actions/navigation";
-import { AlertTitle } from "@material-ui/lab";
 import TopBar from "./topbar";
 
 const Header = styled("div")`
@@ -44,7 +42,6 @@ const MenuItemMainContainer = styled("div")`
   position: fixed;
   z-index: 1;
   transition: 0.4s;
-  
 `;
 const HeaderLogo = styled("div")`
   box-sizing: border-box;
@@ -81,11 +78,19 @@ const Bar = styled("div")`
   background-color: ${theme.colors.primary};
   transition: 0.4s;
 `;
+
+const Image = styled("img")`
+  width: 97px;
+  height: auto;
+`;
+
+
+
 const FirstBar = styled(Bar)``;
 const SecondBar = styled(Bar)``;
 const ThirdBar = styled(Bar)``;
 
-const MobileHeader = ({ className, menus }) => {
+const MobileHeader = ({ className, data }) => {
   const active = useSelector((state) => state["navigation"]["isMenuActive"]);
   return (
     <>
@@ -94,9 +99,7 @@ const MobileHeader = ({ className, menus }) => {
           <HeaderLogo>
             <Link key="1" href="/">
               <Image
-                width="97px"
-                height="40px"
-                src={require("../../assets/images/logo/logo.svg")}
+                src={`${process.env.NEXT_PUBLIC_HOST}${data?.headerContent?.logo?.url}`}
               />
             </Link>
           </HeaderLogo>
@@ -121,7 +124,7 @@ const MobileHeader = ({ className, menus }) => {
         <MenuItemMainContainer
           style={{
             backgroundColor: active ? "rgba(33, 33, 33, 0.2)" : "transparent",
-            display:  active ? "block": "none",
+            display: active ? "block" : "none",
           }}
           onClick={() => {
             store.dispatch(menuSelected(false));
@@ -133,8 +136,8 @@ const MobileHeader = ({ className, menus }) => {
           }}
           className={className}
         >
-          <TopBar menus={menus?.topHeaderMenus} />
-          <NavBar />
+          <TopBar menus={data?.topHeaderMenus} />
+          <NavBar {...data} />
         </MenuItemContainer>
       </div>
     </>

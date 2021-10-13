@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import theme from "../../theme/main";
+import zIndex from "@material-ui/core/styles/zIndex";
 
 const FooterHeader = styled("h4")`
   font-weight: 600;
@@ -15,8 +16,8 @@ const DownloadImage = styled("img")`
   width: 170px;
   height: 51px;
   @media (max-width: 300px) {
-    width:100%;
-    height:auto;
+    width: 100%;
+    height: auto;
   }
 `;
 const LinkComponent = styled("a")``;
@@ -145,93 +146,58 @@ const FlexEnd = styled("div")`
   }
 `;
 
-const FooterSection = () => {
+const FooterSection = ({ data }) => {
   return (
     <Footer>
       <FlexRow>
-        <FooterImage src={require("../../assets/images/footer-image.svg")} />
+        <FooterImage
+          src={`${process.env.NEXT_PUBLIC_HOST}${data?.footerContent?.logo?.url}`}
+        />
         <FooterContent>
           <Grid>
-            <LinkWrapper>
-              <FooterHeader>Taxiye</FooterHeader>
-              <Link href="/services">
-                <FooterLink>Services</FooterLink>
-              </Link>
-              <Link href="/corporate">
-                <FooterLink>Corporate</FooterLink>
-              </Link>
-              <Link href="/contact-us">
-                <FooterLink>Offices</FooterLink>
-              </Link>
-              <Link href="/contact-us">
-                <FooterLink>Contact us</FooterLink>
-              </Link>
-              <Link href="/about-us">
-                <FooterLink>About us</FooterLink>
-              </Link>
-              <Link href="/articles">
-                <FooterLink>Jobs</FooterLink>
-              </Link>
-            </LinkWrapper>
-            <LinkWrapper>
-              <FooterHeader>Driver</FooterHeader>
-              <Link href="/signup/driver">
-                <FooterLink>Become a driver</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Safety</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Requirements</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Insurance</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Bonus</FooterLink>
-              </Link>
-            </LinkWrapper>
-            <LinkEndWrapper>
-              <FooterHeader>Passenger</FooterHeader>
-              <Link href="#">
-                <FooterLink>Call a taxi</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Share a taxi</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Safety</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Rewards</FooterLink>
-              </Link>
-              <Link href="#">
-                <FooterLink>Help</FooterLink>
-              </Link>
-            </LinkEndWrapper>
+            {data?.footerMenus?.map((menu_item, index) => {
+              return (
+                <LinkWrapper key={index}>
+                  <FooterHeader>{menu_item?.title}</FooterHeader>
+                  {menu_item?.header?.map((item, key) => (
+                    <Link href={item?.link} key={key}>
+                      <FooterLink>{item?.text}</FooterLink>
+                    </Link>
+                  ))}
+                </LinkWrapper>
+              );
+            })}
           </Grid>
           <FlexEnd id="download-app-links">
-            <LinkComponent href="https://itunes.apple.com/us/app/taxiye-passenger/id1455202776?mt=8">
-              <DownloadImage
-                src={require("../../assets/images/app_store.png")}
-              />
-            </LinkComponent>
-            <LinkComponent href="https://play.google.com/store/apps/details?id=com.taxiye">
-              <DownloadImage
-                src={require("../../assets/images/play_store.png")}
-              />
-            </LinkComponent>
+            {data?.downloadAppLinks?.map((content, index) => {
+              return (
+                <LinkComponent key={index} href={content?.link}>
+                  <DownloadImage
+                    src={`${process.env.NEXT_PUBLIC_HOST}${content?.thumbnail?.url}`}
+                  />
+                </LinkComponent>
+              );
+            })}
+
           </FlexEnd>
           <FooterBottomLinkWrapper>
             <FooterInfo>
-              <FooterBottomLink>Terms & Conditions</FooterBottomLink>
-              <FooterBottomLink>Privacy Policy</FooterBottomLink>
-              <FooterBottomLink>{`© ${new Date().getFullYear()} Elnet Technologies plc.`}</FooterBottomLink>
+              {data?.footerBottomLinks?.map((content, index) => {
+                return (
+                  <FooterBottomLink href={content?.link} key={index}>
+                    {content?.text}
+                  </FooterBottomLink>
+                );
+              })}
             </FooterInfo>
             <SocialLinkWrapper>
-              <Image src={require("../../assets/icons/facebook.svg")} />
-              <Image src={require("../../assets/icons/twitter.svg")} />
-              <LastImage src={require("../../assets/icons/instagram.svg")} />
+            {data?.socialMedias?.map((content, index) => {
+                return (
+                  <FooterBottomLink href={content?.link} key={index}>
+                  <Image src={`${process.env.NEXT_PUBLIC_HOST}${content?.logo?.url}`} />
+                  </FooterBottomLink>
+                );
+              })}
             </SocialLinkWrapper>
           </FooterBottomLinkWrapper>
         </FooterContent>

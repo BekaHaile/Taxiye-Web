@@ -24,14 +24,14 @@ const MobileHeaderWrapper = styled(MobileHeader)`
   }
 `;
 
-const Header = (props) => {
+const Header = ({ data }) => {
   return (
     <>
       <HeaderWrapper className="desktop-view">
-        <TopBar menus={props?.data?.topHeaderMenus} />
-        <NavBar />
+        <TopBar menus={data?.topHeaderMenus} />
+        <NavBar {...data} />
       </HeaderWrapper>
-      <MobileHeader menus={props?.data} className="mobile-view"></MobileHeader>
+      <MobileHeader data={data} className="mobile-view"></MobileHeader>
     </>
   );
 };

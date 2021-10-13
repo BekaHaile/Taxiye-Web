@@ -6,7 +6,7 @@ import DefaultErrorPage from 'next/error';
 
 const query = gql`
 query PageLayout($locale: String!) {
-    headerContent(locale: $locale) {
+  headerContent(locale: $locale) {
       link
       logo {
         url
@@ -22,6 +22,42 @@ query PageLayout($locale: String!) {
       link
       key
     }
+  footerContent(locale: $locale){
+    logo{
+      url
+    }
+    floatButtonText
+    link
+  }
+  footerMenus(locale: $locale){
+    header{
+      text
+      text
+      link
+      description
+    }
+    
+    title
+  }
+  footerBottomLinks(locale: $locale){
+    text
+    link
+    description
+  }
+  downloadAppLinks(locale: $locale){
+    name
+    link
+    thumbnail{
+      url
+    }
+  }
+  socialMedias(locale: $locale){
+    name
+    link
+    logo{
+      url
+    }
+  }
     loginPage (locale: $locale){
       hero{
         title
