@@ -18,6 +18,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import { theme } from "../theme/main/material_theme";
 import themeColor from "../theme/main";
 import NProgress from "nprogress";
+import DefaultErrorPage from "next/error";
 
 const queryClient = new QueryClient();
 
@@ -101,6 +102,8 @@ export default function App({ Component, pageProps }) {
     );
   }, []);
 
+  if (pageProps?.error) return <DefaultErrorPage statusCode={503} />;
+
   if (
     router.pathname.includes("/login") ||
     router.pathname.includes("/signup") ||
@@ -146,7 +149,7 @@ function withHeader(loading, pageProps, Component) {
             <Loading />
           ) : (
             <>
-              <Header {...pageProps}/>
+              <Header {...pageProps} />
 
               <div>
                 <div
@@ -154,7 +157,13 @@ function withHeader(loading, pageProps, Component) {
                   id="text-on-floating-button"
                   className="hidden"
                 >
-                  <CallLink href="tel:6055">Call Us On 6055</CallLink>
+                  <CallLink
+                    href={`tel: ${
+                      pageProps?.data?.footerContent?.floatButtonPhone ?? ""
+                    }`}
+                  >
+                    {pageProps?.data?.footerContent?.floatButtonText ?? ""}
+                  </CallLink>
                 </div>
                 <FloatingButton
                   onClick={() => toggleFloatingButton(true)}

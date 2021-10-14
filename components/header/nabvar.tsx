@@ -108,7 +108,7 @@ const NavBar = ({ headerMenus, headerContent }) => {
   return (
     <NavWrapper>
       <div className="desktop-view">
-        <Link key="1" href={headerContent?.link}>
+        <Link key="1" href={headerContent?.link ?? "" }>
           <Image
             src={`${process.env.NEXT_PUBLIC_HOST}${headerContent?.logo?.url}`}
           />
@@ -167,7 +167,7 @@ const NavBar = ({ headerMenus, headerContent }) => {
             );
 
           return (
-            <Link key="5" href={menu?.link}>
+            <Link key="5" href={menu?.link ?? ""}>
               <NavLink
                 key={key}
                 className={

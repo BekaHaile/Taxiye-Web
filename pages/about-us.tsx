@@ -28,6 +28,7 @@ const query = gql`
       url
     }
     floatButtonText
+    floatButtonPhone
     link
   }
   footerMenus(locale: $locale){

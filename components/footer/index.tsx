@@ -160,7 +160,7 @@ const FooterSection = ({ data }) => {
                 <LinkWrapper key={index}>
                   <FooterHeader>{menu_item?.title}</FooterHeader>
                   {menu_item?.header?.map((item, key) => (
-                    <Link href={item?.link} key={key}>
+                    <Link href={item?.link ?? ""} key={key}>
                       <FooterLink>{item?.text}</FooterLink>
                     </Link>
                   ))}
@@ -171,7 +171,7 @@ const FooterSection = ({ data }) => {
           <FlexEnd id="download-app-links">
             {data?.downloadAppLinks?.map((content, index) => {
               return (
-                <LinkComponent key={index} href={content?.link}>
+                <LinkComponent key={index} href={content?.link ?? ""}>
                   <DownloadImage
                     src={`${process.env.NEXT_PUBLIC_HOST}${content?.thumbnail?.url}`}
                   />
@@ -184,7 +184,7 @@ const FooterSection = ({ data }) => {
             <FooterInfo>
               {data?.footerBottomLinks?.map((content, index) => {
                 return (
-                  <FooterBottomLink href={content?.link} key={index}>
+                  <FooterBottomLink href={content?.link ?? ""} key={index}>
                     {content?.text}
                   </FooterBottomLink>
                 );
@@ -193,7 +193,7 @@ const FooterSection = ({ data }) => {
             <SocialLinkWrapper>
             {data?.socialMedias?.map((content, index) => {
                 return (
-                  <FooterBottomLink href={content?.link} key={index}>
+                  <FooterBottomLink href={content?.link ?? ""} key={index}>
                   <Image src={`${process.env.NEXT_PUBLIC_HOST}${content?.logo?.url}`} />
                   </FooterBottomLink>
                 );

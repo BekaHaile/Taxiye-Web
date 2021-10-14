@@ -42,6 +42,7 @@ const query = gql`
         url
       }
       floatButtonText
+      floatButtonPhone
       link
     }
     footerMenus(locale: $locale) {
@@ -118,7 +119,7 @@ export async function getServerSideProps(context) {
         articlePage: articlePageData,
         article: articlesData[0],
         populars: popularArticlesData,
-        data: data
+        data: data,
       },
     };
   } catch (e) {

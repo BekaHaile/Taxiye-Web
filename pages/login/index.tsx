@@ -27,6 +27,7 @@ query PageLayout($locale: String!) {
       url
     }
     floatButtonText
+    floatButtonPhone
     link
   }
   footerMenus(locale: $locale){

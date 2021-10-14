@@ -8,7 +8,7 @@ import DefaultErrorPage from "next/error";
 const query = gql`
   # This is query
   query PageLayout($locale: String!) {
-  headerContent(locale: $locale) {
+    headerContent(locale: $locale) {
       link
       logo {
         url
@@ -24,42 +24,43 @@ const query = gql`
       link
       key
     }
-  footerContent(locale: $locale){
-    logo{
-      url
+    footerContent(locale: $locale) {
+      logo {
+        url
+      }
+      floatButtonText
+      floatButtonPhone
+      link
     }
-    floatButtonText
-    link
-  }
-  footerMenus(locale: $locale){
-    header{
-      text
+    footerMenus(locale: $locale) {
+      header {
+        text
+        text
+        link
+        description
+      }
+
+      title
+    }
+    footerBottomLinks(locale: $locale) {
       text
       link
       description
     }
-    
-    title
-  }
-  footerBottomLinks(locale: $locale){
-    text
-    link
-    description
-  }
-  downloadAppLinks(locale: $locale){
-    name
-    link
-    thumbnail{
-      url
+    downloadAppLinks(locale: $locale) {
+      name
+      link
+      thumbnail {
+        url
+      }
     }
-  }
-  socialMedias(locale: $locale){
-    name
-    link
-    logo{
-      url
+    socialMedias(locale: $locale) {
+      name
+      link
+      logo {
+        url
+      }
     }
-  }
     homePage(locale: $locale) {
       hero {
         title
@@ -148,7 +149,8 @@ export async function getServerSideProps(context) {
 }
 
 export default function index({ data, error }) {
-  if (error) return <DefaultErrorPage statusCode={404} />;
+  if (error)
+    return <DefaultErrorPage className="error-page" statusCode={404} />;
 
   return (
     <>

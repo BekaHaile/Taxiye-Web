@@ -11,7 +11,7 @@ import theme from "../theme/main";
 
 const query = gql`
   query PageLayout($locale: String!) {
-  headerContent(locale: $locale) {
+    headerContent(locale: $locale) {
       link
       logo {
         url
@@ -27,42 +27,43 @@ const query = gql`
       link
       key
     }
-  footerContent(locale: $locale){
-    logo{
-      url
+    footerContent(locale: $locale) {
+      logo {
+        url
+      }
+      floatButtonText
+      floatButtonPhone
+      link
     }
-    floatButtonText
-    link
-  }
-  footerMenus(locale: $locale){
-    header{
-      text
+    footerMenus(locale: $locale) {
+      header {
+        text
+        text
+        link
+        description
+      }
+
+      title
+    }
+    footerBottomLinks(locale: $locale) {
       text
       link
       description
     }
-    
-    title
-  }
-  footerBottomLinks(locale: $locale){
-    text
-    link
-    description
-  }
-  downloadAppLinks(locale: $locale){
-    name
-    link
-    thumbnail{
-      url
+    downloadAppLinks(locale: $locale) {
+      name
+      link
+      thumbnail {
+        url
+      }
     }
-  }
-  socialMedias(locale: $locale){
-    name
-    link
-    logo{
-      url
+    socialMedias(locale: $locale) {
+      name
+      link
+      logo {
+        url
+      }
     }
-  }
     corporatePage(locale: $locale) {
       hero {
         title
@@ -140,7 +141,7 @@ export async function getServerSideProps(context) {
   try {
     const { data, error } = await client.query({
       query: query,
-      variables:{locale: locale}
+      variables: { locale: locale },
     });
     return {
       props: {
