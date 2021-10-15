@@ -11,17 +11,16 @@ const Card = styled("div")`
   padding: 0px;
   baackground: ${theme.colors.white};
   border-radius: 10px;
-  gap:40px;
+  gap: 40px;
 `;
 
 const CardImage = styled("img")`
   border-radius: 10px 10px 0px 0px;
-  width:inherit;
-  
+  width: inherit;
 `;
 
 const ImageContainer = styled("div")`
-  width:100%;
+  width: 100%;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -33,13 +32,10 @@ const CardBody = styled("div")`
   align-items: flex-start;
 `;
 
-const Image = styled("img")`
- 
-`;
-
+const Image = styled("img")``;
 
 const Info = styled("div")`
-  padding-right:10px;
+  padding-right: 10px;
 `;
 
 const AuthorText = styled("span")`
@@ -53,7 +49,6 @@ const AuthorText = styled("span")`
 const ArticleInfoWrapper = styled("div")`
   display: flex;
   padding-bottom: 10px;
-  
 `;
 
 const ArticleTitle = styled("h1")`
@@ -61,7 +56,7 @@ const ArticleTitle = styled("h1")`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   margin: 0px 0px 10px 0px;
 `;
 
@@ -70,8 +65,8 @@ const ArticleText = styled("p")`
   font-weight: normal;
   font-size: 14px;
   line-height: 150%;
-  color:${theme.colors.primaryTextColor};;
-  padding-bottom:20px;
+  color: ${theme.colors.primaryTextColor};
+  padding-bottom: 20px;
 `;
 
 const Button = styled("button")`
@@ -84,7 +79,7 @@ const Button = styled("button")`
   text-align: center;
   color: ${theme.colors.primary};
   background: ${theme.colors.white};
-  padding:5px 20px;
+  padding: 5px 20px;
 `;
 
 const TextWrapper = styled("div")`
@@ -98,34 +93,38 @@ const ArticleCard = ({ article }) => {
   return (
     <Card>
       <ImageContainer>
-        <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article?.mainMedia?.url}`} />
+        <CardImage
+          src={`${process.env.NEXT_PUBLIC_HOST}${article?.mainMedia?.url}`}
+        />
       </ImageContainer>
       <CardBody>
         <TextWrapper>
           <ArticleTitle>{article?.headerTitle}</ArticleTitle>
           <ArticleInfoWrapper>
-            <Info>
-              <Image
-                src={require("../../../assets/icons/user/vector.svg")}
-              />
-              {
-                article.user &&
-              <AuthorText>{article?.user?.firstname} {article?.user?.lastname.charAt(0)+`.`}</AuthorText>
-              }
+            {article?.user?.firstname && (
+              <Info>
+                <Image src={require("../../../assets/icons/user/vector.svg")} />
+                {article.user && (
+                  <AuthorText>
+                    {article?.user?.firstname}{" "}
+                    {article?.user?.lastname.charAt(0) + `.`}
+                  </AuthorText>
+                )}
               </Info>
+            )}
             <Info>
-              <Image
-                src={require("../../../assets/icons/user/clock.svg")}
-              />
+              <Image src={require("../../../assets/icons/user/clock.svg")} />
               <AuthorText>
-                <DateView format="MMMM D, YYYY" date={article?.published_at}/>
-                </AuthorText>
+                <DateView format="MMMM D, YYYY" date={article?.published_at} />
+              </AuthorText>
             </Info>
           </ArticleInfoWrapper>
 
           <ArticleText>{article?.headerLongSubtitle}</ArticleText>
         </TextWrapper>
-        <Link href={`/articles/${article?.article_id}`}><Button>Read More</Button></Link>
+        <Link href={`/articles/${article?.article_id}`}>
+          <Button>Read More</Button>
+        </Link>
       </CardBody>
     </Card>
   );

@@ -10,7 +10,7 @@ const Card = styled("div")`
   align-items: flex-start;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  height:480px;
+  height: 480px;
   background: ${theme.colors.white};
   @media (max-width: 500px) {
     margin: 0 0px;
@@ -33,8 +33,8 @@ const CardBody = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-  height:100%;
-  justify-content:space-between;
+  height: 100%;
+  justify-content: space-between;
 `;
 
 const Image = styled("img")``;
@@ -64,7 +64,7 @@ const ArticleTitle = styled("h1")`
   color: ${theme.colors.primaryTextColor};
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -106,8 +106,8 @@ const TextWrapper = styled("div")`
 
 const ImageContainer = styled("div")`
   width: 340px;
-  min-height:230px;
-  overflow:hidden;
+  min-height: 230px;
+  overflow: hidden;
   @media (max-width: 500px) {
     width: 100%;
   }
@@ -124,15 +124,17 @@ const ArticleCard = ({ article }) => {
       <CardBody>
         <TextWrapper>
           <ArticleInfoWrapper>
-            <Info>
-              <Image src={require("../../../assets/icons/user/vector.svg")} />
-              {article.user && (
-                <AuthorText>
-                  {article.user.firstname}{" "}
-                  {article.user.lastname.charAt(0) + `.`}
-                </AuthorText>
-              )}
-            </Info>
+            {article?.user?.firstname && (
+              <Info>
+                <Image src={require("../../../assets/icons/user/vector.svg")} />
+                {article.user && (
+                  <AuthorText>
+                    {article.user.firstname}{" "}
+                    {article.user.lastname.charAt(0) + `.`}
+                  </AuthorText>
+                )}
+              </Info>
+            )}
             <Info>
               <Image src={require("../../../assets/icons/user/clock.svg")} />
               <AuthorText>

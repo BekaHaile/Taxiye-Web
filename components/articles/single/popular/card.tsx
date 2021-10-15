@@ -9,8 +9,7 @@ const Card = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   baackground: ${theme.colors.white};
-  margin-top:34px;
- 
+  margin-top: 34px;
 `;
 
 const CardImage = styled("img")`
@@ -28,13 +27,10 @@ const CardBody = styled("div")`
   padding: 20px;
 `;
 
-const Image = styled("img")`
- 
-`;
-
+const Image = styled("img")``;
 
 const Info = styled("div")`
-  padding-right:10px;
+  padding-right: 10px;
 `;
 
 const AuthorText = styled("span")`
@@ -48,7 +44,6 @@ const AuthorText = styled("span")`
 const ArticleInfoWrapper = styled("div")`
   display: flex;
   padding-bottom: 10px;
-  
 `;
 
 const ArticleTitle = styled("h1")`
@@ -56,10 +51,9 @@ const ArticleTitle = styled("h1")`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color:${theme.colors.primaryTextColor};;
+  color: ${theme.colors.primaryTextColor};
   padding: 0px 0px 10px 0px;
 `;
-
 
 const Button = styled("button")`
   border: 1px solid ${theme.colors.primary};
@@ -71,7 +65,7 @@ const Button = styled("button")`
   text-align: center;
   color: ${theme.colors.primary};
   background: ${theme.colors.white};
-  padding:5px 20px;
+  padding: 5px 20px;
 `;
 
 const TextWrapper = styled("div")`
@@ -81,29 +75,30 @@ const TextWrapper = styled("div")`
   }
 `;
 
-
-
 const PopularArticleCard = ({ article }) => {
   return (
     <Card>
-      <CardImage src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`} />
+      <CardImage
+        src={`${process.env.NEXT_PUBLIC_HOST}${article.thumbnail.url}`}
+      />
       <CardBody>
         <TextWrapper>
-
           <ArticleInfoWrapper>
+            {article?.user?.firstname && (
+              <Info>
+                <Image
+                  src={require("../../../../assets/icons/user/vector.svg")}
+                />
+                {article.user && (
+                  <AuthorText>
+                    {article.user.firstname}{" "}
+                    {article.user.lastname.charAt(0) + `.`}
+                  </AuthorText>
+                )}
+              </Info>
+            )}
             <Info>
-              <Image
-                src={require("../../../../assets/icons/user/vector.svg")}
-              />
-              {
-                article.user &&
-                <AuthorText>{article.user.firstname} {article.user.lastname.charAt(0) + `.`}</AuthorText>
-              }
-            </Info>
-            <Info>
-              <Image
-                src={require("../../../../assets/icons/user/clock.svg")}
-              />
+              <Image src={require("../../../../assets/icons/user/clock.svg")} />
               <AuthorText>
                 <DateView format="MMMM D, YYYY" date={article.published_at} />
               </AuthorText>
@@ -114,7 +109,6 @@ const PopularArticleCard = ({ article }) => {
         <Link href={`/articles/${article?.article_id}`}>
           <Button>Read More</Button>
         </Link>
-
       </CardBody>
     </Card>
   );
