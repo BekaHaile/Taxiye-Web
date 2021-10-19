@@ -15,6 +15,11 @@ const ServiceTitle = styled(SectionTitle)`
   @media (max-width: 1269px) {
     text-align: center;
   }
+  @media (max-width: 768px) {
+    font-size: 5vw;
+  }
+  
+  
 `;
 
 const RightServiceTitle = styled(ServiceTitle)`
@@ -35,7 +40,7 @@ const FlexRow = styled("div")`
   }
 `;
 
-const Description = styled("div")`
+const Description = styled("p")`
   max-width: 500px;
   font-family: Open Sans;
   font-style: normal;
@@ -48,8 +53,12 @@ const Description = styled("div")`
   @media (max-width: 1269px) {
     text-align: center;
   }
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
   @media (max-width: 500px) {
     width: 100%;
+    font-size: 12px;
   }
 `;
 
@@ -86,7 +95,8 @@ const Image = styled("img")`
 `;
 
 const Services = ({ data }) => {
-  const services = data.services;
+  const services = data?.services;
+  console.log(services);
   return (
     <>
       {services.map((service, index) => (

@@ -45,6 +45,9 @@ const SectionTitle = styled("h1")`
   text-align: center;
   margin: 0;
   padding-bottom: 10px;
+  @media (max-width: 768px) {
+    font-size: 5vw;
+  }
 `;
 
 const CenteredText = styled("p")`
@@ -57,6 +60,11 @@ const CenteredText = styled("p")`
   max-width: 800px;
   @media (max-width: 768px) {
     width: 100%;
+    font-size: 16px;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+    font-size: 14px;
   }
 `;
 

@@ -8,6 +8,8 @@ const FormContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   padding: 0px 60px;
+  max-width: 1250px;
+  width:100%;
   @media (max-width: 768px) {
     flex-wrap:wrap;
     padding: 0px;
@@ -16,7 +18,7 @@ const FormContainer = styled("div")`
 `;
 
 const InfosContainer = styled("div")`
-  padding-right: 150px;
+  width:60%;
   @media (max-width: 768px) {
     padding-right: 0px;
     text-align:center;

@@ -11,7 +11,8 @@ const Card = styled("div")`
   text-align: center;
   margin: 10px;
   @media (max-width: 768px) {
-    padding: 50px 0px;
+    padding: 20px 0px;
+    box-shadow: none;
     margin: 0px;
     width:100%;
   }

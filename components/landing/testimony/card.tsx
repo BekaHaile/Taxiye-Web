@@ -34,6 +34,7 @@ const Card = styled("div")`
   @media (max-width: 768px) {
     width: 100%;
     margin: 0px;
+    box-shadow:none;
   }
 `;
 

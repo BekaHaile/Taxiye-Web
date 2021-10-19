@@ -22,24 +22,31 @@ const CustomDefaultTextArea = styled(DefaultTextArea)`
   }
 `;
 const Container = styled("div")`
-  width: min-content;
+  width: 100%;
   gap: 40px;
   @media (max-width: 768px) {
     width: 100%;
-
   }
 `;
 const ButtonContainer = styled("div")`
   margin-top: 40px;
 `;
 const DefaultInputContainer = styled("div")`
-  width: 330px;
+  width: 100%;
   @media (max-width: 768px) {
     width: 100%;
   }
   @media (max-width: 330px) {
     width: 100%;
   }
+`;
+
+
+const InlineFormView = styled(InlineForm)`
+gap:30px !important;
+@media (max-width: 768px) {
+  gap:0px !important;
+}
 `;
 
 const ContactUsForm = () => {
@@ -52,7 +59,7 @@ const ContactUsForm = () => {
   return (
     <>
       <Container>
-        <InlineForm>
+        <InlineFormView>
           <DefaultInputContainer>
             <DefaultInput
               placeholder="Full Name..."
@@ -73,7 +80,7 @@ const ContactUsForm = () => {
               }}
             />
           </DefaultInputContainer>
-        </InlineForm>
+        </InlineFormView>
         <DefaultInput
           placeholder="Subject"
           id="subject"

@@ -18,6 +18,7 @@ const Card = styled("div")`
   overflow: hidden;
   @media (max-width: 768px) {
     margin: 0px;
+    box-shadow: none;
   }
   @media (max-width: 340px) {
     width: 100%;

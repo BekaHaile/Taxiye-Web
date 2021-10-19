@@ -4,7 +4,7 @@ import theme from "../../../theme/main";
 const Input = styled("input")`
 width: 100%;
 padding: 8px 20px;
-margin-bottom: 40px;
+margin-bottom: 20px;
 display: inline-block;
 border: 2px solid #ccc;
 border-radius: 4px;
@@ -17,6 +17,7 @@ margin-top:10px;
   }
   @media (max-width: 768px) {
     width:100%;
+    margin-bottom: 20px;
   }
 `;
 
