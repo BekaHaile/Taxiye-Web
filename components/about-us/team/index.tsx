@@ -39,22 +39,23 @@ const AboutUsContent = ({ title, subTitle, teamContents, groupContents }) => {
             <SectionTitleCenter>{title}</SectionTitleCenter>
             <CenteredTextContent>{subTitle}</CenteredTextContent>
           </SectionHeaderContainer>
+          <div>
+            <SectionContentContainer>
+              <CardContainer>
+                {teamContents.map((content) => (
+                  <SecondaryTeamCard key={content.id} content={content} />
+                ))}
+              </CardContainer>
+            </SectionContentContainer>
 
-          <SectionContentContainer>
-            <CardContainer>
-              {teamContents.map((content) => (
-                <SecondaryTeamCard key={content.id} content={content} />
-              ))}
-            </CardContainer>
-          </SectionContentContainer>
-
-          <SectionContentContainer>
-            <CardContainer>
-              {groupContents.map((content) => (
-                <TeamCard key={content.id} content={content} />
-              ))}
-            </CardContainer>
-          </SectionContentContainer>
+            <SectionContentContainer>
+              <CardContainer>
+                {groupContents.map((content) => (
+                  <TeamCard key={content.id} content={content} />
+                ))}
+              </CardContainer>
+            </SectionContentContainer>
+          </div>
         </Container>
       </DefaultSection>
     </>
