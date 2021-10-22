@@ -1,6 +1,7 @@
 import * as actions from "../../actions/contact-us";
 import * as validationUtils from "../../../utils/validation";
 import { showSuccess, showError } from "../common";
+import axios from "axios";
 
 export const contact_us = (store) => (next) => async (action) => {
   next(action);
@@ -14,8 +15,7 @@ export const contact_us = (store) => (next) => async (action) => {
     var status = validatInput(data);
     next(actions.setValidation(status));
   } else if (action.type == "FORM_SUBMITTED") {
-    submitForm(next);
-    
+    submitForm(next, data);
   }
 };
 
@@ -33,11 +33,23 @@ function validatInput(data) {
   );
 }
 
-function submitForm(next) {
+async function submitForm(next, data) {
   try {
-    // let res = await fetchVehicles(data["origin"].location);
+    const { NEXT_PUBLIC_API_HOST } = process.env;
+    const res = await axios.post(
+      `${NEXT_PUBLIC_API_HOST}/api/support`,
+      {
+        full_name: `${data["full_name"]}`,
+        email: `${data["email"]}`,
+        subject: `${data["subject"]}`,
+        message: `${data["message"]}`,
+      },
+      { timeout: 10000 }
+    );
+
     showSuccess(next);
     next(actions.reset());
+    return res.data;
   } catch (e) {
     showError(next);
   }
