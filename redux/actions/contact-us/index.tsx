@@ -106,3 +106,13 @@ export const reset = () => {
     type: actions.RESET_CONTACT_US,
   };
 };
+
+
+export const changeLoading = (loading) => {
+  return {
+    type: actions.CHANGE_LOADING,
+    payload: {
+      loading: loading,
+    },
+  };
+};

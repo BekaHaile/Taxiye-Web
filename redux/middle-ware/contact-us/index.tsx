@@ -15,7 +15,9 @@ export const contact_us = (store) => (next) => async (action) => {
     var status = validatInput(data);
     next(actions.setValidation(status));
   } else if (action.type == "FORM_SUBMITTED") {
-    submitForm(next, data);
+    next(actions.changeLoading(true));
+    await submitForm(next, data);
+    next(actions.changeLoading(false));
   }
 };
 

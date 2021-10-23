@@ -6,6 +6,7 @@ const initialState = {
   subject: "",
   message: "",
   isValid: false,
+  loading: false,
 };
 
 export default function contactUs(state = initialState, action) {
@@ -20,6 +21,8 @@ export default function contactUs(state = initialState, action) {
       return { ...state, message: action.payload.message };
     case actionTypes.INPUT_VERIFICATION:
       return { ...state, isValid: action.payload.isValid };
+    case actionTypes.CHANGE_LOADING:
+      return { ...state, loading: action.payload.loading };
 
     case actionTypes.RESET_CONTACT_US:
       return {
@@ -29,6 +32,7 @@ export default function contactUs(state = initialState, action) {
         subject: "",
         message: "",
         isValid: false,
+        loading: false,
       };
 
     default:

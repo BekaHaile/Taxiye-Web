@@ -14,7 +14,6 @@ import {
   addMessage,
   submitForm,
 } from "../../../redux/actions/contact-us";
-
 const CustomDefaultTextArea = styled(DefaultTextArea)`
   height: 200px;
   @media (max-width: 768px) {
@@ -41,12 +40,11 @@ const DefaultInputContainer = styled("div")`
   }
 `;
 
-
 const InlineFormView = styled(InlineForm)`
-gap:30px !important;
-@media (max-width: 768px) {
-  gap:0px !important;
-}
+  gap: 30px !important;
+  @media (max-width: 768px) {
+    gap: 0px !important;
+  }
 `;
 
 const ContactUsForm = () => {
@@ -59,6 +57,7 @@ const ContactUsForm = () => {
   return (
     <>
       <Container>
+        
         <InlineFormView>
           <DefaultInputContainer>
             <DefaultInput
