@@ -8,6 +8,7 @@ import {
   SectionHeaderContainer,
   SectionContentContainer,
 } from "../section";
+import Markdown from "markdown-to-jsx";
 
 const ServiceTitle = styled(SectionTitle)`
   margin: 0px 0px;
@@ -18,12 +19,10 @@ const ServiceTitle = styled(SectionTitle)`
   @media (max-width: 768px) {
     font-size: 5vw;
   }
-  
-  
 `;
 
 const RightServiceTitle = styled(ServiceTitle)`
-  text-align: right;
+  
   width: 100%;
   @media (max-width: 1269px) {
     text-align: center;
@@ -63,7 +62,7 @@ const Description = styled("p")`
 `;
 
 const RightDescription = styled(Description)`
-  text-align: right;
+  
   @media (max-width: 1269px) {
     text-align: center;
   }
@@ -96,10 +95,9 @@ const Image = styled("img")`
 
 const Services = ({ data }) => {
   const services = data?.services;
-  console.log(services);
   return (
     <>
-      {services.map((service, index) => (
+      {services?.map((service, index) => (
         <div id={service.id} key={index}>
           {index % 2 == 0 ? (
             <DefaultSection>
@@ -122,12 +120,9 @@ const Services = ({ data }) => {
                     <RightServiceTitle>{service.name}</RightServiceTitle>
 
                     {service.longDescription.map((description, index) => (
-                      <RightDescription
-                        key={index}
-                        dangerouslySetInnerHTML={{
-                          __html: description.content,
-                        }}
-                      />
+                      <RightDescription key={index}>
+                        <Markdown>{description?.content}</Markdown>
+                      </RightDescription>
                     ))}
                   </RightContainer>
                 </FlexRow>
@@ -140,12 +135,9 @@ const Services = ({ data }) => {
                   <ServiceTitle>{service.name}</ServiceTitle>
 
                   {service.longDescription.map((description, index) => (
-                    <Description
-                      key={index}
-                      dangerouslySetInnerHTML={{
-                        __html: description.content,
-                      }}
-                    />
+                    <Description key={index}>
+                      <Markdown>{description?.content}</Markdown>
+                    </Description>
                   ))}
                 </LeftContainer>
                 <Image
