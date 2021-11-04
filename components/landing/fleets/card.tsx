@@ -14,7 +14,6 @@ const Card = styled("div")`
     padding: 20px 0px;
     box-shadow: none;
     margin: 0px;
-    width:100%;
   }
 `;
 

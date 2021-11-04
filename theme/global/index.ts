@@ -598,6 +598,19 @@ overflow:hidden;
 }
 
 
+.desktop-view-article{
+  display:block;
+  @media (max-width: 500px) {
+    display:none;
+  }
+}
+.mobile-view-article{
+  display:none;
+  @media (max-width: 500px) {
+    display:block;
+  }
+}
+
 .first-bar.active{
   -webkit-transform: rotate(-45deg) translate(-4px, 3px);
   transform: rotate(-45deg) translate(-4px, 3px);

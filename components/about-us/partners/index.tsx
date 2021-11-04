@@ -25,15 +25,22 @@ const CardContainer = styled("div")`
 
 const MainCardTitle = styled(CardTitle)`
   width: 400px;
-  
+  text-align:center;
+  padding-bottom: 20px;
   @media (max-width: 768px) {
     padding:0px 20px;
     margin-bottom:20px;
-    font-size:7vw;
+    font-size:75
   }
+  @media (max-width: 500px) {
+    padding:0px 20px;
+    margin-bottom:20px;
+    font-size:7vw;
+  }  
   @media (max-width: 400px) {
     width: 100%;
     text-align:center;
+    font-size:7vw;
     
   }
 `;
@@ -52,6 +59,7 @@ const PartnersContent = ({ title, subTitle, description, contents }) => {
               <CardWrapper>
                 <MainCardTitle>{description}</MainCardTitle>
               </CardWrapper>
+              <CardContainer>
               {contents.map((content, index) => (
                 <CardWrapper key={index}>
                   <Card>
@@ -62,6 +70,7 @@ const PartnersContent = ({ title, subTitle, description, contents }) => {
                   </Card>
                 </CardWrapper>
               ))}
+              </CardContainer>
             </CardContainer>
           </Container>
         </SectionContentContainer>

@@ -34,6 +34,7 @@ const Slider = ({ settings, content }) => {
       itemsToShow={settings.itemsToShow}
       itemPadding={settings.itemPadding}
       transitionMs={settings.transitionMs}
+      breakPoints = {settings.breakPoints}
     >
       {content}
     </Carousel>

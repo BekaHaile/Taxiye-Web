@@ -40,6 +40,12 @@ const settings = {
   itemsToShow: 3,
   itemPadding: [20, 20],
   transitionMs: 700,
+  breakPoints : [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 1},
+    { width: 768, itemsToShow: 2},
+    { width: 850, itemsToShow: 3 },
+  ]
 };
 
 const TestimonySlider = ({ testimonies }) => {

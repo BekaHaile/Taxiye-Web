@@ -14,25 +14,24 @@ const settings = {
   itemsToShow: 3,
   itemPadding: [25, 0],
   transitionMs: 700,
-  // breakPoints : [
-  //   { width: 1, itemsToShow: 1 },
-  //   { width: 550, itemsToShow: 1},
-  //   { width: 768, itemsToShow: 2},
-  //   { width: 850, itemsToShow: 3 },
-  // ]
+  breakPoints: [
+    { width: 1, itemsToShow: 1 },
+    { width: 768, itemsToShow: 2 },
+    { width: 850, itemsToShow: 3 },
+  ],
 };
 
 const ArticleSlider = ({ articles }) => {
   return (
     <>
-      <div className="mobile-view">
+      <div className="mobile-view-article">
         <Container>
           {articles.map((article) => (
             <Card key={article?.id} article={article} />
           ))}
         </Container>
       </div>
-      <div className="desktop-view">
+      <div className="desktop-view-article">
         <Slider
           content={articles.map((article) => (
             <Card key={article?.id} article={article} />

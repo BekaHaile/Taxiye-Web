@@ -42,7 +42,7 @@ const Hero = ({ hero }) => {
       url(${backgroundUrl});
     background-repeat: no-repeat;
     background-size: cover;
-    height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px);
     width: 100%;
     @media (max-width: 768px) {
       background-repeat: no-repeat !important;

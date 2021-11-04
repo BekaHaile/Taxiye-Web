@@ -109,7 +109,7 @@ const Button = styled("button")`
 `;
 
 const TextWrapper = styled("div")`
-  width: 300px;
+  width: 100%;
   @media (max-width: 300px) {
     width: 100%;
   }

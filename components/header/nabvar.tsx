@@ -65,6 +65,10 @@ const Nav = styled("nav")`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap:20px;
+  @media (max-width: 1200px) {
+    gap:9px;
+  }
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 20px;
@@ -78,12 +82,13 @@ const NavLink = styled.a`
   line-height: 19px;
   text-align: center;
   color: ${theme.colors.primaryTextColor};
-  padding: 5px 20px;
+  padding: 5px 0px;
   &&.active {
     height: 32px;
     border: 1px solid ${theme.colors.primary};
     box-sizing: border-box;
     border-radius: 5px;
+    padding: 5px 10px;
   }
   &:hover {
     color: ${theme.colors.primary};

@@ -46,7 +46,7 @@ const Description = styled("p")`
   font-size: 14px;
   line-height: 19px;
 
-  color: ${theme.colors.primaryLabelColor};;
+  color: ${theme.colors.primaryLabelColor};
   max-width: 500px;
   flex: 1;
 `;
@@ -61,8 +61,8 @@ const LeftDescription = styled(Description)`
 `;
 
 const SecondaryImage = styled("img")`
-  height: 400px;
-  width: 400px;
+  max-height: 400px;
+  max-width: 400px;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -73,18 +73,18 @@ const SecondaryImage = styled("img")`
 
 
 const PrimaryImage = styled("img")`
-  position: absolute;
-  height: 400px;
-  width: 400px;
+  max-height: 400px;
+  max-width: 400px;
   @media (max-width: 768px) {
     width: 100%;
   }
 `;
 
 const ImageContainer = styled("div")`
-  width: 601px;
+  max-width: 601px;
   height: 557px;
   position: relative;
+  width:auto;
   @media (max-width: 768px) {
     width: 100%;
   }
