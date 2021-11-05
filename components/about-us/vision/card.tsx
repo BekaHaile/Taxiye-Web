@@ -19,7 +19,10 @@ const CardWrapper = styled("div")`
   flex-wrap: wrap;
 `;
 const CenteredCard = styled(Card)`
+@media (min-width: 1000px) {
   box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.161);
+}
+  
 `;
 
 const CardTitle = styled("h3")`

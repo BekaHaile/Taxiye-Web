@@ -21,14 +21,15 @@ const LeftServiceTitle = styled(ServiceTitle)`
 
 const FlexRow = styled("div")`
   display: flex;
-  justify-content: space-around;
   align-items: left;
   width: 100%;
   min-height: 560px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap:wrap;
+  @media (max-width: 768px) {
+    flex-wrap:wrap;
+  }
 `;
 
 const Container = styled("div")`
@@ -68,6 +69,7 @@ const SecondaryImage = styled("img")`
   right: 0;
   @media (max-width: 768px) {
     width: 100%;
+    display:none;
   }
 `;
 
@@ -81,12 +83,12 @@ const PrimaryImage = styled("img")`
 `;
 
 const ImageContainer = styled("div")`
-  max-width: 601px;
+  width: 601px;
   height: 557px;
   position: relative;
-  width:auto;
   @media (max-width: 768px) {
-    width: 100%;
+    width: fit-content;
+    height:auto;
   }
 `;
 

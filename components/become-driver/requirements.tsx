@@ -8,12 +8,17 @@ import {
 } from "../section";
 import styled from "styled-components";
 import theme from "../../theme/main";
+import Markdown from "markdown-to-jsx";
+const SectionContentContainerView = styled(SectionContentContainer)`
+  width: 100%;
+`;
 
 const CardContainer = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 30px 0px;
+  width: 100%;
   @media (max-width: 768px) {
     flex-wrap: wrap;
   }
@@ -57,6 +62,7 @@ const Image = styled("img")`
 `;
 
 const MainImage = styled("img")`
+  width: 40%;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -70,7 +76,7 @@ const Requirements = ({ title, subTitle, contents, mainImage }) => {
           <SectionTitle>{title}</SectionTitle>
           <CenteredText>{subTitle}</CenteredText>
         </SectionHeaderContainer>
-        <SectionContentContainer>
+        <SectionContentContainerView>
           <CardContainer>
             <div>
               {contents.map((content, index) => (
@@ -80,12 +86,12 @@ const Requirements = ({ title, subTitle, contents, mainImage }) => {
                   />
                   <ElementContainer>
                     <StringContainer>
-                      <Title>{content.title}</Title>
-                      <SubTitle
-                        dangerouslySetInnerHTML={{
-                          __html: content.description,
-                        }}
-                      />
+                      <Title>
+                        <Markdown>{content?.title}</Markdown>
+                      </Title>
+                      <SubTitle>
+                        <Markdown>{content?.description}</Markdown>
+                      </SubTitle>
                     </StringContainer>
                   </ElementContainer>
                 </CardContainer>
@@ -95,7 +101,7 @@ const Requirements = ({ title, subTitle, contents, mainImage }) => {
               src={`${process.env.NEXT_PUBLIC_HOST}${mainImage.url}`}
             />
           </CardContainer>
-        </SectionContentContainer>
+        </SectionContentContainerView>
       </GraySection>
     </>
   );

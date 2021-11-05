@@ -30,8 +30,9 @@ const BlockContent = styled("p")`
 const ContentWrapper = styled("div")`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0px 0px;
+  margin:auto;
   flex-wrap: wrap;
   @media (max-width: 768px) {
     justify-content: center;

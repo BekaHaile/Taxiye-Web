@@ -25,8 +25,11 @@ const CardContainer = styled("div")`
 
 const MainCardTitle = styled(CardTitle)`
   width: 400px;
-  text-align:center;
+  
   padding-bottom: 20px;
+  @media (max-width: 1239px) {
+    text-align:center;
+  }
   @media (max-width: 768px) {
     padding:0px 20px;
     margin-bottom:20px;
