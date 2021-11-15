@@ -28,7 +28,7 @@ import { DatePicker, TimePicker } from "../form/date-picker";
 import { useRouter } from "next/router";
 import { Loader } from "../loading/loading";
 
-const BookForm = ({ contentView }) => {
+const BookForm = ({ contentView, formData }) => {
   const origin = useSelector((state) => state["booking"]["origin"]);
   const destination = useSelector((state) => state["booking"]["destination"]);
   const date = useSelector((state) => state["booking"]["date"]);
@@ -43,17 +43,17 @@ const BookForm = ({ contentView }) => {
     <>
       {contentView ? null : (
         <HomeTitles>
-          <Title>Make every mile count by taxiye.</Title>
-          <SubTitle>For in-city point to point travel</SubTitle>
+          <Title>{formData?.title}</Title>
+          <SubTitle>{formData?.subTitle}</SubTitle>
         </HomeTitles>
       )}
       <Form>
         <FormContainer>
           <LocationInput
-            label="From?"
-            icon={require("../../assets/icons/location.svg")}
-            placeholder="Enter pickup location"
-            id="location"
+            label={formData?.originLocationTextField?.label}
+            icon={formData?.originLocationTextField?.icon?.url ?? require("../../assets/icons/location.svg")}
+            placeholder={formData?.originLocationTextField?.placeHolder}
+            id={formData?.key}
             action={(location, address) => {
               store.dispatch(selectOrigin({ origin: { location, address } }));
             }}
@@ -61,10 +61,10 @@ const BookForm = ({ contentView }) => {
           />
 
           <LocationInput
-            label="Where to?"
-            icon={require("../../assets/icons/flag.svg")}
-            placeholder="Enter drop off for estimate"
-            id="dropoff"
+            label={formData?.destinationLocationTextField?.label}
+            icon={formData?.destinationLocationTextField?.icon?.url ?? require("../../assets/icons/flag.svg")}
+            placeholder={formData?.destinationLocationTextField?.placeHolder}
+            id={formData?.key}
             action={(location, address) => {
               store.dispatch(
                 selectDestination({ destination: { location, address } })
@@ -75,16 +75,16 @@ const BookForm = ({ contentView }) => {
 
           <InlineForm>
             <FormGroup>
-              <Icon src={require("../../assets/icons/user/clock.svg")} />
+              <Icon src={formData?.departureDateTextField?.icon?.url ?? require("../../assets/icons/user/clock.svg")} />
               <InputWrapper>
-                <LabelText htmlFor="datepicker"> When? </LabelText>
+                <LabelText htmlFor={formData?.key}> {formData?.departureDateTextField?.label} </LabelText>
                 <DatePicker
                   selectedDate={date}
                   action={(value) => {
                     store.dispatch(changeDate(value));
                   }}
-                  id="datepicker"
-                  placeholder="today"
+                  id={formData?.key}
+                  placeholder={formData?.departureDateTextField?.placeHolder}
                 />
               </InputWrapper>
             </FormGroup>
@@ -92,17 +92,17 @@ const BookForm = ({ contentView }) => {
             <FormGroup>
               <Icon
                 className="mobile-view"
-                src={require("../../assets/icons/user/clock.svg")}
+                src={formData?.departureTimeTextField?.icon?.url ?? require("../../assets/icons/user/clock.svg")}
               />
               <InputWrapper>
-                <LabelText htmlFor="datepicker"> Time? </LabelText>
+                <LabelText htmlFor={formData?.key}> {formData?.departureTimeTextField?.label} </LabelText>
                 <TimePicker
                   selectedTime={time}
                   action={(value) => {
                     store.dispatch(changeTime(value));
                   }}
-                  id="datepicker"
-                  placeholder="06:54"
+                  id={formData?.key}
+                  placeholder={formData?.departureTimeTextField?.placeHolder}
                 />
               </InputWrapper>
             </FormGroup>
@@ -117,7 +117,7 @@ const BookForm = ({ contentView }) => {
                 <Loader />
               </CustomButton>
             ) : (
-              <CustomButton disabled={!isValid}>Request Now</CustomButton>
+              <CustomButton disabled={!isValid}>{formData?.requestButton?.text}</CustomButton>
             )}
           </Link>
         )}

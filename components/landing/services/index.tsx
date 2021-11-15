@@ -76,16 +76,20 @@ interface ServiceProps {
     name: string;
     shortDescription: any;
     thumbnail: any;
+    readMoreButton: {
+      text: string;
+    };
   }[];
   title: string;
   subTitle: string;
+  bookingForm?;
 }
 
-const Services = ({ services, title, subTitle }: ServiceProps) => {
+const Services = ({ services, title, subTitle, bookingForm }: ServiceProps) => {
   return (
     <>
       <div className="mobile-view">
-        <TabbedForms />
+        <TabbedForms bookingFormContent={bookingForm} />
       </div>
       <DefaultSection>
         <SectionHeaderContainer>
@@ -102,7 +106,7 @@ const Services = ({ services, title, subTitle }: ServiceProps) => {
                 <ServiceTitle>{service?.name}</ServiceTitle>
                 <ServiceText>{service?.shortDescription.content}</ServiceText>
                 <Link href={`/services#${service?.id}`}>
-                  <Button>Load More</Button>
+                  <Button>{service?.readMoreButton?.text}</Button>
                 </Link>
               </ServiceWrapper>
             ))}

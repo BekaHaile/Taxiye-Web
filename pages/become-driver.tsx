@@ -81,6 +81,9 @@ const query = gql`
       safetySectionTitle
       safetySectionSubTitle
       getStartedSectionTitle
+      getStartedButton {
+        text
+      }
     }
     driverWorkFreedoms(locale: $locale) {
       id
@@ -129,7 +132,7 @@ const SloganButton = styled("button")`
 // const children = <Link href="/signup/driver">
 //   <SloganButton>Get started</SloganButton>
 // </Link>
-const children = <SloganButton>Get started</SloganButton>;
+// const children = <SloganButton>Get started</SloganButton>;
 export async function getServerSideProps(context) {
   const { locale } = context;
   try {
@@ -153,7 +156,7 @@ const signup = ({ data, error }) => {
     <>
       <Banner
         hero={data?.becomeADriverPage?.hero}
-        children={children}
+        children={<SloganButton>{data?.becomeADriverPage?.getStartedButton?.text}</SloganButton>}
         key="become-driver"
       />
       <Signup data={data} />

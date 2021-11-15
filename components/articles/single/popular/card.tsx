@@ -107,7 +107,7 @@ const PopularArticleCard = ({ article }) => {
           <ArticleTitle>{article.headerTitle}</ArticleTitle>
         </TextWrapper>
         <Link href={`/articles/${article?.article_id}`}>
-          <Button>Read More</Button>
+          <Button> {article?.readMoreButton?.text} </Button>
         </Link>
       </CardBody>
     </Card>

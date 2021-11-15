@@ -32,6 +32,8 @@ function Map({
   const directionsService = new google.maps.DirectionsService();
   const [markers, setMarkers] = useState([]);
   const [showMyLocation, setShowMyLocation] = useState(false);
+  const [zoom, setZoom] = useState(10);
+  const defaultOrigin = { lat: 8.9868767, lng: 38.78678798 };
 
   useEffect(() => {
     getCurrentLocation();
@@ -44,12 +46,15 @@ function Map({
   }, [directionAction]);
 
   const getCurrentLocation = () => {
-    navigator?.geolocation.getCurrentPosition(
-      ({ coords: { latitude: lat, longitude: lng } }) => {
-        const pos = { lat, lng };
-        setOrigin(pos);
-      }
-    );
+    try {
+      navigator?.geolocation.getCurrentPosition(
+        ({ coords: { latitude: lat, longitude: lng } }) => {
+          const pos = { lat, lng };
+          setOrigin(pos);
+          setZoom(13);
+        }
+      );
+    } catch (e) {}
   };
 
   const setAction = (place) => {
@@ -84,14 +89,14 @@ function Map({
       });
   };
 
-  if (origin == null) return null;
   return (
     <GoogleMap
       {...loadingElement}
       {...containerElement}
       {...mapElement}
-      defaultZoom={13}
-      defaultCenter={origin}
+      defaultZoom={zoom}
+      zoom={zoom}
+      defaultCenter={origin ?? { lat: 8.9868767, lng: 38.78678798 }}
       onIdle={() => getCurrentLocation()}
       onClick={() => {
         action(null);
@@ -134,11 +139,15 @@ function Map({
           }}
           directions={directions}
         />
-      ) : (
+      ) : origin && (
         <Marker
           onClick={() => setShowMyLocation(true)}
-          key={`${origin.lng}-${origin.lat}`}
-          position={origin}
+          key={
+            origin
+              ? `${origin.lng}-${origin.lat}`
+              : `${defaultOrigin.lng}-${defaultOrigin.lat}`
+          }
+          position={origin ?? defaultOrigin}
           icon={{
             url: require("../../assets/icons/marker.svg"),
             scaledSize: new google.maps.Size(25, 25),

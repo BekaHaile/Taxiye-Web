@@ -83,6 +83,9 @@ const query = gql`
       architectureSectionSubTitle
       expenseSectionSubTitle
       expenseTrackerSectionTitle
+      signUpHeroButton{
+        text
+      }
     }
     corporateInfos(locale: $locale) {
       title
@@ -134,7 +137,7 @@ const SloganButton = styled("button")`
 //     <SloganButton>Sign up for your company</SloganButton>
 //   </Link>
 
-const children = <SloganButton>Sign up for your company</SloganButton>;
+// const children = <SloganButton>Sign up for your company</SloganButton>;
 
 export async function getServerSideProps(context) {
   const { locale } = context;
@@ -159,7 +162,7 @@ const corporate = ({ data, error }) => {
     <>
       <Banner
         hero={data?.corporatePage?.hero}
-        children={children}
+        children={<SloganButton> {data?.corporatePage?.signUpHeroButton?.text} </SloganButton>}
         key="corporate"
       />
       <CorporateContent data={data} />;

@@ -46,10 +46,9 @@ const CustomButton = styled(Button)`
   margin-top: 20px;
 `;
 
-const MapView = ({ offices, title, subTitle, socialMedias }) => {
+const MapView = ({ offices, title, subTitle, socialMedias, getDirectionButton }) => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [directionAction, setDirection] = useState(null);
-  const myref = useRef();
   return (
     <>
       <SecondarySection>
@@ -84,7 +83,7 @@ const MapView = ({ offices, title, subTitle, socialMedias }) => {
                   });
               }}
             >
-              Get directions
+              {getDirectionButton?.text}
             </CustomButton>
           )}
         </MapInfoContainer>

@@ -192,9 +192,13 @@ export default function articles({
   const children = (
     <SearchContainer>
       <SecondaryInputs
-        id="location"
-        placeholder="Search..."
-        icon={require("../../assets/icons/search.svg")}
+        id={articlePage?.searchTextField?.label}
+        shadow={true}
+        placeholder={articlePage?.searchTextField?.placeHolder}
+        icon={
+          articlePage?.searchTextField?.icon?.url ??
+          require("../../assets/icons/search.svg")
+        }
         lists={[]}
         onInput={(event) => {
           if (event.target.value == null || event.target.value == "") {

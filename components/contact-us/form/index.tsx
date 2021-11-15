@@ -29,7 +29,7 @@ const InfosContainer = styled("div")`
   }
 `;
 
-const Form = ({ mainOffice, title, subTitle, socialMedias }) => {
+const Form = ({ mainOffice, title, subTitle, socialMedias, contactUsContent }) => {
   const loading = useSelector((state) => state["contact_us"]["loading"]);
   return (
     <>
@@ -45,7 +45,7 @@ const Form = ({ mainOffice, title, subTitle, socialMedias }) => {
               subTitle={subTitle}
             />
           </InfosContainer>
-          <ContactUsForm />
+          <ContactUsForm contactUsContent={contactUsContent} />
         </FormContainer>
       </DefaultSection>
     </>

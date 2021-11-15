@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC, FunctionComponent } from "react";
 import styled from "styled-components";
 import TabHeader from "./tab-header";
 import BookingForm from "./booking-form";
@@ -17,7 +17,7 @@ const TabContainer = styled("div")`
   flex-direction: column;
   height: -webkit-fill-available;
   max-width: 490px;
-  
+
   @media (max-width: 768px) {
     margin: 10px auto;
   }
@@ -50,7 +50,7 @@ const TabButtonWrappers = styled("div")`
 const TabButton = styled.a`
   font-weight: normal;
   font-size: 14px;
- 
+
   line-height: 29px;
   color: ${theme.colors.primaryTextColor};
   text-decoration: none;
@@ -76,58 +76,37 @@ const TabButton = styled.a`
 
 interface Props {
   contentView?;
+  bookingFormContent?;
 }
-const Tab: FunctionComponent<Props> = ({ contentView }) => {
+interface FormContent {
+  key?: string;
+  type?: string;
+  title?: string;
+  subTitle?: string;
+}
+const Tab: FC<Props> = ({ contentView, bookingFormContent }) => {
   const activeTab = useSelector((state) => state["booking"]["type"]);
   return (
     <TabContainer>
       {contentView != null ? <TabHeader></TabHeader> : null}
 
       <TabButtonWrappers>
-        <TabButton
-          className={activeTab === "on_demand" ? "active" : null}
-          onClick={() => {
-            store.dispatch(changeBookingType("on_demand"));
-          }}
-        >
-          On Demand
-        </TabButton>
-        <TabButton
-          className={activeTab === "rental" ? "active" : null}
-          onClick={() => {
-            store.dispatch(changeBookingType("rental"));
-          }}
-        >
-          Rental
-        </TabButton>
-        <TabButton
-          className={activeTab === "out-station" ? "active" : null}
-          onClick={() => {
-            store.dispatch(changeBookingType("out-station"));
-          }}
-        >
-          Out Station
-        </TabButton>
-        <TabButton
-          className={activeTab === "delivery" ? "active" : null}
-          onClick={() => {
-            store.dispatch(changeBookingType("delivery"));
-          }}
-        >
-          Delivery
-        </TabButton>
+        {bookingFormContent?.map((form: any) => (
+          <TabButton
+            className={activeTab === form.key ? "active" : null}
+            onClick={() => {
+              store.dispatch(changeBookingType(form.key));
+            }}
+          >
+            {form.type}
+          </TabButton>
+        ))}
       </TabButtonWrappers>
       <ChildrenContainer>
-        {(() => {
-          if (activeTab === "on_demand")
-            return <BookingForm contentView={contentView} />;
-          if (activeTab === "rental")
-            return <RentalForm contentView={contentView} />;
-          if (activeTab === "out-station")
-            return <StationForm contentView={contentView} />;
-          if (activeTab === "delivery")
-            return <DeliveryForm contentView={contentView} />;
-        })()}
+        {bookingFormContent?.map((form: any) => {
+          if (activeTab === form.key)
+            return <BookingForm contentView={contentView} formData={form} />;
+        })}
       </ChildrenContainer>
     </TabContainer>
   );

@@ -30,7 +30,7 @@ const HomeContainer = styled("div")`
   }
 `;
 
-const Hero = ({ hero }) => {
+const Hero = ({ hero, bookingForm }) => {
   const router = useRouter();
   let slogan = hero?.title;
   let backgroundUrl = `${process.env.NEXT_PUBLIC_HOST}${hero?.background?.url}`;
@@ -49,7 +49,7 @@ const Hero = ({ hero }) => {
       background-size: 100% 100% !important;
       height: 70vw !important;
       width: auto !important;
-      min-height:40vh;
+      min-height: 40vh;
     }
   `;
 
@@ -60,7 +60,7 @@ const Hero = ({ hero }) => {
           <HomeContainer>
             <HomeSlogan>{slogan}</HomeSlogan>
             <div className="desktop-view">
-            <TabbedForms />
+              <TabbedForms bookingFormContent={bookingForm} />
             </div>
           </HomeContainer>
         </div>

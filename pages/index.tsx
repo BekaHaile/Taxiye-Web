@@ -90,6 +90,9 @@ const query = gql`
       thumbnail {
         url
       }
+      readMoreButton{
+        text
+      }
     }
 
     articles(locale: $locale, sort: "created_at", where: { featured: true }) {
@@ -105,6 +108,9 @@ const query = gql`
       headerSubTitle
       thumbnail {
         url
+      }
+      readMoreButton{
+        text
       }
     }
     testimonies(locale: $locale, sort: "created_at") {
@@ -124,6 +130,46 @@ const query = gql`
       speed
       image {
         url
+      }
+    }
+    bookingContent: bookingForm(locale: $locale){
+      id
+      bookingForm{
+        key
+        type
+        title
+        subTitle
+        originLocationTextField{
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        destinationLocationTextField {
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+         departureDateTextField{
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        departureTimeTextField {
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        requestButton{
+          text
+        }
       }
     }
   }
@@ -151,11 +197,10 @@ export async function getServerSideProps(context) {
 export default function index({ data, error }) {
   if (error)
     return <DefaultErrorPage className="error-page" statusCode={404} />;
-
   return (
     <>
-      <Banner hero={data?.homePage?.hero} />
-      <LandingContent data={data} />
+      <Banner hero={data?.homePage?.hero} bookingForm={data?.bookingContent?.bookingForm} />
+      <LandingContent data={data}/>
     </>
   );
 }

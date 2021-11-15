@@ -47,22 +47,24 @@ const InlineFormView = styled(InlineForm)`
   }
 `;
 
-const ContactUsForm = () => {
+const ContactUsForm = ({ contactUsContent }) => {
   const full_name = useSelector((state) => state["contact_us"]["full_name"]);
   const email = useSelector((state) => state["contact_us"]["email"]);
   const subject = useSelector((state) => state["contact_us"]["subject"]);
   const message = useSelector((state) => state["contact_us"]["message"]);
   const isValid = useSelector((state) => state["contact_us"]["isValid"]);
 
+  const contactUsForm = contactUsContent?.contactUsForm;
+  const continueButton = contactUsContent?.continueButton;
+
   return (
     <>
       <Container>
-        
         <InlineFormView>
           <DefaultInputContainer>
             <DefaultInput
-              placeholder="Full Name..."
-              id="full_name"
+              placeholder={contactUsForm?.find((a) => a.label === "full-name")?.placeHolder}
+              id={contactUsForm?.find((a) => a.label === "full-name")?.label}
               value={full_name}
               onChange={(e) => {
                 store.dispatch(addFullName(e.target.value));
@@ -71,8 +73,8 @@ const ContactUsForm = () => {
           </DefaultInputContainer>
           <DefaultInputContainer>
             <DefaultInput
-              placeholder="Email Address"
-              id="email"
+              placeholder={contactUsForm?.find((a) => a.label === "email")?.placeHolder}
+              id={contactUsForm?.find((a) => a.label === "email")?.label}
               value={email}
               onChange={(e) => {
                 store.dispatch(addEmail(e.target.value));
@@ -81,8 +83,8 @@ const ContactUsForm = () => {
           </DefaultInputContainer>
         </InlineFormView>
         <DefaultInput
-          placeholder="Subject"
-          id="subject"
+          placeholder={contactUsForm?.find((a) => a.label === "subject")?.placeHolder}
+          id={contactUsForm?.find((a) => a.label === "subject")?.label}
           value={subject}
           onChange={(e) => {
             store.dispatch(addSubject(e.target.value));
@@ -90,8 +92,8 @@ const ContactUsForm = () => {
         />
 
         <CustomDefaultTextArea
-          placeholder="Message"
-          id="message"
+          placeholder={contactUsForm?.find((a) => a.label === "message")?.placeHolder}
+          id={contactUsForm?.find((a) => a.label === "message")?.label}
           value={message}
           action={(e) => {
             store.dispatch(addMessage(e.target.value));
@@ -102,7 +104,7 @@ const ContactUsForm = () => {
             onClick={() => store.dispatch(submitForm())}
             disabled={!isValid}
           >
-            Send Message
+            {continueButton?.text}
           </Button>
         </ButtonContainer>
       </Container>

@@ -72,6 +72,16 @@ const query = gql`
       contactUsSectionSubTitle
       officesSectionTitle
       officesSectionSubTitle
+      getDirectionButton{
+        text
+      }
+      contactUsForm {
+        label
+        placeHolder
+      }
+      continueButton{
+        text
+      }
     }
 
     socialMedias(locale: $locale) {
@@ -137,6 +147,8 @@ const Contactus = ({ data, error }) => {
         contactUsTitle={data?.contactUsPage?.contactUsSectionTitle}
         contactUsSubTitle={data?.contactUsPage?.contactUsSectionSubTitle}
         addresses={data?.addresses}
+        getDirectionButton={data?.contactUsPage?.getDirectionButton}
+        contactUsContent={data?.contactUsPage}
       />
     </>
   );

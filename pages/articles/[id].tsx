@@ -152,10 +152,13 @@ export default function articles({ articlePage, article, populars, error }) {
 
   const searchingComponent = (
     <SecondaryInputs
-      id="location"
+      id={articlePage?.searchTextField?.label}
       shadow={true}
-      placeholder="Search..."
-      icon={require("../../assets/icons/search.svg")}
+      placeholder={articlePage?.searchTextField?.placeHolder}
+      icon={
+        articlePage?.searchTextField?.icon?.url ??
+        require("../../assets/icons/search.svg")
+      }
       onInput={(event) => {
         if (event.target.value == null || event.target.value == "") {
           setSearching("");

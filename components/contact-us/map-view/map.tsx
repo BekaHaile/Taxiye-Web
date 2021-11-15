@@ -1,10 +1,10 @@
 import React from 'react';
 import WrappedMap from "../../map";
 
-const Mapview = ({setSelectedLocation, offices, directionAction}) => {
+const MapView = ({setSelectedLocation, offices, directionAction}) => {
     return (
         <>
-        <div style={{ width:"100wh",height: "80vh" }}>
+        <div style={{ width:"100wh",height: "100vh" }}>
             <WrappedMap
                 directionAction={directionAction}
                 action={setSelectedLocation}
@@ -18,4 +18,4 @@ const Mapview = ({setSelectedLocation, offices, directionAction}) => {
     );
 }
 
-export default Mapview;
+export default MapView;
