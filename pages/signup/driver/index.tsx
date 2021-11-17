@@ -49,7 +49,6 @@ export async function getServerSideProps(context) {
   }
 }
 const signup = ({data, error}) => {
-  return <DefaultErrorPage statusCode={404} />
   if (error)
   return <DefaultErrorPage statusCode={404} />
   return <SignupContent hero={data.driverSignUpPage.hero} />;

@@ -83,7 +83,7 @@ const query = gql`
       architectureSectionSubTitle
       expenseSectionSubTitle
       expenseTrackerSectionTitle
-      signUpHeroButton{
+      signUpHeroButton {
         text
       }
     }
@@ -160,11 +160,13 @@ const corporate = ({ data, error }) => {
   if (error) return <DefaultErrorPage statusCode={404} />;
   return (
     <>
-      <Banner
-        hero={data?.corporatePage?.hero}
-        children={<SloganButton> {data?.corporatePage?.signUpHeroButton?.text} </SloganButton>}
-        key="corporate"
-      />
+      <Banner hero={data?.corporatePage?.hero} key="corporate">
+        <Link href="/signup/corporate">
+          <SloganButton>
+            {data?.corporatePage?.signUpHeroButton?.text}
+          </SloganButton>
+        </Link>
+      </Banner>
       <CorporateContent data={data} />;
     </>
   );

@@ -47,24 +47,8 @@ const Avatar = styled("img")`
 const Header = () => {
   const router = useRouter();
   const selectedCountry = "";
-  const countries = [
-    {
-      name: "Ethiopia",
-      link: "https://taxiye.com/et",
-    },
-    {
-      name: "Kenya",
-      link: "https://taxiye.com/ke",
-    },
-    {
-      name: "South Sudan",
-      link: "https://taxiye.com/ss",
-    },
-    {
-      name: "Senegal",
-      link: "https://taxiye.com/sn",
-    },
-  ];
+  const countriesList = process?.env?.NEXT_PUBLIC_COUNTRY_LIST?.split(",");
+  const urlList = process?.env?.NEXT_PUBLIC_COUNTRY_URL_LINKS.split(",");
   return (
     <>
       <div className="country-dropdown">
@@ -73,12 +57,12 @@ const Header = () => {
           {selectedCountry}
         </SecondaryNavLink>
         <div className="country-dropdown-content">
-          {countries.map((country) => (
+          {countriesList?.map((country, index) => (
             <LangLinks
-              href={country?.link}
-              className={country?.name == selectedCountry ? "active" : null}
+              href={urlList[index]}
+              className={country == selectedCountry ? "active" : null}
             >
-              {country?.name}
+              {country}
             </LangLinks>
           ))}
         </div>

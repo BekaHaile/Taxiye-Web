@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
 import styles from "../../theme/global/place-autocomplete";
 import { Loader } from "../loading/loading";
 import styled from "styled-components";
-const searchOptions = { componentRestrictions: { country: ["et"] } };
+const searchOptions = { componentRestrictions: { country: process.env.NEXT_PUBLIC_COUNTRY.split(",") } };
 
 const LoadingContainer = styled("div")`
   position: absolute;

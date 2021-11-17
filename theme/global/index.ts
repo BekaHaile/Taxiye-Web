@@ -640,6 +640,9 @@ overflow:hidden;
   z-index: 1;
   color: ${theme.colors.primary}
 }
+.lang-dropdown-content{
+  min-width:80px;
+}
 
 .lang-dropdown:hover .lang-dropdown-content, .country-dropdown:hover .country-dropdown-content {
   display: flex;

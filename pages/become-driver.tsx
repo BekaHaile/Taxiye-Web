@@ -154,11 +154,13 @@ const signup = ({ data, error }) => {
   if (error) return <DefaultErrorPage statusCode={404} />;
   return (
     <>
-      <Banner
-        hero={data?.becomeADriverPage?.hero}
-        children={<SloganButton>{data?.becomeADriverPage?.getStartedButton?.text}</SloganButton>}
-        key="become-driver"
-      />
+      <Banner hero={data?.becomeADriverPage?.hero} key="become-driver">
+        <Link href="/signup/driver">
+          <SloganButton>
+            {data?.becomeADriverPage?.getStartedButton?.text}
+          </SloganButton>
+        </Link>
+      </Banner>
       <Signup data={data} />
     </>
   );
