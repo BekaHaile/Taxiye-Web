@@ -113,10 +113,6 @@ const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
         <Menu.Item key="groups" icon={<GroupOutlined />}>
           Groups
         </Menu.Item>
-        <Menu.Item key="dispatch" icon={<DesktopOutlined />}>
-          Dispatch
-        </Menu.Item>
-
         <SubMenu key="rides" icon={<CarOutlined />} title="Rides">
           <Menu.Item key="on-going">Ongoing</Menu.Item>
           <Menu.Item key="completed">Completed</Menu.Item>

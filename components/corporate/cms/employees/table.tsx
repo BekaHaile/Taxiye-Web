@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table, Space, Button, Tag } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
@@ -26,8 +26,8 @@ const columns = [
     sorter: true,
   },
   {
-    title: "Monthly Budger Limit",
-    dataIndex: "monthly_transaction_limit",
+    title: "Monthly Budget Limit",
+    dataIndex: "monthly_budget_limit",
     sorter: true,
   },
   {
@@ -87,10 +87,22 @@ const TableView = () => {
   const employees = useSelector(
     (state) => state["corporate_employees"]["employees"]
   );
+  const q = useSelector(
+    (state) => state["corporate_employees"]["q"]
+  );
+  const [filteredEmployees, setFilteredEmployees] = useState(employees);
   const onSelectChange = (selectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys);
   };
+
+  useEffect(() => {
+    setFilteredEmployees(
+      employees.filter((entry) =>
+        entry?.user_name?.toLowerCase()?.includes(q?.toLowerCase())
+      )
+    );
+  }, [q, employees]);
 
   const rowSelection = {
     selectedRowKeys,
@@ -134,7 +146,7 @@ const TableView = () => {
       loading={loading}
       rowSelection={rowSelection}
       columns={columns}
-      dataSource={employees}
+      dataSource={filteredEmployees}
     />
   );
 };

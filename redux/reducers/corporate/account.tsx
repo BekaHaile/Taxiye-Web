@@ -3,7 +3,7 @@ const initialState = {
   user: {
     full_name: "Ayele Tolosa",
     email: "ayele@gmail.com",
-    profile: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+    profile: "",
     phone_no: "978768767",
     country_code: "+251",
     country: "Ethiopia",

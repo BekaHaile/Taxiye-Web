@@ -88,14 +88,14 @@ const FormView = () => {
           <PhoneInput
             placeholder="enter phone number"
             id="phone_no"
-            code={parseInt(country_code)}
+            code={country_code}
             phone_no={phone_no}
             action={(data, a) => {
               store.dispatch(
                 changePhone({
                   country: `${data["short"]}`,
                   phone_no: data["phone"],
-                  country_code: `+${data["code"]}`,
+                  country_code: `${data["code"]}`,
                   isValid: validationUtils.validatePhone(data["phone"], `+${data["code"]}`),
                 })
               );

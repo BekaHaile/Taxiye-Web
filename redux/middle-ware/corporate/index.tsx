@@ -228,7 +228,7 @@ function validateLoginInput(data) {
   return (
     validationUtils.validateInput(data["login_password"]) &&
     validationUtils.validateEmail(data["login_email"]) &&
-    data["login_password"].length >= 6
+    data["login_password"].length >= 4
   );
 }
 

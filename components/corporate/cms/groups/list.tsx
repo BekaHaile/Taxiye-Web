@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../../theme/main";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
 import { fetchGroups } from "../../../../redux/actions/corporate/group";
 
-import { Row, Col, Card, Space, Typography, Spin, Empty } from "antd";
+import { Row, Col, Card, Space, Typography, Spin, Empty, Tag } from "antd";
 
 const { Text } = Typography;
 
 const MainCard = styled(Card)`
-  background: ${theme.colors.white};;
+  background: ${theme.colors.white};
   border: 1px solid #eff2f5;
   box-sizing: border-box;
   border-radius: 5px;
@@ -86,14 +86,27 @@ const Hr = styled("hr")`
 `;
 
 const MainRow = styled(Row)`
-row-gap:24px !important;`;
+  row-gap: 24px !important;
+  flex-wrap: wrap;
+`;
 
 const List = () => {
+  const loading = useSelector((state) => state["corporate_group"]["loading"]);
+  const groups = useSelector((state) => state["corporate_group"]["groups"]);
+  const q = useSelector((state) => state["corporate_group"]["query"]);
+  const [filteredGroups, setFilteredGroups] = useState(groups);
   useEffect(() => {
     store.dispatch(fetchGroups());
   }, []);
-  const loading = useSelector((state) => state["corporate_group"]["loading"]);
-  const groups = useSelector((state) => state["corporate_group"]["groups"]);
+
+  useEffect(() => {
+    setFilteredGroups(
+      groups.filter((entry) =>
+        entry?.group_name.toLowerCase()?.includes(q?.toLowerCase())
+      )
+    );
+  }, [q]);
+
   return (
     <>
       <Container>
@@ -102,8 +115,8 @@ const List = () => {
             <Loader />
           </LoaderCard>
         ) : (
-          groups && (
-            <MainRow gutter={24}>
+          filteredGroups && (
+            <MainRow gutter={24} wrap={true}>
               {groups.length == 0 ? (
                 <EmptyData
                   description={
@@ -114,35 +127,45 @@ const List = () => {
                   }
                 />
               ) : (
-                groups.map((group) => (
-                  <Col className="gutter-row" span={8}>
+                filteredGroups.map((group, index) => (
+                  <Col className="gutter-row" span={8} key={index}>
                     <MainCard bodyStyle={{ padding: "16px" }}>
                       <VerticalFlexContainer direction="vertical" size={16}>
                         <FlexContainer direction="vertical" size={16}>
-                          <Title>{group.title}</Title>
+                          <Title>{group?.group_name}</Title>
 
-                          <SubTitle>{group.balance}</SubTitle>
+                          <SubTitle>
+                            Monthly Budget: {group?.monthly_budget_limit ?? 0}
+                          </SubTitle>
                         </FlexContainer>
                         <Hr />
-                        <Space size={48}>
-                          <Space align="start" direction="vertical">
-                            <CardActionTitle>Max. Rides</CardActionTitle>
-                            <CardActionSubText>
-                              {group.maximum_rides}
-                            </CardActionSubText>
-                          </Space>
+                        <Space wrap>
+                          {group?.monthly_ride_limit && (
+                            <Space align="start" direction="vertical">
+                              <CardActionTitle>Max. Rides</CardActionTitle>
+                              <CardActionSubText>
+                                {group?.monthly_ride_limit}
+                              </CardActionSubText>
+                            </Space>
+                          )}
+
+                          {group?.max_members && (
+                            <Space align="start" direction="vertical">
+                              <CardActionTitle>Employees</CardActionTitle>
+                              <CardActionSubText>
+                                {group?.max_members}
+                              </CardActionSubText>
+                            </Space>
+                          )}
 
                           <Space align="start" direction="vertical">
-                            <CardActionTitle>Employees</CardActionTitle>
+                            <CardActionTitle>Status</CardActionTitle>
                             <CardActionSubText>
-                              {group.employees}
-                            </CardActionSubText>
-                          </Space>
-
-                          <Space align="start" direction="vertical">
-                            <CardActionTitle>Payment</CardActionTitle>
-                            <CardActionSubText>
-                              {group.payment}
+                              {group?.is_active ? (
+                                <Tag color="success">Active</Tag>
+                              ) : (
+                                <Tag color="error">In Active</Tag>
+                              )}
                             </CardActionSubText>
                           </Space>
                         </Space>

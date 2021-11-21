@@ -110,7 +110,7 @@ function setUsers(query) {
       key: i,
       profile: {
         name: `Edward King`,
-        image: `https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png`,
+        image: ``,
       },
       email: "email@email.com",
       role: i == 0 ? "Adminstrator" : i == 1 ? "Moderator" : "Dispatcher",

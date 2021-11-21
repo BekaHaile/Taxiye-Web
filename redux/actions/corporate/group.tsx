@@ -15,6 +15,18 @@ export const fetchGroups = () => {
   };
 };
 
+export const addGroup = () => {
+  return {
+    type: actions.INITIATED_ADD_GROUP,
+  };
+};
+
+export const addGroupFinished = () => {
+  return {
+    type: actions.ADD_GROUP_FINISHED,
+  };
+};
+
 export const queryAdded = (query) => {
   return {
     type: actions.QUERY_ADDED,
@@ -106,6 +118,15 @@ export const selectVehicle = (vehicle) => {
   };
 };
 
+export const setNumberOfMemembers = (max_members) => {
+  return {
+    type: actions.NUMBER_OF_MEMBERS_ADDED,
+    payload: {
+      max_members: max_members,
+    },
+  };
+};
+
 export const removeVehicle = (index) => {
   return {
     type: actions.VEHICLE_REMOVED,
@@ -124,10 +145,8 @@ export const setValidation = (isValid) => {
   };
 };
 
-
 export const resetForm = () => {
   return {
     type: actions.RESET,
-    
   };
 };

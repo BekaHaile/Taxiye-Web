@@ -30,7 +30,6 @@ export default function index() {
       store.dispatch(validateAndChangePhone(company_detail["phone_no"]));
     }
   }, [corporate_detail]);
-  if (!corporate_detail) return <Loading />;
 
   return (
     <>

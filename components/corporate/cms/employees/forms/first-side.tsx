@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Table, Form, Space, Input, Select } from "antd";
+import { Table, Form, Space, Input, Select, Button } from "antd";
 import theme from "../../../../../theme/main";
 import { useSelector } from "react-redux";
 import store from "../../../../../redux/store";
@@ -62,12 +62,18 @@ const FormView = () => {
       render: (val, record, index) => {
         return (
           <Form.Item
+            hasFeedback
             validateStatus={
-              validationUtils.validatePhone(record["phone_no"], `+${record["code"]}`) ? "" : "error"
+              validationUtils.validatePhone(
+                record["phone_no"],
+                `${record["code"]}`
+              )
+                ? ""
+                : "error"
             }
           >
             <PhoneInput
-              placeholder="enter phone number"
+              placeholder="Enter phone number"
               id="phone_no"
               code={record["code"]}
               phone_no={record["phone_no"]}
@@ -86,6 +92,7 @@ const FormView = () => {
       render: (val, record, index) => {
         return (
           <Form.Item
+            hasFeedback
             validateStatus={validationUtils.validateInput(val) ? "" : "error"}
           >
             <Input
@@ -106,6 +113,7 @@ const FormView = () => {
       render: (val, record, index) => {
         return (
           <Form.Item
+            hasFeedback
             validateStatus={validationUtils.validateInput(val) ? "" : "error"}
           >
             <Input
@@ -126,6 +134,7 @@ const FormView = () => {
       render: (val, record, index) => {
         return (
           <Form.Item
+            hasFeedback
             validateStatus={validationUtils.validateEmail(val) ? "" : "error"}
           >
             <Input
@@ -146,19 +155,23 @@ const FormView = () => {
       render: (val, record, index) => {
         return (
           <Form.Item
+            hasFeedback
             validateStatus={validationUtils.validateInput(val) ? "" : "error"}
           >
             <Select
               onChange={(value) => {
                 store.dispatch(changeGroup(value, index));
               }}
+              loading={loading}
               value={val}
             >
-              <Option disabled value={null}>
+              <Option key="empty" disabled value={null}>
                 Select Group
               </Option>
               {groups.map((group, index) => (
-                <Option value={group.title}>{group.title}</Option>
+                <Option key={index} value={group.group_name}>
+                  {group.group_name}
+                </Option>
               ))}
             </Select>
           </Form.Item>
@@ -170,12 +183,15 @@ const FormView = () => {
       title: "Action",
       key: "action",
       render: (text, record, index) => (
-        <Form.Item>
-          <DeleteOutlined
+        <Form.Item hasFeedback>
+          <Button
+            disabled={new_employees?.length <= 1}
             onClick={() => {
               store.dispatch(removeEmployee(index));
             }}
-          />
+          >
+            <DeleteOutlined />
+          </Button>
         </Form.Item>
       ),
     },

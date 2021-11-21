@@ -27,7 +27,7 @@ export const corporate_rides = (store) => (next) => async (action) => {
   } else if (action.type == actiontypes.CITY_FETCH_INITIATED) {
     next(actions.setLoading(true));
     var cities = await fetchCities(corporate_data);
-    next(actions.cityChanged(cities[0].city_id));
+    next(actions.cityChanged(cities[0]?.city_id));
     next(actions.setCitiesList(cities));
     
     next(actions.setLoading(false));

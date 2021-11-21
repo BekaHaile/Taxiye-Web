@@ -128,7 +128,7 @@ const FormView = () => {
             <PhoneInput
               placeholder="enter phone number"
               id="phone_no"
-              code={parseInt(country_code)}
+              code={country_code}
               phone_no={phone_no}
               action={(data, a) => {
                 store.dispatch(

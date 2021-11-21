@@ -2,7 +2,7 @@ import * as actionTypes from "../../types/corporate/employees";
 let date = new Date();
 const data = {
   phone_no: "",
-  code: 251,
+  code: "+251",
   first_name: "",
   last_name: "",
   email: "",
@@ -42,7 +42,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
     case actionTypes.EMPLOYEE_FORM_INITIATED:
       return {
         ...state,
-        new_employees: [...state.new_employees, action.payload.employee],
+        new_employees: [action.payload.employee],
       };
     case actionTypes.GROUP_FETCHED:
       return {

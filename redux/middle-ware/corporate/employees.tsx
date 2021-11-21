@@ -3,6 +3,7 @@ import * as typeActions from "../../types/corporate/employees";
 import axios from "axios";
 import * as validationUtils from "../../../utils/validation";
 import { getVehicles } from "./dispatch";
+import {fetchGroups} from "./group";
 
 export const corporate_employees = (store) => (next) => async (action) => {
   next(action);
@@ -30,8 +31,7 @@ export const corporate_employees = (store) => (next) => async (action) => {
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {
     next(actions.setLoading(true));
-    await sleep(3000);
-    var groups = fetchGroups();
+    var groups = await fetchGroups(corporate_data, '');
     next(actions.setGroups(groups));
     next(actions.setLoading(false));
   } else if (
@@ -135,21 +135,6 @@ export async function toggleEmployeeStatus(data, corporate_data, next) {
   }
 }
 
-function fetchGroups() {
-  const data = [];
-  var ran = Math.floor(Math.random() * 6) + 1;
-  for (let i = 1; i <= ran; i++) {
-    data.push({
-      key: i,
-      title: "Group " + i,
-      balance: "10,000.00 Birr",
-      maximum_rides: 3333,
-      employees: 455,
-      payment: "Manual",
-    });
-  }
-  return data;
-}
 
 function validateEmployeeForm(data) {
   var isValid = true;

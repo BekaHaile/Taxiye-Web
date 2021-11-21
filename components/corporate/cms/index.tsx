@@ -7,7 +7,6 @@ import Employees from "./employees";
 import Groups from "./groups";
 import Rides from "./rides/list";
 import Request from "./requests";
-import Dispatch from "./dispatch";
 import AccountSetting from "./account-setting";
 import { useEffect } from "react";
 import store from "../../../redux/store";
@@ -26,13 +25,12 @@ const Cms = () => {
     <Layout>
       <Sider selected={selected} setSelected={setSelected} />
       <Layout className="site-layout" style={{ marginLeft: 256 }}>
-        <Content style={{ margin: selected === "dispatch" ? "0px" : "16px" }}>
+        <Content style={{ padding: selected === "dispatch" ? "0px" : "16px", minHeight:"100vh" }}>
           {(() => {
             if (selected === "home-page")
               return <HomePage setSelected={setSelected} />;
             else if (selected === "employees") return <Employees />;
             else if (selected === "groups") return <Groups />;
-            else if (selected === "dispatch") return <Dispatch />;
             else if (selected === "on-going" || selected === "completed")
               return <Rides type={selected} />;
             else if (selected === "requests") return <Request />;

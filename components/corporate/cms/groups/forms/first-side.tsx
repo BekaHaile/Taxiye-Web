@@ -9,6 +9,7 @@ import {
   addMonthlyBudget,
   addMonthlyRide,
   changePaymentMode,
+  setNumberOfMemembers,
 } from "../../../../../redux/actions/corporate/group";
 
 const CustomSpace = styled(Space)`
@@ -48,6 +49,9 @@ const FormView = () => {
   const payment_mode = useSelector(
     (state) => state["corporate_group"]["payment_mode"]
   );
+  const max_members = useSelector(
+    (state) => state["corporate_group"]["max_members"]
+  );
   return (
     <>
       <Form layout="vertical" form={form} initialValues={{ remember: true }}>
@@ -58,6 +62,17 @@ const FormView = () => {
             onChange={(e) => {
               var val = e.target.value;
               store.dispatch(addGroupName(val));
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Maximum members">
+          <Input
+            type="number"
+            placeholder="4"
+            value={max_members}
+            onChange={(e) => {
+              var val = e.target.value;
+              store.dispatch(setNumberOfMemembers(val));
             }}
           />
         </Form.Item>

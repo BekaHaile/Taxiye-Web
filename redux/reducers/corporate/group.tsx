@@ -4,14 +4,17 @@ const initialState = {
   route: "",
   groups: [],
   loading: false,
+  group_id: null,
   group_name: "",
   monthly_budget: "",
   monthly_ride: 1,
   days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
   payment_mode: "auto-paid",
   time_range: { start: "0:00", end: "23:59" },
-  selected_vehicles: [],
+  selected_vehicle: "",
+  max_members: 1,
   isValid: false,
+  query: "",
 };
 
 export default function corporateGroupReducer(state = initialState, action) {
@@ -32,6 +35,7 @@ export default function corporateGroupReducer(state = initialState, action) {
         ...state,
         groups: action.payload.groups,
         loading: false,
+        group_id: null,
       };
 
     case actionTypes.INITIATE_LOADING:
@@ -78,16 +82,23 @@ export default function corporateGroupReducer(state = initialState, action) {
     case actionTypes.VEHICLE_SELECTION_MADE:
       return {
         ...state,
-        selected_vehicles: [...state.selected_vehicles, action.payload.vehicle],
+        selected_vehicle: action.payload.vehicle,
+      };
+    case actionTypes.ADD_GROUP_FINISHED:
+      return {
+        ...initialState,
       };
 
     case actionTypes.VEHICLE_REMOVED:
       return {
         ...state,
-        selected_vehicles: [
-          ...state.selected_vehicles.slice(0, action.payload.index),
-          ...state.selected_vehicles.slice(action.payload.index + 1),
-        ],
+        selected_vehicle: "",
+      };
+
+    case actionTypes.NUMBER_OF_MEMBERS_ADDED:
+      return {
+        ...state,
+        max_members: parseInt(action.payload.max_members),
       };
 
     case actionTypes.FORM_VALIDATED:
@@ -105,7 +116,7 @@ export default function corporateGroupReducer(state = initialState, action) {
         days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
         payment_mode: "auto-paid",
         time_range: { start: "0:00", end: "23:59" },
-        selected_vehicles: [],
+        selected_vehicle: "",
         isValid: false,
       };
 

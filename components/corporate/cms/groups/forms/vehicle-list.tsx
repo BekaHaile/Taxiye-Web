@@ -52,8 +52,8 @@ const Title = styled("p")`
 
 const VehicleList = () => {
   const [selectedCar, setSelectedCar] = useState(0);
-  const selected_vehicles = useSelector(
-    (state) => state["corporate_group"]["selected_vehicles"]
+  const selected_vehicle = useSelector(
+    (state) => state["corporate_group"]["selected_vehicle"]
   );
 
   const vehicles = [
@@ -85,16 +85,10 @@ const VehicleList = () => {
   ];
 
   const handleChange = (data) => {
-    var veh = selected_vehicles;
-    var index = containsObject(data, veh);
-    if (index !== -1) store.dispatch(removeVehicle(index));
-    else {
-      store.dispatch(selectVehicle(data));
-    }
-    
+    store.dispatch(selectVehicle(data?.id));
   };
   const check = (data, veh) => {
-    return veh.some((vehicle) => vehicle.id === data.id);
+    return data?.id === veh;
   };
 
   function containsObject(obj, list) {
@@ -115,7 +109,7 @@ const VehicleList = () => {
           <Card
             key={index}
             onClick={() => handleChange(vehicle)}
-            className={check(vehicle, selected_vehicles) ? "activecard" : ""}
+            className={check(vehicle, selected_vehicle) ? "activecard" : ""}
           >
             <style jsx global>
               {styles}

@@ -1,15 +1,41 @@
-import CountryPhoneInput, { ConfigProvider } from 'antd-country-phone-input';
-import countries from '../../../../assets/Data/countries.json';
+import countries from "../../../../assets/Data/countries.json";
+import { Input, Select } from "antd";
+import ReactCountryFlag from "react-country-flag";
+import { useState } from "react";
 
-import 'antd/dist/antd.css';
-import 'antd-country-phone-input/dist/index.css';
+const { Option } = Select;
 
-const PhoneInput = ({action, code, phone_no, placeholder, id}) => {
+const PhoneInput = ({ action, code, phone_no, placeholder, id }) => {
+  const [codeValue, setCodeValue] = useState(code);
+  const selectBefore = (
+    <Select
+      value={codeValue}
+      className="select-before"
+      style={{ minWidth: "80px" }}
+      showSearch
+      onChange={(val) => {
+        setCodeValue(val);
+      }}
+    >
+      {countries.map((country, index) => (
+        <Option key={index} value={country.dial_code}>
+          <ReactCountryFlag countryCode={country.code} svg />{" "}
+          {country.dial_code}
+        </Option>
+      ))}
+    </Select>
+  );
   return (
-    <div>Commented out phone input field</div>
-    // <ConfigProvider locale={countries}>
-    //   <CountryPhoneInput id={id} placeholder={placeholder} value= {{ code: code, phone: phone_no}} style={{height:"33px"}} onChange={action}/>
-    // </ConfigProvider>
+    <Input
+      addonBefore={selectBefore}
+      id={id}
+      placeholder={placeholder}
+      value={phone_no}
+      onChange={(e) => {
+        const value = e.target.value;
+        action({ phone: value, code: codeValue });
+      }}
+    />
   );
 };
 

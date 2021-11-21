@@ -9,7 +9,7 @@ import {
   changeRoute,
   appendEmployee,
   initiateEmployeeForm,
-  resetRegistration
+  resetRegistration,
 } from "../../../../../redux/actions/corporate/employees";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -20,7 +20,9 @@ const MainCard = styled(Card)`
   height: 100%;
 `;
 
-const MainRow = styled("div")``;
+const MainRow = styled("div")`
+  margin-bottom: 20px;
+`;
 const BackButton = styled("img")`
   height: 30px;
 `;
@@ -48,8 +50,10 @@ const Title = styled("p")`
   margin: auto 0;
 `;
 
-const Groups = () => {
-  const isFormValid = useSelector((state) => state["corporate_employees"]["isFormValid"]);
+const Employees = () => {
+  const isFormValid = useSelector(
+    (state) => state["corporate_employees"]["isFormValid"]
+  );
   const default_data = useSelector(
     (state) => state["corporate_employees"]["default_data"]
   );
@@ -77,7 +81,7 @@ const Groups = () => {
               <FirstSide />
             </TabPane>
             <TabPane tab="Upload File" key="2">
-              <SecondSide setActiveKey={setActiveKey}/>
+              <SecondSide setActiveKey={setActiveKey} />
             </TabPane>
           </Tabs>
         </MainRow>
@@ -87,7 +91,13 @@ const Groups = () => {
               <Button disabled={!isFormValid} type="primary">
                 Send Invites
               </Button>
-              <Button onClick={() => {store.dispatch(resetRegistration())}}>Clear</Button>
+              <Button
+                onClick={() => {
+                  store.dispatch(resetRegistration());
+                }}
+              >
+                Clear
+              </Button>
             </Space>
             <Button
               type="link"
@@ -126,4 +136,4 @@ const Groups = () => {
   );
 };
 
-export default Groups;
+export default Employees;

@@ -9,7 +9,7 @@ const Card = styled("div")`
   flex-direction: col;
   align-items: flex-start;
   padding: 0px;
-  baackground: ${theme.colors.white};
+  background: ${theme.colors.white};
   border-radius: 10px;
   gap: 40px;
 `;
