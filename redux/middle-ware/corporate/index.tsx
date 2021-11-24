@@ -55,11 +55,22 @@ export const corporate = (store) => (next) => async (action) => {
   } else if (action.type == actiontypes.COMPANY_DATA_SUBMIT_INITIATED) {
     try {
       next(actions.initiateLoading(true));
-      await submitCompanyData({});
+      const res = await submitPhone({
+        phone_no: `${data["country_code"]}${data["phone_no"]}`,
+        country: `${data["country"]}`,
+      });
       next(actions.initiateLoading(false));
-      next(actions.goToStep(2));
+      if (res) {
+        if (res.status === "OK") {
+          next(actions.goToStep(2));
+        } else {
+          showError(next);
+        }
+      }
+      
     } catch (e) {
       next(actions.setValidation(false));
+      next(actions.initiateLoading(false));
     }
   } else if (action.type == actiontypes.ADMIN_DATA_SUBMIT_INITIATED) {
     try {
@@ -134,8 +145,6 @@ export const corporate = (store) => (next) => async (action) => {
 
 async function submitCompanyData(data) {
   try {
-    await sleep(2000);
-    return [];
     const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
     const res = await axios.post(
       `${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`,
@@ -165,13 +174,11 @@ async function submitCompanyAdminData(data) {
 
 async function submitPhone(data) {
   try {
-    await sleep(2000);
-    return { status: "OK" };
-    const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
+    const { NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST } = process.env;
     const res = await axios.post(
-      `${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`,
+      `${NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/account/generate_login_otp`,
       data,
-      { timeout: 5000 }
+      { timeout: 10000 }
     );
     return res.data;
   } catch (e) {
@@ -201,6 +208,27 @@ export async function login(email, password, keepMeSignedIn, next) {
   }
 }
 
+export async function updateUserInfo(data, next) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info/edit`,
+      {
+        token: `${data["token"]}`,
+      },
+      {
+        timeout: 10000,
+      }
+    );
+    if (res.status == 200) {
+      return res.data.data;
+    }
+    return;
+  } catch (e) {
+    showError(next);
+    return;
+  }
+}
+
 export async function getUserInfo(data, next) {
   try {
     const res = await axios.post(
@@ -218,7 +246,6 @@ export async function getUserInfo(data, next) {
     }
     return;
   } catch (e) {
-    console.log(e);
     showError(next);
     return;
   }

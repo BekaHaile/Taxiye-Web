@@ -3,7 +3,10 @@ import styled from "styled-components";
 import theme from "../../../../theme/main";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
-import { fetchGroups } from "../../../../redux/actions/corporate/group";
+import {
+  fetchGroups,
+  initiateGroupUpdate,
+} from "../../../../redux/actions/corporate/group";
 
 import { Row, Col, Card, Space, Typography, Spin, Empty, Tag } from "antd";
 
@@ -105,7 +108,7 @@ const List = () => {
         entry?.group_name.toLowerCase()?.includes(q?.toLowerCase())
       )
     );
-  }, [q]);
+  }, [q, groups]);
 
   return (
     <>
@@ -132,7 +135,13 @@ const List = () => {
                     <MainCard bodyStyle={{ padding: "16px" }}>
                       <VerticalFlexContainer direction="vertical" size={16}>
                         <FlexContainer direction="vertical" size={16}>
-                          <Title>{group?.group_name}</Title>
+                          <Title
+                            onClick={() =>
+                              store.dispatch(initiateGroupUpdate(group))
+                            }
+                          >
+                            {group?.group_name}
+                          </Title>
 
                           <SubTitle>
                             Monthly Budget: {group?.monthly_budget_limit ?? 0}

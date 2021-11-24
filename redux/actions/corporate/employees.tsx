@@ -53,6 +53,18 @@ export const setSelectedEmployee = (selected_employee) => {
   };
 };
 
+export const registerEmployee = () => {
+  return {
+    type: actions.EMPLOYEE_REGISTRATION_INITIATED,
+  };
+};
+
+export const employeeRegistrationConcluded = () => {
+  return {
+    type: actions.EMPLOYEE_REGISTRATION_FINISHED,
+  };
+};
+
 export const selectOrigin = ({ origin }) => {
   return {
     type: actions.ORIGIN_SELECTED,
@@ -145,7 +157,6 @@ export const resetRegistration = () => ({
   type: actions.RESET_EMPLOYEE_REGISTRATION,
 });
 
-
 export const removeEmployee = (index) => ({
   type: actions.EMPLOYEE_REMOVED,
   payload: {
@@ -166,7 +177,7 @@ export const phoneAdded = (phone_no, code, index) => ({
   payload: {
     index: index,
     phone_no: phone_no,
-    code: code
+    code: code,
   },
 });
 
@@ -186,11 +197,11 @@ export const changeEmail = (email, index) => ({
   },
 });
 
-export const changeGroup = (group, index) => ({
+export const changeGroup = (group_id, index) => ({
   type: actions.EMPLOYEE_GROUP_CHANGED,
   payload: {
     index: index,
-    group: group,
+    group_id: group_id,
   },
 });
 

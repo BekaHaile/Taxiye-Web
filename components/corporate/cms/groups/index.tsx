@@ -6,7 +6,7 @@ import List from "./list";
 import CreateGroup from "./forms";
 import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
-import {changeRoute} from "../../../../redux/actions/corporate/group";
+import { changeRoute } from "../../../../redux/actions/corporate/group";
 
 const CustomSpace = styled(Space)`
   width: 100%;
@@ -20,7 +20,7 @@ const Groups = () => {
   }, []);
   return (
     <>
-      {route == "create" ? (
+      {route == "create" || route == "update" ? (
         <CreateGroup />
       ) : (
         <CustomSpace size={16} direction="vertical">

@@ -16,6 +16,11 @@ export const corporate_group = (store) => (next) => async (action) => {
     var res = await addGroup(data, corporate_data, next);
     if (res) next(actions.addGroupFinished());
     else next(actions.setLoading(false));
+  } else if (action.type == actiontypes.INITIATE_UPDATE_GROUP_API) {
+    next(actions.setLoading(true));
+    var res = await updateGroup(data, corporate_data, next);
+    if (res) next(actions.updateGroupFinished());
+    else next(actions.setLoading(false));
   } else if (
     action.type == actiontypes.GROUP_NAME_ADDED ||
     action.type == actiontypes.MONTHLY_BUDGET_ADDED ||
@@ -40,16 +45,17 @@ export async function fetchGroups(corporate_data, query) {
       {
         params: {
           token: `${corporate_data["corporate_detail"]["token"]}`,
-          filter:{
-            group_name: query ?? '',
+          filter: {
+            group_name: query ?? "",
           },
         },
         timeout: 10000,
       }
     );
+    if (res.data.flag !== 143 || res.data.error)
+      throw new Error(res.data.error);
     return res.data.data;
   } catch (e) {
-    console.log(e);
     return [];
   }
 }
@@ -62,19 +68,55 @@ export async function addGroup(group_data, corporate_data, next) {
         token: `${corporate_data["corporate_detail"]["token"]}`,
         group_name: group_data["group_name"],
         monthly_budget_limit: group_data["monthly_budget"],
-        currency: "ETB",
         monthly_ride_limit: group_data["monthly_ride"],
         max_members: group_data["max_members"],
-        payment: group_data["payment_mode"],
-        vehicle_type: group_data["selected_vehicle"],
+        vehicle_type: `${group_data["selected_vehicle"]}`,
+        corporate_id: parseInt(
+          `${corporate_data["corporate_detail"]["business_details"]["business_id"]}`
+        ),
       },
       {
         timeout: 10000,
       }
     );
+    if (res.data.flag !== 143 || res.data.error)
+      throw new Error(res.data.error);
     return res.data;
   } catch (e) {
     showInfo(next, "Could not add group, please try again!", "error");
+    return;
+  }
+}
+
+export async function updateGroup(group_data, corporate_data, next) {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/update_group`,
+      {
+        token: `${corporate_data["corporate_detail"]["token"]}`,
+        group_id: group_data["group_id"],
+        group_name: group_data["group_name"],
+        monthly_budget_limit: group_data["monthly_budget"],
+        monthly_ride_limit: group_data["monthly_ride"],
+        max_members: group_data["max_members"],
+        vehicle_type: `${group_data["selected_vehicle"]}`,
+        corporate_id: parseInt(
+          `${corporate_data["corporate_detail"]["business_details"]["business_id"]}`
+        ),
+      },
+      {
+        timeout: 10000,
+      }
+    );
+    if (res.data.flag !== 143 || res.data.error)
+      throw new Error(res.data.error);
+    return res.data;
+  } catch (e) {
+    showInfo(
+      next,
+      "Could not update group, please try again! " + e.message,
+      "error"
+    );
     return;
   }
 }
@@ -90,7 +132,7 @@ function validateForm(data) {
     data["max_members"] != null &&
     // data["max_members"] >= 1 &&
     data["days"].length > 0 &&
-    data["payment_mode"] != null &&
+    // data["payment_mode"] != null &&
     data["time_range"] != null &&
     data["selected_vehicle"] != ""
   );

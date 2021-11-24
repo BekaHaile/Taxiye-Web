@@ -10,6 +10,7 @@ import {
   appendEmployee,
   initiateEmployeeForm,
   resetRegistration,
+  registerEmployee
 } from "../../../../../redux/actions/corporate/employees";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -57,6 +58,7 @@ const Employees = () => {
   const default_data = useSelector(
     (state) => state["corporate_employees"]["default_data"]
   );
+  const route = useSelector((state) => state["corporate_employees"]["route"]);
   useEffect(() => {
     store.dispatch(initiateEmployeeForm(default_data));
   }, []);
@@ -88,7 +90,13 @@ const Employees = () => {
         {activeKey == "1" ? (
           <FlexContainer>
             <Space size={16}>
-              <Button disabled={!isFormValid} type="primary">
+              <Button
+                disabled={!isFormValid}
+                onClick={() => {
+                  store.dispatch(registerEmployee());
+                }}
+                type="primary"
+              >
                 Send Invites
               </Button>
               <Button

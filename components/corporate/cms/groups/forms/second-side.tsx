@@ -30,12 +30,11 @@ const FormView = () => {
     (state) => state["corporate_group"]["time_range"]
   );
   const days = useSelector((state) => state["corporate_group"]["days"]);
-  
 
   return (
     <>
       <Form layout="vertical" form={form} initialValues={{ remember: true }}>
-        <Form.Item label="Days">
+        {/* <Form.Item label="Days">
           <CheckboxGroup options={plainOptions} value={days} onChange={(days)=>{
             store.dispatch(changeSelectedDays(days));
           }} />
@@ -58,7 +57,7 @@ const FormView = () => {
             range={{ draggableTrack: true }}
             defaultValue={[min, max / 2]}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="Vehicle Type">
           <VehicleList />
         </Form.Item>

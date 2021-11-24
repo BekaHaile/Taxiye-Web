@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Space, Card, Button } from "antd";
+import { Row, Space, Card, Button, Col } from "antd";
 import FirstSide from "./first-side";
 import SecondSide from "./second-side";
 import theme from "../../../../../theme/main";
@@ -8,7 +8,8 @@ import store from "../../../../../redux/store";
 import {
   changeRoute,
   resetForm,
-  addGroup
+  addGroup,
+  updateGroup,
 } from "../../../../../redux/actions/corporate/group";
 import { useSelector } from "react-redux";
 
@@ -16,9 +17,6 @@ const MainCard = styled(Card)`
   height: 100%;
 `;
 
-const MainRow = styled(Row)`
-  gap: 40px;
-`;
 const BackButton = styled("img")`
   height: 30px;
 `;
@@ -41,6 +39,8 @@ const Title = styled("p")`
 const Groups = () => {
   const isValid = useSelector((state) => state["corporate_group"]["isValid"]);
   const loading = useSelector((state) => state["corporate_group"]["loading"]);
+  const group_id = useSelector((state) => state["corporate_group"]["group_id"]);
+  const route = useSelector((state) => state["corporate_group"]["route"]);
 
   return (
     <>
@@ -52,24 +52,44 @@ const Groups = () => {
             }}
             src={require("../../../../../assets/icons/back-arrow.svg")}
           />
-          <Title>Add New Group</Title>
+          <Title>
+            {route == "update" && group_id != null
+              ? "Update Group"
+              : "Add New Group"}
+          </Title>
         </Container>
-        <MainRow>
-          <FirstSide />
-          <SecondSide />
-        </MainRow>
+        <Row gutter={40}>
+          <Col span={12}>
+            <FirstSide />
+          </Col>
+          <Col span={12}>
+            <SecondSide />
+          </Col>
+        </Row>
         <Space size={16}>
+          {route == "update" && group_id != null ? (
+            <Button
+              onClick={() => {
+                store.dispatch(updateGroup());
+              }}
+              disabled={!isValid || loading}
+              type="primary"
+            >
+              Update
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                store.dispatch(addGroup());
+              }}
+              disabled={!isValid || loading}
+              type="primary"
+            >
+              Save
+            </Button>
+          )}
           <Button
-            onClick={() => {
-              store.dispatch(addGroup());
-            }}
-            disabled={!isValid || loading}
-            type="primary"
-          >
-            Save
-          </Button>
-          <Button
-           disabled={loading}
+            disabled={loading}
             onClick={() => {
               store.dispatch(resetForm());
             }}

@@ -103,7 +103,6 @@ export async function fetchOverview(corporate_data) {
     );
     return res.data.data;
   } catch (e) {
-    console.log(e);
     return [];
   }
 }

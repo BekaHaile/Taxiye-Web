@@ -6,7 +6,7 @@ const data = {
   first_name: "",
   last_name: "",
   email: "",
-  group: null,
+  group_id: null,
 };
 const initialState = {
   selected_user: null,
@@ -63,7 +63,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
             first_name: action.payload.first_name,
             last_name: state.new_employees[action.payload.index].last_name,
             email: state.new_employees[action.payload.index].email,
-            group: state.new_employees[action.payload.index].group,
+            group_id: state.new_employees[action.payload.index].group_id,
             phone_no: state.new_employees[action.payload.index].phone_no,
             code: state.new_employees[action.payload.index].code,
           },
@@ -78,7 +78,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
           {
             last_name: action.payload.last_name,
             first_name: state.new_employees[action.payload.index].first_name,
-            group: state.new_employees[action.payload.index].group,
+            group_id: state.new_employees[action.payload.index].group_id,
             email: state.new_employees[action.payload.index].email,
             phone_no: state.new_employees[action.payload.index].phone_no,
             code: state.new_employees[action.payload.index].code,
@@ -94,7 +94,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
           {
             first_name: state.new_employees[action.payload.index].first_name,
             last_name: state.new_employees[action.payload.index].last_name,
-            group: state.new_employees[action.payload.index].group,
+            group_id: state.new_employees[action.payload.index].group_id,
             phone_no: state.new_employees[action.payload.index].phone_no,
             code: state.new_employees[action.payload.index].code,
             email: action.payload.email,
@@ -110,7 +110,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
           {
             first_name: state.new_employees[action.payload.index].first_name,
             last_name: state.new_employees[action.payload.index].last_name,
-            group: state.new_employees[action.payload.index].group,
+            group_id: state.new_employees[action.payload.index].group_id,
             email: state.new_employees[action.payload.index].email,
             phone_no: action.payload.phone_no,
             code: action.payload.code,
@@ -130,7 +130,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
             email: state.new_employees[action.payload.index].email,
             phone_no: state.new_employees[action.payload.index].phone_no,
             code: state.new_employees[action.payload.index].code,
-            group: action.payload.group,
+            group_id: action.payload.group_id,
           },
           ...state.new_employees.slice(action.payload.index + 1),
         ],

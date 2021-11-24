@@ -12,7 +12,7 @@ import {
 } from "../../../../../redux/actions/corporate/group";
 
 const Card = styled("div")`
-  width: 80px;
+  min-width: 80px;
   height: 90px;
   border: 1px solid ${theme.colors.primaryTextColor};
   box-sizing: border-box;
@@ -21,6 +21,8 @@ const Card = styled("div")`
   position: relative;
   text-align: center;
   cursor: pointer;
+  margin-bottom:15px;
+  margin-right:15px;
 `;
 
 const CenteredElement = styled("div")`
@@ -33,7 +35,8 @@ const CenteredElement = styled("div")`
 const Container = styled("div")`
   display: flex;
   gap: 20px;
-  flex-wrap: wrap;
+  overflow-x:scroll;
+  max-width:100%;
 `;
 
 const Image = styled("img")`
@@ -56,39 +59,15 @@ const VehicleList = () => {
     (state) => state["corporate_group"]["selected_vehicle"]
   );
 
-  const vehicles = [
-    {
-      id: "1",
-      name: "Sedan",
-      image: require("../../../../../assets/images/cars/sedan.svg"),
-    },
-    {
-      id: "2",
-      name: "Mini",
-      image: require("../../../../../assets/images/cars/mini.svg"),
-    },
-    {
-      id: "3",
-      name: "7 Seater",
-      image: require("../../../../../assets/images/cars/mini.svg"),
-    },
-    {
-      id: "4",
-      name: "Lada",
-      image: require("../../../../../assets/images/cars/mini.svg"),
-    },
-    {
-      id: "5",
-      name: "Any",
-      image: require("../../../../../assets/images/cars/mini.svg"),
-    },
-  ];
+  const vehicleList = useSelector(
+    (state) => state["corporate"]["corporate_detail"]["supported_vehicles"]
+  );
 
   const handleChange = (data) => {
-    store.dispatch(selectVehicle(data?.id));
+    store.dispatch(selectVehicle(data?.vehicle_type));
   };
   const check = (data, veh) => {
-    return data?.id === veh;
+    return data?.vehicle_type === parseInt(veh) ;
   };
 
   function containsObject(obj, list) {
@@ -105,7 +84,7 @@ const VehicleList = () => {
   return (
     <>
       <Container>
-        {vehicles.map((vehicle, index) => (
+        {vehicleList.map((vehicle, index) => (
           <Card
             key={index}
             onClick={() => handleChange(vehicle)}
@@ -115,8 +94,11 @@ const VehicleList = () => {
               {styles}
             </style>
             <CenteredElement>
-              <Image src={vehicle.image} />
-              <Title>{vehicle.name}</Title>
+              <Image src={require("../../../../../assets/images/cars/sedan.svg")} />
+              <Title>
+                {vehicle?.vehicle_name}
+                {vehicleList?.length}
+              </Title>
             </CenteredElement>
           </Card>
         ))}

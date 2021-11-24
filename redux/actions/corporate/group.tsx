@@ -21,11 +21,33 @@ export const addGroup = () => {
   };
 };
 
+export const updateGroup = () => {
+  return {
+    type: actions.INITIATE_UPDATE_GROUP_API,
+  };
+};
+
+export const initiateGroupUpdate = (group) => {
+  return {
+    type: actions.INITIATE_UPDATE_GROUP,
+    payload: {
+      group: group,
+    },
+  };
+};
+
 export const addGroupFinished = () => {
   return {
     type: actions.ADD_GROUP_FINISHED,
   };
 };
+
+export const updateGroupFinished = () => {
+  return {
+    type: actions.UPDATE_GROUP_API_FINISHED,
+  };
+};
+
 
 export const queryAdded = (query) => {
   return {

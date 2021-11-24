@@ -150,8 +150,8 @@ const FormView = () => {
     },
     {
       title: "Group",
-      dataIndex: "group",
-      key: "group",
+      dataIndex: "group_id",
+      key: "group_id",
       render: (val, record, index) => {
         return (
           <Form.Item
@@ -169,7 +169,7 @@ const FormView = () => {
                 Select Group
               </Option>
               {groups.map((group, index) => (
-                <Option key={index} value={group.group_name}>
+                <Option key={index} value={group.group_id}>
                   {group.group_name}
                 </Option>
               ))}

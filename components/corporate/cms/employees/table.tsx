@@ -7,11 +7,10 @@ import { useSelector } from "react-redux";
 import store from "../../../../redux/store";
 import { toggleEmployeeStatus } from "../../../../redux/actions/corporate/employees";
 
-
 const CenteredContainer = styled("div")`
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const columns = [
@@ -21,14 +20,17 @@ const columns = [
     sorter: true,
   },
   {
-    title: "Group",
-    dataIndex: "user_name",
+    title: "Phone Number",
+    dataIndex: "phone_no",
     sorter: true,
   },
   {
     title: "Monthly Budget Limit",
     dataIndex: "monthly_budget_limit",
     sorter: true,
+    render: (val) => {
+      return <>{val.toString()?.replace('null','0')}</>;
+    },
   },
   {
     title: "Monthly Ride Limit",
@@ -56,7 +58,7 @@ const columns = [
     title: "Actions",
     dataIndex: "status",
     render: (status, data) => (
-      <CenteredContainer >
+      <CenteredContainer>
         {status == 1 ? (
           <Button
             onClick={() => store.dispatch(toggleEmployeeStatus(data))}
@@ -64,15 +66,14 @@ const columns = [
           >
             Deactivate
           </Button>
-        ) : status == 2 ? (
+        ) : (
           <Button
             onClick={() => store.dispatch(toggleEmployeeStatus(data))}
             type="link"
           >
             Activate
           </Button>
-        ) : null}
-        <Button type="link">Edit</Button>
+        )}
       </CenteredContainer>
     ),
   },
@@ -87,9 +88,7 @@ const TableView = () => {
   const employees = useSelector(
     (state) => state["corporate_employees"]["employees"]
   );
-  const q = useSelector(
-    (state) => state["corporate_employees"]["q"]
-  );
+  const q = useSelector((state) => state["corporate_employees"]["q"]);
   const [filteredEmployees, setFilteredEmployees] = useState(employees);
   const onSelectChange = (selectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);

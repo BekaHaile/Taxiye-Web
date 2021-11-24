@@ -62,7 +62,7 @@ export default function corporateReducer(state = initialState, action) {
       return {
         ...state,
         otp: action.payload.otp,
-        isOtpValid: action.payload.otp.length == 6,
+        isOtpValid: action.payload.otp.length == 4,
       };
     case actionTypes.CORPORATE_OTP_SENT:
       return {

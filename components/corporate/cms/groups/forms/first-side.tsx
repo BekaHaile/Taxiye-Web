@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row, Col, Card, Typography, Space, Radio, Form, Input } from "antd";
 import theme from "../../../../../theme/main";
@@ -52,6 +52,7 @@ const FormView = () => {
   const max_members = useSelector(
     (state) => state["corporate_group"]["max_members"]
   );
+
   return (
     <>
       <Form layout="vertical" form={form} initialValues={{ remember: true }}>
@@ -97,7 +98,7 @@ const FormView = () => {
             }}
           />
         </Form.Item>
-        <Form.Item label="Payment Mode" className="group_radio">
+        {/* <Form.Item label="Payment Mode" className="group_radio">
           <Radio.Group
             value={payment_mode}
             onChange={(e) => {
@@ -119,7 +120,7 @@ const FormView = () => {
               </Detail>
             </Radio>
           </Radio.Group>
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </>
   );

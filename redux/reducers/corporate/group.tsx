@@ -20,14 +20,32 @@ const initialState = {
 export default function corporateGroupReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.GROUP_ROUTE_CHANGED:
-      return {
-        ...state,
-        route: action.payload.route,
-      };
+      return action.payload.route === ""
+        ? {
+            ...initialState,
+            loading: state.loading,
+          }
+        : {
+            ...state,
+            route: action.payload.route,
+          };
     case actionTypes.QUERY_ADDED:
       return {
         ...state,
         query: action.payload.query,
+      };
+
+    case actionTypes.INITIATE_UPDATE_GROUP:
+      return {
+        ...state,
+        group_id: action.payload.group?.group_id,
+        group_name: action.payload.group?.group_name ?? "",
+        monthly_budget: action.payload.group?.monthly_budget_limit ?? "",
+        monthly_ride: action.payload.group?.monthly_ride_limit ?? "",
+        max_members: action.payload.group?.max_members ?? "",
+        payment_mode: action.payload.group?.payment ?? "",
+        selected_vehicle: action.payload.group?.vehicle_type ?? "",
+        route: "update",
       };
 
     case actionTypes.GROUP_DATA_FETCHED:
@@ -88,7 +106,10 @@ export default function corporateGroupReducer(state = initialState, action) {
       return {
         ...initialState,
       };
-
+    case actionTypes.UPDATE_GROUP_API_FINISHED:
+      return {
+        ...initialState,
+      };
     case actionTypes.VEHICLE_REMOVED:
       return {
         ...state,
