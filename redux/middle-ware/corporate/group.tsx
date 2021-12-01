@@ -1,125 +1,46 @@
 import * as actions from "../../actions/corporate/group";
-import * as actiontypes from "../../types/corporate/group";
-import axios from "axios";
-import { showSuccess, showInfo, showError } from "../common";
+import * as actionTypes from "../../types/corporate/group";
+import * as groupApi from "../../../services/api/corporate/group/index.api";
+import fetchGroupsDto from "../../../models/corporate/group/fetchGroupsDto";
+import addGroupDto from "../../../models/corporate/group/addGroupDto";
+import updateGroupDto from "../../../models/corporate/group/updateGroupDto";
 
 export const corporate_group = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_group;
   let corporate_data = store.getState().corporate;
-  if (action.type == actiontypes.FETCH_GROUP_INITIATED) {
+  if (action.type == actionTypes.FETCH_GROUP_INITIATED) {
     next(actions.setLoading(true));
-    var groups = await fetchGroups(corporate_data, data["query"]);
+    var groups = await groupApi.fetchGroups(fetchGroupsDto(corporate_data));
     next(actions.setGroupData(groups));
-  } else if (action.type == actiontypes.INITIATED_ADD_GROUP) {
+  } else if (action.type == actionTypes.INITIATED_ADD_GROUP) {
     next(actions.setLoading(true));
-    var res = await addGroup(data, corporate_data, next);
+    var res = await groupApi.addGroup(addGroupDto(data, corporate_data));
     if (res) next(actions.addGroupFinished());
     else next(actions.setLoading(false));
-  } else if (action.type == actiontypes.INITIATE_UPDATE_GROUP_API) {
+  } else if (action.type == actionTypes.INITIATE_UPDATE_GROUP_API) {
     next(actions.setLoading(true));
-    var res = await updateGroup(data, corporate_data, next);
+    var res = await groupApi.updateGroup(
+      updateGroupDto(data, corporate_data)
+    );
     if (res) next(actions.updateGroupFinished());
     else next(actions.setLoading(false));
   } else if (
-    action.type == actiontypes.GROUP_NAME_ADDED ||
-    action.type == actiontypes.MONTHLY_BUDGET_ADDED ||
-    action.type == actiontypes.MONTHLY_RIDE_ADDED ||
-    action.type == actiontypes.PAYMENT_MODE_SELECTED ||
-    action.type == actiontypes.DAYS_SELECTED ||
-    action.type == actiontypes.TIME_RANGE_ADDED ||
-    action.type == actiontypes.VEHICLE_SELECTION_MADE ||
-    action.type == actiontypes.NUMBER_OF_MEMBERS_ADDED ||
-    action.type == actiontypes.VEHICLE_REMOVED
+    action.type == actionTypes.GROUP_NAME_ADDED ||
+    action.type == actionTypes.MONTHLY_BUDGET_ADDED ||
+    action.type == actionTypes.MONTHLY_RIDE_ADDED ||
+    action.type == actionTypes.PAYMENT_MODE_SELECTED ||
+    action.type == actionTypes.DAYS_SELECTED ||
+    action.type == actionTypes.TIME_RANGE_ADDED ||
+    action.type == actionTypes.VEHICLE_SELECTION_MADE ||
+    action.type == actionTypes.NUMBER_OF_MEMBERS_ADDED ||
+    action.type == actionTypes.VEHICLE_REMOVED
   ) {
     next(actions.setValidation(validateForm(data)));
-  } else if (action.type == actiontypes.RESET) {
+  } else if (action.type == actionTypes.RESET) {
     next(actions.changeRoute(""));
   }
 };
-
-export async function fetchGroups(corporate_data, query) {
-  try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/fetch_groups`,
-      {
-        params: {
-          token: `${corporate_data["corporate_detail"]["token"]}`,
-          filter: {
-            group_name: query ?? "",
-          },
-        },
-        timeout: 10000,
-      }
-    );
-    if (res.data.flag !== 143 || res.data.error)
-      throw new Error(res.data.error);
-    return res.data.data;
-  } catch (e) {
-    return [];
-  }
-}
-
-export async function addGroup(group_data, corporate_data, next) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/add_group`,
-      {
-        token: `${corporate_data["corporate_detail"]["token"]}`,
-        group_name: group_data["group_name"],
-        monthly_budget_limit: group_data["monthly_budget"],
-        monthly_ride_limit: group_data["monthly_ride"],
-        max_members: group_data["max_members"],
-        vehicle_type: `${group_data["selected_vehicle"]}`,
-        corporate_id: parseInt(
-          `${corporate_data["corporate_detail"]["business_details"]["business_id"]}`
-        ),
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    if (res.data.flag !== 143 || res.data.error)
-      throw new Error(res.data.error);
-    return res.data;
-  } catch (e) {
-    showInfo(next, "Could not add group, please try again!", "error");
-    return;
-  }
-}
-
-export async function updateGroup(group_data, corporate_data, next) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/update_group`,
-      {
-        token: `${corporate_data["corporate_detail"]["token"]}`,
-        group_id: group_data["group_id"],
-        group_name: group_data["group_name"],
-        monthly_budget_limit: group_data["monthly_budget"],
-        monthly_ride_limit: group_data["monthly_ride"],
-        max_members: group_data["max_members"],
-        vehicle_type: `${group_data["selected_vehicle"]}`,
-        corporate_id: parseInt(
-          `${corporate_data["corporate_detail"]["business_details"]["business_id"]}`
-        ),
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    if (res.data.flag !== 143 || res.data.error)
-      throw new Error(res.data.error);
-    return res.data;
-  } catch (e) {
-    showInfo(
-      next,
-      "Could not update group, please try again! " + e.message,
-      "error"
-    );
-    return;
-  }
-}
 
 function validateForm(data) {
   return (

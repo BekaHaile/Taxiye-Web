@@ -58,7 +58,7 @@ const FormView = () => {
       <Form layout="vertical" form={form} initialValues={{ remember: true }}>
         <Form.Item label="Group Name">
           <Input
-            placeholder="John Doe"
+            placeholder="Hr department"
             value={group_name}
             onChange={(e) => {
               var val = e.target.value;
@@ -79,7 +79,7 @@ const FormView = () => {
         </Form.Item>
         <Form.Item label="Monthly budget per user">
           <Input
-            placeholder="1,200.00 Birr"
+            placeholder="1200"
             value={monthly_budget}
             onChange={(e) => {
               var val = e.target.value;
@@ -90,7 +90,7 @@ const FormView = () => {
         <Form.Item label="Monthly ride per user">
           <Input
             type="number"
-            placeholder="John Doe"
+            placeholder="44"
             value={monthly_ride}
             onChange={(e) => {
               var val = e.target.value;

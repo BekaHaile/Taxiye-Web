@@ -19,7 +19,7 @@ const MainCard = styled(Card)`
 const { TabPane } = Tabs;
 
 const AccountSetting = () => {
-  const [selectedTab, setSelectedTab] = useState("1");
+  const [selectedTab, setSelectedTab] = useState("2");
   useEffect(() => {
     if(selectedTab=="3")
     store.dispatch(initiateRolesApiCall());
@@ -31,15 +31,15 @@ const AccountSetting = () => {
     <>
       <MainCard  bodyStyle={{height:"100%"}}>
         <Tabs style={{height:"100%"}} defaultActiveKey="1" onChange={tabChanged}>
-          <TabPane  tab="Account Information" key="1">
+          {/* <TabPane  tab="Account Information" key="1">
             <AccountInformation />
-          </TabPane>
+          </TabPane> */}
           <TabPane tab="Company Information" key="2">
             <CompanyInformation/>
           </TabPane>
-          <TabPane tab="Roles" key="3">
+          {/* <TabPane tab="Roles" key="3">
             <RolesTab />
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </MainCard>
     </>

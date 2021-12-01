@@ -3,7 +3,11 @@ import * as typeActions from "../../types/corporate/employees";
 import axios from "axios";
 import * as validationUtils from "../../../utils/validation";
 import { getVehicles } from "./dispatch";
-import { fetchGroups } from "./group";
+import * as corporateApi from "../../../services/api/corporate/employee/index.api";
+import * as groupApi from "../../../services/api/corporate/group/index.api";
+import registerEmployeeDto from "../../../models/corporate/employee/registerEmployeeDto";
+import toggleEmployeeStatusDto from "../../../models/corporate/employee/toggleEmployeeStatusDto";
+import fetchGroupsDto from "../../../models/corporate/group/fetchGroupsDto";
 
 export const corporate_employees = (store) => (next) => async (action) => {
   next(action);
@@ -11,7 +15,9 @@ export const corporate_employees = (store) => (next) => async (action) => {
   let corporate_data = store.getState().corporate;
   if (action.type == typeActions.QUERY_ADDED) {
     next(actions.setSearchLoading(true));
-    var res = await getEmployeesList(data["q"], corporate_data);
+    var res = await corporateApi.getEmployeesList(
+      `${corporate_data["corporate_detail"]["token"]}`
+    );
     await getVehicles(data, next);
     next(actions.addFetchedEmployees(res));
     next(actions.setSearchLoading(false));
@@ -25,17 +31,23 @@ export const corporate_employees = (store) => (next) => async (action) => {
     await getVehicles(data, next);
   } else if (action.type == typeActions.GET_EMPLOYEES_INITIATED) {
     next(actions.setLoading(true));
-    var employees = await getEmployeesList(data["q"], corporate_data);
+    var employees = await corporateApi.getEmployeesList(
+      `${corporate_data["corporate_detail"]["token"]}`
+    );
+    var groups = await groupApi.fetchGroups(fetchGroupsDto(corporate_data));
+    employees.group;
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {
     next(actions.setLoading(true));
-    var groups = await fetchGroups(corporate_data, "");
+    var groups = await groupApi.fetchGroups(fetchGroupsDto(corporate_data));
     next(actions.setGroups(groups));
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_REGISTRATION_INITIATED) {
     next(actions.setLoading(true));
-    var groups = await registerEmployees(data, corporate_data);
+    var groups = await corporateApi.registerEmployees(
+      registerEmployeeDto(data, corporate_data)
+    );
     next(actions.setLoading(false));
   } else if (
     action.type == typeActions.EMPLOYEE_APPENDED ||
@@ -50,73 +62,16 @@ export const corporate_employees = (store) => (next) => async (action) => {
     next(actions.setFormValidation(isValid));
   } else if (action.type == typeActions.TOGGLE_USER_STATUS_INITIATED) {
     next(actions.setLoading(true));
-    await toggleEmployeeStatus(data, corporate_data, next);
-    var employees = await getEmployeesList(data["q"], corporate_data);
+    await corporateApi.toggleEmployeeStatus(
+      toggleEmployeeStatusDto(data, corporate_data)
+    );
+    var employees = await corporateApi.getEmployeesList(
+      `${corporate_data["corporate_detail"]["token"]}`
+    );
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
   }
 };
-
-export async function getEmployeesList(query, corporate_data) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/user/list`,
-      {
-        token: `${corporate_data["corporate_detail"]["token"]}`,
-      },
-      { timeout: 10000 }
-    );
-    return res.data.data;
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-}
-
-export async function registerEmployees(corporate_employee, corporate_data) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/add_user_to_corporate`,
-
-      {
-        business_id: `${corporate_data["corporate_detail"]["business_details"]["business_id"]}`,
-        token: `${corporate_data["corporate_detail"]["token"]}`,
-        employees: corporate_employee["new_employees"]?.map((employee) => {
-          return {
-            phone_no: `${employee["code"]}${employee["phone_no"]}`,
-            country_code: `${employee["code"]}`,
-            group_id: `${employee["group_id"]}`,
-            email: `${employee["email"]}`,
-            username: `${employee["first_name"]} ${employee["last_name"]}`,
-          };
-        }),
-      },
-      { timeout: 10000 }
-    );
-    return res.data.data;
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-}
-
-export async function toggleEmployeeStatus(data, corporate_data, next) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/toggle_corporate_user_status`,
-      {
-        token: `${corporate_data["corporate_detail"]["token"]}`,
-        user_id: data["selected_user"]["user_id"],
-        is_active: data["selected_user"]["is_active"] == 1 ? 2 : 1,
-      },
-      { timeout: 10000 }
-    );
-    return res.data.data;
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-}
 
 function validateEmployeeForm(data) {
   var isValid = true;

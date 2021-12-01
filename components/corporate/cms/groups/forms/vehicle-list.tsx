@@ -97,7 +97,6 @@ const VehicleList = () => {
               <Image src={require("../../../../../assets/images/cars/sedan.svg")} />
               <Title>
                 {vehicle?.vehicle_name}
-                {vehicleList?.length}
               </Title>
             </CenteredElement>
           </Card>

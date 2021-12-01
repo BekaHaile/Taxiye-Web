@@ -1,5 +1,5 @@
 import * as actions from "../../actions/corporate/home";
-import * as actiontypes from "../../types/corporate/home";
+import * as actionTypes from "../../types/corporate/home";
 import axios from "axios";
 
 const recentRides = [
@@ -72,11 +72,11 @@ export const corporate_home = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_home;
   let corporate_data = store.getState().corporate;
-  if (action.type == actiontypes.COMPANY_OVERVIEW_PULL_IN_INITIATED) {
+  if (action.type == actionTypes.COMPANY_OVERVIEW_PULL_IN_INITIATED) {
     next(actions.setCompanyOverViewLoading(true));
     var res = await fetchOverview(corporate_data);
     next(actions.setOverviewData(res));
-  } else if (action.type == actiontypes.RECENT_RIDES_PULL_IN_INITIATED) {
+  } else if (action.type == actionTypes.RECENT_RIDES_PULL_IN_INITIATED) {
     next(actions.setRecentRidesLoading(true));
 
     await sleep(4000);
