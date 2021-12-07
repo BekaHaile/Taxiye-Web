@@ -8,6 +8,7 @@ import * as groupApi from "../../../services/api/corporate/group/index.api";
 import registerEmployeeDto from "../../../models/corporate/employee/registerEmployeeDto";
 import toggleEmployeeStatusDto from "../../../models/corporate/employee/toggleEmployeeStatusDto";
 import fetchGroupsDto from "../../../models/corporate/group/fetchGroupsDto";
+import checkUserExistanceDto from "../../../models/corporate/employee/checkUserExistanceDto";
 
 export const corporate_employees = (store) => (next) => async (action) => {
   next(action);
@@ -58,7 +59,31 @@ export const corporate_employees = (store) => (next) => async (action) => {
     action.type == typeActions.EMPLOYEE_LAST_NAME_CHANGED ||
     action.type == typeActions.EMPLOYEE_REMOVED
   ) {
-    var isValid = validateEmployeeForm(data["new_employees"]);
+    let isValid = false;
+    if (action.type == typeActions.EMPLOYEE_PHONE_ADDED) {
+      let employeeTemp = data["new_employees"][data["employee_index"]];
+      isValid = validationUtils.validatePhone(
+        `${employeeTemp["phone_no"]}`,
+        `${employeeTemp["code"]}`
+      );
+      if (isValid) {
+        next(actions.setLoading(true));
+        let existanceRes = await corporateApi.checkUserExistance(
+          checkUserExistanceDto(
+            `${employeeTemp["code"]}${employeeTemp["phone_no"]}`,
+            corporate_data
+          )
+        );
+        if (existanceRes) {
+          let userData = existanceRes?.user_name?.split(" ");
+          actions.changeFirstName(userData[0], data["employee_index"]);
+          actions.changeLastName(userData[1], data["employee_index"]);
+          actions.changeLastName(userData?.user_email, data["employee_index"]);
+        }
+        next(actions.setLoading(false));
+      }
+    }
+    isValid = validateEmployeeForm(data["new_employees"]);
     next(actions.setFormValidation(isValid));
   } else if (action.type == typeActions.TOGGLE_USER_STATUS_INITIATED) {
     next(actions.setLoading(true));
@@ -79,7 +104,7 @@ function validateEmployeeForm(data) {
     isValid =
       validationUtils.validatePhone(
         data[i]["phone_no"],
-        `+${data[i]["code"]}`
+        `${data[i]["code"]}`
       ) &&
       data[i]["code"] != "" &&
       data[i]["code"] != null &&

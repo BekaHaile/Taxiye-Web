@@ -14,6 +14,7 @@ const initialState = {
   employees: [],
   groups: [],
   new_employees: [],
+  employee_index: 0,
   isFormValid: false,
   query: "",
   q: "",
@@ -117,6 +118,7 @@ export default function corporateEmployeeReducer(state = initialState, action) {
           },
           ...state.new_employees.slice(action.payload.index + 1),
         ],
+        employee_index: action.payload.index,
       };
 
     case actionTypes.EMPLOYEE_GROUP_CHANGED:

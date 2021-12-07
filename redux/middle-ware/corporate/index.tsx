@@ -1,19 +1,22 @@
 import * as actions from "../../actions/corporate";
-import * as actiontypes from "../../types/corporate";
-import axios from "axios";
+import * as actionTypes from "../../types/corporate";
 import * as validationUtils from "../../../utils/validation";
 import { showError } from "../common";
+import * as corporateApi from "../../../services/api/corporate/index.api";
+import getCorporateUserDto from "../../../models/corporate/getCorporateUserDto";
+import loginDto from "../../../models/corporate/loginDto";
+import submitPhoneDto from "../../../models/corporate/submitPhoneDto";
 
 export const corporate = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate;
 
   if (
-    action.type == actiontypes.COMPANY_NAME_ADDED ||
-    action.type == actiontypes.COMPANY_OFFICIAL_EMAIL_ADDED ||
-    action.type == actiontypes.COMPANY_PHONE_NUMBER_ADDED ||
-    action.type == actiontypes.NUMBER_OF_EMPLOYEES_ADDED ||
-    action.type == actiontypes.CORPORATE_TERMS_CHANGED
+    action.type == actionTypes.COMPANY_NAME_ADDED ||
+    action.type == actionTypes.COMPANY_OFFICIAL_EMAIL_ADDED ||
+    action.type == actionTypes.COMPANY_PHONE_NUMBER_ADDED ||
+    action.type == actionTypes.NUMBER_OF_EMPLOYEES_ADDED ||
+    action.type == actionTypes.CORPORATE_TERMS_CHANGED
   ) {
     if (
       data["company_name"] != "" &&
@@ -31,11 +34,11 @@ export const corporate = (store) => (next) => async (action) => {
       next(actions.setValidation(true));
     else next(actions.setValidation(false));
   } else if (
-    action.type == actiontypes.ADMIN_NAME_ADDED ||
-    action.type == actiontypes.ADMIN_EMAIL_ADDED ||
-    action.type == actiontypes.ADMIN_PASSWORD_ADDED ||
-    action.type == actiontypes.ADMIN_CONFIRMATION_PASSWORD_ADDED ||
-    action.type == actiontypes.ENABLE_DISPATCH_CHANGED
+    action.type == actionTypes.ADMIN_NAME_ADDED ||
+    action.type == actionTypes.ADMIN_EMAIL_ADDED ||
+    action.type == actionTypes.ADMIN_PASSWORD_ADDED ||
+    action.type == actionTypes.ADMIN_CONFIRMATION_PASSWORD_ADDED ||
+    action.type == actionTypes.ENABLE_DISPATCH_CHANGED
   ) {
     if (
       data["admin_full_name"] != "" &&
@@ -52,13 +55,10 @@ export const corporate = (store) => (next) => async (action) => {
     )
       next(actions.setAdminValidation(true));
     else next(actions.setAdminValidation(false));
-  } else if (action.type == actiontypes.COMPANY_DATA_SUBMIT_INITIATED) {
+  } else if (action.type == actionTypes.COMPANY_DATA_SUBMIT_INITIATED) {
     try {
       next(actions.initiateLoading(true));
-      const res = await submitPhone({
-        phone_no: `${data["country_code"]}${data["phone_no"]}`,
-        country: `${data["country"]}`,
-      });
+      const res = await corporateApi.submitPhone(submitPhoneDto(data));
       next(actions.initiateLoading(false));
       if (res) {
         if (res.status === "OK") {
@@ -67,27 +67,23 @@ export const corporate = (store) => (next) => async (action) => {
           showError(next);
         }
       }
-      
     } catch (e) {
       next(actions.setValidation(false));
       next(actions.initiateLoading(false));
     }
-  } else if (action.type == actiontypes.ADMIN_DATA_SUBMIT_INITIATED) {
+  } else if (action.type == actionTypes.ADMIN_DATA_SUBMIT_INITIATED) {
     try {
       next(actions.initiateLoading(true));
-      await submitCompanyAdminData({});
+      await corporateApi.submitCompanyAdminData({});
       next(actions.initiateLoading(false));
       next(actions.goToStep(4));
     } catch (e) {
       next(actions.setValidation(false));
     }
-  } else if (action.type == actiontypes.CORPORATE_OTP_RESENT) {
+  } else if (action.type == actionTypes.CORPORATE_OTP_RESENT) {
     next(actions.changeOtpStatus({ loading: true, otpSent: false }));
     try {
-      let res = await submitPhone({
-        phone_no: `${data["country_code"]}${data["phone_no"]}`,
-        country: `${data["country"]}`,
-      });
+      let res = await corporateApi.submitPhone(submitPhoneDto(data));
       if (res) {
         if (res.status === "OK") {
           next(actions.changeOtpStatus({ loading: false, otpSent: true }));
@@ -99,13 +95,10 @@ export const corporate = (store) => (next) => async (action) => {
       showError(next);
       next(actions.changeOtpStatus({ loading: false, otpSent: false }));
     }
-  } else if (action.type == actiontypes.CORPORATE_OTP_SUBMITTED) {
+  } else if (action.type == actionTypes.CORPORATE_OTP_SUBMITTED) {
     next(actions.initiateLoading(true));
     try {
-      let res = await submitPhone({
-        phone_no: `${data["country_code"]}${data["phone_no"]}`,
-        country: `${data["country"]}`,
-      });
+      let res = await corporateApi.submitPhone(submitPhoneDto(data));
       if (res) {
         if (res.status === "OK") {
           next(actions.goToStep(3));
@@ -119,137 +112,27 @@ export const corporate = (store) => (next) => async (action) => {
       next(actions.initiateLoading(false));
     }
   } else if (
-    action.type == actiontypes.ADDED_LOGIN_EMAIL ||
-    action.type == actiontypes.KEEP_ME_SIGN_IN_CHANGED ||
-    action.type == actiontypes.ADDED_LOGIN_PASSWORD
+    action.type == actionTypes.ADDED_LOGIN_EMAIL ||
+    action.type == actionTypes.KEEP_ME_SIGN_IN_CHANGED ||
+    action.type == actionTypes.ADDED_LOGIN_PASSWORD
   ) {
     var valiation = validateLoginInput(data);
     next(actions.changeLoginValidation(valiation));
-  } else if (action.type == actiontypes.INITIATED_LOGIN_TO_CORPORATE) {
+  } else if (action.type == actionTypes.INITIATED_LOGIN_TO_CORPORATE) {
     next(actions.initiateLoading(true));
-    var res = await login(
-      data["login_email"],
-      data["login_password"],
-      data["keepMeSignedIn"],
-      next
-    );
-    var infoRes = await getUserInfo(res, next);
+    var res = await corporateApi.login(loginDto(data));
+    if (data["keepMeSignedIn"])
+      localStorage.setItem("corporate_detail", JSON.stringify(res));
+    var infoRes = await corporateApi.getUserInfo(getCorporateUserDto(res));
+    localStorage.setItem("company_detail", JSON.stringify(infoRes));
     next(actions.setLogin(res, infoRes));
     next(actions.initiateLoading(false));
-  } else if (action.type == actiontypes.LOG_OUT_INITIATED) {
+  } else if (action.type == actionTypes.LOG_OUT_INITIATED) {
     next(actions.logout());
-  } else if (action.type == actiontypes.LOGGED_OUT) {
+  } else if (action.type == actionTypes.LOGGED_OUT) {
     localStorage.removeItem("corporate_detail");
   }
 };
-
-async function submitCompanyData(data) {
-  try {
-    const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
-    const res = await axios.post(
-      `${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`,
-      data,
-      { timeout: 5000 }
-    );
-    return res.data;
-  } catch (e) {
-    return null;
-  }
-}
-async function submitCompanyAdminData(data) {
-  try {
-    await sleep(2000);
-    return [];
-    const { NEXT_PUBLIC_AGGREGATE_HOST } = process.env;
-    const res = await axios.post(
-      `${NEXT_PUBLIC_AGGREGATE_HOST}/account/generate_login_otp`,
-      data,
-      { timeout: 5000 }
-    );
-    return res.data;
-  } catch (e) {
-    return null;
-  }
-}
-
-async function submitPhone(data) {
-  try {
-    const { NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST } = process.env;
-    const res = await axios.post(
-      `${NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/account/generate_login_otp`,
-      data,
-      { timeout: 10000 }
-    );
-    return res.data;
-  } catch (e) {
-    return null;
-  }
-}
-
-export async function login(email, password, keepMeSignedIn, next) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/v1/acl/operator/login`,
-      { email, password },
-      {
-        timeout: 10000,
-      }
-    );
-    if (res.status == 200) {
-      if (keepMeSignedIn)
-        localStorage.setItem("corporate_detail", JSON.stringify(res.data));
-      return res.data;
-    }
-    return;
-  } catch (e) {
-    console.log(e);
-    showError(next);
-    return;
-  }
-}
-
-export async function updateUserInfo(data, next) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info/edit`,
-      {
-        token: `${data["token"]}`,
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    if (res.status == 200) {
-      return res.data.data;
-    }
-    return;
-  } catch (e) {
-    showError(next);
-    return;
-  }
-}
-
-export async function getUserInfo(data, next) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info`,
-      {
-        token: `${data["token"]}`,
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    if (res.status == 200) {
-      localStorage.setItem("company_detail", JSON.stringify(res.data.data));
-      return res.data.data;
-    }
-    return;
-  } catch (e) {
-    showError(next);
-    return;
-  }
-}
 
 function validateLoginInput(data) {
   return (
@@ -259,8 +142,3 @@ function validateLoginInput(data) {
   );
 }
 
-async function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}

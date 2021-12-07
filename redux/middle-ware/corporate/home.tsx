@@ -1,6 +1,7 @@
 import * as actions from "../../actions/corporate/home";
 import * as actionTypes from "../../types/corporate/home";
-import axios from "axios";
+import * as corporateApi from "../../../services/api/corporate/index.api";
+import fetchOverviewDto from "../../../models/corporate/fetchOverviewDto";
 
 const recentRides = [
   {
@@ -74,7 +75,9 @@ export const corporate_home = (store) => (next) => async (action) => {
   let corporate_data = store.getState().corporate;
   if (action.type == actionTypes.COMPANY_OVERVIEW_PULL_IN_INITIATED) {
     next(actions.setCompanyOverViewLoading(true));
-    var res = await fetchOverview(corporate_data);
+    var res = await corporateApi.fetchOverview(
+      fetchOverviewDto(corporate_data)
+    );
     next(actions.setOverviewData(res));
   } else if (action.type == actionTypes.RECENT_RIDES_PULL_IN_INITIATED) {
     next(actions.setRecentRidesLoading(true));
@@ -88,21 +91,4 @@ async function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-}
-
-export async function fetchOverview(corporate_data) {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info`,
-      {
-        token: `${corporate_data["corporate_detail"]["token"]}`,
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    return res.data.data;
-  } catch (e) {
-    return [];
-  }
 }

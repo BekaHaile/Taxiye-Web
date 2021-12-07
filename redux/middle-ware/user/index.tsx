@@ -13,7 +13,7 @@ export const user = (store) => (next) => async (action) => {
     next(actions.changeOtp(""));
     next(actions.setLoading(true));
     try {
-      let res = await userApi.submitPhone(submitPhoneDto(data), next);
+      let res = await userApi.submitPhone(submitPhoneDto(data));
       if (res) {
         next(actions.changeStep(data["step"] + 1));
         next(actions.changeOtpStatus({ loading: false, otpSent: true }));
@@ -27,7 +27,7 @@ export const user = (store) => (next) => async (action) => {
   } else if (action.type == "OTP_RESENT") {
     next(actions.changeOtpStatus({ loading: true, otpSent: false }));
     try {
-      let res = await userApi.submitPhone(submitPhoneDto(data), next);
+      let res = await userApi.submitPhone(submitPhoneDto(data));
       if (res) {
         next(actions.changeOtpStatus({ loading: false, otpSent: true }));
       } else {
@@ -40,7 +40,7 @@ export const user = (store) => (next) => async (action) => {
   } else if (action.type == actionTypes.OTP_SUBMITTED) {
     next(actions.setLoading(true));
     try {
-      let res = await userApi.submitOtp(submitOtpDto(data), next);
+      let res = await userApi.submitOtp(submitOtpDto(data));
       if (res.user_data) {
         let access_token = generateToken(res.user_data.auth_key);
         next(actions.loginVerified(res.user_data));

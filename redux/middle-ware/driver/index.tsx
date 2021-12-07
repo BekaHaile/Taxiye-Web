@@ -66,7 +66,6 @@ export const driver = (store) => (next) => async (action) => {
           next(actions.setLoading(false));
         }
       } else {
-        next(actions.changeStep(data["step"] - 1));
         next(actions.changeOtpStatus({ loading: false, otpSent: false }));
       }
     } catch (e) {
