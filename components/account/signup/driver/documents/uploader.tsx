@@ -5,20 +5,11 @@ import { Progress } from "antd";
 import Modal from "../../../../modal/secondary";
 import store from "../../../../../redux/store";
 import {
-  addPortraitPicture,
-  deletePortraitPicture,
+  addImageFile,
+  deleteImageFile,
 } from "../../../../../redux/actions/driver";
 import Preview from "./preview";
-import {
-  BackButton,
-  Container,
-  CustomHeaderContainer,
-  FixedCustomButton,
-  FixedCustomButtonWithSpace,
-  InfoText,
-  ModalContentContainer,
-  ModalTitle,
-} from "./modal-content";
+
 import { useSelector } from "react-redux";
 
 const MainContainer = styled("div")`
@@ -26,29 +17,40 @@ const MainContainer = styled("div")`
   margin-bottom: 60px;
 `;
 
-const Document = () => {
+const FlexContainer = styled("div")`
+  display: flex;
+  gap: 40px;
+`;
+
+const Document = ({ requiredDocument }) => {
   const progress = useSelector((state) => state["driver"]["progress"]);
   const uploading = useSelector((state) => state["driver"]["uploading"]);
-  const portraitPicture = useSelector(
-    (state) => state["driver"]["portraitPicture"]
+
+  const files = useSelector(
+    (state) => state["driver"]["files"]
   );
 
   return (
     <>
-      <MainContainer>
-        {portraitPicture != null ? (
-          <Preview
-            image={portraitPicture}
-            deleteAction={() => store.dispatch(deletePortraitPicture())}
-          />
-        ) : (
-          <FileSelector
-            action={(image) => {
-              store.dispatch(addPortraitPicture(image));
-            }}
-          />
-        )}
-      </MainContainer>
+      <FlexContainer>
+        {[...Array(requiredDocument?.doc_count)].map((x, i) => (
+          <MainContainer key={i}>
+            {files[i] != null ? (
+              <Preview
+                image={files[i]}
+                deleteAction={() => store.dispatch(deleteImageFile(i))}
+              />
+            ) : (
+              <FileSelector
+                action={(image) => {
+                  store.dispatch(addImageFile(image, requiredDocument?.doc_type_num));
+                }}
+              />
+            )}
+          </MainContainer>
+        ))}
+
+      </FlexContainer>
       <Modal onClose={() => console.log("cancel")} show={uploading}>
         <Progress type="circle" percent={progress} />
       </Modal>

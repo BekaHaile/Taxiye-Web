@@ -95,7 +95,7 @@ const MainRow = styled(Row)`
 
 const List = () => {
   const loading = useSelector((state) => state["corporate_group"]["loading"]);
-  const groups = useSelector((state) => state["corporate_group"]["groups"]);
+  const groups = useSelector((state) => state["corporate_group"]["groups"])?.reverse();
   const q = useSelector((state) => state["corporate_group"]["query"]);
   const [filteredGroups, setFilteredGroups] = useState(groups);
   useEffect(() => {

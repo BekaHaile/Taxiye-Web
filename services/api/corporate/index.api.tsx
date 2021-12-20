@@ -17,7 +17,7 @@ export async function fetchOverview(fetchOverviewDto) {
     else if (res?.data?.message) {
       message.success(res?.data?.message);
     }
-    return res?.data?.data
+    return res?.data?.data;
   } catch (e) {
     message.error(e.message);
     return [];
@@ -87,11 +87,9 @@ export async function login(loginDto) {
     const res = await axios.post(corporateEndPoint.corporateLogin, loginDto, {
       timeout,
     });
-    if (res?.data?.flag !== 143 || res?.data?.error)
+    if (res?.data?.error)
       throw new Error(res?.data?.error || res?.data?.message);
-    else if (res?.data?.message) {
-      message.success(res?.data?.message);
-    }
+
     return res.data;
   } catch (e) {
     message.error(e.message);
@@ -113,7 +111,7 @@ export async function updateUserInfo(updateCorporateUserDto) {
     else if (res?.data?.message) {
       message.success(res?.data?.message);
     }
-    return res?.data?.data
+    return res?.data?.data;
   } catch (e) {
     message.error(e.message);
     return;
@@ -134,7 +132,7 @@ export async function getUserInfo(getCorporateUserDto) {
     else if (res?.data?.message) {
       message.success(res?.data?.message);
     }
-    return res?.data?.data
+    return res?.data?.data;
   } catch (e) {
     message.error(e.message);
     return;

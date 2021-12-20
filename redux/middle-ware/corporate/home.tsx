@@ -1,74 +1,10 @@
 import * as actions from "../../actions/corporate/home";
+import * as ridesAction from "../../actions/corporate/rides";
 import * as actionTypes from "../../types/corporate/home";
 import * as corporateApi from "../../../services/api/corporate/index.api";
 import fetchOverviewDto from "../../../models/corporate/fetchOverviewDto";
-
-const recentRides = [
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-  {
-    key: "1",
-    name: "Bessie Cooper",
-    requestTime: "2020-02-06 12:10 AM",
-    pickupLocation: "Sarbet, Addis Ababa",
-    amount: "$406.27",
-  },
-];
-
+import * as rideApi from "../../../services/api/corporate/ride/index.api";
+import fetchRidesInfoDto from "../../../models/corporate/ride/fetchRidesInfoDto";
 export const corporate_home = (store) => (next) => async (action) => {
   next(action);
   let data = store.getState().corporate_home;
@@ -80,15 +16,9 @@ export const corporate_home = (store) => (next) => async (action) => {
     );
     next(actions.setOverviewData(res));
   } else if (action.type == actionTypes.RECENT_RIDES_PULL_IN_INITIATED) {
+    next(ridesAction.setSelectedType("all"));
     next(actions.setRecentRidesLoading(true));
-
-    await sleep(4000);
-    next(actions.setRecentRides(recentRides));
+    let rides = await rideApi.fetchRidesInfo(fetchRidesInfoDto(corporate_data));
+    next(actions.setRecentRides(rides));
   }
 };
-
-async function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}

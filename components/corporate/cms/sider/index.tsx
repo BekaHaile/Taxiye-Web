@@ -67,7 +67,7 @@ const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
     (state) => state["corporate_account"]["user"]["full_name"]
   );
   const profile = useSelector(
-    (state) => state["corporate_account"]["user"]["profile"]
+    (state) => state["corporate"]["corporate_detail"]?.logo_url
   );
   const company_name = useSelector(
     (state) => state["corporate_account"]["company"]["name"]
@@ -79,7 +79,7 @@ const Slider: FunctionComponent<Props> = ({ setSelected, selected }) => {
         overflow: "auto",
         height: "100vh",
         position: "fixed",
-        left:0,
+        left: 0,
         backgroundColor: `${theme.colors.white}`,
       }}
       collapsed={collapsed}

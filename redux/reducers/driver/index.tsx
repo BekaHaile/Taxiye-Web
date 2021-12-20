@@ -22,9 +22,9 @@ const initialState = {
   vehicleType: null,
   driver_data: null,
   signup_detail: null,
+  city: "",
   access_token: "",
   required_documents: null,
-
   vehicles: [
     {
       name: "Sedan",
@@ -74,6 +74,10 @@ const initialState = {
   ownershipCertificatePicture: null,
   ownershipCertificatePictureId: "",
 
+  files: [],
+  doc_type_num: 0,
+  lastUpload: false,
+
   uploading: false,
   progress: 0,
 };
@@ -83,7 +87,12 @@ export default function driverReducer(state = initialState, action) {
     case actionTypes.STEP_CHANGED:
       return { ...state, step: action.payload.step };
     case actionTypes.SUB_STEP_CHANGED:
-      return { ...state, subStep: action.payload.subStep };
+      return {
+        ...state,
+        subStep: action.payload.subStep,
+        files: [],
+        doc_type_num: 0,
+      };
 
     case actionTypes.DRIVER_FULLNAME_ADDED:
       return { ...state, full_name: action.payload.full_name };
@@ -124,6 +133,8 @@ export default function driverReducer(state = initialState, action) {
 
     case actionTypes.VEHICLE_CHANGED:
       return { ...state, vehicleType: action.payload.vehicleType };
+    case actionTypes.DRIVER_CITY_ADDED:
+      return { ...state, city: action.payload.city, vehicles: action.payload.city.vehicle_types };
 
     case actionTypes.DRIVER_FORM_SUBMITTED:
       return { ...state, formStatus: action.payload.status, loading: false };
@@ -138,6 +149,7 @@ export default function driverReducer(state = initialState, action) {
         ...state,
         signup_detail: action.payload.signup_detail,
         vehicles: action.payload.vehicles,
+        city: action.payload.city
       };
 
     case actionTypes.REQUIRED_DOCUMENT_FETCHED:
@@ -226,6 +238,33 @@ export default function driverReducer(state = initialState, action) {
         vehicleFrontViewPictureId: action.payload.frontId,
         vehicleBackViewPictureId: action.payload.backId,
         subStep: action.payload.step,
+      };
+
+    case actionTypes.ADD_IMAGE_TO_BE_UPLOADED:
+      return {
+        ...state,
+        files: [...state.files, action.payload.file],
+        doc_type_num: action.payload.doc_type_num,
+      };
+    case actionTypes.UPLOADING_STATUS_CHANGED:
+      return { ...state, uploading: action.payload.uploading };
+    case actionTypes.DELETE_IMAGE_TO_BE_UPLOADED:
+      return {
+        ...state,
+        files: [
+          ...state.files.slice(0, action.payload.index),
+          ...state.files.slice(action.payload.index + 1),
+        ],
+      };
+    case actionTypes.INITIATE_UPLOAD_IMAGE:
+      return {
+        ...state,
+        lastUpload: action.payload.lastUpload,
+      };
+    case actionTypes.IMAGE_UPLOAD_FINISHED:
+      return {
+        ...state,
+        files: [],
       };
 
     default:

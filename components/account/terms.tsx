@@ -16,7 +16,7 @@ margin:0px;
 const CheckBoxLabel = styled("label")`
 font-family: Open Sans;
 font-style: normal;
-font-weight: normal;
+font-weight: bold;
 font-size: 12px;
 line-height: 16px;
 color:${theme.colors.primaryTextColor};;

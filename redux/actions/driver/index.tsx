@@ -9,6 +9,15 @@ export const addFullName = (full_name) => {
   };
 };
 
+export const cityChanged = (city) => {
+  return {
+    type: actions.DRIVER_CITY_ADDED,
+    payload: {
+      city: city,
+    },
+  };
+};
+
 export const genderSelected = (gender) => {
   return {
     type: actions.DRIVER_GENDER_ADDED,
@@ -109,12 +118,13 @@ export const initiateLoadDriverDetail = () => {
   };
 };
 
-export const setDriverSignDetail = (signup_detail, vehicles) => {
+export const setDriverSignDetail = (signup_detail, vehicles, city) => {
   return {
     type: actions.GET_DRIVER_SIGNUP_DETAILS_FINISHED,
     payload: {
       signup_detail: signup_detail,
       vehicles: vehicles,
+      city: city
     },
   };
 };
@@ -306,6 +316,15 @@ export const changeProgress = (progress) => {
   };
 };
 
+export const changeUploadingStatus = (uploading) => {
+  return {
+    type: actions.UPLOADING_STATUS_CHANGED,
+    payload: {
+      uploading: uploading,
+    },
+  };
+};
+
 export const changeStep = (step) => {
   return {
     type: actions.STEP_CHANGED,
@@ -321,5 +340,41 @@ export const changeSubStep = (subStep) => {
     payload: {
       subStep: subStep,
     },
+  };
+};
+
+/**
+ *
+ */
+export const addImageFile = (file, doc_type_num) => {
+  return {
+    type: actions.ADD_IMAGE_TO_BE_UPLOADED,
+    payload: {
+      file: file,
+      doc_type_num: doc_type_num,
+    },
+  };
+};
+export const deleteImageFile = (index) => {
+  return {
+    type: actions.DELETE_IMAGE_TO_BE_UPLOADED,
+    payload: {
+      index: index,
+    },
+  };
+};
+
+export const uploadImageFile = (lastUpload) => {
+  return {
+    type: actions.INITIATE_UPLOAD_IMAGE,
+    payload: {
+      lastUpload: lastUpload,
+    },
+  };
+};
+
+export const uploadFinishedImageFile = () => {
+  return {
+    type: actions.IMAGE_UPLOAD_FINISHED,
   };
 };

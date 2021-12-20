@@ -13,72 +13,6 @@ const CenteredContainer = styled("div")`
   flex-wrap: wrap;
 `;
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "user_name",
-    sorter: true,
-  },
-  {
-    title: "Phone Number",
-    dataIndex: "phone_no",
-    sorter: true,
-  },
-  {
-    title: "Monthly Budget Limit",
-    dataIndex: "monthly_budget_limit",
-    sorter: true,
-    render: (val) => {
-      return <>{val.toString()?.replace('null','0')}</>;
-    },
-  },
-  {
-    title: "Monthly Ride Limit",
-    dataIndex: "monthly_ride_limit",
-    sorter: true,
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    sorter: true,
-    render: (val) => {
-      let color = "geekblue";
-      let status = "Pending";
-      if (val == 2) {
-        color = "volcano";
-        status = "Inactive";
-      } else if (val == 1) {
-        color = "green";
-        status = "Active";
-      }
-      return <Tag color={color}>{status}</Tag>;
-    },
-  },
-  {
-    title: "Actions",
-    dataIndex: "status",
-    render: (status, data) => (
-      <CenteredContainer>
-        {status == 1 ? (
-          <Button
-            onClick={() => store.dispatch(toggleEmployeeStatus(data))}
-            type="link"
-          >
-            Deactivate
-          </Button>
-        ) : (
-          <Button
-            onClick={() => store.dispatch(toggleEmployeeStatus(data))}
-            type="link"
-          >
-            Activate
-          </Button>
-        )}
-      </CenteredContainer>
-    ),
-  },
-];
-
 const TableView = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -87,11 +21,11 @@ const TableView = () => {
   );
   const employees = useSelector(
     (state) => state["corporate_employees"]["employees"]
-  );
+  )?.reverse();
+  const groups = useSelector((state) => state["corporate_group"]["groups"]);
   const q = useSelector((state) => state["corporate_employees"]["q"]);
   const [filteredEmployees, setFilteredEmployees] = useState(employees);
   const onSelectChange = (selectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys);
   };
 
@@ -102,6 +36,88 @@ const TableView = () => {
       )
     );
   }, [q, employees]);
+
+  const getGroupBudgetInfo = (groupId) => {
+    if (groupId)
+      return groups.find((item) => item.group_id === groupId)
+        ?.monthly_budget_limit;
+    return "Unknown";
+  };
+  const getGroupRideInfo = (groupId) => {
+    if (groupId)
+      return groups.find((item) => item.group_id === groupId)
+        ?.monthly_ride_limit;
+    return "Unknown";
+  };
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "user_name",
+      sorter: true,
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "phone_no",
+      sorter: true,
+    },
+    {
+      title: "Monthly Budget Limit",
+      dataIndex: "group_id",
+      sorter: true,
+      render: (val) => {
+        return <>{getGroupBudgetInfo(val)}</>;
+      },
+    },
+    {
+      title: "Monthly Ride Limit",
+      dataIndex: "group_id",
+      sorter: true,
+      render: (val) => {
+        return <>{getGroupRideInfo(val)}</>;
+      },
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      sorter: true,
+      render: (val) => {
+        let color = "geekblue";
+        let status = "Pending";
+        if (val == 2) {
+          color = "volcano";
+          status = "Inactive";
+        } else if (val == 1) {
+          color = "green";
+          status = "Active";
+        }
+        return <Tag color={color}>{status}</Tag>;
+      },
+    },
+    {
+      title: "Actions",
+      dataIndex: "status",
+      render: (status, data) => (
+        <CenteredContainer>
+          {status == 1 ? (
+            <Button
+              onClick={() => store.dispatch(toggleEmployeeStatus(data))}
+              type="link"
+            >
+              Deactivate
+            </Button>
+          ) : (
+            <Button
+              onClick={() => store.dispatch(toggleEmployeeStatus(data))}
+              type="link"
+            >
+              Activate
+            </Button>
+          )}
+        </CenteredContainer>
+      ),
+    },
+  ];
 
   const rowSelection = {
     selectedRowKeys,

@@ -123,7 +123,7 @@ export const corporate = (store) => (next) => async (action) => {
     var res = await corporateApi.login(loginDto(data));
     if (data["keepMeSignedIn"])
       localStorage.setItem("corporate_detail", JSON.stringify(res));
-    var infoRes = await corporateApi.getUserInfo(getCorporateUserDto(res));
+    var infoRes = await corporateApi.getUserInfo(res?getCorporateUserDto(res):{});
     localStorage.setItem("company_detail", JSON.stringify(infoRes));
     next(actions.setLogin(res, infoRes));
     next(actions.initiateLoading(false));

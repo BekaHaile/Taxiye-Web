@@ -13,6 +13,7 @@ const corporateEndpoint = {
   cancelRequests: `${NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/limit_update/cancel`,
   getCities: `${NEXT_PUBLIC_TAXIYE_RIDES_HOST}/get_city_info_operator_wise`,
   getRides: `${NEXT_PUBLIC_TAXIYE_RIDES_HOST}/get_ride_details`,
+  getRidesInfo: `${NEXT_PUBLIC_TAXIYE_RIDES_HOST}/get_rides_info`,
   fetchOverview: `${NEXT_PUBLIC_TAXIYE_CORPORATE_HOST}/corporate/info`,
   corporateGenerateLogin: `${NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/account/generate_login_otp`,
   corporateLogin: `${NEXT_PUBLIC_TAXIYE_CORPORATE_LOGIN_HOST}/v1/acl/operator/login`,

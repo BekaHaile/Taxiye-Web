@@ -1,6 +1,7 @@
 const request_status = {
   "on-going": 1,
   completed: 2,
+  all: 8,
 };
 
 const fetchRidesDto = (ride_data, corporate_data) => {

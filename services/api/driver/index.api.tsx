@@ -1,6 +1,7 @@
 import axios from "axios";
 import driverEndPoint from "./index.endpoints";
 import message from "../../../utils/message";
+import * as actions from "../../../redux/actions/driver";
 const timeout = 10000;
 export async function submitPhone(data) {
   try {
@@ -72,30 +73,47 @@ export async function getDriverSignupDetails(data) {
   }
 }
 
-export async function uploadImage(data, next) {
+export async function uploadImage(form, next) {
   try {
-    var i = 1;
-    while (i < 100) {
-      await sleep(1000);
-      i += i * Math.random() * 5;
-      //next(actions.changeProgress(Math.floor(i)));
+    const res = await axios.post(driverEndPoint.uploadFile, form, {
+      onUploadProgress: (progressEvent) => {
+        const { loaded, total } = progressEvent;
+        const percentage = Math.floor((loaded * 100) / total);
+        next(actions.changeProgress(percentage));
+      },
+      timeout,
+    });
+
+    if (res?.data?.flag !== 143 || res?.data?.error)
+      throw new Error(res?.data?.error || res?.data?.message);
+    else if (res?.data?.message) {
+      message.success(res?.data?.message);
     }
-    return { id: "1", frontId: "1", backId: "2" };
-    const { NEXT_PUBLIC_TAXIYE_HOST } = process.env;
-    const res = await axios.post(
-      `${NEXT_PUBLIC_TAXIYE_HOST}/account/generate_login_otp`,
-      data,
-      { timeout: 5000 }
-    );
-    return res.data;
+    return true;
   } catch (e) {
     message.error(e.message);
-    return null;
+    return false;
   }
 }
 
-async function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+export async function updateDriverData(driverFormDataDto) {
+  try {
+    const res = await axios.post(
+      driverEndPoint.updateDriverData,
+      driverFormDataDto,
+      {
+        timeout,
+      }
+    );
+
+    if (res?.data?.flag !== 143 || res?.data?.error)
+      throw new Error(res?.data?.error || res?.data?.message);
+    else if (res?.data?.message) {
+      message.success(res?.data?.message);
+    }
+    return true;
+  } catch (e) {
+    message.error(e.message);
+    return false;
+  }
 }

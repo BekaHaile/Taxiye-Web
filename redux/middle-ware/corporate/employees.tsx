@@ -32,11 +32,11 @@ export const corporate_employees = (store) => (next) => async (action) => {
     await getVehicles(data, next);
   } else if (action.type == typeActions.GET_EMPLOYEES_INITIATED) {
     next(actions.setLoading(true));
+    var groups = await groupApi.fetchGroups(fetchGroupsDto(corporate_data));
+    next(actions.setGroups(groups));
     var employees = await corporateApi.getEmployeesList(
       `${corporate_data["corporate_detail"]["token"]}`
     );
-    var groups = await groupApi.fetchGroups(fetchGroupsDto(corporate_data));
-    employees.group;
     next(actions.addFetchedEmployees(employees));
     next(actions.setLoading(false));
   } else if (action.type == typeActions.EMPLOYEE_FORM_INITIATED) {

@@ -29,19 +29,19 @@ const TableContainer = styled("div")`
 const columns = [
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "user_name",
   },
   {
     title: "Request Time",
-    dataIndex: "requestTime",
+    dataIndex: "request_made_on",
   },
   {
     title: "Pick up Location",
-    dataIndex: "pickupLocation",
+    dataIndex: "pickup_location_address",
   },
   {
-    title: "Amount",
-    dataIndex: "amount",
+    title: "Fare",
+    dataIndex: "actual_fare",
   },
 ];
 

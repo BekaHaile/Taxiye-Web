@@ -6,6 +6,8 @@ import driverSignupDto from "../../../models/driver/driverSignupDto";
 import requiredDocumentsDto from "../../../models/driver/requiredDocumentsDto";
 import submitOtpDto from "../../../models/driver/submitOtpDto";
 import submitPhoneDto from "../../../models/driver/submitPhoneDto";
+import fileUploadDto from "../../../models/driver/fileUploadDto";
+import driverFormDataDto from "../../../models/driver/driverFormDataDto";
 
 export const driver = (store) => (next) => async (action) => {
   next(action);
@@ -49,9 +51,11 @@ export const driver = (store) => (next) => async (action) => {
             driverSignupDto(access_token)
           );
           if (res) {
-            var vehicles = res?.vehicle_types;
+            let defaultCity = res?.cities[0];
+            let vehicles = res?.cities[0].vehicle_types;
             vehicles.shift();
-            next(actions.setDriverSignDetail(res, vehicles));
+
+            next(actions.setDriverSignDetail(res, vehicles, defaultCity));
             try {
               let docRes = await driverApi.fetchRequiredDocuments(
                 requiredDocumentsDto(access_token)
@@ -87,30 +91,38 @@ export const driver = (store) => (next) => async (action) => {
     }
   } else if (action.type == actionTypes.INITIATE_SUBMIT_DRIVER_FORM) {
     next(actions.setLoading(true));
+    let res = await driverApi.updateDriverData(driverFormDataDto(data));
     next(actions.driverFormSubmitted(true));
     next(actions.changeStep(data["step"] + 1));
-  } else if (action.type == actionTypes.UPLOAD_PORTRAITE_IMAGE_INITIATED) {
-    var id = await driverApi.uploadImage(data, next);
-    next(actions.setUploadedPortraitePicture(id.id, 1));
-  } else if (action.type == actionTypes.UPLOAD_DRIVER_LICENSE_IMAGE_INITIATED) {
-    var id = await driverApi.uploadImage(data, next);
-    next(actions.setUploadedDriverLicensePicture(id.id, 2));
-  } else if (
-    action.type == actionTypes.UPLOAD_OWNERSHIP_CERTIFICATE_IMAGE_INITIATED
-  ) {
-    var id = await driverApi.uploadImage(data, next);
-    next(
-      actions.setUploadedOwnershipCertificatePicture(id.id, data["step"] + 1)
-    );
-  } else if (action.type == actionTypes.UPLOAD_VEHICLE_IMAGE_INITIATED) {
-    var id = await driverApi.uploadImage(data, next);
-    next(
-      actions.setUploadedVehiclePictures(
-        id.frontId,
-        id.backId,
-        data["subStep"] + 1
-      )
-    );
+  } else if (action.type == actionTypes.INITIATE_UPLOAD_IMAGE) {
+    let files = data["files"];
+    let res = false;
+    next(actions.changeUploadingStatus(true));
+    for (let [file, index] of files) {
+      next(actions.changeProgress(0));
+      res = await driverApi.uploadImage(
+        fileUploadDto(file, index, data["doc_type_num"], data["access_token"]),
+        next
+      );
+      if (!res) break;
+    }
+
+    next(actions.changeUploadingStatus(false));
+    if (res) {
+      if (data["lastUpload"]) {
+        next(actions.setLoading(true));
+        let res = await driverApi.updateDriverData(driverFormDataDto(data));
+        if (res) {
+          next(actions.driverFormSubmitted(true));
+          next(actions.changeStep(data["step"] + 1));
+          next(actions.changeSubStep(0));
+        } else {
+          next(actions.setLoading(false));
+        }
+      } else {
+        next(actions.changeSubStep(data["subStep"] + 1));
+      }
+    }
   }
 };
 
