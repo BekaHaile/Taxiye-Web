@@ -16,8 +16,8 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN addgroup --group 1001 --system nodejs
-RUN adduser --system nextjs --user 1001
+#RUN addgroup --group 1001 --system nodejs
+#RUN adduser --system nextjs --user 1001
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
@@ -25,8 +25,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
-
-USER nextjs
 
 EXPOSE 3000
 
