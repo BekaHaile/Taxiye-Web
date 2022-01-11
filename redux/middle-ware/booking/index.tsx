@@ -9,7 +9,14 @@ import {
   cancelRide,
   cancelRideRequest,
   requestDriver,
-} from "./common";
+} from "../../../services/api/booking/index.api";
+
+import cancelRideByCustomerDto from "../../../models/booking/cancelRideByCustomerDto";
+import cancelRequestDto from "../../../models/booking/cancelRequestDto";
+import fetchFareDto from "../../../models/booking/fetchFareDto";
+import findADriverDto from "../../../models/booking/findADriverDto";
+import requestDriverDto from "../../../models/booking/requestDriverDto";
+
 import { getOnDemandVehicleInfo } from "./on-demand";
 import { getRentalVehicleInfo } from "./rental";
 import { getOutStationVehicleInfo } from "./out-station";
@@ -30,14 +37,43 @@ export const booking = (store) => (next) => async (action) => {
     action.type == "JOURNEY_TIME_CHANGED" ||
     action.type == "BOOKING_TYPE_CHANGED"
   ) {
+    if (
+      !(
+        data["origin"].location !== null &&
+        data["destination"].location !== null &&
+        data["date"] !== null &&
+        data["time"] !== null
+      )
+    )
+      return;
     if (data["type"] == "on_demand") {
-      await getOnDemandVehicleInfo(data, next, userState["access_token"]);
+      await getOnDemandVehicleInfo(
+        data,
+        findADriverDto(data, userState["access_token"]),
+        data["type"],
+        next
+      );
     } else if (data["type"] == "rental") {
-      await getRentalVehicleInfo(data, next, userState["access_token"]);
+      await getRentalVehicleInfo(
+        data,
+        findADriverDto(data, userState["access_token"]),
+        data["type"],
+        next
+      );
     } else if (data["type"] == "out-station") {
-      await getOutStationVehicleInfo(data, next, userState["access_token"]);
+      await getOutStationVehicleInfo(
+        data,
+        findADriverDto(data, userState["access_token"]),
+        data["type"],
+        next
+      );
     } else if (data["type"] == "delivery") {
-      await getDeliveryVehicleInfo(data, next, userState["access_token"]);
+      await getDeliveryVehicleInfo(
+        data,
+        findADriverDto(data, userState["access_token"]),
+        data["type"],
+        next
+      );
     }
   } else if (action.type == "VEHICLE_SELECTED") {
     if (data["type"] == "delivery") {
@@ -89,7 +125,9 @@ export const booking = (store) => (next) => async (action) => {
   } else if (action.type == actionTypes.FETCH_FARE_ESTIMATE_INITIATED) {
     try {
       next(actions.setFareEstimateLoading(true));
-      var estimate = await fetchFare(data, userState["access_token"]);
+      var estimate = await fetchFare(
+        fetchFareDto(data, userState["access_token"])
+      );
       next(actions.setFareEstimate(estimate));
       next(actions.setFareEstimateLoading(false));
     } catch (e) {
@@ -101,7 +139,7 @@ export const booking = (store) => (next) => async (action) => {
     next(actions.resetState());
   } else if (action.type == actionTypes.RIDE_ARRIVED) {
     showInfo(next, data.message, "info");
-  }else if (action.type == actionTypes.DRIVER_ASSIGNED) {
+  } else if (action.type == actionTypes.DRIVER_ASSIGNED) {
     showInfo(next, data.driver.message, "info");
   } else if (action.type == actionTypes.RIDE_STATUS_CHANGED) {
     showInfo(next, data.message, "info");
@@ -116,19 +154,25 @@ export const booking = (store) => (next) => async (action) => {
   // }
   else if (action.type == "REQUEST_CONFIRMED") {
     next(navigationActions.goTo("approve"));
-    var res = await requestDriver(data, userState["access_token"]);
+    var res = await requestDriver(
+      requestDriverDto(data, userState["access_token"])
+    );
     next(actions.setRequestInfo(res));
   } else if (action.type == "HOUSE_NUMBER_ADDED") {
     if (data["house_number"] != null && data["house_number"] != "")
       next(actions.setIsAddressValid(true));
     else next(actions.setIsAddressValid(false));
   } else if (action.type == "TERMINATION_REASON_ADDED") {
-    var res = await cancelRide(data, userState["access_token"]);
+    var res = await cancelRide(
+      cancelRideByCustomerDto(data, userState["access_token"])
+    );
     showSuccess(next);
     next(navigationActions.goTo(""));
   } else if (action.type == "REQUEST_CANCEL_INITIATED") {
     next(actions.setRequestLoading(true));
-    var res = await cancelRideRequest(data, userState["access_token"]);
+    var res = await cancelRideRequest(
+      cancelRequestDto(data, userState["access_token"])
+    );
 
     if (res.flag != 112) {
       showError(next);

@@ -24,7 +24,7 @@ const Contents = styled("div")`
   }
 `;
 
-const Mapview = () => {
+const Mapview = ({bookingForm}) => {
   const origin = useSelector((state) => state["booking"]["origin"]);
   const destination = useSelector((state) => state["booking"]["destination"]);
   const listOfVehicles = useSelector(
@@ -87,7 +87,7 @@ const Mapview = () => {
             mapElement={<div style={{ height: "100%" }} />}
           />
         </ContainerWrapper>
-        <Container />
+        <Container bookingForm={bookingForm}/>
       </Contents>
     </>
   );

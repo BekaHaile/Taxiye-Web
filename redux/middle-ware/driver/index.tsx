@@ -123,6 +123,13 @@ export const driver = (store) => (next) => async (action) => {
         next(actions.changeSubStep(data["subStep"] + 1));
       }
     }
+  } else if(action.type == actionTypes.DRIVER_CITY_ADDED){
+    next(actions.setLoading(true));
+    let docRes = await driverApi.fetchRequiredDocuments(
+      requiredDocumentsDto(data["access_token"],)
+    );
+    next(actions.setRequiredDocuments(docRes.data));
+    next(actions.setLoading(false));
   }
 };
 

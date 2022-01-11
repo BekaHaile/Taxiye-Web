@@ -7,8 +7,75 @@ import { assignDriver } from "../../redux/actions/booking/index";
 
 import { app } from "../../firebase/config";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { gql } from "@apollo/client";
+import client from "../../backend-client";
+import DefaultErrorPage from "next/error";
 
-const Booking = () => {
+const query = gql`
+  # This is query
+  query PageLayout($locale: String!) {
+    bookingContent: bookingForm(locale: $locale) {
+      id
+      bookingForm {
+        key
+        type
+        title
+        subTitle
+        originLocationTextField {
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        destinationLocationTextField {
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        departureDateTextField {
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        departureTimeTextField {
+          label
+          placeHolder
+          icon {
+            url
+          }
+        }
+        requestButton {
+          text
+        }
+      }
+    }
+  }
+`;
+
+export async function getServerSideProps(context) {
+  const { locale } = context;
+  // console.log(context);
+  try {
+    const { data, error } = await client.query({
+      query: query,
+      variables: { locale: locale ? locale : "en" },
+    });
+
+    return {
+      props: {
+        data: data,
+      },
+    };
+  } catch (e) {
+    return { props: { error: true } };
+  }
+}
+const Booking = ({ data, error }) => {
   useEffect(() => {
     try {
       const messaging = getMessaging(app);
@@ -56,7 +123,9 @@ const Booking = () => {
       }
     });
   }
-  return <BookingService />;
+  if (error)
+    return <DefaultErrorPage className="error-page" statusCode={404} />;
+  return <BookingService bookingForm={data?.bookingContent?.bookingForm} />;
 };
 
 export default Booking;

@@ -143,13 +143,13 @@ const Company = ({goToLogin}) => {
               </InputContainer>
 
               <InputContainer>
-                <DefaultDropDown
+                <DefaultInput
                   onChange={(event) =>
                     store.dispatch(
                       addCompanyEmployeesNumber(event.target.value)
                     )
                   }
-                  items={[3, 2, 4, 5, 1]}
+                  type="number"
                   value={no_of_employees}
                   label="Number of Employees *"
                   placeholder="Select one"

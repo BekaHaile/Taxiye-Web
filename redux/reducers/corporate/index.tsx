@@ -49,7 +49,7 @@ export default function corporateReducer(state = initialState, action) {
         isPhoneValid: action.payload.isPhoneValid,
       };
     case actionTypes.NUMBER_OF_EMPLOYEES_ADDED:
-      return { ...state, no_of_employees: action.payload.no_of_employees };
+      return { ...state, no_of_employees: action.payload.no_of_employees > 0 ? action.payload.no_of_employees : 1 };
     case actionTypes.VALIDATION_UPDATED:
       return { ...state, isValid: action.payload.isValid };
     case actionTypes.LOADING_INITIATED:

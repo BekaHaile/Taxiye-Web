@@ -1,21 +1,18 @@
 import * as actions from "../../../actions/booking";
-import { loadVehicleTypes } from "../common";
-import { showError, showTimeOut } from "../../common";
+import { loadVehicleTypes } from "../../../../services/api/booking/index.api";
 
-export async function getDeliveryVehicleInfo(data, next, access_token) {
+export async function getDeliveryVehicleInfo(data, findADriverDto, type, next) {
   if (
     data["origin"].location !== null &&
     data["destination"].location !== null &&
     data["date"] !== null &&
     data["time"] !== null
-  ) {
+  ){
     next(actions.loadVehicles(true));
     try {
-      await loadVehicleTypes(data, next, actions, access_token);
+      await loadVehicleTypes(findADriverDto, next, type);
     } catch (e) {
       console.log(e);
-      if (e.message.includes("timeout")) showTimeOut(next);
-      else showError(next);
       next(actions.loadVehicles(false));
     }
     next(actions.loadVehicles(false));
@@ -28,7 +25,6 @@ export async function uploadFile(data, next) {
     await sleep(2000);
     next(actions.addDeliveryItemImages(data["delivery"]["image"]));
   } catch (e) {
-    showError(next);
     next(actions.loadVehicles(false));
   }
 

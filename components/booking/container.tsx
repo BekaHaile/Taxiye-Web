@@ -8,7 +8,10 @@ import Delivery from "./delivery/";
 import Meta from "./delivery/meta";
 
 import { useSelector } from "react-redux";
-import { initiatePaymentMethodCall, getFareEstimate } from "../../redux/actions/booking";
+import {
+  initiatePaymentMethodCall,
+  getFareEstimate,
+} from "../../redux/actions/booking";
 
 import Login from "./login";
 import Approve from "./approval";
@@ -33,14 +36,13 @@ const ChildrenContainer = styled("div")`
   padding: 5px 0px;
 `;
 
-const Container = () => {
+const Container = ({ bookingForm }) => {
   const activeTab = useSelector((state) => state["booking"]["type"]);
   const page = useSelector((state) => state["navigation"]["page"]);
   useEffect(() => {
     if (page == "confirm") {
       store.dispatch(getFareEstimate());
       store.dispatch(initiatePaymentMethodCall());
-      
     }
   }, [page]);
 
@@ -56,6 +58,7 @@ const Container = () => {
         <Meta />
       ) : (
         <Tabs
+          bookingFormContent={bookingForm}
           contentView={
             <ChildrenContainer>
               {activeTab == "rental" ? (

@@ -1,8 +1,7 @@
 import * as actions from "../../../actions/booking";
-import { loadVehicleTypes } from "../common";
-import { showError } from "../../common";
+import { loadVehicleTypes } from "../../../../services/api/booking/index.api";
 
-export async function getOutStationVehicleInfo(data, next, access_token) {
+export async function getOutStationVehicleInfo(data, findADriverDto, type, next) {
   if (
     data["origin"].location !== null &&
     data["destination"].location !== null &&
@@ -14,9 +13,9 @@ export async function getOutStationVehicleInfo(data, next, access_token) {
   ) {
     next(actions.loadVehicles(true));
     try {
-      await loadVehicleTypes(data, next, actions, access_token);
+      await loadVehicleTypes(findADriverDto, next, type);
     } catch (e) {
-      showError(next);
+      console.log(e);
       next(actions.loadVehicles(false));
     }
     next(actions.loadVehicles(false));
