@@ -16,7 +16,7 @@ FROM nginx:alpine AS blog-nx-ui
 
 #WORKDIR /usr/share/nginx/html
 
-COPY --from=builder /app/dist/ /usr/share/nginx/html/
+COPY --from=builder /app/public/ /usr/share/nginx/html/
 
 EXPOSE 80
 
