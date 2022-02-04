@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:14 AS bulider
 
 WORKDIR /app
 
@@ -12,6 +12,12 @@ COPY . /app
 
 RUN npm  run build
 
-EXPOSE 3000
+FROM nginx:alpine AS blog-nx-ui
 
-CMD ["npm", "start"]
+WORKDIR /usr/share/nginx/html
+
+COPY --from=bulider /app/dist/ .
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
