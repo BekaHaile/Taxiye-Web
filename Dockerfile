@@ -14,9 +14,9 @@ RUN npm  run build
 
 FROM nginx:alpine AS blog-nx-ui
 
-WORKDIR /usr/share/nginx/html
+#WORKDIR /usr/share/nginx/html
 
-COPY --from=bulider /app/dist/ .
+COPY --from=builder /app/dist/ /usr/share/nginx/html/
 
 EXPOSE 80
 
