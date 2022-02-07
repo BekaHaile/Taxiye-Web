@@ -1,29 +1,26 @@
-FROM node:14 AS deps
+FROM node:14
 
-WORKDIR /opt/app
-COPY package.json yarn.lock ./
-RUN yarn install
+RUN mkdir -p /usr/src/app
 
-# Rebuild the source code only when needed
-# This is where because may be the case that you would try
-# to build the app based on some `X_TAG` in my case (Git commit hash)
-# but the code hasn't changed.
-FROM node:14 AS builder
+ENV PORT 3000
 
-ENV NODE_ENV=production
-WORKDIR /opt/app
-COPY . .
-COPY --from=deps /opt/app/node_modules ./node_modules
+WORKDIR /usr/src/app
+
+COPY package.json /usr/src/app
+
+COPY yarn.lock /usr/src/app
+
+# Production use node instead of root
+# USER node
+
+RUN yarn install --production
+
+COPY . /usr/src/app
+
+RUN npx browserslist@latest --update-db
+
 RUN yarn build
 
-# Production image, copy all the files and run next
-FROM node:14 AS runner
-ARG X_TAG
-WORKDIR /opt/app
-ENV NODE_ENV=production
-COPY --from=builder /opt/app/next.config.js ./
-COPY --from=builder /opt/app/public ./public
-COPY --from=builder /opt/app/.next ./.next
-COPY --from=builder /opt/app/node_modules ./node_modules
-CMD ["node_modules/.bin/next", "start"]
 EXPOSE 3000
+
+CMD [ "yarn", "start" ]
