@@ -15,6 +15,7 @@ docker-build:
     - docker push $CI_REGISTRY_IMAGE:$BUILD_NAME-latest
     - docker push $CI_REGISTRY_IMAGE:$BUILD_NAME-$CI_COMMIT_SHORT_SHA
   only:
+    - develop
     - global
     - et
     - ke
