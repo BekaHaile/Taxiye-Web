@@ -1,4 +1,3 @@
-
 # base image
 FROM node:14
 
@@ -16,7 +15,7 @@ COPY . /usr/src/web_app
 RUN npm install
 
 # start app
-RUN npm run build
+RUN npm install --dev typescript && npm install
 
 EXPOSE 3000
 
