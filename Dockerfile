@@ -1,27 +1,23 @@
-FROM node:14-alpine
 
-RUN mkdir -p /usr/src/app
+# base image
+FROM node:14
 
-ENV PORT 3000
+# create & set working directory
+RUN mkdir -p /usr/src/web_app
 
-WORKDIR /usr/src/app/
+WORKDIR /usr/src/web_app
 
-COPY *.json /usr/src/app/
+ENV NODE_ENV=production
 
+# copy source files
+COPY . /usr/src/web_app
 
-COPY yarn.lock /usr/src/app/
+# install dependencies
+RUN npm install
 
-# Production use node instead of root
-# USER node
-
-RUN yarn install --production
-
-COPY . /usr/src/app/
-
-RUN npx browserslist@latest --update-db
-
-RUN yarn build
+# start app
+RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+CMD npm run start
