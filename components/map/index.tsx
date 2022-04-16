@@ -12,7 +12,7 @@ interface props {
   loadingElement: any;
   containerElement: any;
   mapElement: any;
-  places?: any;
+  places?: any; 
   action?;
   directionAction?;
   originAction?;

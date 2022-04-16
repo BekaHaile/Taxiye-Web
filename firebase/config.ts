@@ -12,8 +12,8 @@ const firebaseConfig = {
   projectId: "taxiye",
   storageBucket: "taxiye.appspot.com",
   messagingSenderId: "813634269297",
-  appId: "1:813634269297:web:941ce44f08f87b8ca6abd0",
-  measurementId: "G-2NP2F0E70X"
+  appId: "1:813634269297:web:941ce44f08f87b8ca6abd0", 
+  measurementId: "G-2NP2F0E70X" 
 };
 
 // Initialize Firebase

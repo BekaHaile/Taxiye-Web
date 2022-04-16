@@ -7,7 +7,7 @@ import {
   Marker,
   DirectionsRenderer,
   InfoWindow,
-} from "react-google-maps";
+} from "react-google-maps"; 
 
 const Container = styled("div")`
   display: flex;

@@ -22,11 +22,11 @@ const Cms = () => {
       >
         <Content style={{ margin: selected == "booking"? "0px":"16px" }}>
           {(() => {
-            if (selected === "booking") return <Booking />;
-            else if (selected === "my-orders") return <MyOrders />;
-            else if (selected === "wallet") return <Booking />;
-            else if (selected === "payment-method") return <Booking />;
-            else if (selected === "promotions") return <Booking />;
+            if (selected === "booking") return <Booking />; 
+            else if (selected === "my-orders") return <MyOrders />; 
+            else if (selected === "wallet") return <Booking />; 
+            else if (selected === "payment-method") return <Booking />; 
+            else if (selected === "promotions") return <Booking />; 
             else if (selected === "invite-friends") return <InviteFriends />;
             else if (selected === "support") return <Booking />;
             else if (selected === "account-Setting") return <Booking />;

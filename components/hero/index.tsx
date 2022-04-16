@@ -65,7 +65,7 @@ const Breadcrump = styled("h2")`
   &::firstline {
     text-transform: uppercase;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 400px) { 
     font-size: 5vw;
   }
 `;

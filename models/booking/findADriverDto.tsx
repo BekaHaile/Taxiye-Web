@@ -14,5 +14,5 @@ const findADriverDto = (data, access_token) => {
     ride_type: 1,
   };
 };
-
+ 
 export default findADriverDto;
